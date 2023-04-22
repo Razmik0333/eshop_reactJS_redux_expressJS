@@ -21,16 +21,16 @@ export const currentUser = (id) => (dispatch) => {
   }
 };
 
-export const getUserData = (id) => (dispatch) => {
+export const getUserData = (id) => async(dispatch) => {
+  console.log(id);
+  
     if(id){
-      fetch(`${root}/guest/${id}`) 
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        
-        dispatch(getUserDataAction(res));
-      })
-      .catch((e) => console.log('error from userDuck', e));
+      try {
+        const [data] = await (await fetch(`${root}/api/user/${id}`) ).json();
+        dispatch(getUserDataAction(data));
+      } catch (e) {
+        console.log('error from userDuck', e)
+      }
     }else{
       dispatch(getUserDataAction(null))
     }

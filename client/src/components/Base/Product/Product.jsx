@@ -26,13 +26,14 @@ function Product({product, text}) {
      }
      const addProductToCart = (e) => {
           console.log(e.target.dataset.id);
+          
           //e.stopPropagation()
-          dispatch(getCartItem({
-                    [e.target.dataset.id] : 1 
-               }
-          ))
-          dispatch(getCountOfCart(1));
-          dispatch(getTotalPriceValue(discountedPrice));
+          // dispatch(getCartItem({
+          //           [e.target.dataset.id] : 1 
+          //      }
+          // ))
+          // dispatch(getCountOfCart(1));
+          // dispatch(getTotalPriceValue(discountedPrice));
      }
      const showProductPopup = (e) => {
           dispatch(changePopup(true));
@@ -41,7 +42,6 @@ function Product({product, text}) {
      }
      const addProductToWishList = (e) => {
           const target = e.target; 
-          
                numInArray(wishListIds,target.dataset.id) ? 
                     dispatch(fetchAddWishList(userId, target.dataset.id)):
                          dispatch(deleteWishListItem(userId, target.dataset.id))

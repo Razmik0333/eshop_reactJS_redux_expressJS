@@ -424,33 +424,45 @@ var fetchViewedProducts = function fetchViewedProducts(arr) {
       while (1) {
         switch (_context9.prev = _context9.next) {
           case 0:
-            _context9.prev = 0;
+            if (!(arr.length > 0)) {
+              _context9.next = 17;
+              break;
+            }
+
+            _context9.prev = 1;
             _context9.t0 = regeneratorRuntime;
-            _context9.next = 4;
+            _context9.next = 5;
             return regeneratorRuntime.awrap(fetch("".concat(_constants.root, "/api/list/product/").concat(arr)));
 
-          case 4:
+          case 5:
             _context9.t1 = _context9.sent.json();
-            _context9.next = 7;
+            _context9.next = 8;
             return _context9.t0.awrap.call(_context9.t0, _context9.t1);
 
-          case 7:
+          case 8:
             data = _context9.sent;
             dispatch(changeViewedProductsData(data));
-            _context9.next = 14;
+            _context9.next = 15;
             break;
 
-          case 11:
-            _context9.prev = 11;
-            _context9.t2 = _context9["catch"](0);
+          case 12:
+            _context9.prev = 12;
+            _context9.t2 = _context9["catch"](1);
             console.log('error from productDuck', _context9.t2);
 
-          case 14:
+          case 15:
+            _context9.next = 18;
+            break;
+
+          case 17:
+            dispatch(getCartProducts([]));
+
+          case 18:
           case "end":
             return _context9.stop();
         }
       }
-    }, null, null, [[0, 11]]);
+    }, null, null, [[1, 12]]);
   };
 };
 

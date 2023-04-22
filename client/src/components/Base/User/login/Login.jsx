@@ -22,20 +22,21 @@ function Login() {
      const handleSubmit = async (e) => {
           e.preventDefault();
           const data = new FormData(formRef.current);
-          await fetch(`${root}/login`, {
+         
+          await fetch(`${root}/api/login`, {
                method: 'POST',
-               body: data,    
+               body: new URLSearchParams(data),     
           })
           .then(res => res.json())
           .then(res => {
-               console.log(res);
+               console.log();
                if (res) {
                     setEmailLoginExist(true);
                     dispatch(currentUser(res));
                     dispatch(getUserData(res));
                 //    dispatch(fetchCurrentWishList(res))
 
-                    navigate('/home')
+                   navigate('/home')
                }else{
                    
                     setEmailLoginExist(false);

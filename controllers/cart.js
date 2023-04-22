@@ -22,6 +22,7 @@ module.exports.addToCartById = async (req, res) => {
           });
           await realyze("INSERT INTO wish (user_id, wish, cart) VALUES ( ?, ? , ?) ", [userId, '', cart]); 
      }else{
+          
           if(cartByUser.cart) {
                cart = JSON.parse(cartByUser.cart);
                cart[productId] = (productId in cart) ?

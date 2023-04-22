@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { checkEmptyObject } from "../../helpers/functions/functions";
-import { currenciesSelector, currentLanguageDataSelector, getCartSelector, getProductsInCart, getTotalPriceSelector } from "../../helpers/reduxSelectors";
+import { currentLanguageDataSelector, getCartSelector, getProductsInCart, getTotalPriceSelector } from "../../helpers/reduxSelectors";
 import { fetchProductsByString } from "../../redux/ducks/productDuck";
 
 import CartListItem from "../Cart/CartListItem/CartListItem";

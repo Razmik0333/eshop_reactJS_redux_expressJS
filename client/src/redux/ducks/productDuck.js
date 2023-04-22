@@ -138,16 +138,24 @@ export const fetchProductsByString = (arr) => async(dispatch) => {
   }
 };
 export const fetchViewedProducts = (arr) => async(dispatch) => {
- // arr.length === 0 ? dispatch(getCartProducts([])) :
+ //  ?  :
+ if (arr.length > 0) {
+  try {
+    const data = await (await fetch(`${root}/api/list/product/${arr}`)).json()
+    dispatch(changeViewedProductsData(data));
+  
+  } catch (e) {
+    console.log('error from productDuck', e)
+  }
+ }else{
+  dispatch(getCartProducts([]))
+ }
+ 
 
- try {
-  const data = await (await fetch(`${root}/api/list/product/${arr}`)).json()
-  dispatch(changeViewedProductsData(data));
-
-} catch (e) {
-  console.log('error from productDuck', e)
-}
+  
+ 
 };
+ 
 
 export const fetchNewestProducts = (arr) => (dispatch) => {
   fetch(`${root}/list/product/${arr}`) 

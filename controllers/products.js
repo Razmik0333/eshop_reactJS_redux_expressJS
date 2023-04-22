@@ -39,9 +39,11 @@ module.exports.productById = async (req, res) => {
 }
 module.exports.productsByIds = async (req, res) => {
      const ids = req.params.ids;
+     console.log("🚀 ~ file: products.js:42 ~ module.exports.productsByIds= ~ ids:", ids)
      const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
      res.send(result)
 }
+
 module.exports.productsBetweenCosts = async (req, res) => {
      const category = req.query.category;
      const start = req.query.start;

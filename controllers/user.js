@@ -9,12 +9,15 @@ module.exports.userById = async (req, res) => {
      const users = await realyze("SELECT * FROM `user` WHERE `id`= ? ", [userId]);
      res.send(users)
 }
-module.exports.login = async (req, res) => {
+
+module.exports.login = async (req, res) => {     
      const [email, password] = [req.body.email, req.body.password]
      const [user] = await realyze("SELECT * FROM `user` WHERE `email`= ? ", [email]);
+     console.log(user['id']);
+     
      if(user && await bcrypt.compare(password, user.password)){
-          req.session.user = user;
-          res.send(user);
+          //req.session.user = user;
+          res.send(`${user.id}`);
      }else{
           res.send('0');
      }

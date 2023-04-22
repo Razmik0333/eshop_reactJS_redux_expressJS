@@ -1,7 +1,8 @@
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
-const path = require('path')
+const path = require('path');
+const bodyParser = require('body-parser')
 const categoryRoutes = require('./routes/category')
 const cartRoutes = require('./routes/cart')
 const productRoutes = require('./routes/products')
@@ -10,7 +11,6 @@ const reviewRoutes = require('./routes/review')
 const userRoutes = require('./routes/user')
 const wishListRoutes = require('./routes/wishlist')
 const configsRoutes = require('./routes/configs')
-
 const adminOrders = require('./routes/admin/orders')
 const adminProducts = require('./routes/admin/products')
 const adminCategories = require('./routes/admin/category')
@@ -20,16 +20,14 @@ const adminUsers = require('./routes/admin/users')
 const app = express();
 
 
-app.get('/hye', (req, res) => {
-  res.sendFile(path.resolve(__dirname + '/public/index.html'))
-})
+
 const PORT = process.env.PORT || 3001;
 
 //middleware
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-app.use(express.static('public'));
 
+app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+app.use(express.static('public'));
 app.use(session({secret:'niufewfukewkfgekfgekfgkefgewf', cookie: { maxAge:60000 }}))
 app.use(cors({origin:"http://localhost:3000"}));
 
@@ -51,9 +49,11 @@ app.use('/api', adminUsers);
 
 
 
-app.listen(PORT, () => {
+app.listen(PORT, (err) => {
+      if (err) console.log("Error in server setup")
      console.log(`server has started in port ${PORT}`);
 });
+
 
 
 

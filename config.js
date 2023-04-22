@@ -14,3 +14,4 @@ async function realyze(queryString, arr ) {
 }
 
 module.exports.realyze = realyze;
+
