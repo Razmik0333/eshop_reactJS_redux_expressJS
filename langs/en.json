@@ -1,0 +1,183 @@
+{
+    "header" : {
+        "home" : "Home",
+        "about": "ABOUT",
+        "admin": "Admin",
+        "signup": "Signup",
+        "profile": "Profile",
+        "my_profile": "My Profile",
+        "my_orders": "My Orders",
+        "login": "Login",
+        "logout": "Logout"
+    },
+    "product_item" : {
+        "sale": "Sale",
+        "quick_view": "Quick View",
+        "add_to_cart": "Add To Cart"
+    },
+    "home" : {
+        "hot_deals": {
+            "header" : "HOT DEALS",
+            "add_to_cart" : "Add To Cart",
+            "timer" : {
+                "day" : "DAYS",
+                "hour" : "HRS",
+                "minute" : "MINS",
+                "second" : "SECS"
+            }
+        },
+        "carousel" : {
+            "shop_now" : "SHOP NOW"
+        },
+        "services_part" : {
+            "free_shipping" : "FREE SHIPPING ALL ORDER",
+            "support" : "24/7 COSTOMER SUPPORT",
+            "money" : "MONEY BACK GUARANTEE",
+            "discount" : "MEMBER dISCOUNT FIRST ORDER"
+        },
+        "newest" : "NEWEST PRODUCTS"
+    },
+    "details" : {
+        "sort_by" : "Sort By",
+        "show" : "Show",
+        "search" : "You Searched",
+        "select_count" : "Show",
+        "select_type" : "Select Type",
+        "filter_type": [
+            "price : lowest first",
+            "price : highest first",
+            "date : lowest first",
+            "date : highest first",
+            "rating : lowest first",
+            "rating : highest first"
+        ],
+        "filter_price" : "FILTER BY PRICE"
+    },
+    "product_page" : {
+        "content" : {
+            "reviews" : "reviews",
+            "add_review": "Add Your Review",
+            "add_to_cart": "Add To Cart",
+            "quantity":"Quantity",
+            "name":"Name",
+            "availability":"Availability",
+            "category":"Category",
+            "sold" :"Sold",
+            "pcs":"pcs"
+        },
+        "home" : "HOME",
+        "best_seller" : "BEST SELLER"
+    },
+    "cart" : {
+        "cart" : "CART",
+        "total" : "Total",
+        "empty" : "CART IS EMPTY",
+        "buy" : "BUY ORDER",
+        "cart_item" : {
+            "sale" : "Sale"
+        }
+    },
+    "wishlist" : {
+        "header" : "WISHLIST",
+        "empty" : "No Products"
+    },
+    "order" : {
+        "header" : {
+            "my_orders" : "MY ORDERS",
+            "nav" : [
+                "All Orders",
+                "Accepted",
+                "Sent",
+                "Success",
+                "Received"
+            ],
+            "order_item_header": {
+                "number" :"Order Number",
+                "price" : "Order Price",
+                "status" : "Order Status"
+            },
+            "confirm" : "Confirm Receipt"
+        }
+    },
+    "recomend" : {
+        "recomended_products": "FEATURED PRODUCTS",
+        "add_to_cart": "ADD TO CART"       
+    },
+    "register": {
+        "register":"REGISTER",
+        "your_name" : "Your Name",
+        "name" : "Name",
+        "your_login" : "Your Login",
+        "login" : "Login",
+        "your_email" : "Your Email",
+        "email" : "Email",
+        "your_pass" : "Your Password",
+        "confirm_pass" : "Confirm Password",
+        "pass" : "Password",
+        "inc_name" : "Incorrect Name",
+        "inc_email" : "Incorrect Email Or Login",
+        "inc_login" : "Incorrect Login",
+        "inc_pass": "Incorrect Password",
+        "inc_match_pass":"Password are no match",
+        "gender" : {
+            "male" :"Male",
+            "female" : "Female"
+        },
+        "continue" : "CONTINUE"        
+    },
+    "login": {
+        "login":"LOGIN",
+        "your_email" : "Your Email",
+        "email" : "Էլ․ Փոստի հասցեն",
+        "your_pass" : "Your Password",
+        "pass" : "Գաղտնաբառը",
+        "continue" : "CONTINUE",
+        "inc_email" : "Incorrect Email",
+        "inc_pass": "Incorrect Password",
+        "email_not_exist" : "Email is not  exist"
+    },
+    "buy" : {
+        "your_info" : "YOUR INFO",
+        "your_name" : "Your Name",
+        "name" : "Name",
+        "your_email" : "Your email",
+        "email" : "Email",
+        "your_phone" : "Your phone",
+        "phone" : "Phone number",
+        "your_review" : "Your text here",
+        "offer" : "Offer",
+        "continue": "CONTINUE",
+        "inc_val": "Incorrect value",
+        "buy_info" : "Buy success"
+    },
+    "footer" : {
+        "about" : [
+            "Information",
+            "About us",
+            "Privacy",
+            "Conditions",
+            "Online support"
+        ],
+        "my_account" : [
+            "My Account",
+            "Login",
+            "My Cart",
+            "Wishlist",
+            "Checkout"
+        ],
+        "information" : [
+            "Information",
+            "Specials",
+            "New Products",
+            "Best Sellers",
+            "Our Stores"
+        ],
+        "orders" : [
+            "Orders",
+            "Payment options",
+            "Shipping and delivery",
+            "Returns",
+            "Shipping"
+        ]        
+    }
+}

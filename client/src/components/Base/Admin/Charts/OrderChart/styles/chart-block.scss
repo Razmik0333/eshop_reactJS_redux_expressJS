@@ -1,0 +1,112 @@
+.admin__content{
+     .charts__block{
+          width: 100%;
+          margin:10px 32px;
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
+          .chart__block{
+               display: flex;
+               .orders_graph{
+                    width: 650px;
+                    background-color: #fff;
+                    .orders_graph_header{
+                         display: flex;
+                         justify-content: space-between;
+                         align-items: center;
+                         .grafs_time{
+                              display: flex;
+                              justify-content: space-between;
+                              margin: 10px;
+                              .graf_time{
+                                   padding: 10px 5px;
+                                   border-radius: 5px;
+                                   margin-left: 5px;
+                                   position: relative;
+     
+                                   .months_head,.years_head{
+                                        img{
+                                             width: 12px;
+                                             height: auto;
+                                             margin-left: 5px;
+                                        }
+                                   }
+                                   &:hover{
+                                        .years{
+                                             display: flex;
+                                             flex-direction: column;
+                                             position: absolute;
+                                             top: 35px;
+                                             left: 0;
+                                             width: 60px;
+                                             border-radius: 5px;
+                                             background-color: var(--white);
+                                             color: var(--black);
+                                             .years_item{
+                                                  padding: 5px 0;
+                                                  text-align: center;
+                                                  cursor: pointer;
+                                                  &:hover{
+                                                       background-color: var(--orange);
+                                                  }
+     
+                                             }
+                                        }
+                                        .months {
+     
+                                             display: flex;
+                                             flex-direction: column;
+                                             position: absolute;
+                                             top: 35px;
+                                             left: 0;
+                                             width: 60px;
+                                             border-radius: 5px;
+                                             background-color: var(--white);
+                                             color: var(--black);
+                                             .month_item{
+                                                  padding: 5px 0;
+                                                  text-align: center;
+                                                  cursor: pointer;
+                                                  &:hover{
+                                                       background-color: var(--orange);
+                                                  }
+     
+                                             }
+                                        }
+     
+                                   }
+                                   .months{
+                                        display: none;
+                                   }
+                                   .years{
+                                        
+                                        display: none;
+                                   }
+                                   .day{
+                                        position: relative;
+                                        input{
+                                             position: absolute;
+                                             display: none;
+                                        }
+                                   }
+                                   &:hover{
+          
+                                        input{
+                                             display: inline;
+                                        }
+                                   }
+                              }
+                              
+                         }
+                    }
+               }
+
+          }
+     }
+     .orders_status{
+          width: 310px;
+          height: 383px;
+          margin-left: 28px;
+          background-color: #fff;
+     }
+}

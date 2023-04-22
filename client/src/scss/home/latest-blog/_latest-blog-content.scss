@@ -1,0 +1,87 @@
+.latest__blog__content{
+     width: 100%;
+     height: 480px;
+
+     .latest__blog__items{
+          width: 100%;
+          height: 480px;
+          background-color: #fff;
+          display: flex;
+          margin-top: 25px;
+          .latest__blog__item{
+               width: 31.4%;
+               height: 480px;
+               background-color: #fff;
+               &:not(&:first-child){
+                    margin-left: 24px;
+               }
+               .latest__blog__item__picture{
+                    width: 100%;
+                    height: 230px;
+                    background-color: #969696;
+                    position: relative;
+               }
+               .latest__blog__item__title{
+                    background-color: #fff;
+                    width: 83%;
+                    height: 48px;
+                    position: absolute;
+                    bottom: 0;
+                    left: 9%;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    font-size: 13px;
+                    color: #676767;
+                    img{
+                         width: 15px;
+                         height: auto;
+                         margin-right: 5px;
+                         vertical-align: middle;
+                    }
+               }
+               .latest__blog__item__desc{
+                    width: 83%;
+                    background-color: #fff;
+                    position: relative;
+                    .latest_blog_content {
+                         background-color: #fff;
+                         position: absolute;
+                         width: 100%;
+                         left: 11%;
+                         cursor: pointer;
+                         .item-desc-title{
+                              padding: 15px 0;
+                              color: #676767;
+                              font-weight: 500;
+                         }
+                         .item-desc-text{
+                              font-size: 14px;
+                              color: #676767;
+                              line-height: 1.3;
+                         }
+                         .latest-blog-footer {
+                              position: absolute;
+                              left: 30%;
+                              .latest_blog_button{
+                                   width: 130px;
+                                   height: 30px;
+                                   background-color: #2a2a2a;
+                                   margin-top: 30px;
+                                   left: 10px;
+                                   color: #fff;
+                              }
+                         }
+                         &:hover .latest_blog_button{
+                              background-color: #d58e32;
+                         }
+                         &:hover .item-desc-title{
+                              color: #d58e32;
+                         }
+                    }
+                   
+               }
+          }
+     }
+     
+}

@@ -1,0 +1,48 @@
+
+.order__list__container{
+
+     
+          .details__products__header{
+               border-bottom: 1px solid #2a2a2a;
+               padding: 10px 0;
+          
+               .products__header__items{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px 0;
+                    margin-top: 10px;
+                    .current__category{
+                         font-size: 22px;
+                         font-weight: 500;
+                         
+                    }
+                    .show__parameters{
+                        display: flex;
+                        .show__parameter{
+                             margin-left: 20px;
+                             padding: 10px ;
+                             &:hover{
+                              background-color: var(--orange);
+                              cursor: pointer;
+                              color: var(--white);
+                             }
+                             
+                         }
+                         .active{
+                          background-color: var(--orange);
+                               cursor: pointer;
+                               color: var(--white);
+                         }
+                        
+                    }
+               }
+               
+          }
+     
+     
+}
+
+
+
+

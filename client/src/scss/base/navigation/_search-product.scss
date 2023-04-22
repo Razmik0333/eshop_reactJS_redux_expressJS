@@ -1,0 +1,15 @@
+.search__part{
+     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+     .search-input{
+          width: 210px;
+          padding: 17px;
+          background:#fff url("/scss/icons/search_icon.svg") no-repeat 95% 10px;
+          background-size: 25px;
+     }
+}
+

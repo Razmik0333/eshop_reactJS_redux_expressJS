@@ -1,0 +1,46 @@
+.newsletter{
+     width: 100%;
+     height: 90px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-family: 'Poppins', Arial, Sans-Serif;
+     background-color: #f2f2f2;
+     span{
+          font-size: 22px;
+          color: $orange;
+          font-weight: 700;
+          margin-right: 40px;
+     }
+     input{
+          width: 33%;
+          height: 40px;
+          background-image:url('/scss/img/mail_orange.png') ;
+          background-repeat: no-repeat;
+          background-size:15px ;
+          background-position: 10px 12px;
+          padding: 0 50px;
+          border-radius: 10px;
+          border: 0;
+     }
+     button{
+          width: 44px;height: 44px;
+          background-color: $white;
+          margin-left: 15px;
+          border-radius: 10px;
+          border: 0;
+          cursor: pointer;
+          &:hover{
+               background-color: $orange;
+               .newsletter__arrow{
+                    fill: $white;
+               }
+
+          }
+          .newsletter__arrow{
+               width: 25px;
+               height: auto;
+               fill: $orange;
+          }
+     }
+}

@@ -1,0 +1,23 @@
+.login__register{
+     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 13px;
+     .login__register__item{
+          padding: 10px;
+          &:hover{
+               cursor: pointer;
+               background-color: #d58e32;
+               padding: 10px;
+          }
+          .register__icon{
+               fill: #fff;
+          }
+     }
+
+     
+          
+}

@@ -1,0 +1,35 @@
+.footer__bottom{
+     display: flex;
+     justify-content: space-around;
+     .footer__bottom__rows{
+          .copyright{
+               font-size: 14px;
+               color: #9c9c9c;
+          }
+          .footer__bottom__icons{
+               
+               display: flex;
+               li {
+                    padding:0 10px;
+                    a {
+                         svg{
+                              width: 30px;
+                              height: 30px;
+                              fill: #a1a1a1;
+                              &:hover{
+                                   fill: #d58e32;
+                              }
+                              .footer__bottom__icon__item{
+                              }
+               
+                         }
+                    }
+               }
+          }
+          &:first-child{
+               width: 30%;
+          }
+
+     }
+
+}

@@ -1,0 +1,40 @@
+.order__info{
+     h3{
+          font-size: 25px;
+          font-weight: 600;
+          margin-top: 10px;
+          text-align: center;
+     }
+     .user__info{
+         
+          margin: 0 auto;
+         display: flex;
+         flex-direction: column;
+         width: 23%;
+         align-items: center;
+         flex-wrap: wrap;
+         align-items: center;
+         .order__block{
+              width: 100%;
+         }
+         .order__input__item {
+              margin: 10px 0;
+               width: 100%;
+               height: 40px;
+               padding: 0 10px;
+               outline-color: var(--orange);
+          }
+     }
+     .continue{
+          width: 120px;
+          height: 44px;
+          font-size: 14px;
+          color: var(--white);
+          background-color: var(--black);
+          padding: 11px 15px;
+          cursor: pointer;
+
+     }
+
+}
+

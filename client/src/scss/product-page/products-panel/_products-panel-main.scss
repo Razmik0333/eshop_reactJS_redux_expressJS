@@ -1,0 +1,21 @@
+.details__products__container{
+     display: flex;
+     .products__panel{
+          width: 75%;
+
+     
+     }
+     .categories__panel{
+          width: 25%;
+          margin-left: 25px;
+     }
+}
+.product__content{
+     margin-top: -190px;
+     .product__content__container{
+          display: flex;
+          
+          background-color: $white;
+
+     }    
+}

@@ -1,0 +1,108 @@
+.product__content{
+     margin-top: -190px;
+     .product__content__container{
+          display: flex;
+          
+          background-color: var(--white);
+          .product__pictures{
+               width: 36%;
+               height: 530px;
+               display: flex;
+               flex-direction: column;
+               .base__picture{
+                    width: 80%;
+                    height: 400px;
+                    padding: 15px;
+                    z-index: 999;
+                    position: relative;                         
+                    img{
+                         width: 100%;
+                         height: inherit;
+                    }
+                    
+                    .resize-picture{
+                         background-color: var(--white);
+                         background-image: url("http://eshopfinal.net/template/images/icons/resize-outer.svg");
+                         background-repeat: no-repeat;
+                         background-size: contain;
+                         width: 28px;
+                         height: 28px;
+                         padding: 0;
+                         position: absolute;
+                         bottom: 25px;
+                         right: 25px;
+                         cursor: pointer;
+                         svg{
+                              width: 20px;
+                              height: 20px;
+                         }
+                         &:hover{
+                              background-color: var(--orange);
+                              border: 1px solid var(--orange); 
+                              svg{
+                                   fill: var(--white);
+                              }
+                         }
+                    }
+                    
+               }
+               .other__pictures{
+                    position: relative;
+                    .other__pictures__buttons{
+                         position: relative;
+                         width: 80%;
+                         button{
+                              width: 22px;
+                              height: 22px;
+                              background-color: var(--white);
+                              padding: 0;
+                               position: absolute;
+                              margin-top: 9%;
+                              svg{
+                                   width: 18px;
+                                   height: 18px;
+                                   fill: var(--black);
+                              }
+                              &:hover{
+                                   
+                                   background-color: var(--orange);
+                                   color: var(--white);
+                                   border: 1px solid var(--orange);
+                                   cursor: pointer;
+                                   svg{
+                                        fill: var(--white);
+                                   }
+                              }
+                         }
+                          .prev__picture{
+                                left: 12px;
+          
+                          }
+                          .next__picture{
+                               left: 100%;
+                          }
+          
+                    }
+                    .other__pictures__items{
+                         width: 80%;
+                         display: flex;
+                         justify-content: space-around;
+                         align-items: center;
+                         margin-left: 15px;
+                         position: absolute;
+                         img{
+                              width: 21%;
+                              height: 80px;
+                              &:hover{
+                                   cursor: pointer;
+                              }
+                         }
+                    }
+               }
+          
+          }
+
+     }    
+}
+
+

@@ -1,0 +1,75 @@
+.carousel{
+     width: 73.3%;
+     background-color: #ccc;
+     height: 400px;
+     margin-left: 20px;
+     position: relative;
+    .carousel__body{
+          width: 100%;
+          height: 170px;
+          display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          align-content: space-around;
+          justify-content: center;
+          align-items: center;
+          background-color: #666;
+          position: absolute;
+          top: 32%;
+          .carousel-body-header{
+               font-size: 54px;
+               color: #fff;
+               span{
+                    font-weight: 700;
+               }
+          }
+     }
+     .shop-now{
+          width: 110px;
+          height: 40px;
+          background-color: #fff;
+          color: #2a2a2a;
+          cursor: pointer;
+          border-width: 0;
+          font-size: 14px;
+          position: absolute;
+          left: 45%;
+          top: 70%;
+          font-family: 'Poppins', Arial, Sans-Serif;
+          &:hover{
+               background-color: #d58e32;
+          }
+
+     }
+     .carousel__buttons{
+          
+          position: absolute;
+          bottom: -6%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          height: 30px;
+          text-align: center;
+          vertical-align: middle;
+          img{
+               width: 20px;
+               height: auto;
+          }
+          .carousel-button{
+               width: 50%;
+               padding:10px;   
+               border-width: 0;
+               cursor: pointer;
+               &:hover{
+                    background-color: #d58e32;
+               }
+          }
+          .arrow-left{
+               background-color: #2a2a2a;
+          }
+          .arrow-right{
+               background-color: #2a2a2a;
+               
+          }
+     }
+}

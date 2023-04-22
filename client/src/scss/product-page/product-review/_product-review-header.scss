@@ -1,0 +1,20 @@
+.product__review__header{
+     .product__review__items{
+          display: flex;
+          .product__review__item{
+               width: 120px;
+               padding: 13px 20px;
+               border: 1px solid #c2c2c2;
+               font-size: 16px;
+               font-weight: 500;
+               margin: -1px;
+
+               &:hover{
+                    color: $orange;
+               }
+          }
+          .active{
+               border-bottom: 1px solid $white;
+          }
+     }
+}

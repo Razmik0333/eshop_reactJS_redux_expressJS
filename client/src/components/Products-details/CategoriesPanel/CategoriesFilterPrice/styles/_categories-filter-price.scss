@@ -1,0 +1,71 @@
+.categories__filter__price{
+     user-select: none;
+     .categories__filter__price__header{
+          font-size: 16px;
+          font-weight:700;
+          padding: 10px 0;
+          margin-top: 10px;
+          border-bottom: 1px solid #000;
+          
+     } 
+     .range__content{
+          position: relative;
+          margin-top: 20px;
+          height: 30px;
+          .ranges{
+               width: 10px;
+               height: 10px;
+               border: 3px solid var(--orange);
+               border-radius: 50%;
+               position: absolute;
+               z-index: 99998;
+               background-color: var(--white);
+          }
+          .line{
+               height: 6px;
+               top: 5px;
+               position: absolute;
+          }
+          .base-line{
+               width: 100%;
+               border: 1px solid var(--lineBorder);
+          }
+          .current-line{
+               background-color: var(--black);
+               width: 100%;
+               left: 0;
+          }
+          .start{
+               left: 0;
+               
+          }
+          .selected{
+               border: 3px solid #ccc;
+          }
+          .final{
+               left: 100%;
+
+          }
+     }
+     .filter-price{
+          margin-top: 60px;
+          display: flex;
+          justify-content: space-between;
+           align-items: center;
+           .filter-button{
+                width: 60px;
+                height: 30px;
+                color: var(--white);
+                outline: 0;
+               background-color: var(--orange);
+               font-size: 13px;
+               padding: 5px;
+               border: 0;
+               cursor: pointer;
+          }
+          .price-numbers{
+               border: 1px solid var(--lineBorder);
+               padding: 5px;
+          }
+     }
+}

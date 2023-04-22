@@ -1,0 +1,34 @@
+.product__list__container{
+     .category-line-circle{
+          display: flex;
+          align-items: center;
+          .category-line{
+               width: 90%;
+               height: 2px;
+               background-color: #e2e2e2;
+     
+          }
+          .circles{
+               width: 90px;
+               height: 15px;
+               display: flex;
+               margin-left: 35px;
+               .circle{
+                    width: 5px;
+                    height: 5px;
+                    padding: 5px;
+                    margin-left: 15px;
+                    border-radius: 50%;
+                    background-color: #e2e2e2;
+                    cursor: pointer;
+                    &:hover{
+                         background-color: var(--orange);
+                    }
+               }
+               .active{
+                    background-color:  var(--orange);
+               }
+          }
+     }
+
+}

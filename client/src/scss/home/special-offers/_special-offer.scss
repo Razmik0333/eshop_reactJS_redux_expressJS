@@ -1,0 +1,37 @@
+.special-offer{
+     padding: 20px;
+     background-color: #e8edf7;
+     height: 480px;
+     width: 50%;
+     margin-left: 25px;
+     .special-offer-price{
+          font-size: 48px;
+          color: #79ae30;
+          font-weight: 500;
+          padding: 25px 0;
+     }
+     p{
+          font-size: 18px;
+          color: #000;
+          padding: 25px 20px 0 25px;
+     }
+     .special-offer-title{
+          font-size: 48px;
+          color: #d58e32;
+          font-weight: 500;
+          padding: 25px;
+     }
+     .shop-now{
+          width: 108px;
+          height: 40px;
+          margin: 20px;
+          padding: 12px;
+          background-color: #79ae30;
+          color: #fff;
+          font-size: 14px;
+          &:hover{
+               background-color: #d58e32;
+               cursor: pointer;
+          }
+     }
+}

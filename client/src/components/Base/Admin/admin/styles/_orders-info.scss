@@ -1,0 +1,77 @@
+.orders__info{
+     padding: 25px;
+     background-color: #fff;
+     margin-left: 32px;
+     display: flex;
+     flex-direction: column;
+     margin-top: 10px;
+     width: 92%;
+     .orders__info__titles{
+
+          margin-top: 20px;
+          display: flex;
+          width: 100%;
+          .order__title{
+               padding: 10px;
+               font-size: 14px;
+               width: 15%;
+               font-weight: 700;
+               &:first-child{
+                    width: 5%;
+               }
+          }
+     }
+     .order__item__info{
+          display: flex;
+          align-items: center;
+          width: 100%;
+          .order__item__data__info{
+               padding: 10px;
+               width: 15%;
+               font-size: 14px;
+               button {
+                    border-radius: 50%;
+                    background-color: var(--white);
+                    cursor: pointer;
+                    border: 1px solid #ccc;
+                    &:hover{
+                         border: 1px solid var(--orange);
+                         svg{
+
+                              fill: var(--orange);
+                         }
+
+                         
+                    }
+                    svg{
+                         width: 25px;
+                         height: 25px;
+                         fill: #ccc;
+                
+                    }
+               }
+               &:first-child{
+                    width: 5%;
+               }
+               .status__order{
+                    padding: 5px;
+                    color: var(--white)
+               }
+               .accept{
+                    background-color: blue;
+               }
+               .reached{
+                    color: var(--black);
+                    background-color: yellow;
+               }
+               .delivered{
+                    background-color: green;
+               }
+               .delivered_PS{
+                    background-color: yellowgreen;
+               }
+
+          }
+     }
+     
+}

@@ -1,0 +1,74 @@
+.modal{
+     width: 100vw;
+     height: 100vw;
+     background-color: rgb(112, 104, 104, 0.2);
+     position: fixed;
+     left: 0;
+     top: 0;
+     z-index: 99999;
+     .modal__block{
+          width: 40%;
+          height: 200px;
+          background-color: var(--white);
+          position: absolute;
+          left: 30%;
+          top: 10%;
+          border-radius: 5px;
+          text-align: center;
+          .modal__header{
+               padding: 10px ;
+               font-size: 20px;
+               text-align: center;
+          }
+          .modal__content{
+               margin-top: 10px;
+               padding: 10px;
+          }
+          
+          .modal__button{
+               margin-top: 20px;
+               width: 105px;
+               height: 44px;
+               font-size: 14px;
+               color: var(--white);
+               background-color: var(--black);
+               padding: 11px 15px;
+               cursor: pointer;
+     
+          }
+     }
+     .modal__popup{
+          width: 30%;
+          background-color: #fff;
+          height: auto;
+          border-radius: 5px;
+          position: absolute;
+          left: 35%;
+          top: 8%;
+          .picture-block{
+               img{
+                    width:100%;
+                    height: auto;
+               }
+          }
+     }
+     .button-block{
+          position: absolute;
+          top: 0;
+          right: 10%;
+          .modal__resize{
+               position: fixed;
+               background-image: url("http://eshopfinal.net/template/images/icons/resize-inner.svg");
+               background-repeat: no-repeat;
+               background-size: contain;
+               background-color: var(--white);
+               width: 30px;
+               height: 30px;
+               cursor: pointer;
+               &:hover{
+                    background-color: var(--orange);
+               }
+          }
+
+     }
+}

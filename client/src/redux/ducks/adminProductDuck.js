@@ -1,0 +1,139 @@
+import { createAction } from "../../helpers/redux";
+import { root } from "../../helpers/constants/constants";
+
+const PRODUCTS_LIST = 'adminProductDuck/PRODUCTS_LIST';
+const PRODUCTS_FOR_UPDATE_ID = 'adminProductDuck/PRODUCTS_FOR_UPDATE_ID';
+const PRODUCTS_FOR_UPDATE = 'adminProductDuck/PRODUCTS_FOR_UPDATE';
+const PRODUCT_FOR_DELETE = 'adminProductDuck/PRODUCT_FOR_DELETE';
+const TIME_OBJECT = 'adminProductDuck/TIME_OBJECT';
+const CLEAR_TIME_OBJECT = 'adminProductDuck/CLEAR_TIME_OBJECT';
+
+
+export const getProductsList = createAction(PRODUCTS_LIST);
+export const getProductIdForUpdate = createAction(PRODUCTS_FOR_UPDATE_ID);
+export const getProductForUpdate = createAction(PRODUCTS_FOR_UPDATE);
+export const getProductForDelete = createAction(PRODUCT_FOR_DELETE);
+export const getTimeObject = createAction(TIME_OBJECT);
+export const clearTimeObject = createAction(CLEAR_TIME_OBJECT);
+
+
+
+const initialStateApp = {
+  productsList: [],
+  currentProductId : null,
+  currentProduct:null,
+  isDeleted : false,
+  timeObj : {}
+
+};
+export const currentCartItem = () => (dispatch) => {
+     dispatch(getProductsList());
+   };
+export const currentProductID = (id) => (dispatch) => {
+  console.log(id);
+    
+     dispatch(getProductIdForUpdate(id));
+};
+export const currentProductClear = () => (dispatch) => {
+  
+    
+     dispatch(getProductForUpdate(null));
+     dispatch(getProductIdForUpdate(null));
+};
+export const resetIsDeleted = (bool) => (dispatch) => {
+      dispatch(getProductForDelete(bool));
+};
+export const createYear = (obj) => (dispatch) => {
+  dispatch(getTimeObject(obj))
+}
+export const createMonth = (obj) => (dispatch) => {
+dispatch(getTimeObject(obj))
+
+}
+export const resetTimeObject = () => (dispatch) => {
+  dispatch(clearTimeObject())
+}
+
+export const fetchProductsList = (id) => (dispatch) => {
+    
+    fetch(`${root}/admin/product/list/${id}`)
+      .then((res) => res.json())
+      .then((res) => {
+            dispatch(getProductsList(res));
+      })
+      .catch((e) => console.log('error from AdminProductDuck', e));
+};
+export const fetchProductItem = (id) => (dispatch) => {
+    
+    fetch(`${root}/admin/product/item/${id}`)
+      .then((res) => res.json())
+      .then((res) => {
+            dispatch(getProductForUpdate(res));
+      })
+      .catch((e) => console.log('error from AdminProductDuck', e));
+};
+export const fetchProductsForUpdate = (userId, productId) => (dispatch) => {
+     fetch(`${root}/admin/product/update/${userId}/${productId}`)
+     
+       .then((res) => res.json())
+       .then((res) => {
+        console.log(res);
+        
+            dispatch(getProductForUpdate(res));
+       })
+       .catch((e) => console.log('error from AdminProductDuck', e));
+};
+export const fetchProductsForDelete = (userId, productId) => (dispatch) => {
+     fetch(`${root}/admin/product/delete/${userId}/${productId}`)
+     
+       .then((res) => res.json())
+       .then((res) => {
+        console.log(res);
+
+           dispatch(getProductForDelete(res));
+       })
+       .catch((e) => console.log('error from AdminProductDuck', e));
+};
+
+
+const AdminProductDuck = (state = initialStateApp, action) => {
+  switch (action.type) {
+    case PRODUCTS_LIST:
+      return {
+        ...state,
+        productsList: action.payload,
+      };
+    case PRODUCTS_FOR_UPDATE_ID:
+      return {
+        ...state,
+        currentProductId: action.payload,
+      };
+    case PRODUCTS_FOR_UPDATE:
+      return {
+        ...state,
+        currentProduct: action.payload,
+      };
+    case PRODUCT_FOR_DELETE:
+      return {
+        ...state,
+        isDeleted: action.payload,
+      };
+      case TIME_OBJECT:
+        return {
+          ...state,
+          timeObj: {
+            ...state.timeObj,
+            ...action.payload
+          },
+        };
+      case CLEAR_TIME_OBJECT:
+        return {
+          ...state,
+          timeObj: {},
+        };
+    default:
+      return state;
+  }
+};
+
+export default AdminProductDuck;

@@ -1,0 +1,29 @@
+nav{
+     box-shadow: 1px 12px 10px -6px #d1d1d1;
+
+     .category__list{
+          display: flex;
+     
+          li{
+               
+               font-size: 14px;
+               a{
+                    padding: 15px;
+                    text-decoration: none;
+                    color: #636363;
+                    &:hover {
+                         background-color: #d58e32;
+                         color: #fff;
+                    }
+               }
+          }
+          .active {
+               a{
+                    background-color: #d58e32;
+     
+                    color: #fff;
+               }
+          }
+     }
+}
+

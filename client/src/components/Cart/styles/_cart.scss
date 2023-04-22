@@ -1,0 +1,32 @@
+.cart__header__items{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 10px 0;
+     margin-top: 10px;
+     border-bottom: 1px solid var(--black);
+     margin-bottom: -80px;
+     .cart__header{
+          font-size: 22px;
+          font-weight: 500;
+
+     }
+     .cart__summ{
+          margin-left: 30px;
+     }
+}
+.cart__buy{
+     margin: 25px 0 ;
+     .cart__buy__button{
+          vertical-align: middle;
+          background-color: #2a2a2a;
+          color: var(--white);
+          padding: 10px;
+          text-decoration: none;
+          &:hover{
+               cursor: pointer;
+               background-color: #d58e32;
+          }
+     }
+
+}

@@ -1,0 +1,10 @@
+.order__list__header__items{
+     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-around;
+    .order__list__header__item{
+         padding: 10px 0;
+         margin-left: 25px;
+    }
+}

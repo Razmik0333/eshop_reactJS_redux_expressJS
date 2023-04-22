@@ -1,0 +1,225 @@
+.furniture__gallery{
+     width: 50%;
+     height: auto;
+     .furniture__gallery__header{
+          font-size: 20px;
+          color: #d58e32;
+          font-weight: 900;
+          padding: 10px 0;
+     }
+     .offers-items{
+          display: flex;
+          flex-direction: row;
+          align-content: stretch;
+          justify-content: space-evenly;
+          align-items: flex-end;
+          .offers-item{
+               padding: 10px 32px;
+               background-color: #fff;
+               cursor: pointer;
+               &:hover{
+                    color: #fff;
+                    background-color: #d58e32;
+
+               }
+          }
+          .active{
+               color: #d58e32;
+               border-top: 2px solid #d58e32 ;
+               background-color: #f4f5f7;
+          }
+     }
+     .offers-informations{
+          width: 100%;
+          height: 400px;
+          position: relative;
+          .current-offer{
+               width: 100%;
+               height: 440px;
+               position: absolute;
+               background-color: #f4f5f7;
+          }
+          .offers-panels{
+               display: flex;
+               flex-wrap: nowrap;
+               align-content: center;
+               justify-content: space-between;
+               align-items: center;
+               width: 100%;
+               .left-panel{
+                    display: flex;
+                    //background-color: #d58e32;
+                    flex-direction: column;
+                    width: 110px;
+                    height: 135px;
+                    padding: 5px;
+                    position: absolute;
+                    top: 100px;
+                    flex-wrap: nowrap;
+                    align-items: baseline;
+                    .offer-button{
+                         display: flex;
+                         align-items: center;
+                         margin-top: 5px;
+                         .offer-button-item{
+                              cursor: pointer;
+                              display: flex;
+                              .add-cart-button{
+                                   margin-left: 6px;
+                                   vertical-align: middle;
+                                   text-align: center;
+                                   display: none;
+                              }
+                              &:hover{
+                                   color: #d58e32;
+                              }
+                              &:hover  .add-cart-button{
+                                    display: flex;
+                               }
+                         }
+                    }
+                    .button-favorite{
+                         width: 30px;
+                         height: 26px;
+                         &::before{
+                              content: "\2661" ;
+                         }
+                    }
+                    .button-compare{
+                         
+                         width: 30px;
+                         height: 26px;
+                         &::before{
+                              content: "\21C4" ;
+                         }
+                    }
+                    .button-eyes{
+                         width: 30px;
+                         height: 26px;
+                         vertical-align: middle;
+
+                         &::before{
+                              width: 30px;
+                               height: 26px;
+                              content: "\1F441" ;
+                         }
+                    }
+                    .button-cart{
+                         vertical-align: middle;
+                         width: 30px;
+                         height: 26px;
+                         &::before{
+                              content: "\1F441" ;
+                         }
+                    }
+                   
+                    .add-cart-button{
+                         position: relative;
+                         background-color: red;
+                         height: 22px;
+                         .add-cart{
+                              width: 80px;
+                              height: 22px;
+                              background-color: #2a2a2a;
+                              font-size: 12px;
+                              color: #fff;
+                         }
+                         .arrow-triangle{
+                              width: 0; 
+                              height: 0; 
+                              border-top: 5px solid transparent;
+                              border-bottom: 5px solid transparent; 
+                              
+                              border-right:5px solid #2a2a2a; 
+                              position: absolute;
+                              left: -6%;
+                              top: 29%;
+                              z-index: 99999;
+                         }
+                    }
+
+               }
+               .right-panel{
+                    position: absolute;
+                    bottom: 10%;
+                    right: 0;
+                    width: 30%;
+                    height: 150px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .offer-items{
+                         display: flex;
+                         flex-direction: column;
+                         align-items: flex-end;
+                         position: relative;
+                         width: 30%;
+                         height: inherit;
+                         .offer-prices{
+                              position: absolute;
+                              background-color: #7b7b7c;
+                              border-radius: 50%;
+                              text-align: center;
+                              vertical-align: middle;
+                              padding: 20px 10px;
+                              margin-bottom: -10px;
+                              z-index: 9999;
+                         
+                         .new-offer-price{
+                              font-size: 20px;
+                              font-weight: 300;
+                              color: #fff;
+                              margin-bottom: 5px;
+                         }
+                         .old-offer-price{
+                              font-size: 15px;
+                              font-weight: 300;
+                              color: #fff;
+                              margin-bottom: 5px;
+                         }
+                    }
+                    .offer-content{
+                         width: 200px;
+                         height: 60px;
+                         background-color: #fff;
+                         text-align: center;
+                         vertical-align: middle;
+                         position: absolute;
+                         top: 50%;
+                         padding: 20px;
+                         right: -64px;
+                         a{
+                              text-decoration: none;
+                              color: #2a2a2a;
+                              font-weight: 500;
+                              font-size: 16px;
+                         }
+                         .offer-rating{
+                              margin-top: 10px;
+                              .star{
+                                   width: 40px;
+                                   height: 40px;
+                                   color: #000;
+                                   font-size: 20px;
+                                   cursor: pointer;
+                              }
+                              .full{
+                                   
+                                   &::before{
+                                        content:"\2605";
+                                   }
+                              }
+                              .empty{
+                                   color: #000;
+                                   &::before{
+                                        content:"\2606";
+                                   }
+                                   
+                              }
+                         }
+                    }
+                    }
+               }
+          }
+     }
+}

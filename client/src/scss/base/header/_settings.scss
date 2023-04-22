@@ -1,0 +1,22 @@
+.settings{
+     display: flex;
+     justify-content: space-evenly;
+     align-content: center;
+     flex-wrap: wrap;
+     flex-direction: row;
+     align-items: center;
+     ul{
+          list-style: none;
+          margin-left: 25px;
+          li{
+               padding: 10px;
+
+          }
+          &:hover{
+               cursor: pointer;
+               background-color: #d58e32;
+
+          }
+     }
+
+}

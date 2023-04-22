@@ -1,0 +1,46 @@
+.categories__filters__content{
+     padding: 20px 0;
+    .filter-item{
+         margin-bottom: 15px;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         .category__name{
+               font-size: 13px;
+               &::before{
+                    content: '>';
+               }
+          }
+          .product-count{
+               width: 20px;
+               height: 20px;
+               border-radius: 50%;
+               font-size: 13px;
+               background-color: var(--black);
+               color: var(--white);
+               padding: 5px;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+
+         }
+         &:hover{
+              margin-left: 5px;
+              color: var(--orange);
+              cursor: pointer;
+               .product-count{
+                    background-color: var(--orange);
+
+               }
+         }
+    }
+    .active{
+          margin-left: 5px;
+          color: var(--orange);
+          cursor: pointer;
+          .product-count{
+               background-color: var(--orange);
+
+          }
+     }
+}  

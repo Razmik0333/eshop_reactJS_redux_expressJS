@@ -1,0 +1,32 @@
+.total__infos{
+     display: flex;
+     justify-content: space-between;
+     margin-left: 32px;
+     .total__info{
+          background-color: #fff;
+          width: 26%;
+          height: 65px;
+          display: flex;
+          flex-direction: column;
+          padding: 27px;
+          align-items: flex-start;
+          .total__count{
+               color: #525bff;
+               font-size: 30px;
+               .progress{
+                    svg{
+                         width: 30px;
+                         height: 30px;
+                         fill: #525bff;
+                         vertical-align: middle;
+                         margin-left: 5px;
+                    }
+               }
+          }
+          .total__text{
+               font-size: 14px;
+               margin-top: 10px;
+               font-weight:100;
+          }
+     }
+}

@@ -1,0 +1,14 @@
+@import '../base/variables/variables.scss';
+@import '../base/reset/reset.scss';
+
+@import '../base/container/container.scss';
+@import '../base/header/header.scss';
+@import '../base/header-down/header-down.scss';
+@import '../base/navigation/navigation.scss';
+@import './path-panel/path-panel';
+
+@import './products-panel/_products-panel.scss';
+@import './product-review/product-review.scss';
+@import './newest-products/newest-products.scss';
+
+@import '../base/footer/footer.scss';

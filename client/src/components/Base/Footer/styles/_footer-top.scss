@@ -1,0 +1,28 @@
+.footer__top{
+     display: flex;
+     margin-top: 10px;
+     .footer__row{
+          margin:45px 75px;
+          .footer__row__categories{
+               .footer__row__category{
+     
+                    padding: 5px 0;
+                    color: #a9a9a9;
+                    &:first-child{
+                         font-size: 20px;
+                         color: #fff;
+                         padding: 30px 0;
+                    }
+               }
+               .footer__row__credit__cards{
+                    img{
+                         width: 39px;
+                         height: auto;
+                         vertical-align: middle;
+                         margin-top: 40px;
+                    }
+               }
+          }
+     }
+
+}

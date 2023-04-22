@@ -1,0 +1,69 @@
+.search__part{
+     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+    .search__products{
+         position: relative;
+         width: 180px;
+         padding: 17px;
+         .search-input{
+              width: 180px;
+              padding: 17px;
+              position: absolute;
+              top: -11px;
+              left: 0;
+          }
+          .search-button{
+               width: 35px;
+               height: 50px;
+               background:transparent ;
+               border: 0;
+               position: absolute;
+               right: 5px;
+               bottom: -6px;
+               top: -8px;
+               z-index: 0;
+               cursor: pointer;
+               background-image: url("http://eshopfinal.net/template/images/icons/search-button.svg");
+               background-repeat: no-repeat;
+               background-size: contain;
+               background-position: center;
+               &:hover{
+                    background-image: url("http://eshopfinal.net/template/images/icons/search-button-active.svg");
+               
+               }
+         }
+         .search__items{
+              position: absolute;
+              top: 53px;
+              z-index: 9999;
+               text-align: center;
+              width: 100%;
+              border-radius: 5px;
+               height: 100px;
+              overflow: scroll;
+              left: 0;
+              .search__item{
+                    height: 30px;
+                    padding-top: 10px;
+                    background-color: var(--white);
+                    border-bottom: 1px solid var(--black);
+                    a{
+                         text-decoration: none;
+                         color: var(--black);
+                         &:hover{
+                              color: var(--orange);
+                         }
+                    }
+
+              }
+         }
+         .hidden{
+              display: none;
+         }
+    }
+}
+

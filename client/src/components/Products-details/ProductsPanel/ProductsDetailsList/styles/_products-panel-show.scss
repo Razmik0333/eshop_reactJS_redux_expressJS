@@ -1,0 +1,166 @@
+
+.details__products__container{
+     display: flex;
+     .products__panel{
+          width: 75%;
+     
+          .details__products__header{
+               padding: 10px 0;
+               .current__category{
+                    font-size: 22px;
+                    font-weight: 500;
+                    padding: 15px 0px;
+
+               }
+               .products__header__items{
+                    display: flex;
+                    padding: 10px 0;
+                    margin-top: 10px;
+                    
+                    .show__parameters{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
+                         .show__parameter{
+                              list-style-type: none;
+                              color: #b7b7b7;
+                              vertical-align: middle;
+                              .show__parameter_text{
+                                   margin: 5px;
+                                   padding: 5px 0;
+                              }
+                              .sorting, .count-items{
+                                   border: 1px solid #b7b7b7;
+                                   padding: 7px 10.8px;
+                                   position: relative;
+                                   cursor: pointer;
+                                   width: 80px;
+                                   text-align: center;
+                                   li{
+                                        .quantities{
+                                             position: absolute;
+                                             top: 26px;
+                                             left:-1px;
+                                             z-index:99999;
+                                             
+                                             .quantity{
+                                                  padding: 10px 0 10px 12px;
+                                                  width: 90px;
+                                                  border: 1px solid #b7b7b7;
+                                                  background-color: var(--white);
+                                                  display: flex;
+                                                  align-items: center;
+                                                  flex-direction: column;
+                                                  &:hover{
+                                                       background-color: #b7b7b7;
+                                                       color: var(--white);
+                                                       cursor: pointer;
+
+                                                  }
+                                             }
+                                        }
+                                        .hidden{
+                                             display: none;
+                                        }
+                                   }
+                                   
+                              }
+                              .sorting{
+                                   width: 140px;
+                                   line-height: 1.2;
+                                   height: auto;
+                                   .filter__types{
+                                        position: absolute;
+                                        top: 35px;
+                                        left:-1px;
+                                        z-index:99999;
+                                        .filter__type{
+                                             padding: 10px 0 10px 12px;
+                                             width: 150px;
+                                             border: 1px solid #b7b7b7;
+                                             background-color: var(--white);
+                                             display: flex;
+                                             align-items: center;
+                                             flex-direction: column;
+                                             line-height: 1.3;
+
+                                             &:hover{
+                                                  background-color: #b7b7b7;
+                                                  color: var(--white);
+                                                  cursor: pointer;
+                                             }
+                                        }
+                                   }
+                              }
+
+                              .select-dropdown {
+                                   margin-left: 15px;
+                                   cursor: pointer;
+                                   position: absolute;
+                                   right: 5px;
+                                   top: 8px;
+                                   img{
+                                        width: 10px;
+                                        height: 15px;
+                                        cursor: pointer;
+                                   }
+                              }
+                         }
+                         .filter-type-parameter{
+                              display: flex;
+                         }
+                         .count-parameter{
+                              margin-left: 40px;
+                              display: flex;
+                              position: relative;
+                         }
+                         .show-type{
+                              margin-left: 20px;
+                              padding: 4px 5px;
+                              border: 1px solid #b7b7b7;
+                              text-align: center;
+                              cursor: pointer;
+                              display: flex;
+                              li{
+                                   vertical-align: middle;
+                                  position: relative;
+                                  width: 25px;height: 25px;
+                                  z-index: 9999;
+                                   &:hover{
+                                        svg{
+                                             fill: var(--orange);
+                                        }
+                                   }
+                                  svg{
+                                       position: absolute;
+                                       top: 0;left: 0;
+                                       width: 100%;
+                                  }
+                              }
+                              .list{
+                                   margin-left: 5px;
+                              }
+                              .grid{
+                                   margin-left: 5px;
+                              }
+                              .show-menu{
+                                   width: 20px;
+                                   height: 20px;
+                              }
+               
+                         }
+                    }
+               }
+                .products__header__line{
+                     height: 1px;width: 100%;
+                     background-color: #2a2a2a;
+                }
+          }
+     
+     }
+}
+
+
+
+

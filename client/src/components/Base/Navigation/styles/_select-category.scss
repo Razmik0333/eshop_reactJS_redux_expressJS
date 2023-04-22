@@ -1,0 +1,28 @@
+.select__category{
+     width: 210px;
+     border: 1px solid #464646;
+     padding: 15px;
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     justify-content: space-between;
+     align-items: center;
+     border-right-color:#fff ;
+     border-radius: 2px;
+     margin-right: -2px;
+     .select-text{
+          font-size: 14px;
+     }
+     .select-icon img{
+          width: 24px;
+          height: auto;
+          vertical-align: middle;
+          margin-right: 10px;
+     }
+     .select-dropdown img{
+          width: 10px;
+          height: auto;
+          vertical-align: middle;
+          margin-left: 10px;
+     }
+}

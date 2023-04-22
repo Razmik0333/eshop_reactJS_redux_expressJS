@@ -1,0 +1,83 @@
+.details__products__header{
+     border-bottom: 1px solid #2a2a2a;
+     padding: 10px 0;
+
+     .products__header__items{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 0;
+          margin-top: 10px;
+          .current__category{
+               font-size: 22px;
+               font-weight: 500;
+               
+          }
+          .show__parameters{
+              
+               .show__parameter{
+                    display: inline-block;
+                    list-style-type: none;
+                    color: #b7b7b7;
+                    .sorting, .count-items{
+                         border: 1px solid #b7b7b7;
+                         padding: 5px 10px;
+     
+                    }
+                    .select-dropdown {
+                         margin-left: 15px;
+                         cursor: pointer;
+                         img{
+                              width: 10px;
+                              height: 15px;
+                              cursor: pointer;
+                         }
+                    }
+               }
+               .count-parameter{
+                    margin-left: 40px;
+               }
+               .show-type{
+                    margin-left: 20px;
+                    padding: 6px 5px;
+                    border: 1px solid #b7b7b7;
+                    text-align: center;
+                    span{
+                         vertical-align: middle;
+                    }
+                    .list{
+                         margin-left: 5px;
+                    }
+                    .show-menu{
+                         width: 20px;
+                         height: 20px;
+                         :hover{
+                              fill: $orange;
+                         }
+                    }
+     
+               }
+          }
+     }
+     // .products__header__line{
+     //      height: 1px;width: 100%;
+     //      background-color: #2a2a2a;
+     // }
+}
+
+.refresh__button{
+     width: 100%;
+     height: 100px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     .refresh{
+          border-radius: 50%;
+         .refresh-img{
+               width: 20px;
+               height: auto;
+          }
+     }
+          
+}
+
