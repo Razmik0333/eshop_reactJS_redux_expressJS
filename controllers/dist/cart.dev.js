@@ -22,7 +22,7 @@ var getSummArray = functions.summArray;
 var getTokensForQuery = functions.query;
 
 module.exports.cartById = function _callee(req, res) {
-  var userId, productCount, _ref, _ref2, cartByUser;
+  var userId, productCount, _ref, _ref2, cartByUser, cart, product_ids, quantities, tokens, products, productsWithCounts;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -31,15 +31,41 @@ module.exports.cartById = function _callee(req, res) {
           userId = req.params.user_id;
           productCount = req.params.count;
           _context.next = 4;
-          return regeneratorRuntime.awrap(realyze("SELECT cart FROM `wish` WHERE `user_id`= ? ", [userId]));
+          return regeneratorRuntime.awrap(realyze("SELECT cart FROM `user_interest` WHERE `user_id`= ? ", [userId]));
 
         case 4:
           _ref = _context.sent;
           _ref2 = _slicedToArray(_ref, 1);
           cartByUser = _ref2[0];
-          res.send(cartByUser);
+          cart = JSON.parse(cartByUser.cart);
 
-        case 8:
+          if (!Object.keys(cart)) {
+            _context.next = 12;
+            break;
+          }
+
+          res.send([]);
+          _context.next = 20;
+          break;
+
+        case 12:
+          product_ids = Object.keys(cart);
+          quantities = Object.values(cart);
+          tokens = getTokensForQuery(product_ids);
+          _context.next = 17;
+          return regeneratorRuntime.awrap(realyze("SELECT * FROM products WHERE id IN (".concat(tokens, ")"), product_ids));
+
+        case 17:
+          products = _context.sent;
+          productsWithCounts = products.reduce(function (acc, curr, pos) {
+            acc.push(_objectSpread({}, curr, {
+              quantity: quantities[pos]
+            }));
+            return acc;
+          }, []);
+          res.send(productsWithCounts);
+
+        case 20:
         case "end":
           return _context.stop();
       }
@@ -48,7 +74,7 @@ module.exports.cartById = function _callee(req, res) {
 };
 
 module.exports.addToCartById = function _callee2(req, res) {
-  var cart, userId, productId, productQuantity, _ref3, _ref4, cartByUser, totalCount;
+  var cart, userId, productId, productQuantity, _ref3, _ref4, cartByUser, product_ids, quantities, tokens, products, productsWithCounts;
 
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
@@ -58,52 +84,68 @@ module.exports.addToCartById = function _callee2(req, res) {
           userId = req.params.user_id;
           productId = req.body.product_id;
           productQuantity = req.body.quantity;
-          _context2.next = 6;
-          return regeneratorRuntime.awrap(realyze("SELECT cart FROM `wish` WHERE `user_id`= ? ", [userId]));
+          console.log(userId, productId, productQuantity, req.body);
+          _context2.next = 7;
+          return regeneratorRuntime.awrap(realyze("SELECT cart FROM `user_interest` WHERE `user_id`= ? ", [userId]));
 
-        case 6:
+        case 7:
           _ref3 = _context2.sent;
           _ref4 = _slicedToArray(_ref3, 1);
           cartByUser = _ref4[0];
+          console.log(cartByUser);
 
           if (cartByUser) {
-            _context2.next = 15;
+            _context2.next = 17;
             break;
           }
 
           cart = JSON.stringify(_defineProperty({}, productId, productQuantity));
-          _context2.next = 13;
-          return regeneratorRuntime.awrap(realyze("INSERT INTO wish (user_id, wish, cart) VALUES ( ?, ? , ?) ", [userId, '', cart]));
-
-        case 13:
-          _context2.next = 25;
-          break;
+          _context2.next = 15;
+          return regeneratorRuntime.awrap(realyze("INSERT INTO user_interest (user_id, wish, cart) VALUES ( ?, ? , ?) ", [userId, '', cart]));
 
         case 15:
+          _context2.next = 27;
+          break;
+
+        case 17:
           if (!cartByUser.cart) {
-            _context2.next = 22;
+            _context2.next = 24;
             break;
           }
 
           cart = JSON.parse(cartByUser.cart);
           cart[productId] = productId in cart ? +cart[productId] + +productQuantity : productQuantity;
-          _context2.next = 20;
-          return regeneratorRuntime.awrap(realyze("UPDATE `wish` SET cart = ? WHERE `user_id`= ? ", [JSON.stringify(cart), userId]));
-
-        case 20:
-          _context2.next = 25;
-          break;
+          _context2.next = 22;
+          return regeneratorRuntime.awrap(realyze("UPDATE `user_interest` SET cart = ? WHERE `user_id`= ? ", [JSON.stringify(cart), userId]));
 
         case 22:
-          cart = JSON.stringify(_defineProperty({}, productId, productQuantity));
-          _context2.next = 25;
-          return regeneratorRuntime.awrap(realyze("UPDATE `wish` SET cart = ? WHERE `user_id`= ? ", [cart, userId]));
+          _context2.next = 27;
+          break;
 
-        case 25:
-          totalCount = getSummArray(Object.values(cart));
-          res.send("".concat(totalCount));
+        case 24:
+          cart = JSON.stringify(_defineProperty({}, productId, productQuantity));
+          _context2.next = 27;
+          return regeneratorRuntime.awrap(realyze("UPDATE `user_interest` SET cart = ? WHERE `user_id`= ? ", [cart, userId]));
 
         case 27:
+          console.log(Object.values(cart));
+          product_ids = Object.keys(cart);
+          quantities = Object.values(cart);
+          tokens = getTokensForQuery(product_ids);
+          _context2.next = 33;
+          return regeneratorRuntime.awrap(realyze("SELECT * FROM products WHERE id IN (".concat(tokens, ")"), product_ids));
+
+        case 33:
+          products = _context2.sent;
+          productsWithCounts = products.reduce(function (acc, curr, pos) {
+            acc.push(_objectSpread({}, curr, {
+              quantity: quantities[pos]
+            }));
+            return acc;
+          }, []);
+          res.send(productsWithCounts); // const totalCount = getSummArray(Object.values(cart));
+
+        case 36:
         case "end":
           return _context2.stop();
       }
@@ -121,7 +163,7 @@ module.exports.removeProductFromCart = function _callee3(req, res) {
           userId = req.body.user_id;
           productId = req.params.product_id;
           _context3.next = 4;
-          return regeneratorRuntime.awrap(realyze("SELECT cart FROM `wish` WHERE `user_id`= ? ", [userId]));
+          return regeneratorRuntime.awrap(realyze("SELECT cart FROM `user_interest` WHERE `user_id`= ? ", [userId]));
 
         case 4:
           _ref5 = _context3.sent;
@@ -129,17 +171,28 @@ module.exports.removeProductFromCart = function _callee3(req, res) {
           cartByUser = _ref6[0];
           currentCart = JSON.parse(cartByUser.cart);
           delete currentCart[productId];
-          _context3.next = 11;
-          return regeneratorRuntime.awrap(realyze("UPDATE `wish` SET cart = ? WHERE `user_id`= ? ", [JSON.stringify(currentCart), userId]));
 
-        case 11:
+          if (!(Object.keys(currentCart).length === 0)) {
+            _context3.next = 13;
+            break;
+          }
+
+          res.send([]);
+          _context3.next = 23;
+          break;
+
+        case 13:
+          _context3.next = 15;
+          return regeneratorRuntime.awrap(realyze("UPDATE `user_interest` SET cart = ? WHERE `user_id`= ? ", [JSON.stringify(currentCart), userId]));
+
+        case 15:
           cartKeys = Object.keys(currentCart);
           cartValues = Object.values(currentCart);
           tokens = getTokensForQuery(cartKeys);
-          _context3.next = 16;
+          _context3.next = 20;
           return regeneratorRuntime.awrap(realyze("SELECT * FROM products WHERE id IN (".concat(tokens, ")"), cartKeys));
 
-        case 16:
+        case 20:
           products = _context3.sent;
           productsWithCounts = products.reduce(function (acc, curr, pos) {
             acc.push(_objectSpread({}, curr, {
@@ -149,7 +202,7 @@ module.exports.removeProductFromCart = function _callee3(req, res) {
           }, []);
           res.send(productsWithCounts);
 
-        case 19:
+        case 23:
         case "end":
           return _context3.stop();
       }

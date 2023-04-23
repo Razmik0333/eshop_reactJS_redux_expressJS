@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getCartSelector } from '../../../helpers/reduxSelectors';
-import { getCartItem, getCartToRemove, getCountOfCart, getModifiedCart, getTotalPrice, getTotalPriceValue } from '../../../redux/ducks/cartDuck';
+import { getCartSelector, getUserId } from '../../../helpers/reduxSelectors';
+import { fetchAddCart, fetchRemoveOnCart, getCartItem, getCartToRemove, getCountOfCart, getModifiedCart, getTotalPrice, getTotalPriceValue } from '../../../redux/ducks/cartDuck';
 import { currentProduct } from '../../../redux/ducks/productDuck';
 import { root } from '../../../helpers/constants/constants';
 import Rating from '../../Base/Rating/Rating';
@@ -11,27 +11,26 @@ import './_cartListItem.scss';
 
 function CartListItem({product, text}) {
      const cart = useSelector(getCartSelector);
-     const [count, setCount] = useState(cart[product.id]);
+     const [count, setCount] = useState(product?.quantity);
+     const userId = useSelector(getUserId);
      const dispatch = useDispatch();
      const changeCurrentProduct = (e) => {
           dispatch(currentProduct(e.target.dataset.id))
      }
      const addQuantity = (e) => {
-          dispatch(getCartItem({
-               [e.target.dataset.id] : 1 
+          const inc =  ++e.target.dataset.quantity;
+          setCount(inc);
+          dispatch(fetchAddCart(userId ,{
+               [e.target.dataset.id] : 1
           }))
-          dispatch(getCountOfCart(1));
-          dispatch(getTotalPriceValue(product.cost *(1 - product.discount / 100)));
-          setCount(++e.target.dataset.count);
      }
      const subQuantity = (e) => {
-          if (+e.target.dataset.count > 1 ) {
-               dispatch(getCartToRemove({
-                    [e.target.dataset.id] : 1 
+          if (+e.target.dataset.quantity > 1 ) {
+               const inc =  --e.target.dataset.quantity;
+               setCount(inc);
+               dispatch(fetchAddCart(userId ,{
+                    [e.target.dataset.id] : -1
                }))
-               dispatch(getCountOfCart(-1));
-               dispatch(getTotalPriceValue(-(product.cost *(1 - product.discount / 100))));
-               setCount(--e.target.dataset.count);
           }else{
                
                setCount(1);
@@ -40,9 +39,10 @@ function CartListItem({product, text}) {
 
      }
      const changeDeletedId = (e) => {
-          dispatch(getModifiedCart(e.target.dataset.product));
-          dispatch(getTotalPrice(e.target.dataset.price * e.target.dataset.count));
-          dispatch(getCountOfCart(-e.target.dataset.count));
+          dispatch(fetchRemoveOnCart(userId, e.target.dataset.product))
+          // dispatch(getModifiedCart(e.target.dataset.product));
+          // dispatch(getTotalPrice(e.target.dataset.price * e.target.dataset.count));
+          // dispatch(getCountOfCart(-e.target.dataset.count));
      }
      return (
           
@@ -51,7 +51,7 @@ function CartListItem({product, text}) {
                {text?.sale}
                </div>
                <div className="product-pictures">
-               <img src={`${root}/template/images/${product.id}.jpg`} alt="" />
+               <img src={`${root}/images/${product.id}.jpg`} alt="" />
 
                </div>
                <div className="product-details">
@@ -66,7 +66,7 @@ function CartListItem({product, text}) {
                <div className="product-prices">
                     {
                          <span className="product-price new-price">
-                         {`${product.cost * (1 - product.discount / 100)}Դ X ${cart[product.id]}`}
+                         {`${product.cost * (1 - product.discount / 100)}Դ X ${product?.quantity}`}
                          </span> 
                     }
                     
@@ -81,21 +81,21 @@ function CartListItem({product, text}) {
                     </div>
                     <div className="product-quantity">
                          <button
-                         className="quantity__button remove"
-                         data-count={cart[product.id]}
-                         data-id={product.id}
-                         onClick={subQuantity}
+                              className="quantity__button remove"
+                              data-quantity={product?.quantity}
+                              data-id={product.id}
+                              onClick={subQuantity}
                          >-</button>
                          <span 
-                         type="text" 
-                         name="quantity" 
-                         data-count={cart[product.id]}
+                              type="text" 
+                              name="quantity" 
+                              data-quantity={product?.quantity}
                          >{count}</span>
                          <button
-                         className="quantity__button add"
-                         data-count={cart[product.id]}
-                         data-id={product.id}
-                         onClick={addQuantity}
+                              className="quantity__button add"
+                              data-quantity={product?.quantity}
+                              data-id={product.id}
+                              onClick={addQuantity}
 
                          >+</button>
                          

@@ -2,6 +2,7 @@ import { createAction } from "../../helpers/redux";
 import { root } from "../../helpers/constants/constants";
 import { checkEmptyObject } from "../../helpers/functions/functions";
 
+const CURRENT_CART = 'cartDuck/CURRENT_CART';
 const CURRENT_CART_ITEM = 'cartDuck/CURRENT_CART_ITEM';
 const ADD_TO_CART = 'cartDuck/ADD_TO_CART';
 const REMOVE_FROM_CART = 'cartDuck/REMOVE_FROM_CART';
@@ -11,6 +12,7 @@ const TOTAL_PRICE = 'cartDuck/TOTAL_PRICE';
 const CART_COUNT = 'cartDuck/CART_COUNT';
 
 export const getCurrentId = createAction(CURRENT_CART_ITEM);
+export const readCurrentCart = createAction(CURRENT_CART);
 export const getCurrentCart = createAction(ADD_TO_CART);
 export const getSubCart = createAction(REMOVE_FROM_CART);
 export const getTotalPrice = createAction(TOTAL_PRICE);
@@ -21,7 +23,7 @@ export const getCartCount = createAction(CART_COUNT);
 
 const initialStateApp = {
   currentCartItemId: null,
-  cartData:{},
+  cartData:[],
   totalPrice: 0,
   countItems: 0
 };
@@ -47,14 +49,58 @@ export const getModifiedCart = (id) => (dispatch) => {
      dispatch(getDeletedCart(id));
    };
 
-export const fetchAddCart = (id, count) => (dispatch) => {
-     fetch(`${root}/list/cart/${id}/${count}`)
-          .then((res) => res.json())
-          .then((res) => {
-               dispatch(getCurrentCart(res));
-          })
-          .catch((e) => console.log('error from productDuck', e));
+export const fetchAddCart = (userId, obj) => async(dispatch) => {
+  try {
+    const data = await(await fetch(`${root}/api/cart/add/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type" :"application/json"
+        },
+        body: JSON.stringify({
+          product_id: Object.keys(obj)[0],
+          quantity: `${Object.values(obj)[0]}`,
+
+        })
+    })).json();
+    
+    dispatch(readCurrentCart(data));
+  } catch (e) {
+    console.log('error from cartDuck', e)
+  }
+
 };
+
+export const fetchCurrentCart = (id) => async (dispatch) => {
+  if (id) {
+    try {
+      const data = await (await fetch(`${root}/api/cart/${id}`)).json()
+      dispatch(readCurrentCart(data))
+    } catch (e) {
+      console.log('error from cartDuck', e)
+    }
+  }else{
+    dispatch(readCurrentCart([]))
+
+  }
+}
+
+
+export const fetchRemoveOnCart = (user_id,product_id) => async(dispatch) => {
+  try {
+    const data = await (await fetch(`${root}/api/cart/remove/${product_id}`, {
+      method:"PUT",
+      headers: {
+        "Content-Type" :"application/json"
+      },
+      body: JSON.stringify({
+        user_id
+      })
+    })).json();
+    dispatch(readCurrentCart(data))
+  } catch (e) {
+    console.log('error from cartDuck', e)
+  }
+}
 
 
 const CartDuck = (state = initialStateApp, action) => {
@@ -74,10 +120,13 @@ const CartDuck = (state = initialStateApp, action) => {
     case CART_COUNT:
       return {
         ...state,
-        countItems: action.payload ? 
-                          state.countItems + action.payload 
-                                  : action.payload,
+        countItems: action.payload,
       };
+    case CURRENT_CART:
+      return {
+        ...state,
+        cartData: action.payload
+      }
     case ADD_TO_CART: 
         let valObj = {};
 

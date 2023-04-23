@@ -1,15 +1,21 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getCartCountSelector, getUserId, getWishListDataSelector, getWishListIdsSelector, hotDealsTimerSelector } from '../../../helpers/reduxSelectors';
+import { getCartCountSelector, getCartSelector, getUserId, getWishListDataSelector, getWishListIdsSelector, hotDealsTimerSelector } from '../../../helpers/reduxSelectors';
 import './styles/_header-down.scss';
 import { root } from '../../../helpers/constants/constants'; 
 import { useEffect, useState } from 'react';
 import { getHotDealsTimerSecond } from '../../../redux/ducks/configsDuck';
 import { fetchCurrentWishList, fetchWishList } from '../../../redux/ducks/wishListDuck';
+import { getProductCount } from '../../../helpers/functions/functions';
+import { fetchCurrentCart } from '../../../redux/ducks/cartDuck';
 function HeaderDown() {
      const dispatch = useDispatch();
-     const cartCount = useSelector(getCartCountSelector);
+     //const cartCount = useSelector(getCartCountSelector);
+     const cartData = useSelector(getCartSelector);
+     const cartCount = getProductCount(cartData)
+
+     
      const timeDeals = useSelector(hotDealsTimerSelector);
      const wishListIds = useSelector(getWishListIdsSelector)
      const wishListItems = useSelector(getWishListDataSelector);
@@ -17,6 +23,7 @@ function HeaderDown() {
 
      const date = new Date();
      useEffect(() => {
+          dispatch(fetchCurrentCart(userId))
          const id = setInterval(() => {
                let  currentSecond = Math.floor((Date.now() - date)/1000);
                 
@@ -25,7 +32,7 @@ function HeaderDown() {
           }, 30000);
           timeDeals <= 0 &&  dispatch(getHotDealsTimerSecond(3*24*3600))
           return () => clearInterval(id)
-     }, []);
+     }, [userId]);
 
      return (
           <div className="header__down">

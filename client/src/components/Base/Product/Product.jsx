@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getCartItem, getCountOfCart, getTotalPriceValue } from '../../../redux/ducks/cartDuck';
+import { fetchAddCart, getCartItem, getCountOfCart, getTotalPriceValue } from '../../../redux/ducks/cartDuck';
 import { currentProduct } from '../../../redux/ducks/productDuck'; 
 import ModalPopup from "../../Base/Modal/ModalPopup";
 import { root } from '../../../helpers/constants/constants';
@@ -26,7 +26,9 @@ function Product({product, text}) {
      }
      const addProductToCart = (e) => {
           console.log(e.target.dataset.id);
-          
+          dispatch(fetchAddCart(userId ,{
+               [e.target.dataset.id] : 1
+          }))
           //e.stopPropagation()
           // dispatch(getCartItem({
           //           [e.target.dataset.id] : 1 

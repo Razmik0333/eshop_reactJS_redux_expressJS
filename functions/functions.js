@@ -27,7 +27,7 @@ const getIdsArray = (idsString) => {
 }
 const getSummArray = (arr) => {
     return arr.reduce((acc, curr) => {
-          return acc + +curr
+          return +acc + +curr
      }, 0)
 }
 const upload = () => {

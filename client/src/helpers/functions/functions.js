@@ -38,6 +38,23 @@ export const getOrdersFromStatus = (arr, status) =>  {
      return +status === -1 ? arr : arr.filter(item => +item?.user_status === +status)
 }
 
+//
+export const getCartSumm = (arr) => {
+     return arr.reduce((acc, curr) => {
+          acc += curr?.cost * ( 1 - curr?.discount/100 ) * +curr?.quantity;
+          return acc
+     }, 0);
+}
+export const getProductCount = (arr) => {
+     
+    const count = arr.length === 0 ? 0 :
+     arr.reduce((acc, curr) => {
+          acc += +curr?.quantity
+          return acc;
+     },0);
+     return count
+}
+//
 export const getMinMax = (arr, type) => {
      let variab = arr[0];
      arr.forEach((item) => {

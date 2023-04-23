@@ -1,27 +1,24 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { checkEmptyObject } from "../../helpers/functions/functions";
-import { currentLanguageDataSelector, getCartSelector, getProductsInCart, getTotalPriceSelector } from "../../helpers/reduxSelectors";
+import { checkEmptyObject, getCartSumm } from "../../helpers/functions/functions";
+import { currentLanguageDataSelector, getCartSelector, getProductsInCart, getTotalPriceSelector, getUserId } from "../../helpers/reduxSelectors";
 import { fetchProductsByString } from "../../redux/ducks/productDuck";
 
 import CartListItem from "../Cart/CartListItem/CartListItem";
 import './styles/_cart.scss';
+import { fetchCurrentCart } from "../../redux/ducks/cartDuck";
 function Cart() {
      const dispatch = useDispatch();
      const cartData = useSelector(getCartSelector);
+     console.log("🚀 ~ file: Cart.jsx:14 ~ Cart ~ cartData:", cartData)
      const productsData = useSelector(getProductsInCart);
-     const cartSumm = useSelector(getTotalPriceSelector);
+     //const cartSumm = useSelector(getTotalPriceSelector);
+     const cartSumm = getCartSumm(cartData)
+
      const cartObject = useSelector(currentLanguageDataSelector)?.cart;
+     //const userId = useSelector(getUserId);
 
-     console.log("🚀 ~ file: Cart.jsx ~ line 16 ~ Cart ~ cartObject", cartObject)
-
-     useEffect(() => {
-          
-          
-               dispatch(fetchProductsByString(Object.keys(cartData)));
-
-     }, [cartSumm]);
      return(
 
           <div className="products__list">
@@ -42,8 +39,8 @@ function Cart() {
                          {
                               <div className="products-list">
                               {
-                                   checkEmptyObject(productsData) ? <div>{cartObject?.empty}</div> :
-                                   productsData.map(product => {
+                                   checkEmptyObject(cartData) ? <div>{cartObject?.empty}</div> :
+                                   cartData.map(product => {
                                         return  <CartListItem product={product} text={cartObject?.cart_item} key={product.id} />
                                    })
                               }
