@@ -52,7 +52,7 @@ function Cart() {
                               <button 
                               className="cart__buy__button" 
                               disabled = {
-                                   checkEmptyObject(productsData)
+                                   checkEmptyObject(cartData)
                               }
                               >{cartObject?.buy}</button>
                          </NavLink>

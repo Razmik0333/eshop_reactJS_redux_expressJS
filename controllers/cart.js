@@ -8,10 +8,11 @@ module.exports.cartById = async (req, res) => {
      const userId = req.params.user_id;
      const productCount = req.params.count;     
      const [cartByUser] = await realyze("SELECT cart FROM `user_interest` WHERE `user_id`= ? ", [userId]); 
-     const cart = JSON.parse(cartByUser.cart);
-     if (Object.keys(cart)) {
-          res.send([])
+     if (!cartByUser.cart) {
+          res.send([]);
+          
      }else{
+          const cart = JSON.parse(cartByUser.cart);
           const product_ids =  Object.keys(cart)
           const quantities =  Object.values(cart)
           const tokens = getTokensForQuery(product_ids);
@@ -31,9 +32,7 @@ module.exports.addToCartById = async (req, res) => {
      const userId = req.params.user_id;
      const productId = req.body.product_id;
      const productQuantity = req.body.quantity; 
-     console.log(userId,productId, productQuantity, req.body );    
      const [cartByUser] = await realyze("SELECT cart FROM `user_interest` WHERE `user_id`= ? ", [userId]); 
-     console.log(cartByUser);
      
      if (!cartByUser) {        
           cart = JSON.stringify({
@@ -54,7 +53,6 @@ module.exports.addToCartById = async (req, res) => {
                await realyze("UPDATE `user_interest` SET cart = ? WHERE `user_id`= ? ", [cart,userId]);  
           }
      }
-     console.log(Object.values(cart));
      const product_ids =  Object.keys(cart)
      const quantities =  Object.values(cart)
      const tokens = getTokensForQuery(product_ids);
@@ -67,7 +65,6 @@ module.exports.addToCartById = async (req, res) => {
           return acc;
      },[])
      res.send(productsWithCounts)
-     // const totalCount = getSummArray(Object.values(cart));
 
 } 
 module.exports.removeProductFromCart = async (req, res) => {
@@ -99,8 +96,11 @@ module.exports.removeProductFromCart = async (req, res) => {
 
 module.exports.buy = async (req, res) => {
      const order = req.body;
+     const user_id = req.params.user_id;
+
      const bool = 
        await realyze("INSERT INTO `orders` (user_id, user_name, user_phone, user_comment, user_order, user_price, user_status, time_add) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?) ",
        [order.user_id, order.user_name, order.user_phone,order.user_comment,order.user_order,order.user_price,order.user_status, Date.now()]);
-     res.send('0')
+       await realyze("UPDATE `user_interest` SET cart = ? WHERE `user_id`= ? ", ['',user_id]);
+     res.send([])
 }

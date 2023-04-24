@@ -102,7 +102,6 @@ export const fetchRemoveOnCart = (user_id,product_id) => async(dispatch) => {
   }
 }
 
-
 const CartDuck = (state = initialStateApp, action) => {
   switch (action.type) {
     case CURRENT_CART_ITEM:

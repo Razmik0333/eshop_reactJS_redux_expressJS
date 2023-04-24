@@ -13,6 +13,7 @@ function HeaderDown() {
      const dispatch = useDispatch();
      //const cartCount = useSelector(getCartCountSelector);
      const cartData = useSelector(getCartSelector);
+     console.log("🚀 ~ file: HeaderDown.jsx:16 ~ HeaderDown ~ cartData:", cartData)
      const cartCount = getProductCount(cartData)
 
      

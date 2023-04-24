@@ -10,7 +10,7 @@ const buyOrder = require('../controllers/cart').buy
 router.get('/cart/:user_id', getCartById)
 router.put('/cart/add/:user_id', addToCartById)
 router.put('/cart/remove/:product_id', removeProductFromCart)
-router.post('/buy', buyOrder)
+router.post('/buy/:user_id', buyOrder)
 
 
 

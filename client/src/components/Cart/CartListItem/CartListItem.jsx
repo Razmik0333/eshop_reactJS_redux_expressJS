@@ -32,17 +32,11 @@ function CartListItem({product, text}) {
                     [e.target.dataset.id] : -1
                }))
           }else{
-               
                setCount(1);
           }
-          
-
      }
      const changeDeletedId = (e) => {
           dispatch(fetchRemoveOnCart(userId, e.target.dataset.product))
-          // dispatch(getModifiedCart(e.target.dataset.product));
-          // dispatch(getTotalPrice(e.target.dataset.price * e.target.dataset.count));
-          // dispatch(getCountOfCart(-e.target.dataset.count));
      }
      return (
           

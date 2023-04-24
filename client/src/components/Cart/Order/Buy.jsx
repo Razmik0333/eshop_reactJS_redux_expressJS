@@ -6,14 +6,27 @@ import { root } from '../../../helpers/constants/constants';
 import Modal from '../../Base/Modal/Modal';
 import { changeModal } from '../../../redux/ducks/configsDuck';
 import './styles/_buy.scss';
-import { getClearedCart, getCountOfCart, getTotalPriceValue } from '../../../redux/ducks/cartDuck';
+import { fetchClearCart, getClearedCart, getCountOfCart, getTotalPriceValue, readCurrentCart } from '../../../redux/ducks/cartDuck';
 import { getCartProductsItems } from '../../../redux/ducks/productDuck';
 import { useNavigate } from 'react-router-dom';
 function Buy() {
+     const navigate = useNavigate()
      const userData = useSelector(getUserDataSelector);
+     console.log("🚀 ~ file: Buy.jsx:14 ~ Buy ~ userData:", userData)
      const cartData = useSelector(getCartSelector);
-     const totalPrice = useSelector(getTotalPriceSelector);
+     console.log("🚀 ~ file: Buy.jsx:15 ~ Buy ~ cartData:", cartData)
+    // const totalPrice = useSelector(getTotalPriceSelector);
      const dispatch = useDispatch();
+     const cartDataForOrder = cartData.reduce((acc, curr) => {
+          acc[curr?.id] = curr?.quantity
+          return acc
+     }, {})
+     const totalPrice = cartData.reduce((acc, curr) => {
+          acc += curr?.cost * (1 - curr?.discount/100) * curr?.quantity
+          
+          return acc
+     }, 0)
+     console.log(cartDataForOrder)
      const buy = useSelector(currentLanguageDataSelector)?.buy;
      const modalIsClose = useSelector(modalCloseSelector);
      const [userName, setUserName] = useState(userData?.name);
@@ -25,23 +38,27 @@ function Buy() {
      const changePhoneNumber = (e) => setUserPhone(e.target.value)
      const handleSubmit = async (e) => {
           e.preventDefault();
-          const data = new FormData(orderRef?.current);
-          await fetch(`${root}/list/buy`, {
-               method: 'POST',
-               body: data,    
-          })
-          .then(res => res.json())
-          .then(() => {       
-               dispatch(changeModal(true));
-               dispatch(getClearedCart({}))                          
-               dispatch(getCartProductsItems({}))                          
-               dispatch(getTotalPriceValue(0))                          
-               dispatch(getCountOfCart(0))   
-                                     
-          })
-          .catch((e) => {
+
+          try {
+               const data = new FormData(orderRef?.current);
+              const res =  await(await fetch(`${root}/api/buy/${userData?.id}`, {
+                    method: 'POST',
+                    body: new URLSearchParams(data),    
+               })).json();
+               dispatch(readCurrentCart(res));
+               navigate('/home')
+          } catch (e) {
                console.log(e)
-          })
+          }
+            
+               // dispatch(changeModal(true));
+               // dispatch(getClearedCart({}))                          
+               // dispatch(getCartProductsItems({}))                          
+               // dispatch(getTotalPriceValue(0))                          
+               // dispatch(getCountOfCart(0))   
+                                     
+
+
 
      }
 
@@ -115,7 +132,7 @@ function Buy() {
                                    </textarea>    
                               </div>
                               <div className="order__block">
-                                   <input type="hidden" name="user_order" value={JSON.stringify(cartData)} onChange={()=>{}} />
+                                   <input type="hidden" name="user_order" value={JSON.stringify(cartDataForOrder)} onChange={()=>{}} />
                               </div>
                               <div className="order__block">
                                    <input type="hidden" name="user_price" value={totalPrice} onChange={()=>{}} />
