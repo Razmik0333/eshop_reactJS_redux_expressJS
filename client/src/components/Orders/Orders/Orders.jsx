@@ -12,6 +12,7 @@ import {
 import { clearOrders,
      fetchOrderData,
      fetchUserOrders,
+     fetchUserOrdersByStatus,
      getOrderStatus,
 } from "../../../redux/ducks/orderDuck";
 import OrderLists from "../OrderLists/OrderLists";
@@ -32,42 +33,50 @@ function Orders() {
       const modalIsClose = useSelector(modalCloseSelector);
      const dispatch = useDispatch();
      const userData = useSelector(getUserDataSelector);
+     const statusIndex = useSelector(getStatusIndex);
      const keys = Object.keys;
      const values = Object.values;
+
      useEffect(() => {
-          dispatch(fetchUserOrders(userData?.id));
-          dispatch(getOrderStatus(-1))
-     }, []);
+          statusIndex === -1 ? 
+          
+          dispatch(fetchUserOrders(userData?.id)):
+          dispatch(fetchUserOrdersByStatus(userData?.id, statusIndex))
+          setIsLoad(true);
+
+          //dispatch(getOrderStatus(-1))
+     }, [statusIndex]);
      const orders = useSelector(getUserOrders);
-     const statusIndex = useSelector(getStatusIndex);
-     console.log("🚀 ~ file: Orders.jsx:40 ~ Orders ~ statusIndex", statusIndex)
+     console.log("🚀 ~ file: Orders.jsx:54 ~ Orders ~ orders:", orders)
+
+     console.log("🚀 ~ file: Orders.jsx:44 ~ Orders ~ statusIndex:", statusIndex)
      const isConfirmed =  useSelector(isConfirmedSelector);
      const userObject = getOrdersFromStatus(orders, statusIndex);
      
-     const ordersUserObject = getUserOrdersFromArray(userObject, statusIndex);
-     useEffect(() => {
-          setIsLoad(false)
-          const id = setTimeout(() => {
-               dispatch(clearOrders());
-               //debugger;
-               if (!checkEmptyObject(ordersUserObject)) {
-                    dispatch(fetchOrderData(ordersUserObject))
-                    setIsLoad(true);
+     //const ordersUserObject = getUserOrdersFromArray(userObject, statusIndex);
+     // useEffect(() => {
+     //      setIsLoad(false)
+     //      const id = setTimeout(() => {
+     //           dispatch(clearOrders());
+     //           //debugger;
+     //           if (!checkEmptyObject(ordersUserObject)) {
+     //                dispatch(fetchOrderData(ordersUserObject))
+     //                setIsLoad(true);
                     
-               }else{
-                    setIsLoad(true)
-               }
+     //           }else{
+     //                setIsLoad(true)
+     //           }
 
-          }, 1500);
-          return () => {
-               clearTimeout(id)
-          }
+     //      }, 1500);
+     //      return () => {
+     //           clearTimeout(id)
+     //      }
           
-     },[orders.length,statusIndex, isConfirmed]);     
-     const userProducts = useSelector(getUserProducts);
-     const ordersKeys = sortDesc(keys(userProducts));
-     const ordersValues = sortDesc(values(userProducts));
-     const productQuantity = sortDesc(values(useSelector(getProductsCounts)));
+     // },[orders.length,statusIndex, isConfirmed]);     
+     // const userProducts = useSelector(getUserProducts);
+     // const ordersKeys = sortDesc(keys(userProducts));
+     // const ordersValues = sortDesc(values(userProducts));
+     // const productQuantity = sortDesc(values(useSelector(getProductsCounts)));
      return <>
           {
                modalIsClose ?
@@ -81,20 +90,21 @@ function Orders() {
                {  isLoad ? 
                     <>
                     {
-                         ordersKeys.length ?
-                              ordersKeys.map((_, ind) => {
+                         orders.length ?
+                              orders.map((order, ind) => {
                                    return <div className="order-item" key={`order_${ind}`}>
                                         <OrderLists 
                                              ind={ind}
-                                             values={ordersValues[ordersKeys.length - 1 - ind]}
-                                             counts = {productQuantity[ordersKeys.length - 1 - ind]}
+                                             order={order}
                                         />
                                    </div>
                               })
                          : <>Տվյալները բացակայում են</>
                          
                     }
-                    </> : <Loader />
+                    </>
+                    
+                     : <Loader />
                }
                </div>
           </div>

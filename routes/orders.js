@@ -9,6 +9,7 @@ const getOrdersByStatus = require('../controllers/orders').ordersByStatus
 router.get('/package/data/:id', getOrdersByUser)
 router.get('/package/user/:id', getAllOrdersByUser)
 //router.get('/package/product/:str', )
-router.get('/package/delivered/:id', getOrdersByStatus)
+router.put('/package/delivered/:id', getOrdersByStatus)
+
 
 module.exports = router

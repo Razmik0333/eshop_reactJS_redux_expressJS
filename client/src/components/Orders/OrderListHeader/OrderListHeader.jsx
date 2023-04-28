@@ -3,7 +3,7 @@ import { getOrdersFromStatus, getStatus, getNewCurrency } from "../../../helpers
 import { currentLanguageDataSelector, getCurrentCurrencySelector, getStatusIndex, getUserOrders } from "../../../helpers/reduxSelectors";
 import "./styles/_order-list-header.scss";
 
-function OrderListHeader({ind}) {
+function OrderListHeader({ind, id, status, price}) {
      const statusIndex = useSelector(getStatusIndex)
      const orders =  useSelector(getUserOrders);
      const userObject = getOrdersFromStatus(orders, statusIndex);
@@ -13,15 +13,15 @@ function OrderListHeader({ind}) {
           <div className="order__list__header" >
                <ul className="order__list__header__items">
                     <li className="order__list__header__item">
-                          {orderListHeader?.number} ։ {userObject[ind]?.id}
+                          {orderListHeader?.number} ։ {id}
                     </li>
                     <li className="order__list__header__item">
                          {orderListHeader?.price} ։ 
-                         {`${getNewCurrency(currentCurrency,userObject[ind]?.user_price)?.value}
-                         ${getNewCurrency(currentCurrency,userObject[ind]?.user_price)?.char}`}
+                         {`${getNewCurrency(currentCurrency,price)?.value}
+                         ${getNewCurrency(currentCurrency,price)?.char}`}
                     </li>
                     <li className="order__list__header__item">
-                          {orderListHeader?.status} ։ {getStatus(+userObject[ind]?.user_status)?.title} 
+                          {orderListHeader?.status} ։ {getStatus(+status)?.title} 
                     </li>
                     <li className="order__list__header__item"></li>
                     

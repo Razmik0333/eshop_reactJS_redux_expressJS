@@ -1,3 +1,4 @@
+const realyze = require('.././config').realyze;
 
 const getMaxSoldedProducts = (arr) => {
      return arr
@@ -34,6 +35,24 @@ const upload = () => {
      
      
 }
+
+const getProductsFromOrdersList = async (arr) => {
+     return  await Promise.all(arr.map(async(item,pos) => {
+          const user_order = JSON.parse(item?.user_order);
+          const productsKeys = Object.keys(user_order);
+          const productsValues = Object.values(user_order);
+          
+          const tokens = getTokensForQuery(productsKeys);
+          let productIds = Object.keys(user_order);
+          const result = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, productIds);
+          return await {
+               ...item,
+               user_order: result,
+               quantities:productsValues
+          }
+     })) 
+}
+
 module.exports = {
      solded : [
           getMaxSoldedProducts,
@@ -43,7 +62,8 @@ module.exports = {
      query :getTokensForQuery,
      idsArray :getIdsArray,
      summArray:getSummArray,
-     uploadFile : upload
+     uploadFile : upload,
+     getProductsFromOrdersList :getProductsFromOrdersList
 
 }
 

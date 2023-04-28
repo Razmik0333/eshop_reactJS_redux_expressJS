@@ -8,7 +8,7 @@ import './styles/_orderListItem.scss'
 import { root } from '../../../helpers/constants/constants';
 import { getNewCurrency } from '../../../helpers/functions/functions';
 import { currentLanguageDataSelector, getCurrentCurrencySelector } from '../../../helpers/reduxSelectors';
-function OrderListItem({product, count}) {
+function OrderListItem({product, counts}) {
      const dispatch = useDispatch();
      const orderTextItem = useSelector(currentLanguageDataSelector)?.product_item;
      const currentCurrency = useSelector(getCurrentCurrencySelector)
@@ -22,7 +22,7 @@ function OrderListItem({product, count}) {
                {orderTextItem?.sale}
                </div>
                <div className="product-pictures">
-               <img src={`${root}/template/images/${product.id}.jpg`} alt="" />
+               <img src={`${root}/images/${product.id}.jpg`} alt="" />
 
                </div>
                <div className="product-details">
@@ -37,13 +37,13 @@ function OrderListItem({product, count}) {
                               product.discount > 0 ? 
                               <>
                                    <span className="product-price new-price">
-                                   {`${count} x ${getNewCurrency(currentCurrency,product.cost *(1 - product.discount / 100))?.value}
+                                   {`${counts} x ${getNewCurrency(currentCurrency,product.cost *(1 - product.discount / 100))?.value}
                                    ${getNewCurrency(currentCurrency,product.cost *(1 - product.discount / 100))?.char}`}
                                    </span>
                                    
                               </> : 
                                    <span className="product-price new-price">
-                                   {`${count} x ${product.cost}Դ`}
+                                   {`${counts} x ${product.cost}Դ`}
                                    </span>
                          }
                          
@@ -60,7 +60,7 @@ function OrderListItem({product, count}) {
                               <button className="product-button button-favorite"></button>
                               <button className="product-button button-compare"></button>
                               <button className="add-to-cart">
-                                   <img src={`${root}/template/images/icons/cart.svg`} alt="" />
+                                   <img src={`${root}/icons/config/cart.svg`} alt="" />
                                    {orderTextItem?.add_to_cart}
                               </button>
                          </div>

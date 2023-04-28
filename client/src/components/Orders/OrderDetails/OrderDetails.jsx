@@ -1,12 +1,13 @@
 import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { currentLanguageDataSelector } from '../../../helpers/reduxSelectors';
+import { currentLanguageDataSelector, getStatusIndex } from '../../../helpers/reduxSelectors';
 import { getOrderStatus } from '../../../redux/ducks/orderDuck';
 import './styles/_order-details.scss'
 
 function OrderDetails() {
      const dispatch = useDispatch();
      const orderHeader = useSelector(currentLanguageDataSelector)?.order?.header;
+     const statusIndex = useSelector(getStatusIndex);
 
      const changeStatusIndex = (e) => {
           dispatch(getOrderStatus(+e.target.dataset.status))
@@ -19,7 +20,7 @@ function OrderDetails() {
                     <ul className="show__parameters" >
                          {
                               orderHeader?.nav?.map((item, pos) => {
-                                   return <li className="show__parameter"
+                                   return <li className={`show__parameter ${pos - 1 === statusIndex ? 'active' : '' }`} 
                                         data-status={pos - 1}
                                         onClick={changeStatusIndex}
                                         key={`orderHeader_${pos-1}`}

@@ -26,6 +26,7 @@ import AdminOrders from './components/Base/Admin/AdminOrders/AdminOrders/AdminOr
 import OrderForm from './components/Base/Admin/AdminOrders/OrderForm/OrderForm';
 import Wishlist from './components/Wishlist/Wishlist';
 import ViewedProducts from './components/Home/ViewedProducts/ViewedProducts';
+import Loader from './components/Base/Loader/Loader';
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
 function App() {
@@ -36,7 +37,7 @@ function App() {
         <Header />
         <HeaderDown />
         <Navigation />
-          <Suspense fallback={<div>...Loading</div>}>
+          <Suspense fallback={<Loader />}>
             <Routes>
               <Route
               path="/register" 

@@ -31,7 +31,7 @@ const initialStateApp = {
   orderProducts :{},
   deliveredOrders : [],
   productsCounts : {},
-  currentStatus: null,
+  currentStatus: -1,
   changedStatus:0,
   orderConfirmId : null,
   isConfirmed : false
@@ -77,16 +77,35 @@ export const orderConfirm = (bool) => (dispatch) => {
       dispatch(getProductsCount({
         [val]:obj
       }));
-    };
+};
+export const emptyOrders = () => (dispatch) => {
+  dispatch(fetchOrders([]));
+}
 
-
-export const fetchUserOrders = (id) => (dispatch) => {
-     fetch(`${root}/package/data/${id}`)
-          .then((res) => res.json())
-          .then((res) => {
-               dispatch(fetchOrders(res));
-          })
-          .catch((e) => console.log('error from orderDuck', e));
+export const fetchUserOrders = (id) => async(dispatch) => {
+  try {
+    const data = await (await fetch(`${root}/api/package/user/${id}`)).json()
+    dispatch(fetchOrders(data));
+  } catch (e) {
+    console.log('error from orderDuck', e)
+  }
+};
+export const fetchUserOrdersByStatus = (id,status) => async(dispatch) => {
+  try {
+    const data = await (await fetch(`${root}/api/package/delivered/${id}`,{
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        status
+      })
+    })).json()
+    dispatch(fetchOrders(data));
+    console.log("🚀 ~ file: orderDuck.js:95 ~ fetchUserOrdersByStatus ~ data:", data)
+  } catch (e) {
+    console.log('error from orderDuck', e)
+  }
 };
 
 export const fetchProductsByOrder = (val, arr) => (dispatch) => {
@@ -94,7 +113,6 @@ export const fetchProductsByOrder = (val, arr) => (dispatch) => {
     fetch(`${root}/package/product/${arr}`) 
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       
       dispatch(fetchProducts({
         [val]:res
@@ -105,13 +123,14 @@ export const fetchProductsByOrder = (val, arr) => (dispatch) => {
   }
 
 };
+
+
 export const changeOrderStatus = (id, status) => (dispatch) => {
 
   //console.log(id, status);
     fetch(`${root}/package/status/${id}/${status}`) 
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       
       dispatch(changeOrderForConfirm(res));
       dispatch(orderConfirm(true));
@@ -127,7 +146,6 @@ export const fetchDeliveredOrdersByUser = (id) => (dispatch) => {
     fetch(`${root}/package/delivered/${id}`) 
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       
        dispatch(getDeliveredOredersByUser(Object.values(getUserOrdersFromArray(res))));
       // dispatch(orderConfirm(true));
@@ -148,20 +166,10 @@ export const getOrderStatus = (id) => (dispatch) => {
 const OrderDuck = (state = initialStateApp, action) => {
   switch (action.type) {
     case FETCH_ORDERS:
-      const ordersObj = action.payload;
-      if(!ordersObj.length){
-        return {
-          ...state,
-          ordersData: [...action.payload],
-        };
-        
-      }else{
-        
         return {
           ...state,
           ordersData: action.payload,
-        };
-      }
+        }
     case FETCH_PRODUCTS:
 
       if(checkEmptyObject(action.payload)){
