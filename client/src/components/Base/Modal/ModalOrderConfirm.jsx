@@ -1,16 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getConfirmIdSelector } from "../../../helpers/reduxSelectors";
+import { getConfirmIdSelector, getUserId } from "../../../helpers/reduxSelectors";
+
 import { changeModal } from "../../../redux/ducks/configsDuck";
-import { changeOrderStatus, orderConfirm } from "../../../redux/ducks/orderDuck";
+import { changeOrderStatus, getCurrentStatus, orderConfirm } from "../../../redux/ducks/orderDuck";
 import "./styles/_modal.scss"
 
 function ModalOrderConfirm({message}) {
      const dispatch = useDispatch();
+     const userId = useSelector(getUserId)
+
      const orderIdForConfirm = useSelector(getConfirmIdSelector)
      const changeOrderConfirm = (e) => {
-          dispatch(changeOrderStatus(orderIdForConfirm, 3));
+          //dispatch(changeOrderStatus(orderIdForConfirm, 3));
+          dispatch(changeOrderStatus(orderIdForConfirm, userId, 3));
           dispatch(changeModal(false))
-          dispatch(orderConfirm(false))
+          dispatch(orderConfirm(false));
+          dispatch(getCurrentStatus(3))
      }
      return <div className="modal container">
           <div className="modal__block">

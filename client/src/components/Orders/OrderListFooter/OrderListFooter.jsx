@@ -10,13 +10,13 @@ function OrderListFooter({ind}) {
 
      const dispatch = useDispatch();
      const orderConfirm = useSelector(currentLanguageDataSelector)?.order?.header;
-
      const statusIndex = useSelector(getStatusIndex);
      const confirmOrder = (e) => { 
           dispatch(changeModal(true));         
           dispatch(orderConfirmId(e.target.dataset.id));         
+                   
           
-          // console.log(e.target.dataset.id);
+           console.log(e.target.dataset.id);
      }
      const orders =  useSelector(getUserOrders);
      const userObject = getOrdersFromStatus(orders, statusIndex);

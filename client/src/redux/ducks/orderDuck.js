@@ -22,7 +22,6 @@ export const changeStatus = createAction(CHANGE_STATUS);
 export const changeOrderForConfirm = createAction(CHANGE_ORDER_CONFIRMED_ID);
 export const changeConfirmed = createAction(CONFIRMED);
 export const getDeliveredOredersByUser = createAction(DELIVERED_ORDERS_BY_USER);
-// export const clearOrders = createAction(CLEAR_ORDER_FROM_STATUS);createAction(CHANGE_ORDER_CONFIRMED_ID);
 
 
 
@@ -125,18 +124,25 @@ export const fetchProductsByOrder = (val, arr) => (dispatch) => {
 };
 
 
-export const changeOrderStatus = (id, status) => (dispatch) => {
-
-  //console.log(id, status);
-    fetch(`${root}/package/status/${id}/${status}`) 
-    .then((res) => res.json())
-    .then((res) => {
+export const changeOrderStatus = (id, userId, status) => async(dispatch) => {
+    try {
+      const res = await (await fetch(`${root}/api/package/status/${id}`, {
+        method: "PUT",
+        headers:{
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          status,
+          userId
+        })
+      })).json();
+      //dispatch(changeOrderForConfirm(res));
+      console.log(res);
       
-      dispatch(changeOrderForConfirm(res));
-      dispatch(orderConfirm(true));
-      
-    })
-    .catch((e) => console.log('error from orderDuck', e));
+      dispatch(fetchOrders(res));
+    } catch (e) {
+      console.log('error from orderDuck', e)
+    }
 
 };
 export const fetchDeliveredOrdersByUser = (id) => (dispatch) => {
@@ -222,11 +228,7 @@ const OrderDuck = (state = initialStateApp, action) => {
           deliveredOrders : action.payload
         } 
     case CHANGE_ORDER_CONFIRMED_ID:
-      state.ordersData.map(item => {
-        if (item['id'] === action.payload) {
-          item['user_status'] = 3
-        }
-      })
+      
       return{
         ...state,
         orderConfirmId : action.payload

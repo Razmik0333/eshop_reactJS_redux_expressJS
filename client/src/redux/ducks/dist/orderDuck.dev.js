@@ -40,8 +40,7 @@ var changeOrderForConfirm = (0, _redux.createAction)(CHANGE_ORDER_CONFIRMED_ID);
 exports.changeOrderForConfirm = changeOrderForConfirm;
 var changeConfirmed = (0, _redux.createAction)(CONFIRMED);
 exports.changeConfirmed = changeConfirmed;
-var getDeliveredOredersByUser = (0, _redux.createAction)(DELIVERED_ORDERS_BY_USER); // export const clearOrders = createAction(CLEAR_ORDER_FROM_STATUS);createAction(CHANGE_ORDER_CONFIRMED_ID);
-
+var getDeliveredOredersByUser = (0, _redux.createAction)(DELIVERED_ORDERS_BY_USER);
 exports.getDeliveredOredersByUser = getDeliveredOredersByUser;
 var initialStateApp = {
   ordersData: [],
@@ -223,17 +222,51 @@ var fetchProductsByOrder = function fetchProductsByOrder(val, arr) {
 
 exports.fetchProductsByOrder = fetchProductsByOrder;
 
-var changeOrderStatus = function changeOrderStatus(id, status) {
-  return function (dispatch) {
-    //console.log(id, status);
-    fetch("".concat(_constants.root, "/package/status/").concat(id, "/").concat(status)).then(function (res) {
-      return res.json();
-    }).then(function (res) {
-      dispatch(changeOrderForConfirm(res));
-      dispatch(orderConfirm(true));
-    })["catch"](function (e) {
-      return console.log('error from orderDuck', e);
-    });
+var changeOrderStatus = function changeOrderStatus(id, userId, status) {
+  return function _callee3(dispatch) {
+    var res;
+    return regeneratorRuntime.async(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.t0 = regeneratorRuntime;
+            _context3.next = 4;
+            return regeneratorRuntime.awrap(fetch("".concat(_constants.root, "/api/package/status/").concat(id), {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                status: status,
+                userId: userId
+              })
+            }));
+
+          case 4:
+            _context3.t1 = _context3.sent.json();
+            _context3.next = 7;
+            return _context3.t0.awrap.call(_context3.t0, _context3.t1);
+
+          case 7:
+            res = _context3.sent;
+            //dispatch(changeOrderForConfirm(res));
+            console.log(res);
+            dispatch(fetchOrders(res));
+            _context3.next = 15;
+            break;
+
+          case 12:
+            _context3.prev = 12;
+            _context3.t2 = _context3["catch"](0);
+            console.log('error from orderDuck', _context3.t2);
+
+          case 15:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, null, null, [[0, 12]]);
   };
 };
 
@@ -310,11 +343,6 @@ var OrderDuck = function OrderDuck() {
       });
 
     case CHANGE_ORDER_CONFIRMED_ID:
-      state.ordersData.map(function (item) {
-        if (item['id'] === action.payload) {
-          item['user_status'] = 3;
-        }
-      });
       return _objectSpread({}, state, {
         orderConfirmId: action.payload
       });

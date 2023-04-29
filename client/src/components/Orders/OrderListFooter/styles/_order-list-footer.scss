@@ -2,4 +2,9 @@
      width: 150px;
      height: 30px;
      background-color: var(--orange);
+     &:hover{
+          color: var(--white);
+          background-color: var(--black);
+          cursor: pointer;
+     }
 }
