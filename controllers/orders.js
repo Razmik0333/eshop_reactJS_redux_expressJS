@@ -30,12 +30,17 @@ module.exports.updateStatus = async (req, res) => {
      const id = req.params.id;
      const status = req.body.status;
      const userId = req.body.userId;
-     console.log(req.body);
-     
      await realyze("UPDATE orders SET user_status = ? WHERE id = ?", [status, id]);
      const orders = await realyze("SELECT * FROM orders WHERE user_id = ? AND user_status = ?", [userId, status]);
-     console.log("🚀 ~ file: orders.js:35 ~ module.exports.updateStatus= ~ orders:", orders)
      const resArray = await getProductsFromOrdersList(orders)
-     console.log("🚀 ~ file: orders.js:39 ~ module.exports.updateStatus= ~ resArray:", resArray)
      res.send(JSON.stringify(resArray, undefined, 2));
 }
+module.exports.deleteOrder = async(req, res) => {
+     const order_id = req.body.order_id;
+     const user_id = req.body.user_id;
+      await realyze("DELETE FROM  orders WHERE id = ?", [order_id]);
+      const orders = await realyze("SELECT * FROM orders WHERE user_id = ? AND user_status = ?", [user_id, 3]);
+      const resArray = await getProductsFromOrdersList(orders)
+      res.send(JSON.stringify(resArray, undefined, 2));
+}
+

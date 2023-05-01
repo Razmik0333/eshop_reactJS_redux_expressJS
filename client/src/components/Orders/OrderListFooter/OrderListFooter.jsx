@@ -10,6 +10,7 @@ function OrderListFooter({ind}) {
 
      const dispatch = useDispatch();
      const orderConfirm = useSelector(currentLanguageDataSelector)?.order?.header;
+     console.log("🚀 ~ file: OrderListFooter.jsx:13 ~ OrderListFooter ~ orderConfirm:", orderConfirm)
      const statusIndex = useSelector(getStatusIndex);
      const confirmOrder = (e) => { 
           dispatch(changeModal(true));         
@@ -22,11 +23,20 @@ function OrderListFooter({ind}) {
      const userObject = getOrdersFromStatus(orders, statusIndex);
      return (
           <>
-               <button data-id={userObject[ind]?.id}  className="confirm_receipt"
+               <button data-id={userObject[ind]?.id}  className={statusIndex === 3 ?  "confirm_receipt" : 'confirm_receipt_active'}
                onClick={confirmOrder}
+               disabled={statusIndex === 3}
                >
                     {orderConfirm?.confirm}
                </button>
+               {
+                    statusIndex === 3 && 
+                    <button  className="confirm_receipt_active"
+                         
+                    >
+                         {orderConfirm?.review}
+                    </button>
+               }
           </>
      )
 }

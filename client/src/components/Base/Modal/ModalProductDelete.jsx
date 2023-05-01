@@ -8,6 +8,7 @@ function ModalProductDelete({message}) {
      const dispatch = useDispatch();
      const userId = useSelector(getUserId);
      const productIdForUpdate = useSelector(adminProductIdSelector);
+     console.log(message);
 
      const productDelete = (e) => {
           dispatch(fetchProductsForDelete(userId,productIdForUpdate));

@@ -4,6 +4,7 @@ import "./styles/_modal.scss"
 
 function Modal({message}) {
      const dispatch = useDispatch();
+     console.log(message);
      return <div className="modal container">
           <div className="modal__block">
                <div className="modal__header">

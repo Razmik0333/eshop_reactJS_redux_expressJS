@@ -39,6 +39,7 @@ export const getCartCountSelector = ({ CartDuck }) => CartDuck.countItems; //
 export const getTotalPriceSelector = ({ CartDuck }) => CartDuck.totalPrice; //
 export const getProductsInCart = ({ ProductDuck }) => ProductDuck.cartProducts; //
 export const getUserOrders = ({ OrderDuck }) => OrderDuck.ordersData; //
+export const getOrderIdDelete = ({ OrderDuck }) => OrderDuck.orderIdForDelete; //
 export const getUserProducts = ({ OrderDuck }) => OrderDuck.orderProducts; //
 export const getProductsCounts = ({ OrderDuck }) => OrderDuck.productsCounts; //
 export const getStatusIndex = ({ OrderDuck }) => OrderDuck.currentStatus; //

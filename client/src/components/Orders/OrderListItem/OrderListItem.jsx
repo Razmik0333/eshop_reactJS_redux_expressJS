@@ -59,10 +59,12 @@ function OrderListItem({product, counts}) {
                          <div className="product-buttons">
                               <button className="product-button button-favorite"></button>
                               <button className="product-button button-compare"></button>
+
                               <button className="add-to-cart">
                                    <img src={`${root}/icons/config/cart.svg`} alt="" />
                                    {orderTextItem?.add_to_cart}
                               </button>
+
                          </div>
                          
                     </div>

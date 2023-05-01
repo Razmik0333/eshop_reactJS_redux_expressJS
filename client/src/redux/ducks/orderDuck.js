@@ -10,6 +10,7 @@ const CURRENT_STATUS = 'orderDuck/CURRENT_STATUS';
 const CHANGE_STATUS = 'orderDuck/CHANGE_STATUS';
 const CHANGE_ORDER_CONFIRMED_ID = 'orderDuck/CHANGE_ORDER_CONFIRMED_ID';
 const CONFIRMED = 'orderDuck/CONFIRMED';
+const DELETE_ID = 'orderDuck/DELETE_ID';
 const DELIVERED_ORDERS_BY_USER = 'orderDuck/DELIVERED_ORDERS_BY_USER';
 // const CLEAR_ORDER_FROM_STATUS = 'orderDuck/CLEAR_ORDER_FROM_STATUS';
 
@@ -33,7 +34,7 @@ const initialStateApp = {
   currentStatus: -1,
   changedStatus:0,
   orderConfirmId : null,
-  isConfirmed : false
+  isConfirmed : false,
 };
 
 
@@ -65,6 +66,7 @@ export const orderConfirmId = (id) => (dispatch) => {
   dispatch(changeOrderForConfirm(id));
 
 }
+
 export const orderConfirm = (bool) => (dispatch) => {
 
   
@@ -160,7 +162,26 @@ export const fetchDeliveredOrdersByUser = (id) => (dispatch) => {
     .catch((e) => console.log('error from orderDuck', e));
 
 };
+export const fetchDeletedOrder = (user_id,order_id) => async(dispatch) => {
+  try {
+    const data = await (await fetch(`${root}/api/package/delete`, {
+      method: "DELETE",
+      headers:{
+        "content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        user_id,
+        order_id
 
+      })
+    })).json();
+    console.log(data);
+    
+    dispatch(fetchOrders(data))
+  } catch (e) {
+    console.log('error from orderDuck', e)
+  }
+}
 
 export const getOrderStatus = (id) => (dispatch) => {
   dispatch(getCurrentStatus(id))
@@ -222,11 +243,16 @@ const OrderDuck = (state = initialStateApp, action) => {
         ...state,
         isConfirmed : action.payload
       } 
-      case DELIVERED_ORDERS_BY_USER:
-        return{
-          ...state,
-          deliveredOrders : action.payload
-        } 
+    case DELETE_ID:
+      return{
+        ...state,
+        orderIdForDelete : action.payload
+      } 
+    case DELIVERED_ORDERS_BY_USER:
+      return{
+        ...state,
+        deliveredOrders : action.payload
+      } 
     case CHANGE_ORDER_CONFIRMED_ID:
       
       return{

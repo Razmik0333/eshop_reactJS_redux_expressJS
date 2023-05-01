@@ -1,0 +1,24 @@
+@charset "UTF-8";
+.order__list__header {
+  display: flex;
+}
+.order__list__header .order__info .order__list__header__items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: space-around;
+}
+.order__list__header .order__info .order__list__header__items .order__list__header__item {
+  padding: 10px 0;
+  margin-left: 25px;
+}
+.order__list__header .order__info .order__list__header__items .order__list__header__item .button-delete::before {
+  content: "🗙";
+}
+.order__list__header .order__info .order__list__header__items .remove {
+  color: red;
+  cursor: pointer;
+}
+.order__list__header .order__info .order__list__header__items .remove:hover {
+  color: var(--orange);
+}

@@ -6,6 +6,7 @@ import { popupItemIdSelector } from "../../../helpers/reduxSelectors";
 
 function ModalPopup() {
      const dispatch = useDispatch();
+     console.log('kkkkkkkk');
 
      const pictureId = useSelector(popupItemIdSelector)
      return <div className="modal container">

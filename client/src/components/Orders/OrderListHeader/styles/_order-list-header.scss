@@ -1,10 +1,33 @@
-.order__list__header__items{
+.order__list__header{
      display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-content: space-around;
-    .order__list__header__item{
-         padding: 10px 0;
-         margin-left: 25px;
-    }
+
+     .order__info{
+          .order__list__header__items{
+               display: flex;
+              justify-content: space-between;
+              align-items: center;
+              align-content: space-around;
+              .order__list__header__item{
+                   padding: 10px 0;
+                   margin-left: 25px;
+                   .button-delete{
+                    &::before{
+                         content: "\01F5D9" ;
+                    }
+               }
+              }
+              .remove{
+                    color: red;
+                    cursor: pointer;
+                    &:hover{
+                         color: var(--orange);
+
+                    }
+              }
+
+          }
+     }
+     
+     
+
 }

@@ -7,10 +7,12 @@ const getOrdersByUser = require('../controllers/orders').ordersByUser;
 const getAllOrdersByUser = require('../controllers/orders').allOrdersByUser;
 const getOrdersByStatus = require('../controllers/orders').ordersByStatus;
 const updateStatus = require('../controllers/orders').updateStatus;
+const deleteOrder = require('../controllers/orders').deleteOrder;
 router.get('/package/data/:id', getOrdersByUser)
 router.get('/package/user/:id', getAllOrdersByUser)
 //router.get('/package/product/:str', )
 router.put('/package/delivered/:id', getOrdersByStatus)
 router.put('/package/status/:id', updateStatus)
+router.delete('/package/delete', deleteOrder)
 
 module.exports = router

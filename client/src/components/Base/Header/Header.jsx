@@ -8,6 +8,7 @@ import { changeOrdersFromLogout } from '../../../redux/ducks/orderDuck';
 import { currentUser, getUserData } from '../../../redux/ducks/userDuck';
 import MenuBurger from './MenuBurger/MenuBurger';
 import './styles/_header.scss';
+import { fetchCurrentCart } from '../../../redux/ducks/cartDuck';
 
 function Header() {
      const dispatch = useDispatch();
@@ -27,6 +28,10 @@ function Header() {
           dispatch(fetchLanguageData(currentLanguage));
 
      }, []);
+     useEffect(() => {
+          dispatch(fetchCurrentCart(userId))
+          
+     }, [userId]);
      const changeLogout = (e) => {        
 
            dispatch(currentUser(null))

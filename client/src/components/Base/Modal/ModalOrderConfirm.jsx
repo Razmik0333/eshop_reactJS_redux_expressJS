@@ -8,8 +8,10 @@ import "./styles/_modal.scss"
 function ModalOrderConfirm({message}) {
      const dispatch = useDispatch();
      const userId = useSelector(getUserId)
+     console.log(message);
 
      const orderIdForConfirm = useSelector(getConfirmIdSelector)
+     console.log("🚀 ~ file: ModalOrderConfirm.jsx:14 ~ ModalOrderConfirm ~ orderIdForConfirm:", orderIdForConfirm)
      const changeOrderConfirm = (e) => {
           //dispatch(changeOrderStatus(orderIdForConfirm, 3));
           dispatch(changeOrderStatus(orderIdForConfirm, userId, 3));

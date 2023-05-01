@@ -1,4 +1,4 @@
-.confirm_receipt{
+.confirm_receipt_active{
      width: 150px;
      height: 30px;
      background-color: var(--orange);
@@ -7,4 +7,9 @@
           background-color: var(--black);
           cursor: pointer;
      }
+}
+.confirm_receipt{
+     width: 150px;
+     height: 30px;
+     background-color: #f3f3f3;
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { 
+     getOrderIdDelete,
      getProductsCounts,
      getStatusIndex,
      getUserDataSelector,
@@ -34,14 +35,13 @@ function Orders() {
      const dispatch = useDispatch();
      const userData = useSelector(getUserDataSelector);
      const statusIndex = useSelector(getStatusIndex);
-     const keys = Object.keys;
-     const values = Object.values;
+
 
      useEffect(() => {
           statusIndex === -1 ? 
           
           dispatch(fetchUserOrders(userData?.id)):
-          dispatch(fetchUserOrdersByStatus(userData?.id, statusIndex))
+               dispatch(fetchUserOrdersByStatus(userData?.id, statusIndex))
           setIsLoad(true);
 
           //dispatch(getOrderStatus(-1))
@@ -52,7 +52,7 @@ function Orders() {
      console.log("🚀 ~ file: Orders.jsx:44 ~ Orders ~ statusIndex:", statusIndex)
      const isConfirmed =  useSelector(isConfirmedSelector);
      const userObject = getOrdersFromStatus(orders, statusIndex);
-     
+
      //const ordersUserObject = getUserOrdersFromArray(userObject, statusIndex);
      // useEffect(() => {
      //      setIsLoad(false)
@@ -80,8 +80,9 @@ function Orders() {
      return <>
           {
                modalIsClose ?
-                 <ModalOrderConfirm message={'Դուք ստացե՞լ եք Ձեր փաթեթը'} /> 
+                 <ModalOrderConfirm message={'Դուք Ցանկանում եք հեռացնել Ձեր փաթեթը'} /> 
                  : <></>
+                 //<ModalOrderConfirm message={'Դուք ստացե՞լ եք Ձեր փաթեթը'} />
 
           }
           <div className="products__list">
