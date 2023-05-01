@@ -21,35 +21,61 @@ const initialStateApp = {
 export const currentWishListItem = (id) => (dispatch) => {
      dispatch(addToWishlist(id));
 };
-export const deleteWishListItem = (userId,productId) => (dispatch) => {
-
-  fetch(`${root}/wishlist/delete/${userId}/${productId}`)
-  .then((res) => res.json())
-  .then((res) => {
-      console.log(res.length);
-      res.length === 0 ?
+export const deleteWishListItem = (user_id,productId) => async (dispatch) => {
+  
+  try {
+    const data = await (await fetch(`${root}/api/wishlist/remove/${productId}`, {
+      method:"PUT",
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        user_id
+      })
+    })).json()
+    dispatch(getWishListData(data))
+  } catch (e) {
+    console.log('error from wishListDuck', e)
+  }
+  
+  // .then((res) => res.json())
+  // .then((res) => {
+  //     console.log(res.length);
+  //     res.length === 0 ?
       
-      dispatch(addToWishlist([])):
+  //     dispatch(addToWishlist([])):
       
-      dispatch(addToWishlist(res.trim('').split('|')))
+  //     dispatch(addToWishlist(res.trim('').split('|')))
 
-      // dispatch(deleteFromWishlist(id));
-  })
-  .catch((e) => console.log('error from wishListDuck', e));
+  //     // dispatch(deleteFromWishlist(id));
+  // })
+
 
 };
 
-export const fetchAddWishList = (userId,productId) => (dispatch) => {
+export const fetchAddWishList = (user_id,productId) => async(dispatch) => {
 
-  !userId ? dispatch(addToWishlist([])) :
-     fetch(`${root}/wishlist/add/${userId}/${productId}`)
-          .then((res) => res.json())
-          .then((res) => {
-              console.log(res);
+  try {
+    const data = await (await fetch(`${root}/api/wishlist/add/${productId}`, 
+    {
+      method: "PUT",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        user_id
+      })
+    })).json()
+    console.log("🚀 ~ file: wishListDuck.js:47 ~ fetchAddWishList ~ data:", data)
+    dispatch(getWishListData(data))
+  } catch (e) {
+    console.log('error from wishListDuck', e)
+  }
+  //!userId ? dispatch(addToWishlist([])) :
+    
               
-              dispatch(addToWishlist(res.trim('').split('|')));
-          })
-          .catch((e) => console.log('error from wishListDuck', e));
+      //        dispatch(addToWishlist(res.trim('').split('|')));
+
 };
 
 export const fetchCurrentWishList = (userId) => (dispatch) => {
@@ -64,19 +90,17 @@ export const fetchCurrentWishList = (userId) => (dispatch) => {
           })
           .catch((e) => console.log('error from wishListDuck', e));
 };
-export const fetchWishList = (arr) => (dispatch) => {
-  console.log(arr);
-  
-  arr.length === 0 ? dispatch(getWishListData([])) :
-     fetch(`${root}/wishlist/wish/${arr}`)
 
-          .then((res) => res.json())
-          .then((res) => {
-              console.log(res);
-              
-               dispatch(getWishListData(res));
-          })
-          .catch((e) => console.log('error from wishListDuck', e));
+export const fetchWishList = (userId) => async (dispatch) => {
+  console.log(userId);
+  try {
+    const data = await (await fetch(`${root}/api/wishlist/${userId}`)).json();
+    dispatch(getWishListData(data));
+  } catch (e) {
+    console.log('error from wishListDuck', e)
+  }
+  //arr.length === 0 ? dispatch(getWishListData([])) :
+     
 };
 
 

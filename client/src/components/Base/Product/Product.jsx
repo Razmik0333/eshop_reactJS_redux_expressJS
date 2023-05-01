@@ -5,7 +5,7 @@ import { currentProduct } from '../../../redux/ducks/productDuck';
 import ModalPopup from "../../Base/Modal/ModalPopup";
 import { root } from '../../../helpers/constants/constants';
 import { changePopup, getIsLogin, getPopupItemId } from '../../../redux/ducks/configsDuck';
-import { getCurrentCurrencySelector, getUserId, getWishListIdsSelector, popupCloseSelector } from '../../../helpers/reduxSelectors';
+import { getCurrentCurrencySelector, getUserId, getWishListDataSelector, getWishListIdsSelector, popupCloseSelector } from '../../../helpers/reduxSelectors';
 import { getNewCurrency, numInArray } from '../../../helpers/functions/functions';
 import RatingMapping from '../RatingMapping/RatingMapping';
 import './styles/_products.scss';
@@ -19,23 +19,17 @@ function Product({product, text}) {
      const discountedPrice = product.cost *(1 - product.discount / 100);
      const popupIsShow = useSelector(popupCloseSelector);
      const currentCurrency = useSelector(getCurrentCurrencySelector);
-     const wishListIds = useSelector(getWishListIdsSelector)
+     //const wishListIds = useSelector(getWishListIdsSelector)
      const userId = useSelector(getUserId);
+     const wishListData = useSelector(getWishListDataSelector);
+     const wishListIds = wishListData.map(item => item?.id);
      const changeCurrentProduct = (e) => {
           dispatch(currentProduct(e.target.dataset.id));
      }
      const addProductToCart = (e) => {
-          console.log(e.target.dataset.id);
           dispatch(fetchAddCart(userId ,{
                [e.target.dataset.id] : 1
           }))
-          //e.stopPropagation()
-          // dispatch(getCartItem({
-          //           [e.target.dataset.id] : 1 
-          //      }
-          // ))
-          // dispatch(getCountOfCart(1));
-          // dispatch(getTotalPriceValue(discountedPrice));
      }
      const showProductPopup = (e) => {
           dispatch(changePopup(true));
@@ -44,9 +38,9 @@ function Product({product, text}) {
      }
      const addProductToWishList = (e) => {
           const target = e.target; 
-               numInArray(wishListIds,target.dataset.id) ? 
-                    dispatch(fetchAddWishList(userId, target.dataset.id)):
-                         dispatch(deleteWishListItem(userId, target.dataset.id))
+          numInArray(wishListIds,+target.dataset.id) ? 
+               dispatch(fetchAddWishList(userId, +target.dataset.id)):
+                    dispatch(deleteWishListItem(userId, +target.dataset.id))
 
      }
      return (
