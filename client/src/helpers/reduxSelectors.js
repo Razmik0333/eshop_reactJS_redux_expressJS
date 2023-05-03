@@ -59,6 +59,7 @@ export const getViewedProductsDataSelector = ({ ProductDuck }) => ProductDuck.vi
 //admins block//
 
 export const adminOrderSelector = ({ AdminOrderDuck }) => AdminOrderDuck.ordersList; //
+export const adminOrderProductsSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrderProducts; //
 export const adminTimeObjectSelector = ({ AdminOrderDuck }) => AdminOrderDuck.timeObj; //
 export const adminTimeObjectProductSelector = ({ AdminProductDuck }) => AdminProductDuck.timeObj; //
 

@@ -101,7 +101,7 @@ export const changeCurrencies = () => async (dispatch) => {
 };
 
 export const fetchLanguageData = (lang) => async(dispatch) => {
-  console.log(lang);
+ 
   try {
     const data = await ( await fetch(`${root}/api/language/${lang}`)).json();
     dispatch(changeCurrentLanguageData(data));

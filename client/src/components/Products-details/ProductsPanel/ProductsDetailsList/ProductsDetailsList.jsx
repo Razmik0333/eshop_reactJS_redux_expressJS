@@ -31,9 +31,7 @@ function ProductsDetailsList() {
           dispatch(getStepsCounts(Math.ceil(products.length / +e.target.dataset.count)));
           setCountShowBar(false)
       }
-     const changeFilterItems = (e) => {
-          console.log(e.target);
-          
+     const changeFilterItems = (e) => {        
           setFilterItems(e.target.innerText)
           dispatch(changeSortType({
                type : e.target.dataset.type,
@@ -58,14 +56,14 @@ function ProductsDetailsList() {
                     
                     <ul className="show__parameters" >
                          <li className="show__parameter filter-type-parameter">
-                         <span className="show__parameter_text">{productDetailText['sort_by']}</span>
+                         <span className="show__parameter_text">{productDetailText?.sort_by}</span>
                                <ul className="sorting" 
                                    onMouseMove={()=>{setFilterShowBar(true)}}>
                                    
                                    <span className="filter_header">
                                         {
                                              filterItems ?                                        
-                                             `${filterItems}` : productDetailText['select_type']
+                                             `${filterItems}` : productDetailText?.select_type
                                         }
 
                                    </span>

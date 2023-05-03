@@ -1,10 +1,10 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getCartCountSelector, getCartSelector, getUserId, getWishListDataSelector, getWishListIdsSelector, hotDealsTimerSelector } from '../../../helpers/reduxSelectors';
+import { getCartSelector, getWishListDataSelector, hotDealsTimerSelector } from '../../../helpers/reduxSelectors';
 import './styles/_header-down.scss';
 import { root } from '../../../helpers/constants/constants'; 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getHotDealsTimerSecond } from '../../../redux/ducks/configsDuck';
 import { getProductCount } from '../../../helpers/functions/functions';
 function HeaderDown() {
@@ -14,10 +14,7 @@ function HeaderDown() {
 
      
      const timeDeals = useSelector(hotDealsTimerSelector);
-     const wishListIds = useSelector(getWishListIdsSelector)
-     const wishListItems = useSelector(getWishListDataSelector);
-     const userId = useSelector(getUserId);
-
+     const wishListData = useSelector(getWishListDataSelector)
      const date = new Date();
 
      useEffect(() => {
@@ -51,7 +48,7 @@ function HeaderDown() {
 
                                    <div className="cart">
                                         <img src={
-                                             wishListIds.length > 0 ? `${root}/icons/config/wishlist_active.svg`:
+                                             wishListData.length > 0 ? `${root}/icons/config/wishlist_active.svg`:
                                              `${root}/icons/config/wishlist.svg`
                                         } alt="" />
                                    </div>

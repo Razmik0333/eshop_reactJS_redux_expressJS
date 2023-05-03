@@ -25,6 +25,7 @@ function CategoriesFilterPrice() {
      const currentLineRef = useRef(null);
 
      let leftVal = getPositiveNumber(value);
+     console.log("🚀 ~ file: CategoriesFilterPrice.jsx:28 ~ CategoriesFilterPrice ~ leftVal:", leftVal)
      const startRef = useRef(null);
 
      
@@ -46,7 +47,8 @@ function CategoriesFilterPrice() {
                     onMouseMove={(e)=> {
                               const zeroRange = e.pageX - 1084;                              
                               if(isUp){
-                                   setValue(zeroRange)
+                                   setValue(zeroRange);
+                                   
                                    fIsSelected ? startRef.current.style.left = leftVal + 'px' :
                                    finalRef.current.style.left = leftVal + 'px';
                               }
@@ -99,7 +101,7 @@ function CategoriesFilterPrice() {
                                              '0px':`${startRef.current.style.left}px`;
                                    finalRef.current.style.left = 
                                         finalRef.current.style.left.length === 0 ? 
-                                             `299px`:`${finalRef.current.style.left}px`;
+                                             `283px`:`${finalRef.current.style.left}px`;
                                    //finalRef.current.style.left = leftVal + 'px';
                               }
                          }
@@ -115,7 +117,7 @@ function CategoriesFilterPrice() {
                                         parseInt(startRef.current.style.left) +'px';
                               dispatch(changeCosts({final : Math.floor((min + (max - min) * ((parseInt(finalRef.current.style.left))/283 )))}))
                          }}
-                         style={checkEmptyObject(costInterval) ? {left:283} : {left:finalRef.current?.style.left}}
+                         style={checkEmptyObject(costInterval) ? {left:299} : {left:finalRef.current?.style.left}}
 
                          ></div>
                          <div 

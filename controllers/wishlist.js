@@ -20,7 +20,6 @@ module.exports.addToWishlist = async (req, res) => {
      let tokens = '';
      const userId = req.body.user_id;
      const productId = req.params.product_id;
-     console.log(userId, productId);
      const [wishByUser] = await realyze("SELECT wish FROM `user_interest` WHERE `user_id`= ? ", [userId]); 
       if(!wishByUser){
            await realyze("INSERT INTO wish (user_id, wish, cart) VALUES ( ?, ? , ? ) ", [userId, productId, null]); 
@@ -50,8 +49,12 @@ module.exports.removeFromWishlist = async (req, res) => {
      const idsArray = wishByUser.wish.split('|').filter(item => item !== productsId );
      const newWish = idsArray.join('|') ;
      await realyze("UPDATE `user_interest` SET wish = ? WHERE `user_id`= ? ", [newWish,userId]);  
+     if(newWish === ""){
+          res.send([])
+     }else{
+          const tokens = getTokensForQuery(idsArray);
+          const products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, idsArray);
+          res.send(products);
 
-     const tokens = getTokensForQuery(idsArray);
-     const products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, idsArray);
-     res.send(products);
+     }
 }

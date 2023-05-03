@@ -9,6 +9,7 @@ import ProductCreateUpdateFooter from './ProductCreateUpdateFooter';
 
 import "./styles/_product-create-update-form.scss";
 import { fetchOrderItem } from '../../../../redux/ducks/adminOrderDuck';
+import { fetchProductItem } from '../../../../redux/ducks/adminProductDuck';
 function ProductCreateUpdate() {
      const [isCreated, setIsCreated] = useState(false);
      const modalIsClose = useSelector(modalCloseSelector);
@@ -22,15 +23,16 @@ function ProductCreateUpdate() {
      const dispatch = useDispatch();
      
      const currentProduct = useSelector(adminProductSelector);
+     console.log("🚀 ~ file: ProductCreateUpdate.jsx:25 ~ ProductCreateUpdate ~ currentProduct:", currentProduct)
 
      const userId = useSelector(getUserId);
-     const currentOrderId = useSelector(adminOrderIdSelector)
+     const currentProductId = useSelector(adminProductIdSelector)
 
      useEffect(() => {
           
-          setTimeout(() => {
-               dispatch(fetchOrderItem(userId,currentOrderId))
-          }, 500)
+        //  setTimeout(() => {
+               dispatch(fetchProductItem(currentProductId))
+      //    }, 500)
           
      }, []);
      useEffect(() => {
@@ -40,7 +42,7 @@ function ProductCreateUpdate() {
           setProductDiscount(currentProduct?.discount);
           setProductArticul( currentProduct?.['1c_articul']);
           setSelectedCat(currentProduct?.category)
-     }, [currentOrderId, currentProduct]);
+     }, [currentProductId, currentProduct]);
      
 
      const changeCategory = (e) => {
@@ -191,7 +193,7 @@ function ProductCreateUpdate() {
 
                               <div className="form__item">
                                    <div className="form__item__header">Current Picture</div>
-                                   <img src={`${root}/template/images/${currentProduct.id}.jpg`} alt="" /> 
+                                   <img src={`${root}/images/${currentProduct.id}.jpg`} alt="" /> 
                               </div>:
 
                               <></>

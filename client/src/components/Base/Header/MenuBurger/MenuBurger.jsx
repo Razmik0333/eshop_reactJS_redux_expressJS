@@ -45,7 +45,7 @@ function MenuBurger() {
                               {
                                    <>
                                         {
-                                             userId === '2' ?  
+                                             userId === 2 ?  
                                                   <li className="burger_list_item">
                                                        <NavLink to={"/admin"} className="register-link">{headerLangData?.admin}</NavLink>
 

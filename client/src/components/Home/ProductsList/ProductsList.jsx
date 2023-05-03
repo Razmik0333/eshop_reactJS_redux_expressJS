@@ -16,7 +16,7 @@ function ProductsList() {
      }, [idProductsFromStart]);
 
      useEffect(() => {
-          dispatch(fetchCurrentWishList(userId))
+          //dispatch(fetchCurrentWishList(userId))
          // userId ?  dispatch(fetchWishList(wishListIds)) : dispatch(fetchWishList([]))
          
      }, [userId]);

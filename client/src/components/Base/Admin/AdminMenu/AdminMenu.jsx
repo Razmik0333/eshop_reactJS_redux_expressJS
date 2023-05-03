@@ -13,7 +13,7 @@ function AdminMenu() {
           <div className="admin__menu">
                     <div className="admin_picture">
                          <div className="admin__img">
-                              <img src={`${root}/template/images/icons/admin.png`} alt='' />
+                              <img src={`${root}/icons/config/admin.png`} alt='' />
                               <p className="admin__name">
                                    {userData?.name}
                               </p>

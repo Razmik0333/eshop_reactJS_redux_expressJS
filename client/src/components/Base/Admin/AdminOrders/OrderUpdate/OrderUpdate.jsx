@@ -1,21 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { adminCurrentOrderInfoSelector, adminCurrentOrderSelector, adminOrderIdSelector, getUserId, modalCloseSelector } from "../../../../../helpers/reduxSelectors";
+import { adminCurrentOrderInfoSelector, adminCurrentOrderSelector, adminOrderIdSelector, adminOrderProductsSelector, adminOrderSelector, getUserId, modalCloseSelector } from "../../../../../helpers/reduxSelectors";
 import { root } from "../../../../../helpers/constants/constants";
 import { changeModal } from "../../../../../redux/ducks/configsDuck";
 import Modal from "../../../Modal/Modal";
 import ProductCreateUpdateFooter from "../../AdminProducts/ProductCreateUpdateFooter";
 import { getStatus, checkEmptyObject } from "../../../../../helpers/functions/functions";
-import { clearCurrentOrder, fetchOrderItem, fetchOrdersByString } from "../../../../../redux/ducks/adminOrderDuck";
+import { clearCurrentOrder, fetchOrderItem, fetchOrderProducts, fetchOrdersByString } from "../../../../../redux/ducks/adminOrderDuck";
 import Loader from "../../../Loader/Loader";
 function OrderUpdate() {
      const dispatch = useDispatch();
-
      const currentOrderId = useSelector(adminOrderIdSelector);
      useEffect(() => {
-          dispatch(fetchOrderItem(userId, currentOrderId))
+          dispatch(fetchOrderItem(userId, currentOrderId));
+          dispatch(fetchOrderProducts(userId, currentOrderId));
      }, []);
-     console.log("🚀 ~ file: OrderUpdate.jsx:13 ~ OrderUpdate ~ currentOrderId", currentOrderId)
      const [isChanged, setIsChanged] = useState(false);
      const [isUpdated, setIsUpdated] = useState(false);
      const modalIsClose = useSelector(modalCloseSelector);
@@ -24,24 +23,24 @@ function OrderUpdate() {
      const [customerComment, setCustomerComment] = useState(``);
      const [customerOrder, setCustomerOrder] = useState({});
      const [orderPrice, setOrderPrice] = useState("");
-     console.log("🚀 ~ file: OrderUpdate.jsx:22 ~ OrderUpdate ~ customerOrder", customerOrder)
      const [orderStatus, setOrderStatus] = useState('');
-
+     const currentOrderProducts = useSelector(adminOrderProductsSelector)
+     console.log("🚀 ~ file: OrderUpdate.jsx:28 ~ OrderUpdate ~ currentOrderProducts:", currentOrderProducts)
 
      const currentOrder = useSelector(adminCurrentOrderSelector);
        console.log("🚀 ~ file: OrderUpdate.jsx:26 ~ OrderUpdate ~ currentOrder", currentOrder)
      const userId = useSelector(getUserId);
      
-    // const orders = JSON.parse(currentOrder?.user_order)
-    // const keys = Object.keys(orders);
+    const orders = JSON.parse(currentOrder?.user_order)
+    const keys = Object.keys(orders);
      useEffect(() => {
-          
+       
           if(!checkEmptyObject(currentOrder)){
 
                setCustomerName(currentOrder?.user_name);
                setCustomerPhone(currentOrder?.user_phone);
                setCustomerComment(currentOrder?.user_comment);
-               setCustomerOrder(JSON.parse(currentOrder?.user_order));
+               //setCustomerOrder(JSON.parse(currentOrder?.user_order));
                setOrderPrice( currentOrder?.user_price);
                setOrderStatus(currentOrder?.user_status);
           }
@@ -156,7 +155,7 @@ function OrderUpdate() {
                               </label>
                          </div>
                          { 
-                              currentOrderInfo ?
+                              currentOrderProducts ?
                               <div className="form__item form__item_list">
                                    <div className="form__item__header">Current Order Info</div>
                                    {
@@ -165,11 +164,11 @@ function OrderUpdate() {
                                         <input type="hidden" name="user_order" value={`${JSON.stringify(customerOrder)}`} onChange={()=>{}} />
                                         <ul className="current__order__infos">
                                              {
-                                                  currentOrderInfo.map((item,ind) => {
+                                                  currentOrderProducts.map((item,ind) => {
                                                        return <li className="current__order__info" key={`current__order__${ind}`}>
                                                             <>
-                                                            <img src={`${root}/template/images/${item.id}.jpg`} alt="" />X 
-                                                            <span>{`${customerOrder?.[item.id]}հտ`}</span>
+                                                            <img src={`${root}/images/${item.id}.jpg`} alt="" />X 
+                                                            <span>{`${item?.quantity}հտ`}</span>
                                                             </>
 
                                                        </li>

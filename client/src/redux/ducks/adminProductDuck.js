@@ -54,18 +54,18 @@ export const resetTimeObject = () => (dispatch) => {
   dispatch(clearTimeObject())
 }
 
-export const fetchProductsList = (id) => (dispatch) => {
-    
-    fetch(`${root}/admin/product/list/${id}`)
-      .then((res) => res.json())
-      .then((res) => {
-            dispatch(getProductsList(res));
-      })
-      .catch((e) => console.log('error from AdminProductDuck', e));
+export const fetchProductsList = () => async (dispatch) => {
+    try {
+      const data = await( await fetch(`${root}/api/admin/product/list`)).json()
+      dispatch(getProductsList(data));
+    } catch (e) {
+      console.log('error from AdminProductDuck', e)
+    }
+         
 };
 export const fetchProductItem = (id) => (dispatch) => {
     
-    fetch(`${root}/admin/product/item/${id}`)
+    fetch(`${root}/api/admin/product/${id}`)
       .then((res) => res.json())
       .then((res) => {
             dispatch(getProductForUpdate(res));

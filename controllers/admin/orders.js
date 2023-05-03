@@ -9,7 +9,7 @@ module.exports.adminOrdersList = async(req, res) => {
      res.send(orders)
 }
 
-module.exports.adminOrderById = async(req, res) => {
+module.exports.getProductFromOrder = async(req, res) => {
      const orderId = req.params.order_id; //
      const [orderById] = await realyze("SELECT * FROM orders WHERE id = ? ", [orderId]);
      const currentOrder = JSON.parse(orderById.user_order);
@@ -25,6 +25,12 @@ module.exports.adminOrderById = async(req, res) => {
           return acc;
      },[])
      res.send(productsWithQuantities)
+}
+
+module.exports.adminOrderById = async(req, res) => {
+     const orderId = req.params.order_id; //
+     const [orderById] = await realyze("SELECT * FROM orders WHERE id = ? ", [orderId]);
+     res.send(orderById);
 }
 
 module.exports.adminStatusUpdate = async (req, res) => {

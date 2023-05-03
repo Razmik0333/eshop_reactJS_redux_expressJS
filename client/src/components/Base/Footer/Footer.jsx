@@ -1,3 +1,5 @@
+import {root} from "../../../helpers/constants/constants";
+
 import './styles/_footer.scss';
 function Footer() {
      return(
@@ -39,11 +41,11 @@ function Footer() {
                                    <li className="footer__row__category">Returns</li>
                                    <li className="footer__row__category">Shipping</li>
                                    <li className="footer__row__credit__cards">
-                                        <a href=""><img src="../img/visa.png" alt="" /></a>
-                                        <a href=""><img src="../img/master_card.png" alt="" /></a>
-                                        <a href=""><img src="../img/Discover_Network.png" alt="" /></a>
-                                        <a href=""><img src="../img/american_express.png" alt="" /></a>
-                                        <a href=""><img src="../img/paypal.png" alt="" /></a>
+                                        <a href=""><img src={`${root}/icons/other/visa.png`} alt="" /></a>
+                                        <a href=""><img src={`${root}/icons/other/master_card.png`} alt="" /></a>
+                                        <a href=""><img src={`${root}/icons/other/Discover_Network.png`} alt="" /></a>
+                                        <a href=""><img src={`${root}/icons/other/american_express.png`} alt="" /></a>
+                                        <a href=""><img src={`${root}/icons/other//paypal.png`} alt="" /></a>
                                         
                                    </li>
                               </ul>

@@ -21,6 +21,8 @@ import SearchItems from './SearchItems/SearchItems';
 import SearchInput from './SearchProducts/SearchInput';
 import { changeStepsCounts } from '../../../redux/ducks/productDuck';
 
+import { root } from '../../../helpers/constants/constants';
+
 function Navigation() {
      const dispatch = useDispatch();
      useEffect(() => {
@@ -62,11 +64,11 @@ function Navigation() {
                          <div className="search__part">
                               <div className="select__category">
                                    <span className="select-icon">
-                                        <img src="../icons/menu.svg" alt="" />
+                                        <img src={`${root}/icons/config/menu.svg`} alt="" />
                                    </span>
                                    <span className="select-text">Select a category</span>
                                    <span className="select-dropdown">
-                                        <img src="../icons/triangle.svg" alt="" />
+                                        <img src={`${root}/icons/config/triangle.svg`} alt="" />
                                    </span>
                               </div>
                               <div className="search__products" /*onMouseOut={false}*/>

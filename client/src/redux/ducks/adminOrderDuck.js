@@ -5,6 +5,7 @@ const ORDERS_LIST = 'adminOrderDuck/ORDERS_LIST';
 const CURRENT_ORDER = 'adminOrderDuck/CURRENT_ORDER';
 const CURRENT_ORDER_ID = 'adminOrderDuck/CURRENT_ORDER_ID';
 const CURRENT_ORDER_INFO = 'adminOrderDuck/CURRENT_ORDER_INFO';
+const CURRENT_ORDER_PRODUCTS = 'adminOrderDuck/CURRENT_ORDER_PRODUCTS';
 const CURRENT_ORDER_DELETE = 'adminOrderDuck/CURRENT_ORDER_DELETE';
 const TIME_OBJECT = 'adminOrderDuck/TIME_OBJECT';
 const CLEAR_TIME_OBJECT = 'adminOrderDuck/CLEAR_TIME_OBJECT';
@@ -13,6 +14,7 @@ const CLEAR_TIME_OBJECT = 'adminOrderDuck/CLEAR_TIME_OBJECT';
 export const getOrdersList = createAction(ORDERS_LIST);
 export const getOrderForUpdate = createAction(CURRENT_ORDER);
 export const getCurrentOrderId = createAction(CURRENT_ORDER_ID);
+export const getCurrentOrderProducts = createAction(CURRENT_ORDER_PRODUCTS);
 export const getCurrentOrderInfo = createAction(CURRENT_ORDER_INFO);
 export const getCurrentOrderDelete = createAction(CURRENT_ORDER_DELETE);
 export const getTimeObject = createAction(TIME_OBJECT);
@@ -24,6 +26,7 @@ const initialStateApp = {
   ordersList: [],
   currentOrderId:null,
   currentOrder:{},
+  currentOrderProducts:[],
   currentOrderInfo: null,
   isDeleted: false,
   timeObj : {}
@@ -50,29 +53,38 @@ export const resetIsDeleted = (bool) => (dispatch) => {
 export const resetTimeObject = () => (dispatch) => {
     dispatch(clearTimeObject())
 }
-export const fetchOrdersList = (id) => (dispatch) => { 
-    fetch(`${root}/admin/order/package/${id}`)
-      .then((res) => res.json())
-      .then((res) => {
-            dispatch(getOrdersList(res));
-      })
-      .catch((e) => console.log('error from AdminOrderDuck', e));
-};
-export const fetchOrderItem = (userId, productId) => (dispatch) => {
+export const fetchOrdersList = (id) => async(dispatch) => { 
     
-  fetch(`${root}/admin/order/item/${userId}/${productId}`)
-    .then((res) => res.json())
-    .then((res) => {
-          dispatch(getOrderForUpdate(res));
-    })
-    .catch((e) => console.log('error from AdminProductDuck', e));
+  try {
+    const data = await (await fetch(`${root}/api/admin/orders/list`)).json();
+    dispatch(getOrdersList(data));
+  } catch (e) {
+    console.log('error from AdminOrderDuck', e)
+  }
+};
+export const fetchOrderItem = (userId, orderId) => async (dispatch) => {
+    try {
+      const data = await (await fetch(`${root}/api/admin/order/${orderId}`)).json()
+      dispatch(getOrderForUpdate(data));
+    } catch (e) {
+      console.log('error from AdminOrderDuck', e)
+    }
+
+};
+export const fetchOrderProducts = (orderId) => async (dispatch) => {
+    try {
+      const data = await (await fetch(`${root}/api/admin/order/products/${orderId}`)).json()
+      dispatch(getCurrentOrderProducts(data));
+    } catch (e) {
+      console.log('error from AdminOrderDuck', e)
+    }
+
 };
 
 export const fetchOrdersByString = (arr) => (dispatch) => {
   fetch(`${root}/list/product/${arr}`) 
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       
       dispatch(getCurrentOrderInfo(res));
     })
@@ -83,7 +95,6 @@ export const fetchOrdersForDelete = (userId, productId) => (dispatch) => {
   fetch(`${root}/admin/order/delete/${userId}/${productId}`)
     .then((res) => res.json())
     .then((res) => {
-     console.log(res);
 
         dispatch(getCurrentOrderDelete(res));
     })
@@ -130,6 +141,11 @@ const AdminOrderDuck = (state = initialStateApp, action) => {
       return {
         ...state,
         timeObj: {},
+      };
+    case CURRENT_ORDER_PRODUCTS:
+      return {
+        ...state,
+        currentOrderProducts: action.payload,
       };
 
     default:

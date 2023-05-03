@@ -12,6 +12,14 @@ module.exports.delete = async (req, res) => {
      const productsAfterDelete = await realyze("SELECT * FROM products ");
      res.send(productsAfterDelete);
 }
+module.exports.getAdminProductById = async(req, res) => {
+     const product_id = req.params.product_id;
+     const [currentProduct] = await realyze("SELECT * FROM `products` WHERE id = ? ", [product_id])
+     console.log("🚀 ~ file: products.js:19 ~ module.exports.getAdminProductById=async ~ currentProduct:", currentProduct)
+     res.send(currentProduct);
+
+}
+
 module.exports.create = async(req, res) => {
      const body = req.body;
      await realyze("INSERT INTO `products` (category, alias, descr, cost, discount, is_recomended, availability, main, `1c_articul`, time_add) VALUES (?,?,?,?,?,?,?,?,?,?) ",
