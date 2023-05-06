@@ -91,14 +91,23 @@ export const fetchOrdersByString = (arr) => (dispatch) => {
     .catch((e) => console.log('error from productDuck', e));
 };
 
-export const fetchOrdersForDelete = (userId, productId) => (dispatch) => {
-  fetch(`${root}/admin/order/delete/${userId}/${productId}`)
-    .then((res) => res.json())
-    .then((res) => {
-
-        dispatch(getCurrentOrderDelete(res));
-    })
-    .catch((e) => console.log('error from AdminProductDuck', e));
+export const fetchOrdersForDelete = (order_id) => async(dispatch) => {
+  try {
+    const data = await(await fetch(`${root}/api/admin/order/delete`, 
+    {
+      method:"DELETE",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        order_id
+      })
+    }
+    )).json();
+    dispatch(getOrdersList(data));
+  } catch (e) {
+    console.log('error from AdminProductDuck', e)
+  }
 };
 
 

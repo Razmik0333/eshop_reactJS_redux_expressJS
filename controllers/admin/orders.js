@@ -35,11 +35,13 @@ module.exports.adminOrderById = async(req, res) => {
 
 module.exports.adminStatusUpdate = async (req, res) => {
      const orderId = req.params.order_id; //
-     const statusIndex = req.body.status;
+     const statusIndex = req.body.user_status;
      await realyze("UPDATE `orders` SET user_status = ? WHERE id = ? ", [statusIndex, orderId]);
+     const updatedOrder = await realyze("SELECT * FROM `orders` WHERE id = ?", [orderId])
+     res.send(updatedOrder)
 }
 module.exports.adminOrderDelete = async (req, res) => {
-     const orderId = req.params.order_id;
+     const orderId = req.body.order_id;
      await realyze("DELETE FROM orders WHERE id = ? ", [orderId]);
      const ordersAfterDelete = await realyze("SELECT * FROM orders ");
      res.send(ordersAfterDelete);

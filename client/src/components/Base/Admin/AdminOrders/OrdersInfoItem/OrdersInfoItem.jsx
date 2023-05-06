@@ -20,6 +20,7 @@ function OrdersInfoItem({order}) {
      }
      const deleteOrderItem = (e) => {
           dispatch(changeModal(true))
+          console.log(e.target.dataset.id);
           dispatch(currentOrderId(e.target.dataset.id))
       
      }

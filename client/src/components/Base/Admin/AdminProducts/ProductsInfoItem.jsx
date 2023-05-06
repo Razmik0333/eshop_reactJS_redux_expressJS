@@ -12,7 +12,6 @@ import { changeModal } from "../../../../redux/ducks/configsDuck";
 function ProductsInfoItem({product}) {
      const [forDeleted, setforDeleted] = useState(false)
      const dispatch = useDispatch();
-     const modalIsClose = useSelector(modalCloseSelector);
      const getProductId = (e) => {
           dispatch(currentProductID(e.target.dataset.id))
           dispatch(fetchProductItem(e.target.dataset.id))
@@ -25,9 +24,7 @@ function ProductsInfoItem({product}) {
      
      return (
           <>
-          {
-               modalIsClose ? <ModalProductDelete message={'Դուք Ցնկանում եք ջնջլ տվյալ ապրանքը'} /> : <></>
-          }         
+     
           <div className="product__item__info">
                <div className="product__item__data__info">
                     <input type="checkbox"/>

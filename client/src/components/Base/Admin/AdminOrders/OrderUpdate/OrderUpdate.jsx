@@ -30,9 +30,7 @@ function OrderUpdate() {
      const currentOrder = useSelector(adminCurrentOrderSelector);
        console.log("🚀 ~ file: OrderUpdate.jsx:26 ~ OrderUpdate ~ currentOrder", currentOrder)
      const userId = useSelector(getUserId);
-     
-    const orders = JSON.parse(currentOrder?.user_order)
-    const keys = Object.keys(orders);
+
      useEffect(() => {
        
           if(!checkEmptyObject(currentOrder)){
@@ -43,36 +41,28 @@ function OrderUpdate() {
                //setCustomerOrder(JSON.parse(currentOrder?.user_order));
                setOrderPrice( currentOrder?.user_price);
                setOrderStatus(currentOrder?.user_status);
-          }
-          const id = setTimeout(() => {
-               dispatch(fetchOrdersByString(Object.keys(customerOrder)));
                setIsChanged(true)
-          }, 500);
-          return () =>{
-               setIsChanged(false)
-               clearTimeout(id)
           }
+          
      }, [currentOrder]);
-     const currentOrderInfo = useSelector(adminCurrentOrderInfoSelector);
      const changeStatus = (e) => {
           setOrderStatus(+e.target.value);         
      }
      const formRef = useRef(null);
      const handleSubmit = async (e) => {
+
           e.preventDefault();
           const data = new FormData(formRef.current);
           
-          await fetch(`${root}/admin/order/update/${+userId}/${currentOrder?.id}`, {
-               method: 'POST',
-               body: data,    
+          await fetch(`${root}/api/admin/order/update/${currentOrderId}`, {
+               method: 'PUT',
+               body: new URLSearchParams(data),    
           })
           .then(res => res.json())
           .then(res => {
-               console.log(res);
-               
               setIsUpdated(res);
               dispatch(changeModal(true));          
-          })
+          }).catch(e => console.log("error", e))
 
      }
      return <>
@@ -161,7 +151,6 @@ function OrderUpdate() {
                                    {
                                         isChanged ?
                                         <>                           
-                                        <input type="hidden" name="user_order" value={`${JSON.stringify(customerOrder)}`} onChange={()=>{}} />
                                         <ul className="current__order__infos">
                                              {
                                                   currentOrderProducts.map((item,ind) => {

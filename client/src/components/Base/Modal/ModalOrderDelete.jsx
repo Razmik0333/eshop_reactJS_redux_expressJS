@@ -8,14 +8,13 @@ import { fetchDeletedOrder } from "../../../redux/ducks/orderDuck";
 function ModalOrderDelete({message}) {
      const dispatch = useDispatch();
      const userId = useSelector(getUserId);
-     const orderIdForDelete = useSelector(getOrderIdDelete);
-     console.log(message);
+     const orderIdForDelete = useSelector(adminOrderIdSelector);
      
      const orderDelete = (e) => {
           console.log("🚀 ~ file: ModalOrderDelete.jsx ~ line 11 ~ orderIdForDelete ~ orderIdForDelete", orderIdForDelete)
-          //dispatch(fetchOrdersForDelete(userId,orderIdForUpdate));
+          dispatch(fetchOrdersForDelete(orderIdForDelete));
           // dispatch(fetchDeletedOrder())
-          // dispatch(changeModal(false))
+           dispatch(changeModal(false))
           // dispatch(resetIsDeleted(false))
      }
      

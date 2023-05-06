@@ -13,8 +13,8 @@ const deleteOrderFromAdmin = require('../../controllers/admin/orders').adminOrde
 router.get('/admin/orders/list', getOrdersList)
 router.get('/admin/order/:order_id', getAdminOrderById)
 router.get('/admin/order/products/:order_id', getProductFromOrder)
-router.put('/admin/order/status/:userId/:order_id', updateStatusFromAdmin)
-router.delete('/admin/order/delete/:user_id/:order_id', deleteOrderFromAdmin)
+router.put('/admin/order/update/:order_id', updateStatusFromAdmin)
+router.delete('/admin/order/delete', deleteOrderFromAdmin)
 
 
 module.exports = router

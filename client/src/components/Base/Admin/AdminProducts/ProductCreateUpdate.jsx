@@ -9,7 +9,7 @@ import ProductCreateUpdateFooter from './ProductCreateUpdateFooter';
 
 import "./styles/_product-create-update-form.scss";
 import { fetchOrderItem } from '../../../../redux/ducks/adminOrderDuck';
-import { fetchProductItem } from '../../../../redux/ducks/adminProductDuck';
+import { changeCurrentProduct, fetchProductItem } from '../../../../redux/ducks/adminProductDuck';
 function ProductCreateUpdate() {
      const [isCreated, setIsCreated] = useState(false);
      const modalIsClose = useSelector(modalCloseSelector);
@@ -23,16 +23,13 @@ function ProductCreateUpdate() {
      const dispatch = useDispatch();
      
      const currentProduct = useSelector(adminProductSelector);
-     console.log("🚀 ~ file: ProductCreateUpdate.jsx:25 ~ ProductCreateUpdate ~ currentProduct:", currentProduct)
 
      const userId = useSelector(getUserId);
      const currentProductId = useSelector(adminProductIdSelector)
 
      useEffect(() => {
-          
-        //  setTimeout(() => {
-               dispatch(fetchProductItem(currentProductId))
-      //    }, 500)
+          dispatch(fetchProductItem(currentProductId))
+
           
      }, []);
      useEffect(() => {
@@ -55,16 +52,20 @@ function ProductCreateUpdate() {
           e.preventDefault();
           const data = new FormData(formRef.current);
           const url = currentProduct ? 
-               `${root}/admin/product/update/${+userId}/${currentProduct?.id}`:
-                    `${root}/admin/product/create/${+userId}`
+               `${root}/api/admin/product/update`:
+                    `${root}/api/admin/product/create`
 
           await fetch(url, {
-               method: 'POST',
+               method: 'PUT',
+               //  headers: {
+               //       "Content-Type" :"multipart/form-data"
+               //  },
                body: data,    
           })
           .then(res => res.json())
           .then(res => {
-            //   console.log(res);
+               currentProduct && dispatch(changeCurrentProduct(res[0]))
+               console.log(res);
                setIsCreated(res);
                dispatch(changeModal(true))
                            
@@ -81,7 +82,7 @@ function ProductCreateUpdate() {
           }
 
           <div className="form__container">
-               <form onSubmit={handleSubmit} ref={formRef}>
+               <form onSubmit={handleSubmit} ref={formRef} encType="multipart/form-data" >
                     <div className="form__items">
                          <div className="form__item">
                               <div className="form__item__header">Category Index</div>
@@ -121,6 +122,15 @@ function ProductCreateUpdate() {
                                    value={`${categories[selectedCat- 1]?.arm_name}`} 
                                    onChange={() => {}} 
                                    />
+                         { currentProduct &&
+                              <input 
+                                   type="hidden" 
+                                   name="id" 
+                                   id="" 
+                                   value={`${currentProduct.id}`} 
+                                   onChange={() => {}} 
+                                   />
+                         }
                         <div className="form__item">
                               <div className="form__item__header">Name</div>
                               <input 
@@ -202,8 +212,8 @@ function ProductCreateUpdate() {
                               <div className="form__item__header">Insert Picture</div>
                               <input type="file" name="image" id="" />
                          </div>
-                              <input type="hidden" name="availability" id="" value={`${currentProduct?.availability}`} onChange={() => {}} />
-                              <input type="hidden" name="is_recommended" id="" value={`${currentProduct?.is_recomended}`} onChange={() => {}} />
+                              <input type="hidden" name="availability" id="" value={`${currentProduct?.availability || 1}`} onChange={() => {}} />
+                              <input type="hidden" name="is_recommended" id="" value={`${currentProduct?.is_recomended || 1}`} onChange={() => {}} />
                         <ProductCreateUpdateFooter />
                     </div>  
                </form>

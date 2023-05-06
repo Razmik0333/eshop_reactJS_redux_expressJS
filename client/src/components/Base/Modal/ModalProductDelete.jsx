@@ -8,10 +8,11 @@ function ModalProductDelete({message}) {
      const dispatch = useDispatch();
      const userId = useSelector(getUserId);
      const productIdForUpdate = useSelector(adminProductIdSelector);
-     console.log(message);
+     console.log("🚀 ~ file: ModalProductDelete.jsx:11 ~ ModalProductDelete ~ productIdForUpdate:", productIdForUpdate)
+
 
      const productDelete = (e) => {
-          dispatch(fetchProductsForDelete(userId,productIdForUpdate));
+          dispatch(fetchProductsForDelete(productIdForUpdate));
           dispatch(changeModal(false))
           //dispatch(resetIsDeleted(false))
      }

@@ -9,9 +9,10 @@ const updateProduct = require('../../controllers/admin/products').update
 
 router.get('/admin/product/list', getProductsList);
 router.get('/admin/product/:product_id', getAdminProductById)
-router.delete('/admin/product/delete/:user_id/:product_id', deleteProductById)
-router.post('/admin/product/create/2', upload.single('file'), createProduct)
-router.put('/admin/product/update/2', updateProduct)
+router.delete('/admin/product/delete', deleteProductById)
+router.put('/admin/product/create', upload.single('image'), createProduct)
+router.put('/admin/product/update', upload.single('image'), updateProduct)
+
 
 
 

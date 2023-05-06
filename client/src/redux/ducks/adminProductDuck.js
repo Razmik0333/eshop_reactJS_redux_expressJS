@@ -50,6 +50,10 @@ export const createMonth = (obj) => (dispatch) => {
 dispatch(getTimeObject(obj))
 
 }
+export const changeCurrentProduct = (obj) => (dispatch) => {
+dispatch(getProductForUpdate(obj))
+
+}
 export const resetTimeObject = () => (dispatch) => {
   dispatch(clearTimeObject())
 }
@@ -72,27 +76,43 @@ export const fetchProductItem = (id) => (dispatch) => {
       })
       .catch((e) => console.log('error from AdminProductDuck', e));
 };
-export const fetchProductsForUpdate = (userId, productId) => (dispatch) => {
-     fetch(`${root}/admin/product/update/${userId}/${productId}`)
+// export const fetchProductsForUpdate = (product_id) => async(dispatch) => {
+//   try {
+//     const data = await(await fetch(`${root}/api/admin/product/update`,{
+//       method:"PUT",
+//       headers: {
+//         "Content-Type":"application/json"
+//       },
+//       body:JSON.stringify({
+//         product_id
+//       })
+//      })).json();
+//      dispatch(getProductForUpdate(data));
+//   } catch (e) {
+//     console.log('error from AdminProductDuck', e)
+//   }   
+  
      
-       .then((res) => res.json())
-       .then((res) => {
-        console.log(res);
-        
-            dispatch(getProductForUpdate(res));
-       })
-       .catch((e) => console.log('error from AdminProductDuck', e));
-};
-export const fetchProductsForDelete = (userId, productId) => (dispatch) => {
-     fetch(`${root}/admin/product/delete/${userId}/${productId}`)
-     
-       .then((res) => res.json())
-       .then((res) => {
-        console.log(res);
-
-           dispatch(getProductForDelete(res));
-       })
-       .catch((e) => console.log('error from AdminProductDuck', e));
+    
+       
+// };
+export const fetchProductsForDelete = (product_id) => async(dispatch) => {
+  
+  try {
+    const data = await (await fetch(`${root}/api/admin/product/delete`, {
+      method:"DELETE",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        product_id
+      })
+    } )).json();
+    
+    dispatch(getProductsList(data));
+  } catch (e) {
+    console.log('error from AdminProductDuck', e)
+  }
 };
 
 
