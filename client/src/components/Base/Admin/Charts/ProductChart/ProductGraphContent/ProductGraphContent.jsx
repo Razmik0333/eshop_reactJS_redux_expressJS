@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { anotherMethod, getArrayByOrderAndTime, getArrayOfDatasets, getFilteredArrayByDay, getProductsListFromIdAndCategory } from '../../../../../../helpers/functions/functions';
 import { adminOrderSelector, adminTimeObjectProductSelector } from '../../../../../../helpers/reduxSelectors';
 import {adminProductsSelector} from '../../../../../../helpers/reduxSelectors.js';
+import { dates } from '../../../../../../helpers/constants/constants';
 
 function ProductGraphContent() {
   const ordersList = useSelector(adminOrderSelector);
@@ -15,17 +16,18 @@ function ProductGraphContent() {
   const timeObj = useSelector(adminTimeObjectProductSelector);
   const filteredByTime = getFilteredArrayByDay(Object.values(arrByOrderAndTime),timeObj)
   const result = anotherMethod(filteredByTime,productsListFromIdAndCategory);
-  console.log("🚀 ~ file: ProductGraphContent.jsx:18 ~ ProductGraphContent ~ result", result)
+  console.log("🚀 ~ file: ProductGraphContent.jsx:19 ~ ProductGraphContent ~ result:", result)
   const [orderData, setOrderData] = useState({
-    labels: Object.keys(result).map(item => (new Date(+item).getDate())),
+    labels: Object.keys(result).map(item =>  +item),
     datasets:getArrayOfDatasets(Object.values(result),[1,2,3])
 });
 useEffect(() => {
   setOrderData({
-       labels: Object.keys(result).map(item => (new Date(+item).getDate())),
+       labels: Object.keys(result).map(item => +item),
        datasets:getArrayOfDatasets(Object.values(result),[1,2,3])
 })
   
+
 }, [timeObj.year, timeObj.month]);
 return (
 <div className="orders_graph_content">

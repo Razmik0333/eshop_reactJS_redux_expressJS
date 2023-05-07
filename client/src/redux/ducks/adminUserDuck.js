@@ -21,15 +21,14 @@ const initialStateApp = {
 
 
 
-export const fetchUsersList = (id) => (dispatch) => {
+export const fetchUsersList = () => async (dispatch) => {
     
-    fetch(`${root}/admin/user/list/${id}`)
-      .then((res) => res.json())
-      .then((res) => {
-        
-            dispatch(getUsersList(res));
-      })
-      .catch((e) => console.log('error from AdminProductDuck', e));
+    try {
+      const data = await (await fetch(`${root}/api/admin/user/list`)).json();
+      dispatch(getUsersList(data));
+    } catch (e) {
+      console.log('error from AdminProductDuck', e)
+    }
 };
 
 const AdminUserDuck = (state = initialStateApp, action) => {

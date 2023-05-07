@@ -8,6 +8,10 @@
           .chart__block{
                display: flex;
                .orders_graph{
+                    p{
+                         padding: 20px 0;
+                          text-align: center;
+                    }
                     width: 650px;
                     background-color: #fff;
                     .orders_graph_header{

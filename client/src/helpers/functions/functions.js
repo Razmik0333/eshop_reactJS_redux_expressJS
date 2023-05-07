@@ -322,19 +322,19 @@ export const anotherMethod = (ordersList, productsList) => {
      return ordersList.reduce((acc, curr) => {
           for (const key in curr?.user_order) {
                const category = getCategoryFromProductId(productsList,key)
-             if (+curr?.time_add in acc) {            
-                    if (category in acc[+curr?.time_add]) {
-                         acc[+curr?.time_add][category] = {
-                              countItem: acc[+curr?.time_add][category].countItem + +curr?.user_order[+key]
+             if (new Date(+curr?.time_add).getDate() in acc) {            
+                    if (category in acc[new Date(+curr?.time_add).getDate()]) {
+                         acc[new Date(+curr?.time_add).getDate()][category] = {
+                              countItem: acc[new Date(+curr?.time_add).getDate()][category].countItem + +curr?.user_order[+key]
                          }
                     }else{
-                        acc[+curr?.time_add][category] = {
+                        acc[new Date(+curr?.time_add).getDate()][category] = {
                              countItem: 1
                         }
                    }
               }else{
                     
-                    acc[+curr?.time_add] = {
+                    acc[new Date(+curr?.time_add).getDate()] = {
                          [category] :{
                               countItem: 1
 
@@ -347,10 +347,7 @@ export const anotherMethod = (ordersList, productsList) => {
 }
 
 export const getArrayForChartByCategories = (arr,ind) => {
-     const counts = arr.map(item => {
-          return item[ind]?.countItem !== undefined ? item[ind]?.countItem : 0
-     })
-     //console.log(getCategoryName(ind));
+     const counts = arr.map(item =>  item[ind]?.countItem !== undefined ? item[ind]?.countItem : 0).filter(item => item > 0);
      return {
           label: getCategoryName(ind)?.title,
           data: counts
@@ -361,5 +358,6 @@ export const  getArrayOfDatasets = (arr, arrIndexes) => {
 }
 
 export const getCategoryFromProductId = (arr, id) => {
+     
      return arr[id]?.category
 }

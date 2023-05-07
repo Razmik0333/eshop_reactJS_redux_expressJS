@@ -3,6 +3,6 @@ const router = express.Router();
 
 const getAdminUsersList = require('../../controllers/admin/users').usersList;
 
-router.get('/admin/user/list/:id', getAdminUsersList);
+router.get('/admin/user/list', getAdminUsersList);
 
 module.exports = router

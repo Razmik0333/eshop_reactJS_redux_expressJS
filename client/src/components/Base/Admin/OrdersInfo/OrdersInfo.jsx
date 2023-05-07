@@ -12,7 +12,6 @@ import OrdersInfoItem from '../AdminOrders/OrdersInfoItem/OrdersInfoItem';
 function OrdersInfo() {
      const dispatch = useDispatch();
      const userId = useSelector(getUserId);
-     console.log("🚀 ~ file: OrdersInfo.jsx:15 ~ OrdersInfo ~ userId", userId)
      
      useEffect(() => {
           dispatch(fetchOrdersList(userId));
@@ -21,7 +20,6 @@ function OrdersInfo() {
 
      const ordersList = useSelector(adminOrderSelector);
      const filteredOrders = ordersList.filter(item => +item?.user_status === 0)
-     console.log("🚀 ~ file: OrdersInfo.jsx:23 ~ OrdersInfo ~ ordersList", filteredOrders)
      return (
           <div className="orders__info">
                <OrdersInfoHeader />

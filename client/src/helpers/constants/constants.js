@@ -57,7 +57,10 @@ export const FILTER_OPTIONS = [
 export const days =  [
   "Երկ", "Երք", "Չրք", "Հնգ", "Ուրբ", "Շբթ","Կիր"
 ]
-export const months =  [
+export const months_arm =  [
+  "Հուն", "Փետ", "Մրտ", "Ապր", "Մյս", "Հուն","Հուլ","Օգս","Սեպ","Հոկ","Նոյ","Դեկ"
+]
+export const months_eng =  [
   "Հուն", "Փետ", "Մրտ", "Ապր", "Մյս", "Հուն","Հուլ","Օգս","Սեպ","Հոկ","Նոյ","Դեկ"
 ]
 export const dates =  [

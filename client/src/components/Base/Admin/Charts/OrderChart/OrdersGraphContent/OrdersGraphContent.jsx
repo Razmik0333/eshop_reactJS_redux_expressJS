@@ -4,7 +4,8 @@ import {Line, Bar} from 'react-chartjs-2';
 import { getArrayForChartByTime, getFilteredArrayByDay, getFilteredArrayByMonth } from '../../../../../../helpers/functions/functions';
 import { adminOrderSelector, adminTimeObjectSelector } from '../../../../../../helpers/reduxSelectors';
 import {Chart as ChartJS} from 'chart.js/auto';
-import { months } from '../../../../../../helpers/constants/constants';
+import { months_arm, months_eng } from '../../../../../../helpers/constants/constants';
+
 
 function OrdersGraphContent() {
      const ordersList = useSelector(adminOrderSelector);
@@ -14,7 +15,7 @@ function OrdersGraphContent() {
      const ordersForChartMonth = getArrayForChartByTime(filteredArrayByTime,timeObj);
      const [orderData, setOrderData] = useState({
           labels: Object.values(ordersForChartMonth).map(item => {
-             return  timeObj?.month === undefined ? months[item?.time] : item.time
+             return  timeObj?.month === undefined ? months_arm[item?.time] : item.time
           }),
           datasets:[
           {
@@ -26,7 +27,7 @@ function OrdersGraphContent() {
      useEffect(() => {
           setOrderData({
                labels: Object.values(ordersForChartMonth).map(item => {
-                    return  timeObj?.month === undefined ? months[item?.time] : item?.time
+                    return  timeObj?.month === undefined ? months_arm[item?.time] : item?.time
 
                }),
                datasets:[
