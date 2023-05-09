@@ -12,6 +12,29 @@
      }
      .add-cart{
           visibility: hidden;
+          position: absolute;
+          width: 130px;
+          height: 30px;
+          top: 35%;
+          left: 35%;
+          cursor: pointer;
+          background-color: #2a2a2a;
+          border-radius: 5px;
+          z-index: 99999;
+          img{
+               vertical-align: sub;
+               width: 20px;
+               height: auto;
+               //margin-right: 5px;
+          }
+          .add-cart-text{
+               margin-left: 0px;
+               color: #fff;
+               font-size: 11px;
+               vertical-align: text-top;
+               /* width: 100%; */
+               padding: 5px;
+          }
      }
      &:hover{
           .add-cart{
@@ -32,10 +55,12 @@
                     //margin-right: 5px;
                }
                .add-cart-text{
-                    margin-left: 5px;
-                    color:#fff ;
+                    margin-left: 0px;
+                    color: #fff;
                     font-size: 11px;
                     vertical-align: text-top;
+                    /* width: 100%; */
+                    padding: 5px;
                }
                &:hover{
                     background-color: var(--orange);
@@ -124,10 +149,12 @@
                     }
                }
                .hot-deals-prices{
+                    display: flex;
                     .hot-deals-price{
-                         width: 90px;
-                         height: 35px;
+                         width: 56px;
+                         height:18px;
                          padding: 10px;
+                         text-align: center;
                     }
                     .new-price{
                          background-color: #2a2a2a;

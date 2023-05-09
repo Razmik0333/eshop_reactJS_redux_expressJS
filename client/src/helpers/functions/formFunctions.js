@@ -1,7 +1,12 @@
-export const checkEmail = (str) => str.split("").filter(item => item === '@').length > 0;
+export const checkEmail = (str) => {
+    return str.length === 0 || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(str)
 
+}
+export const checkPassword = (str) => {
+     return str.length === 0 || /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(str)
+}
 
-export const checkStrLength = (str, num) => str.trim().length > num; 
+export const checkStrLength = (str, num) => str.length === 0 || str.trim().length > num; 
 
 export const checkCapitalLetter = (str) => str.trim().toLowerCase() !== str.trim();
 export const checkStrWithNumber = (str) => str.split("").filter(item => +item >= 0 && +item <= 9).length > 1;

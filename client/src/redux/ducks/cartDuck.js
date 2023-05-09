@@ -67,7 +67,6 @@ export const fetchAddCart = (userId, obj) => async(dispatch) => {
   } catch (e) {
     console.log('error from cartDuck', e)
   }
-
 };
 
 export const fetchCurrentCart = (id) => async (dispatch) => {

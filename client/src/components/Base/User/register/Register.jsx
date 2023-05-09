@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import { checkEmail,
           checkStrLength,
            checkCapitalLetter,
            checkStrWithNumber,
-           checkConfirmPassword
+           checkConfirmPassword,
+           checkPassword
      } from '../../../../helpers/functions/formFunctions';
 import { root } from '../../../../helpers/constants/constants';
      import './_register.scss';
@@ -19,8 +21,7 @@ function Register() {
      const [userGender, setUserGender] = useState('');
      const [emailLoginExist, setEmailLoginExist] = useState(true);
      const registerUser = useSelector(currentLanguageDataSelector)?.register;
-     console.log("🚀 ~ file: Register.jsx ~ line 22 ~ Register ~ registerUser", registerUser)
-     
+     const navigate = useNavigate()
      
      
      const changeUserGender = e => setUserGender(e.target.value)
@@ -32,15 +33,16 @@ function Register() {
      const handleSubmit = async (e) => {
           e.preventDefault();
           const data = new FormData(formRef.current);
-          await fetch(`${root}/register`, {
+          await fetch(`${root}/api/register`, {
                method: 'POST',
-               body: data,    // ERROR THERE
+               body: new URLSearchParams(data),    // ERROR THERE
           })
           .then(res => res.json())
           .then(res => {
                console.log(res);
                
-               return res ? setEmailLoginExist(true) : setEmailLoginExist(false)
+                +res === 1 ? setEmailLoginExist(true) : setEmailLoginExist(false);
+                navigate('/login')
           })
      }
      return (
@@ -123,9 +125,7 @@ function Register() {
                          />
                          <span className="output">
                               {
-                                   checkStrLength(userPassword, 5) &&
-                                   checkCapitalLetter(userPassword) &&
-                                   checkStrWithNumber(userPassword) ? '' : `${registerUser?.inc_pass}`
+                                   checkPassword(userPassword) ? '' : `${registerUser?.inc_pass}`
                               }
                          </span>
                     </div>
@@ -142,9 +142,7 @@ function Register() {
                          />
                          <span className="output">
                          {
-                              checkStrLength(userConfirm, 5) &&
-                              checkCapitalLetter(userConfirm) &&
-                              checkStrWithNumber(userConfirm) ? '' : `${registerUser?.inc_pass}`
+                              checkPassword(userPassword) ? '' : `${registerUser?.inc_pass}`
                          }
                          {
                               userConfirm.length > 0 ? 

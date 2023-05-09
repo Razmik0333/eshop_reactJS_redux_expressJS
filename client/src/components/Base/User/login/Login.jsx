@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {  checkCapitalLetter,
           checkEmail,
+          checkPassword,
           checkStrLength,
           checkStrWithNumber
      } from "../../../../helpers/functions/formFunctions";
@@ -29,7 +30,7 @@ function Login() {
           })
           .then(res => res.json())
           .then(res => {
-               console.log();
+               console.log(res);
                if (res) {
                     setEmailLoginExist(true);
                     dispatch(currentUser(res));
@@ -88,9 +89,8 @@ function Login() {
                          />
                          <span className="output">
                               {
-                                   checkStrLength(userPassword, 5) &&
-                                   checkCapitalLetter(userPassword) &&
-                                   checkStrWithNumber(userPassword) ? '' : `${loginUser?.inc_pass}`
+                                   
+                                   checkPassword(userPassword) ? '' : `${loginUser?.inc_pass}`
                               }
                          </span>
                     </div>

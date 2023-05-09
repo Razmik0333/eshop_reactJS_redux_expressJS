@@ -35,7 +35,7 @@ function Wishlist() {
 
                               </div>
                          </> 
-                         : <>{wishList?.empty}</>
+                         : <p className="wishlist__empty">{wishList?.empty}</p>
                     }
                </div>
           </div>

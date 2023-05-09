@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { currentLanguageDataSelector, getCurrentCurrencySelector, hotDealsSelector, maxDiscountDataSelector, popupCloseSelector } from "../../../../../helpers/reduxSelectors";
+import { currentLanguageDataSelector, getCurrentCurrencySelector, getUserId, hotDealsSelector, maxDiscountDataSelector, popupCloseSelector } from "../../../../../helpers/reduxSelectors";
 import {root} from '../../../../../helpers/constants/constants' ;
 import ModalPopup from "../../../../Base/Modal/ModalPopup";
 import { getNewCurrency } from "../../../../../helpers/functions/functions";
 import { currentProduct, fetchMaxDiscountProduct } from "../../../../../redux/ducks/productDuck";
-import { getCartItem, getCountOfCart, getTotalPriceValue } from "../../../../../redux/ducks/cartDuck";
+import { fetchAddCart, getCartItem, getCountOfCart, getTotalPriceValue } from "../../../../../redux/ducks/cartDuck";
 import { changePopup, getPopupItemId } from "../../../../../redux/ducks/configsDuck";
 import RatingMapping from "../../../../Base/RatingMapping/RatingMapping";
 import "./styles/_hot-deals-content.scss"
 function HotDealsContent() {
      const dispatch = useDispatch();
-
+     const userId = useSelector(getUserId)
      const popupIsShow = useSelector(popupCloseSelector);
 
      const currentCurrency = useSelector(getCurrentCurrencySelector);
@@ -29,14 +29,10 @@ function HotDealsContent() {
           dispatch(currentProduct(e.target.dataset.id));
      }
      const addProductToCart = (e) => {
-          console.log(e.target.dataset);
-          e.stopPropagation();
-          dispatch(getCartItem({
-                    [e.target.dataset.id] : 1 
-               }
-          ));
-          dispatch(getCountOfCart(1));
-          dispatch(getTotalPriceValue(arr?.cost *(1 - arr?.discount / 100)));
+          console.log(e.target);
+          dispatch(fetchAddCart(userId ,{
+               [e.target.dataset.id] : 1
+          }))
      }
      const maxDiscountData = useSelector(maxDiscountDataSelector);
      const hotDealsId = useSelector(hotDealsSelector);
@@ -50,12 +46,12 @@ function HotDealsContent() {
                     <div className="hot-deals-picture-part">
                          <div className="hot-deals-picture">
                               <img src={`${root}/images/${arr?.id}.jpg`} alt="" />
-                              <button type="button" className="add-cart">
-                                   <img src={`${root}/icons/config/add-cart.png`} alt="" />
+                              <button type="button" className="add-cart" data-id={arr?.id}>
+                                   
                                    <span className="add-cart-text"
                                         data-id={arr?.id}
                                         onClick={addProductToCart}
-                                   >
+                                   ><img src={`${root}/icons/config/add-cart.png`} alt="" />
                                    {addCart}
                                    </span>
                               </button>
