@@ -38,15 +38,16 @@
          }
          .search__items{
               position: absolute;
-              top: 53px;
+              top: 42px;
               z-index: 9999;
                text-align: center;
               width: 100%;
               border-radius: 5px;
                height: 100px;
-              overflow: scroll;
+              overflow-y: scroll;
               left: 0;
               .search__item{
+                    z-index: 99999;
                     height: 30px;
                     padding-top: 10px;
                     background-color: var(--white);

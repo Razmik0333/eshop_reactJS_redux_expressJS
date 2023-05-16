@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {  checkCapitalLetter,
           checkEmail,
           checkPassword,
@@ -94,6 +94,7 @@ function Login() {
                               }
                          </span>
                     </div>
+                    <p>Առաջին անգամ եք կայքու՞մ  <NavLink to={'/register'}>Գրանցում</NavLink></p>
                     <button
                     className="continue"
                          type="submit"

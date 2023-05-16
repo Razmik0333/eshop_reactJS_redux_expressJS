@@ -1,4 +1,5 @@
 const express = require('express');
+const { hint } = require('../controllers/products');
 const router = express.Router();
 
 const getProductsByCategory = require('../controllers/products').productsByCategory;
@@ -19,7 +20,8 @@ router.get('/filter/product/:id', getFilteredProducts)
 router.get('/product/:id', getProductById)
 router.get('/list/product/:ids', getProductsByIds)
 router.get('/cost', getProductsBetweenCosts)
-router.get('/goods/search', getSearchedProducts)
+router.get('/search', getSearchedProducts)
+router.put('/hint', hint)
 router.get('/package/sold', getVerySoldedProducts);
 
 

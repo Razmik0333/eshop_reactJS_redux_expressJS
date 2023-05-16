@@ -51,10 +51,11 @@ app.use('/api', adminUsers);
 
 
 
-app.listen(PORT, (err) => {
+app.listen(PORT, (err) => {      
       if (err) console.log("Error in server setup")
      console.log(`server has started in port ${PORT}`);
 });
+
 
 
 

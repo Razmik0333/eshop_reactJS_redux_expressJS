@@ -8,7 +8,6 @@ module.exports.cartById = async (req, res) => {
      const userId = req.params.user_id;
      const productCount = req.params.count;     
      const [cartByUser] = await realyze("SELECT cart FROM `user_interest` WHERE `user_id`= ? ", [userId]); 
-     console.log("🚀 ~ file: cart.js:12 ~ module.exports.cartById= ~ cartByUser:", cartByUser)
      if (cartByUser === undefined) {
           await realyze("INSERT INTO `user_interest`(user_id, wish, cart) VALUES ( ?, ?, ?)  ", [userId, '', ''])
      }
@@ -37,8 +36,8 @@ module.exports.addToCartById = async (req, res) => {
      const productId = req.body.product_id;
      const productQuantity = req.body.quantity; 
      const [cartByUser] = await realyze("SELECT cart FROM `user_interest` WHERE `user_id`= ? ", [userId]); 
-     
-     if (!cartByUser) {        
+     if (!cartByUser) {   
+               
           cart = JSON.stringify({
                [productId]: productQuantity
           });
@@ -47,18 +46,21 @@ module.exports.addToCartById = async (req, res) => {
           
           if(cartByUser.cart) {
                cart = JSON.parse(cartByUser.cart);
+
                cart[productId] = (productId in cart) ?
-                     +cart[productId] + +productQuantity : productQuantity;
-               await realyze("UPDATE `user_interest` SET cart = ? WHERE `user_id`= ? ", [JSON.stringify(cart),userId]);  
+                    +cart[productId] + +productQuantity : productQuantity;
+               cart = JSON.stringify(cart)
+               await realyze("UPDATE `user_interest` SET cart = ? WHERE `user_id`= ? ", [cart,userId]);  
             }else{
-               cart = JSON.stringify({
-                    [productId]: productQuantity
-               });
+                 cart = JSON.stringify({
+                      [productId]: productQuantity
+                    });
                await realyze("UPDATE `user_interest` SET cart = ? WHERE `user_id`= ? ", [cart,userId]);  
           }
      }
-     const product_ids =  Object.keys(cart)
-     const quantities =  Object.values(cart)
+     
+     const product_ids =  Object.keys(JSON.parse(cart));
+     const quantities =  Object.values(JSON.parse(cart));
      const tokens = getTokensForQuery(product_ids);
      let products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, product_ids);
      const productsWithCounts = products.reduce((acc, curr, pos) => {
@@ -68,6 +70,7 @@ module.exports.addToCartById = async (req, res) => {
           });
           return acc;
      },[])
+     
      res.send(productsWithCounts)
 
 } 

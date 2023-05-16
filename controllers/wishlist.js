@@ -8,10 +8,17 @@ const getIdsArray = functions.idsArray;
 module.exports.wishListByUserId = async (req, res) => {
      const userId = req.params.user_id;
      const [wishByUser] = await realyze("SELECT `wish` FROM `user_interest` WHERE `user_id`= ? ", [userId]);
-     const productsIds = getIdsArray(wishByUser.wish);
-     const tokens = getTokensForQuery(productsIds);
-     const products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, productsIds);
-     res.send(products);
+     if (wishByUser === undefined) {
+          await realyze("INSERT INTO `user_interest`(user_id, wish, cart) VALUES ( ?, ?, ?)  ", [userId, '', ''])
+     }
+     else if (!wishByUser.wish) {
+          res.send([]);     
+     }else{
+          const productsIds = getIdsArray(wishByUser.wish);
+          const tokens = getTokensForQuery(productsIds);
+          const products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, productsIds);
+          res.send(products);
+     }
 }
 
 module.exports.addToWishlist = async (req, res) => {

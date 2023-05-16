@@ -25,7 +25,6 @@ function CategoriesFilterPrice() {
      const currentLineRef = useRef(null);
 
      let leftVal = getPositiveNumber(value);
-     console.log("🚀 ~ file: CategoriesFilterPrice.jsx:28 ~ CategoriesFilterPrice ~ leftVal:", leftVal)
      const startRef = useRef(null);
 
      

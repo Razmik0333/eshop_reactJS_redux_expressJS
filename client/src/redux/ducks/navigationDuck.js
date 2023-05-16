@@ -5,6 +5,7 @@ const CATEGORY_ID = 'navigationDuck/CATEGORY_ID';
 const CURRENT_CATEGORY = 'navigationDuck/CURRENT_CATEGORY';
 const SEARCH_WORD = 'navigationDuck/SEARCH_WORD';
 const IS_SEARCH = 'navigationDuck/IS_SEARCH';
+const IS_FOCUS = 'navigationDuck/IS_FOCUS';
 
 
 export const getCategories = createAction(FETCH_CATEGORIES);
@@ -12,6 +13,7 @@ export const getCurrentCategoryId = createAction(CATEGORY_ID);
 export const getCurrentCategory = createAction(CURRENT_CATEGORY);
 export const getSearchWord = createAction(SEARCH_WORD);
 export const changeIsSearch = createAction(IS_SEARCH);
+export const changeIsFocused = createAction(IS_FOCUS);
 
 //category/([0-9]+)
 export const fetchCatgories = () => async (dispatch) => {
@@ -40,6 +42,9 @@ export const currentSearch = (str) => (dispatch) => {
 export const isSearch = (str) => (dispatch) => {
   dispatch(changeIsSearch(str));
 };
+export const getIsFocused = (bool) => (dispatch) => {
+  dispatch(changeIsFocused(bool));
+};
 
 
 
@@ -49,6 +54,7 @@ export const initialStateApp = {
   currentCategory: {}, //
   searchWord: '', //
   isSearch: false,
+  isFocused: false,
 
 };
 
@@ -79,6 +85,11 @@ function NavigationDuck(state = initialStateApp, action) {
       return {
         ...state,
         isSearch: action.payload,
+      };
+    case IS_FOCUS:
+      return {
+        ...state,
+        isFocused: action.payload,
       };
     default:
       return state;

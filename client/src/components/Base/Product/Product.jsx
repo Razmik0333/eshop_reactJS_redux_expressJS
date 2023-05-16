@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { fetchAddCart, getCartItem, getCountOfCart, getTotalPriceValue } from '../../../redux/ducks/cartDuck';
 import { currentProduct } from '../../../redux/ducks/productDuck'; 
 import ModalPopup from "../../Base/Modal/ModalPopup";
@@ -15,7 +15,7 @@ import { deleteWishListItem, fetchAddWishList } from '../../../redux/ducks/wishL
 function Product({product, text}) {
     
      const dispatch = useDispatch();
-     
+     const  navigate = useNavigate();
      const discountedPrice = product.cost *(1 - product.discount / 100);
      const popupIsShow = useSelector(popupCloseSelector);
      const currentCurrency = useSelector(getCurrentCurrencySelector);
@@ -27,9 +27,11 @@ function Product({product, text}) {
           dispatch(currentProduct(e.target.dataset.id));
      }
      const addProductToCart = (e) => {
+          userId ? 
           dispatch(fetchAddCart(userId ,{
                [e.target.dataset.id] : 1
           }))
+          : navigate('/login')
      }
      const showProductPopup = (e) => {
           dispatch(changePopup(true));
@@ -38,9 +40,11 @@ function Product({product, text}) {
      }
      const addProductToWishList = (e) => {
           const target = e.target; 
-          numInArray(wishListIds,+target.dataset.id) ? 
+          userId ? 
+          (numInArray(wishListIds,+target.dataset.id) ? 
                dispatch(fetchAddWishList(userId, +target.dataset.id)):
-                    dispatch(deleteWishListItem(userId, +target.dataset.id))
+                    dispatch(deleteWishListItem(userId, +target.dataset.id)))
+          : navigate('/login')
 
      }
      return (
@@ -74,7 +78,9 @@ function Product({product, text}) {
                     <p className="product-name">
                          <NavLink to={`/product/${product?.id}`}
                               data-id={product?.id}
-                              className="product-link"  onClick={changeCurrentProduct}>
+                              className="product-link"
+                              onClick={changeCurrentProduct}
+                              >
                               {product?.descr}
                          </NavLink>
                     </p>

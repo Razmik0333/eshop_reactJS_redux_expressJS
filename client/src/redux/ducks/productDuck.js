@@ -15,6 +15,7 @@ const FETCH_ALL_VERY_SOLDED_PRODUCTS = 'productDuck/FETCH_ALL_VERY_SOLDED_PRODUC
 const STEPS_COUNTS = 'productDuck/STEPS_COUNTS';
 const COST_ELEMENTS = 'productDuck/COST_ELEMENTS';
 const SEARCH_DATA = 'productDuck/SEARCH_DATA';
+const HINTS_DATA = 'productDuck/HINTS_DATA';
 const MAX_DISCOUNT_DATA = 'productDuck/MAX_DISCOUNT_DATA';
 const VIEWED_PRODUCTS = 'productDuck/VIEWED_PRODUCTS';
 const VIEWED_PRODUCTS_DATA = 'productDuck/VIEWED_PRODUCTS_DATA';
@@ -33,6 +34,7 @@ export const getCartProducts = createAction(FETCH_CART_PRODUCTS);
 export const getVerySoldedProducts = createAction(FETCH_VERY_SOLDED_PRODUCTS);
 export const getAllVerySoldedProducts = createAction(FETCH_ALL_VERY_SOLDED_PRODUCTS);
 export const getSearchData = createAction(SEARCH_DATA);
+export const getHintsData = createAction(HINTS_DATA);
 export const getMaxDiscountData = createAction(MAX_DISCOUNT_DATA);
 
 export const getElementsByCosts = createAction(COST_ELEMENTS);
@@ -42,6 +44,9 @@ export const changeViewedProductsData = createAction(VIEWED_PRODUCTS_DATA);
 
 export const clearSearchData = (arr) => (dispatch) => {
   dispatch(getSearchData(arr));
+};
+export const clearHintsData = (arr) => (dispatch) => {
+  dispatch(getHintsData(arr));
 };
    
 
@@ -80,10 +85,28 @@ export const fetchProductsByCosts = (typeObj,costObj,count) => async(dispatch) =
   }
 };
 
+export const fetchSearchedHints = (user_id) => async(dispatch) => {
+ 
+  try {
+    const data = await (await fetch(`${root}/api/hint`, 
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        user_id
+      })
+    }) ).json();
+    dispatch(getHintsData(data));
+  } catch (e) {
+    console.log('error from productDuck', e)
+  }    
+};
 export const fetchSearchedData = (str,count) => async(dispatch) => {
  
   try {
-    const data = await (await fetch(`${root}/api/goods/search/?search=${str}`) ).json();
+    const data = await (await fetch(`${root}/api/search/?search=${str}`) ).json();
     dispatch(getSearchData(data));
     dispatch(getStepsCounts(Math.ceil(data.length / count)));
   } catch (e) {
@@ -150,10 +173,6 @@ export const fetchViewedProducts = (arr) => async(dispatch) => {
  }else{
   dispatch(getCartProducts([]))
  }
- 
-
-  
- 
 };
  
 
@@ -207,7 +226,8 @@ export const initialStateApp = {
   currentProduct : [],
   viewedProducts : [],
   viewedProductsData : [],
-  rating : null
+  rating : null,
+  hintsData:[]
 };
 
 function ProductDuck(state = initialStateApp, action) {
@@ -278,6 +298,11 @@ function ProductDuck(state = initialStateApp, action) {
       return {
         ...state,
         searchData: action.payload,
+      };
+    case HINTS_DATA:
+      return {
+        ...state,
+        hintsData: action.payload,
       };
     case MAX_DISCOUNT_DATA:
       return {

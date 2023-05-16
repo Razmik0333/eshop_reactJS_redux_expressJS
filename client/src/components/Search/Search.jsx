@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkEmptyObject, getObjectSize, getSortedArray } from "../../helpers/functions/functions";
-import { costsValuesSelector, countElementsSelector, currentCategoryIdSelector, currentSearchData, currentSearchSelector, elementsCostsSelector, isSearchSelector, showTypeSelector, sortTypeSelector } from "../../helpers/reduxSelectors";
+import { costsValuesSelector, countElementsSelector, currentCategoryIdSelector, currentLanguageDataSelector, currentSearchData, currentSearchSelector, elementsCostsSelector, isSearchSelector, showTypeSelector, sortTypeSelector } from "../../helpers/reduxSelectors";
 import { clearCostValues } from "../../redux/ducks/configsDuck";
 import { clearProductsByCosts, fetchProductsByCosts } from "../../redux/ducks/productDuck";
 import NonFound from "../Base/NonFound/NonFound";
@@ -15,7 +15,7 @@ import './styles/_search.scss';
 function Search(){
      const dispatch = useDispatch();
      const showType = useSelector(showTypeSelector)
-
+     const productItem = useSelector(currentLanguageDataSelector)?.product_item;
      const searchData = useSelector(currentSearchData);
      const isSearchValue = useSelector(isSearchSelector);
      const costObject = useSelector(costsValuesSelector);
@@ -65,7 +65,7 @@ function Search(){
                                         isSearchValue ? 
                                         searchedProductsByCount.length > 0 ?
                                         searchedProductsByCount.map(item => {
-                                             return  showType === 'grid' || '' ? <Product product={item} key={item.id}/> : <ProductByList product={item} key={item.id} />
+                                             return  showType === 'grid' || '' ? <Product product={item} text={productItem} key={item.id}/> : <ProductByList product={item} text={productItem} key={item.id} />
                                                   }) :
                                                   <NonFound />
                                                   : false

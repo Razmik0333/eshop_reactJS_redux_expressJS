@@ -22,23 +22,13 @@ import SearchInput from './SearchProducts/SearchInput';
 import { changeStepsCounts } from '../../../redux/ducks/productDuck';
 
 import { root } from '../../../helpers/constants/constants';
+import Categories from './Categories/Categories';
 
 function Navigation() {
      const dispatch = useDispatch();
      useEffect(() => {
           dispatch(fetchCatgories());
      }, []);
-
-     const changeCategory = (e) => {
-
-         dispatch(currentCategory(e.target.dataset.id));
-         dispatch(fetchCurrentCatgory(e.target.dataset.id))
-         dispatch(clearSearchData([]))                  
-         dispatch(currentSearch('')) 
-     }
-
-     
-
      // useEffect(() => {
      //      dispatch(fetchSearchedData(searchString));
      //      setSearchItems(searchData)
@@ -54,9 +44,6 @@ function Navigation() {
      //           // }
      //     // }, 1000);
      // }, [searchWord]);
-    
-     const categories = useSelector(categoriesSelector);
-     
      return (
           <nav>
                <div className="container navigation__container">
@@ -78,24 +65,7 @@ function Navigation() {
                          </div>
                     </div>
                     <div className="nav__item">
-                         <div className="navigation__part">
-                              <ul className="category__list">
-                                   
-                                   {
-                                   
-                                        categories.map(item => {
-                                             return  <li className="category__item"
-                                                       key={item.id} 
-                                                       onClick = {changeCategory} >
-                                                       <NavLink to={`/category/${item.id}`} data-id={item.id}>
-                                                            {item.arm_name}
-                                                       </NavLink>
-                                                  </li>
-                                        })
-                                       
-                                   }
-                              </ul>
-                         </div>
+                         <Categories />
                     </div>
                </div>
           </nav>

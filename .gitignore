@@ -4,3 +4,4 @@ uploads
 public/icons
 public/images
 client/public/images
+.env

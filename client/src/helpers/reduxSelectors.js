@@ -13,8 +13,10 @@ export const allVerySoldedProductsSelector = ({ ProductDuck }) => ProductDuck.al
 export const productStepCountsSelector = ({ ProductDuck }) => ProductDuck.stepCounts; //
 export const currentSearchSelector = ({ NavigationDuck }) => NavigationDuck.searchWord; //
 export const currentSearchData = ({ ProductDuck }) => ProductDuck.searchData; //
+export const currentHintsData = ({ ProductDuck }) => ProductDuck.hintsData; //
 export const maxDiscountDataSelector = ({ ProductDuck }) => ProductDuck.maxDiscountData; //
 export const isSearchSelector = ({ NavigationDuck }) => NavigationDuck.isSearch; //
+export const isFocusedSelector = ({ NavigationDuck }) => NavigationDuck.isFocused; //
 export const showTypeSelector = ({ ConfigsDuck }) => ConfigsDuck.showType; //
 export const sortTypeSelector = ({ ConfigsDuck }) => ConfigsDuck.sortType; //
 export const hotDealsSelector = ({ ConfigsDuck }) => ConfigsDuck.hotDealsId; //

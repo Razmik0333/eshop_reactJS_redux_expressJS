@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { checkEmail,
           checkStrLength,
            checkCapitalLetter,
@@ -172,6 +172,7 @@ function Register() {
                               })
                          }
                     </div>
+                    <p>Արդեն գրանցվե՞լ եք  <NavLink to={'/login'}>Մուտք</NavLink></p>
                     <button
                     className="continue"
                          

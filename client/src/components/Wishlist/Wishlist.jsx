@@ -4,14 +4,19 @@ import { currentLanguageDataSelector, getUserId, getWishListDataSelector, getWis
 import { fetchWishList } from "../../redux/ducks/wishListDuck";
 import Product from "../Base/Product/Product";
 import  "./styles/wishlist.scss";
+import { useNavigate } from "react-router-dom";
 
 function Wishlist() {
      const dispatch = useDispatch();
-     const userId = useSelector(getUserId)
+     const userId = useSelector(getUserId);
+     const navigate = useNavigate()
+
      const wishListIds = useSelector(getWishListIdsSelector)
      const wishList = useSelector(currentLanguageDataSelector)?.wishlist;
      const productItem = useSelector(currentLanguageDataSelector)?.product_item;
-
+     useEffect(() => {
+          !userId && navigate('/login') 
+     }, []);
      useEffect(() => {
           
           dispatch(fetchWishList(userId))     
