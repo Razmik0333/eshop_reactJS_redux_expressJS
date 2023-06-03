@@ -1,16 +1,19 @@
 import { useDispatch } from 'react-redux';
-import { currentProduct } from '../../../../redux/ducks/productDuck';
+import { currentSearch } from '../../../../redux/ducks/navigationDuck';
 
 export default function HintsItem({item}) {
      const dispatch = useDispatch();
-     const changeCurrentProduct = (e) => {
-         dispatch(currentProduct(e.target.dataset.id))
+     const changeSearchWord = (e) => {
+        dispatch(currentSearch(e.target.dataset.hint))
      }
      return <li className="search__item"
-                onClick={changeCurrentProduct}
                 data-id={item.id} >
-                <p 
+                <p className="hints_item"
                     key={item.id}
-                    data-id={item.id}
-               >  {item.descr}</p></li>
+                    data-hint={`${item.descr}`}
+                    onClick={changeSearchWord}
+                >
+                {item.descr}
+               </p>
+            </li>
 }

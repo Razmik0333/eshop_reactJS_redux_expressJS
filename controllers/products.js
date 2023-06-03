@@ -52,33 +52,38 @@ module.exports.productsBetweenCosts = async (req, res) => {
 }
 module.exports.search = async (req, res) => {
      const search = req.query.search;
-
-
      const searched = await realyze("SELECT * FROM products WHERE main LIKE ?", [`%${search}%`]);
      res.send(searched)
 }
-module.exports.hint = async (req, res) => {
+module.exports.hintAdd = async (req, res) => {
      const userId = req.body.user_id;
-     //const hint = req.params.hint;
+     const hint = req.params.hint;
+     console.log("🚀 ~ file: products.js:60 ~ module.exports.hintAdd= ~ userId:", userId)
      if (userId) {
           const [currentSearched] = await realyze("SELECT search_items FROM user_interest WHERE user_id = ? ", [userId])
           const search_items = currentSearched.search_items;
-         console.log(search_items);
-         const hintArr = search_items.split("|");
-         const hintObj = hintArr.reduce((acc, curr, pos) => {
-              acc[pos] = {
-                   'id' : pos,
-                   'descr' : curr,
-         }
-              return acc
-         },[])
-         
-         
-          /*const newHint = `${search_items}|${hint}`;
-          console.log("🚀 ~ file: products.js:69 ~ module.exports.hint= ~ hintArr:", hintArr)
+          const newHint = `${search_items}|${hint}`;
           !search_items.includes(hint) &&
-              await realyze("UPDATE `user_interest` SET `search_items` = ? WHERE `user_id`= ? ", [newHint,userId]);*/
-          return res.send(hintObj)
+          await realyze("UPDATE `user_interest` SET `search_items` = ? WHERE `user_id`= ? ", [newHint,userId]);
+          res.send(JSON.stringify(hint))
+     }
+     
+}
+module.exports.hint = async (req, res) => {
+     const userId = req.body.user_id;
+     
+     if (userId) {
+          const [currentSearched] = await realyze("SELECT search_items FROM user_interest WHERE user_id = ? ", [userId])
+          const search_items = currentSearched.search_items;
+         const hintArr = search_items.split("|").map((item, pos) => {
+           return {
+               'id' : pos,
+               'descr' : item,
+           }
+         })
+         
+  
+          return res.send(hintArr)
      }
      
        return  res.send([])

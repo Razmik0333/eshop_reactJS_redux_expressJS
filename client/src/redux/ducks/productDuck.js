@@ -103,6 +103,23 @@ export const fetchSearchedHints = (user_id) => async(dispatch) => {
     console.log('error from productDuck', e)
   }    
 };
+export const changeHints = (user_id, hint) => async(dispatch) =>  {
+  try {
+    const data = await (await fetch(`${root}/api/hint/add/${hint}`, {
+      method:"PUT",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        user_id
+      })
+    }) ).json();
+
+    console.log("🚀 ~ file: productDuck.js:110 ~ changeHints ~ data:", data)
+  } catch (e) {
+    console.log('error from productDuck', e)
+  }  
+};
 export const fetchSearchedData = (str,count) => async(dispatch) => {
  
   try {

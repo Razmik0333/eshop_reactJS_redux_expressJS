@@ -15,7 +15,7 @@ export const getSearchWord = createAction(SEARCH_WORD);
 export const changeIsSearch = createAction(IS_SEARCH);
 export const changeIsFocused = createAction(IS_FOCUS);
 
-//category/([0-9]+)
+
 export const fetchCatgories = () => async (dispatch) => {
   try {
     const data = await( await fetch(`${root}/api/category`) ).json();

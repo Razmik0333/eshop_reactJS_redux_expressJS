@@ -10,11 +10,10 @@ export default function Categories() {
      const categories = useSelector(categoriesSelector);
      
      const changeCategory = (e) => {
-
           dispatch(currentCategory(e.target.dataset.id));
-          dispatch(fetchCurrentCatgory(e.target.dataset.id))
-          dispatch(clearSearchData([]))                  
-          dispatch(currentSearch('')) 
+          dispatch(fetchCurrentCatgory(e.target.dataset.id));
+          dispatch(clearSearchData([]));
+          dispatch(currentSearch(''));
       }
   return (
     <>

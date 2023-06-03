@@ -1,25 +1,13 @@
 
-import { useState ,useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './styles/_navigation.scss';
-import { categoriesSelector,
-         currentSearchData,
-         currentSearchSelector,
-         productsByCategoryLengthSelector, 
-} from '../../../helpers/reduxSelectors';
 import { 
-     currentCategory, 
-     currentSearch, 
      fetchCatgories, 
-     fetchCurrentCatgory, 
-     fetchSearchedData 
+     getIsFocused
 } from '../../../redux/ducks/navigationDuck';
-import { clearSearchData, currentProduct } from '../../../redux/ducks/productDuck';
-import SearchItem from './SearchItem/SearchItem';
 import SearchItems from './SearchItems/SearchItems';
 import SearchInput from './SearchProducts/SearchInput';
-import { changeStepsCounts } from '../../../redux/ducks/productDuck';
 
 import { root } from '../../../helpers/constants/constants';
 import Categories from './Categories/Categories';
@@ -29,6 +17,9 @@ function Navigation() {
      useEffect(() => {
           dispatch(fetchCatgories());
      }, []);
+     const changeMouseOut = () => {
+          dispatch(getIsFocused(false))
+     }
      // useEffect(() => {
      //      dispatch(fetchSearchedData(searchString));
      //      setSearchItems(searchData)
@@ -58,7 +49,7 @@ function Navigation() {
                                         <img src={`${root}/icons/config/triangle.svg`} alt="" />
                                    </span>
                               </div>
-                              <div className="search__products" /*onMouseOut={false}*/>
+                              <div className="search__products" onMouseLeave={changeMouseOut}/*onMouseOut={false}*/>
                                    <SearchInput />
                                    <SearchItems />
                               </div>

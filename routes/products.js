@@ -1,5 +1,4 @@
 const express = require('express');
-const { hint } = require('../controllers/products');
 const router = express.Router();
 
 const getProductsByCategory = require('../controllers/products').productsByCategory;
@@ -11,20 +10,23 @@ const getProductsByIds = require('../controllers/products').productsByIds;
 const getProductsBetweenCosts = require('../controllers/products').productsBetweenCosts;
 const getSearchedProducts = require('../controllers/products').search;
 const getVerySoldedProducts = require('../controllers/products').sold;
+const hint = require('../controllers/products').hint;
+const hintAdd = require('../controllers/products').hintAdd;
 
 
-router.get('/main/:id', getProductsByCategory)
-router.get('/discount', getProductsByLargeDiscount)
-router.get('/recommend', getRecommendedProducts)
-router.get('/filter/product/:id', getFilteredProducts)
-router.get('/product/:id', getProductById)
-router.get('/list/product/:ids', getProductsByIds)
-router.get('/cost', getProductsBetweenCosts)
-router.get('/search', getSearchedProducts)
-router.put('/hint', hint)
+router.get('/main/:id', getProductsByCategory);
+router.get('/discount', getProductsByLargeDiscount);
+router.get('/recommend', getRecommendedProducts);
+router.get('/filter/product/:id', getFilteredProducts);
+router.get('/product/:id', getProductById);
+router.get('/list/product/:ids', getProductsByIds);
+router.get('/cost', getProductsBetweenCosts);
+router.get('/search', getSearchedProducts);
+router.put('/hint', hint);
+router.put('/hint/add/:hint', hintAdd);
 router.get('/package/sold', getVerySoldedProducts);
 
 
-module.exports = router
+module.exports = router;
 
 

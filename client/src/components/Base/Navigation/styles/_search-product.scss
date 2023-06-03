@@ -37,17 +37,16 @@
                }
          }
          .search__items{
-              position: absolute;
-              top: 42px;
-              z-index: 9999;
+               position: absolute;
+               top: 42px;
                text-align: center;
-              width: 100%;
-              border-radius: 5px;
+               width: 100%;
+               border-radius: 5px;
                height: 100px;
-              overflow-y: scroll;
-              left: 0;
+               overflow-y: auto;
+               left: 0;
+               z-index: 99999;
               .search__item{
-                    z-index: 99999;
                     height: 30px;
                     padding-top: 10px;
                     background-color: var(--white);
@@ -60,6 +59,9 @@
                          }
                     }
 
+              }
+              .hints_item{
+               cursor: pointer;
               }
          }
          .hidden{
