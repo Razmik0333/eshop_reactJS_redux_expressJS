@@ -75,18 +75,18 @@ module.exports.hint = async (req, res) => {
      if (userId) {
           const [currentSearched] = await realyze("SELECT search_items FROM user_interest WHERE user_id = ? ", [userId])
           const search_items = currentSearched.search_items;
-         const hintArr = search_items.split("|").map((item, pos) => {
-           return {
-               'id' : pos,
-               'descr' : item,
-           }
-         })
-         
-  
-          return res.send(hintArr)
+         const hintArr = search_items
+                              .split("|")
+                              .map((item, pos) => {
+                                   return {
+                                   'id' : pos,
+                                   'descr' : item,
+                                   }
+                              })
+                              .sort((a, b) =>  b.id - a.id)
+                              return res.send(hintArr)
      }
-     
-       return  res.send([])
+     return  res.send([])
 
 
 }

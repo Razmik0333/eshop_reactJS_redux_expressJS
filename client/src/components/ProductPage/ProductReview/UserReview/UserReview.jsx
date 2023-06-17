@@ -31,6 +31,7 @@ function UserReview() {
      const modalIsOpen = useSelector(modalCloseSelector);
 
      const purchacedByUser = hasValueInObject(+currentProduct?.id,deliveredOrders);
+     console.log("🚀 ~ file: UserReview.jsx:34 ~ UserReview ~ purchacedByUser:", purchacedByUser)
      const changeUserReview = (e) => {
           setUserReview(e.target.value)
      }
@@ -49,7 +50,7 @@ function UserReview() {
                     modalIsOpen ? <Modal message={"Review changed"} /> : <></>
                }
                {    
-                    purchacedByUser ? 
+               //     purchacedByUser ? 
                     <div className="product__review__content">
                          <input type="hidden" name="user_id" value={reviewItem?.user_id || 0} onChange={() =>{}} />
                          <input type="hidden" name="product_id" value={reviewItem?.product_id} onChange={() =>{}} />
@@ -89,7 +90,8 @@ function UserReview() {
                                    />
                               <button className="continue" onClick={sendReview}>CONTINUE</button>
                          </div>
-                    </div> : <></>
+                    </div>
+                    // : <></>
                }
           </>
      )

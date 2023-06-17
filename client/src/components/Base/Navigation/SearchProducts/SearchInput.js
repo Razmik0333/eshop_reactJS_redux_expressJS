@@ -10,7 +10,7 @@ function SearchInput() {
      const dispatch = useDispatch();
      const searchWord = useSelector(currentSearchSelector);
      const [searchValue, setSearchValue] = useState('');
-     console.log("🚀 ~ file: SearchInput.js:13 ~ SearchInput ~ searchValue:", searchValue)
+    // console.log("🚀 ~ file: SearchInput.js:13 ~ SearchInput ~ searchValue:", searchValue)
      const userId = useSelector(getUserId);
      const categoryId = useSelector(currentCategoryIdSelector)
      useEffect(() => {

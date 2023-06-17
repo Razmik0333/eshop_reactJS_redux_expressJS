@@ -12,6 +12,8 @@ const CHANGE_ORDER_CONFIRMED_ID = 'orderDuck/CHANGE_ORDER_CONFIRMED_ID';
 const CONFIRMED = 'orderDuck/CONFIRMED';
 const DELETE_ID = 'orderDuck/DELETE_ID';
 const DELIVERED_ORDERS_BY_USER = 'orderDuck/DELIVERED_ORDERS_BY_USER';
+const EVALUATE_PRODUCT_ID = 'orderDuck/EVALUATE_PRODUCT_ID';
+const EVALUATE_PRODUCTS = 'orderDuck/EVALUATE_PRODUCTS';
 // const CLEAR_ORDER_FROM_STATUS = 'orderDuck/CLEAR_ORDER_FROM_STATUS';
 
 
@@ -23,6 +25,8 @@ export const changeStatus = createAction(CHANGE_STATUS);
 export const changeOrderForConfirm = createAction(CHANGE_ORDER_CONFIRMED_ID);
 export const changeConfirmed = createAction(CONFIRMED);
 export const getDeliveredOredersByUser = createAction(DELIVERED_ORDERS_BY_USER);
+export const getEvaluateProductId = createAction(EVALUATE_PRODUCT_ID);
+export const getEvaluateProducts = createAction(EVALUATE_PRODUCTS);
 
 
 
@@ -31,10 +35,12 @@ const initialStateApp = {
   orderProducts :{},
   deliveredOrders : [],
   productsCounts : {},
+  evaluatedProducts : [],
   currentStatus: -1,
   changedStatus:0,
   orderConfirmId : null,
   isConfirmed : false,
+  orderId:null
 };
 
 
@@ -66,6 +72,12 @@ export const orderConfirmId = (id) => (dispatch) => {
   dispatch(changeOrderForConfirm(id));
 
 }
+export const orderEvaluateId = (id) => (dispatch) => {
+
+  
+  dispatch(getEvaluateProductId(id));
+
+}
 
 export const orderConfirm = (bool) => (dispatch) => {
 
@@ -87,6 +99,15 @@ export const fetchUserOrders = (id) => async(dispatch) => {
   try {
     const data = await (await fetch(`${root}/api/package/user/${id}`)).json()
     dispatch(fetchOrders(data));
+  } catch (e) {
+    console.log('error from orderDuck', e)
+  }
+};
+export const fetchProductsByOrderId = (id) => async(dispatch) => {
+  try {
+    const data = await (await fetch(`${root}/api/package/${id}`)).json()
+    dispatch(getEvaluateProducts(data));
+    //console.log("🚀 ~ file: orderDuck.js:110 ~ fetchProductsByOrderId ~ data:", data)
   } catch (e) {
     console.log('error from orderDuck', e)
   }
@@ -237,6 +258,16 @@ const OrderDuck = (state = initialStateApp, action) => {
       return{
         ...state,
         currentStatus : action.payload
+      } 
+    case EVALUATE_PRODUCT_ID:
+      return{
+        ...state,
+        orderId : action.payload
+      } 
+    case EVALUATE_PRODUCTS:
+      return{
+        ...state,
+        evaluatedProducts : action.payload
       } 
     case CONFIRMED:
       return{

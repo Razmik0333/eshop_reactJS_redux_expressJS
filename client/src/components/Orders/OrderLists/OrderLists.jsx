@@ -7,6 +7,7 @@ import OrderListItem from "../OrderListItem/OrderListItem";
 import "./styles/_order-lists.scss";
 function OrderLists({ind,order}) {   
      const orderProducts = order?.user_order;
+     console.log("🚀 ~ file: OrderLists.jsx:10 ~ OrderLists ~ orderProducts:", orderProducts)
      const productQuantities = order?.quantities;
      return <div className="orders-list">
           <OrderListHeader 

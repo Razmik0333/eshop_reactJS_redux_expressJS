@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrdersFromStatus } from "../../../helpers/functions/functions";
 import { currentLanguageDataSelector, getStatusIndex, getUserOrders } from "../../../helpers/reduxSelectors";
 import { changeModal } from "../../../redux/ducks/configsDuck";
-import { changeOrderStatus, orderConfirmId } from "../../../redux/ducks/orderDuck";
+import { changeOrderStatus, orderConfirmId, orderEvaluateId } from "../../../redux/ducks/orderDuck";
 import "./styles/_order-list-footer.scss";
+import { NavLink } from "react-router-dom";
 
 function OrderListFooter({ind}) {
      //changeOrderStatus
@@ -15,9 +16,10 @@ function OrderListFooter({ind}) {
      const confirmOrder = (e) => { 
           dispatch(changeModal(true));         
           dispatch(orderConfirmId(e.target.dataset.id));         
-                   
+     }
+     const changeCurrentOrder = (e) => {
+         dispatch(orderEvaluateId(e.target.dataset.id));
           
-           console.log(e.target.dataset.id);
      }
      const orders =  useSelector(getUserOrders);
      const userObject = getOrdersFromStatus(orders, statusIndex);
@@ -31,11 +33,13 @@ function OrderListFooter({ind}) {
                </button>
                {
                     statusIndex === 3 && 
-                    <button  className="confirm_receipt_active"
-                         
-                    >
+                   <NavLink to={"/orders/evaluate"}
+                   data-id = {userObject[ind]?.id}
+                    onClick={changeCurrentOrder}>
+                         <button data-id = {userObject[ind]?.id} className="confirm_receipt_active">
                          {orderConfirm?.review}
-                    </button>
+                         </button>
+                   </NavLink>
                }
           </>
      )

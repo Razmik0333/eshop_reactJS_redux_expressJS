@@ -15,6 +15,9 @@ export const currentSearchSelector = ({ NavigationDuck }) => NavigationDuck.sear
 export const currentSearchData = ({ ProductDuck }) => ProductDuck.searchData; //
 export const currentHintsData = ({ ProductDuck }) => ProductDuck.hintsData; //
 export const maxDiscountDataSelector = ({ ProductDuck }) => ProductDuck.maxDiscountData; //
+export const productReviewDataSelector = ({ ProductDuck }) => ProductDuck.productReview; //
+export const getEvaluateProductsSelector = ({ OrderDuck }) => OrderDuck.evaluatedProducts; //
+
 export const isSearchSelector = ({ NavigationDuck }) => NavigationDuck.isSearch; //
 export const isFocusedSelector = ({ NavigationDuck }) => NavigationDuck.isFocused; //
 export const showTypeSelector = ({ ConfigsDuck }) => ConfigsDuck.showType; //
@@ -46,6 +49,7 @@ export const getUserProducts = ({ OrderDuck }) => OrderDuck.orderProducts; //
 export const getProductsCounts = ({ OrderDuck }) => OrderDuck.productsCounts; //
 export const getStatusIndex = ({ OrderDuck }) => OrderDuck.currentStatus; //
 export const getConfirmIdSelector = ({ OrderDuck }) => OrderDuck.orderConfirmId; //
+export const getEvaluateSelector = ({ OrderDuck }) => OrderDuck.orderId; //
 export const isConfirmedSelector = ({ OrderDuck }) => OrderDuck.isConfirmed; //
 export const getDeliveredOrdersByUserSelector = ({ OrderDuck }) => OrderDuck.deliveredOrders; //
 export const getCurrentTabNameSelector = ({ ReviewDuck }) => ReviewDuck.tabName; //

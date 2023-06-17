@@ -17,7 +17,6 @@ function ProductReviewHeader() {
           dispatch(changeTabName(e.target.dataset.tab));
      }
      const tabName = useSelector(getCurrentTabNameSelector)
-     console.log("🚀 ~ file: ProductReviewHeader.jsx ~ line 20 ~ ProductReviewHeader ~ tabName", tabName)
      // const getReviewsByProduct = () => {
 
      //      dispatch(fetchCurrentProductsReviews(currentProduct?.id))

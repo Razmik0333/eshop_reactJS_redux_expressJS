@@ -27,6 +27,7 @@ import OrderForm from './components/Base/Admin/AdminOrders/OrderForm/OrderForm';
 import Wishlist from './components/Wishlist/Wishlist';
 import ViewedProducts from './components/Home/ViewedProducts/ViewedProducts';
 import Loader from './components/Base/Loader/Loader';
+import Evaluate from './components/Orders/Evaluate/Evaluate';
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
 function App() {
@@ -107,6 +108,10 @@ function App() {
               <Route 
               path="/viewed" 
               element={<ViewedProducts />} 
+              />
+              <Route 
+              path="/orders/evaluate" 
+              element={<Evaluate />} 
               />
               <Route 
               path="/home" 

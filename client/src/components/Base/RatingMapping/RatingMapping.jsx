@@ -20,7 +20,8 @@ function RatingMapping({rating}) {
                     <span
                     className={
                          pos < rating ? "star  rating-over full" : "star empty"
-                    } key={pos} data-rating={pos + 1}></span>
+                    } key={pos} data-rating={pos + 1}
+                    ></span>
                })
                }
                </div>

@@ -14,11 +14,14 @@ module.exports.allOrdersByUser = async (req, res) => {
      const resArray = await getProductsFromOrdersList(ordersByUser)
      res.send(JSON.stringify(resArray, undefined, 2));
 }
-/*module.exports.getPackageProducts = async (req, res) => {
-     const userId = req.params.id;
-     const orders = await realyze(`SELECT * FROM orders WHERE user_id = ? `, [userId]);
-     res.send(orders)
-}*/
+module.exports.getProductsByOrder = async (req, res) => {
+     const orderId = req.params.id;
+     const order = await realyze(`SELECT * FROM orders WHERE id = ? `, [orderId]);
+     const [resArray] = await getProductsFromOrdersList(order)
+
+     console.log("🚀 ~ file: orders.js:21 ~ module.exports.getProductsByOrder= ~ resArray:", resArray)
+     res.send(resArray?.user_order)
+}
 module.exports.ordersByStatus = async (req, res) => {
      const userId = req.params.id;
      const status = req.body.status

@@ -1,6 +1,6 @@
 import { createAction } from '../../helpers/redux';
 import { root } from '../../helpers/constants/constants';
-import { getBestSellers, getObjectFromSoldedOrders, numInArray } from '../../helpers/functions/functions';
+import { checkEmptyObject, getBestSellers, getObjectFromSoldedOrders, numInArray } from '../../helpers/functions/functions';
 const FETCH_PRODUCTS = 'productDuck/FETCH_PRODUCTS';
 const FETCH_PRODUCTS_CATEGORY = 'productDuck/FETCH_PRODUCTS_CATEGORY';
 const FETCH_PRODUCTS_CATEGORY_LENGTH = 'productDuck/FETCH_PRODUCTS_CATEGORY_LENGTH';
@@ -19,6 +19,8 @@ const HINTS_DATA = 'productDuck/HINTS_DATA';
 const MAX_DISCOUNT_DATA = 'productDuck/MAX_DISCOUNT_DATA';
 const VIEWED_PRODUCTS = 'productDuck/VIEWED_PRODUCTS';
 const VIEWED_PRODUCTS_DATA = 'productDuck/VIEWED_PRODUCTS_DATA';
+const EVALUATED_PRODUCTS_DATA = 'productDuck/EVALUATED_PRODUCTS_DATA';
+const EVALUATED_PRODUCT_ITEM = 'productDuck/EVALUATED_PRODUCT_ITEM';
 
 
 export const getProducts = createAction(FETCH_PRODUCTS);
@@ -40,6 +42,8 @@ export const getMaxDiscountData = createAction(MAX_DISCOUNT_DATA);
 export const getElementsByCosts = createAction(COST_ELEMENTS);
 export const changeViewedProducts = createAction(VIEWED_PRODUCTS);
 export const changeViewedProductsData = createAction(VIEWED_PRODUCTS_DATA);
+export const changeProductReviewData = createAction(EVALUATED_PRODUCTS_DATA);
+export const changeEvaluatedProductItem = createAction(EVALUATED_PRODUCT_ITEM);
 
 
 export const clearSearchData = (arr) => (dispatch) => {
@@ -49,7 +53,19 @@ export const clearHintsData = (arr) => (dispatch) => {
   dispatch(getHintsData(arr));
 };
    
+export const changeProductReview = (product_id, productItem) => (dispatch) => {
 
+  
+  dispatch(changeProductReviewData(
+    {
+      [product_id] : productItem
+      
+    }
+    ))
+}
+export const getEvaluatedProductItem = (obj) => (dispatch) => {
+  dispatch(changeEvaluatedProductItem(obj))
+}
 
 export const fetchProductsForStartingPage = (id) => async (dispatch) => {
   try {
@@ -178,7 +194,6 @@ export const fetchProductsByString = (arr) => async(dispatch) => {
   }
 };
 export const fetchViewedProducts = (arr) => async(dispatch) => {
- //  ?  :
  if (arr.length > 0) {
   try {
     const data = await (await fetch(`${root}/api/list/product/${arr}`)).json()
@@ -244,7 +259,9 @@ export const initialStateApp = {
   viewedProducts : [],
   viewedProductsData : [],
   rating : null,
-  hintsData:[]
+  hintsData:[],
+  productReview: {},
+  evaluatedProductItem: {}
 };
 
 function ProductDuck(state = initialStateApp, action) {
@@ -349,7 +366,43 @@ function ProductDuck(state = initialStateApp, action) {
         ...state,
         viewedProductsData: action.payload
       };
-      default:
+    case EVALUATED_PRODUCTS_DATA:
+      console.log(state.productReview);
+          
+      if(!checkEmptyObject(state.productReview)){
+        const newInd = Object.keys(action.payload)[0];
+        if (newInd in state.productReview) {
+            return{
+              ...state,
+              productReview: {
+                ...state.productReview,
+                [newInd]: {
+                  ...state.productReview[newInd],
+                  ...action.payload[newInd]
+    
+                }
+            }}
+        }
+        else{
+          return{
+            ...state,
+            productReview: {
+              ...state.productReview,
+              ...action.payload,
+          }}
+        }
+        
+      }else{
+
+        return{
+          ...state,
+          productReview: {
+            ...state.productReview,
+            ...action.payload,
+        }}
+      };
+      
+    default:
       return state;
   }
 }

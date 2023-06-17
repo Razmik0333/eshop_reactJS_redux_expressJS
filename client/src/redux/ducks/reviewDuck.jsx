@@ -27,43 +27,14 @@ const initialStateApp = {
   tabName : 'desc',
   reviewsByProduct :[],
   reviewByUserAndProduct :{},
-//   productsCounts : {},
-//   currentStatus: -1,
-//   changedStatus:0,
-//   orderConfirmId : null,
-//   isConfirmed : false
 };
 
 
-// export const changeOrdersFromLogout = () => (dispatch) => {
-//   dispatch(fetchOrders([]));
-//   dispatch(fetchProducts({}));
-//   dispatch(getProductsCount({}));
-//   dispatch(getOrderStatus(-1));
 
-// }
-// export const clearOrders = () => (dispatch) => {
-
-//   dispatch(fetchProducts({}));
-//   dispatch(getProductsCount({}));
-
-// }
-// export const orderConfirmId = (id) => (dispatch) => {
-
-  
-//   dispatch(changeOrderForConfirm(id));
-
-// }
  export const changeTabName = (name) => (dispatch) => {
 
    dispatch(currentTabName(name));
  }
-//  export const getProductQuantity = (val,obj) => (dispatch) => {
-    
-//       dispatch(getProductsCount({
-//         [val]:obj
-//       }));
-//     };
 
 
 export const fetchCurrentProductsReviews = (productId) => async(dispatch) => {
@@ -80,21 +51,22 @@ export const fetchCurrentProductsReviews = (productId) => async(dispatch) => {
 export const fetchReviewByUserAndProduct = (userId, productId) => async (dispatch) => {
 
   try {
-    const data = await(await fetch(`${root}/api/review/item/${userId}/${productId}`));
-    dispatch(getReviewByUserAndProduct(data[0]));
+    const data = await(await fetch(`${root}/api/review/item/${userId}/${productId}`)).json();
+    dispatch(getReviewByUserAndProduct(data));
+    console.log("🚀 ~ file: reviewDuck.jsx:56 ~ fetchReviewByUserAndProduct ~ data:", data)
   } catch (e) {
     console.log('error from orderDuck', e)
   }  
+};
+export const fetchAddReviewByUser = (userId, productId) => async (dispatch) => {
 
-  // fetch(`${root}/review/item/${userId}/${productId}`) 
-  //   .then((res) => res.json())
-  //   .then((res) => {
-  //     console.log(res);
-   
-  //     dispatch(getReviewByUserAndProduct(res[0]));
-   
-  //   })
-  //   .catch((e) => );
+  try {
+    const data = await(await fetch(`${root}/api/review/item/${userId}/${productId}`)).json();
+    //dispatch(getReviewByUserAndProduct(data));
+    console.log("🚀 ~ file: reviewDuck.jsx:56 ~ fetchReviewByUserAndProduct ~ data:", data)
+  } catch (e) {
+    console.log('error from orderDuck', e)
+  }  
 };
 
 // export const fetchProductsByOrder = (val, arr) => (dispatch) => {

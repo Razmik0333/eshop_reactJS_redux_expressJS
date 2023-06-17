@@ -8,6 +8,7 @@ import './styles/_orderListItem.scss'
 import { root } from '../../../helpers/constants/constants';
 import { getNewCurrency } from '../../../helpers/functions/functions';
 import { currentLanguageDataSelector, getCurrentCurrencySelector } from '../../../helpers/reduxSelectors';
+import RatingMapping from '../../Base/RatingMapping/RatingMapping';
 function OrderListItem({product, counts}) {
      const dispatch = useDispatch();
      const orderTextItem = useSelector(currentLanguageDataSelector)?.product_item;
@@ -48,7 +49,7 @@ function OrderListItem({product, counts}) {
                          }
                          
                     </div>
-                    <Rating rating={product.rating}  />
+                    <RatingMapping rating={product.rating}  />
 
                     <div className="product-options">
                          <div className="product-description">
