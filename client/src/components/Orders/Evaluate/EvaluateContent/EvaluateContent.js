@@ -14,9 +14,7 @@ export default function EvaluateContent({product}) {
      const currentUserId = useSelector(getUserId);
      const currentProductId = useSelector(currentProductIdSelector);
      const productReview = useSelector(productReviewDataSelector)
-     console.log("🚀 ~ file: Evaluate.jsx:43 ~ Evaluate ~ productReview:", productReview)
      const reviewItem = useSelector(getReviewByProductIdAndUserId);
-     console.log("🚀 ~ file: EvaluateContent.js:17 ~ EvaluateContent ~ reviewItem:", reviewItem)
      const [userReview, setUserReview] = useState(productReview?.[product?.id]?.review);     
      //console.log("🚀 ~ file: EvaluateContent.js:17 ~ EvaluateContent ~ userReview:", userReview)
      const currentProduct = useSelector(currentProductSelector);
@@ -36,6 +34,9 @@ export default function EvaluateContent({product}) {
           <div className="picture__item">
                <img src={`${root}/images/${product?.id}.jpg`} alt="" />
           </div>
+          <p className="product_desc">
+               {product?.descr}
+          </p>
           <input type="hidden" name="product_id" value={product?.id} onChange={() =>{}} />
           <div className="product__rating__add">
                <p className="product__review__add">Your rating</p>

@@ -12,13 +12,14 @@ const getSearchedProducts = require('../controllers/products').search;
 const getVerySoldedProducts = require('../controllers/products').sold;
 const hint = require('../controllers/products').hint;
 const hintAdd = require('../controllers/products').hintAdd;
-
+const evaluateProducts = require('../controllers/products').evaluateProducts
 
 router.get('/main/:id', getProductsByCategory);
 router.get('/discount', getProductsByLargeDiscount);
 router.get('/recommend', getRecommendedProducts);
 router.get('/filter/product/:id', getFilteredProducts);
 router.get('/product/:id', getProductById);
+router.post('/product/evaluate', evaluateProducts);
 router.get('/list/product/:ids', getProductsByIds);
 router.get('/cost', getProductsBetweenCosts);
 router.get('/search', getSearchedProducts);

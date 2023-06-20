@@ -153,6 +153,11 @@ export const getStatus = (num) => {
                     title: 'Հանձնված',
                     status : 'delivered' 
                }     
+          case 4:
+               return {
+                    title: 'Ավարտված',
+                    status : 'finished' 
+               }     
           default:
                break;
      }

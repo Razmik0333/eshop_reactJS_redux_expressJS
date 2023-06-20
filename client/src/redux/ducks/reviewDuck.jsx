@@ -5,7 +5,7 @@ import { root } from "../../helpers/constants/constants";
 const CURRENT_TAB_NAME = 'reviewDuck/CURRENT_TAB_NAME';
 const FETCH_REVIEWS = 'reviewDuck/FETCH_REVIEWS';
 const REVIEW_BY_USER_AND_PRODUCT = 'reviewDuck/REVIEW_BY_USER_AND_PRODUCT';
-// const CURRENT_STATUS = 'orderDuck/CURRENT_STATUS';
+const LATEST_REVIEW = 'reviewDuck/LATEST_REVIEW';
 // const CHANGE_STATUS = 'orderDuck/CHANGE_STATUS';
 // const CHANGE_ORDER_CONFIRMED_ID = 'orderDuck/CHANGE_ORDER_CONFIRMED_ID';
 // const CONFIRMED = 'orderDuck/CONFIRMED';
@@ -15,7 +15,7 @@ const REVIEW_BY_USER_AND_PRODUCT = 'reviewDuck/REVIEW_BY_USER_AND_PRODUCT';
 export const currentTabName = createAction(CURRENT_TAB_NAME);
 export const fetchReviews = createAction(FETCH_REVIEWS);
 export const getReviewByUserAndProduct = createAction(REVIEW_BY_USER_AND_PRODUCT);
-// export const getCurrentStatus = createAction(CURRENT_STATUS);
+export const getLatestReviews = createAction(LATEST_REVIEW);
 // export const changeStatus = createAction(CHANGE_STATUS);
 // export const changeOrderForConfirm = createAction(CHANGE_ORDER_CONFIRMED_ID);
 // export const changeConfirmed = createAction(CONFIRMED);
@@ -27,6 +27,7 @@ const initialStateApp = {
   tabName : 'desc',
   reviewsByProduct :[],
   reviewByUserAndProduct :{},
+  latestReviews : []
 };
 
 
@@ -41,6 +42,16 @@ export const fetchCurrentProductsReviews = (productId) => async(dispatch) => {
     try {
       const data = await(await fetch(`${root}/api/review/list/${productId}`)).json();
       dispatch(fetchReviews(data));
+
+    } catch (e) {
+      console.log('error from reviewDuck', e)
+    }
+};
+
+export const fetchLatestReviews = () => async(dispatch) => {
+    try {
+      const data = await(await fetch(`${root}/api/review/latest`)).json();
+      dispatch(getLatestReviews(data));
 
     } catch (e) {
       console.log('error from reviewDuck', e)
@@ -68,26 +79,6 @@ export const fetchAddReviewByUser = (userId, productId) => async (dispatch) => {
     console.log('error from orderDuck', e)
   }  
 };
-
-// export const fetchProductsByOrder = (val, arr) => (dispatch) => {
-//   if (arr) {
-//     fetch(`${root}/package/product/${arr}`) 
-//     .then((res) => res.json())
-//     .then((res) => {
-   
-//       dispatch(fetchProducts({
-//         [val]:res
-//       }));
-//     })
-//     .catch((e) => console.log('error from orderDuck', e));
-    
-//   }
-
-// };
-// export const getOrderStatus = (id) => (dispatch) => {
-//   dispatch(getCurrentStatus(id))
-// }
-
 
 
 

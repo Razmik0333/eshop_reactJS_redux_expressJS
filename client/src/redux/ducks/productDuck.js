@@ -21,6 +21,7 @@ const VIEWED_PRODUCTS = 'productDuck/VIEWED_PRODUCTS';
 const VIEWED_PRODUCTS_DATA = 'productDuck/VIEWED_PRODUCTS_DATA';
 const EVALUATED_PRODUCTS_DATA = 'productDuck/EVALUATED_PRODUCTS_DATA';
 const EVALUATED_PRODUCT_ITEM = 'productDuck/EVALUATED_PRODUCT_ITEM';
+const CLEAR_PRODUCT_REVIEW = 'productDuck/CLEAR_PRODUCT_REVIEW';
 
 
 export const getProducts = createAction(FETCH_PRODUCTS);
@@ -44,6 +45,7 @@ export const changeViewedProducts = createAction(VIEWED_PRODUCTS);
 export const changeViewedProductsData = createAction(VIEWED_PRODUCTS_DATA);
 export const changeProductReviewData = createAction(EVALUATED_PRODUCTS_DATA);
 export const changeEvaluatedProductItem = createAction(EVALUATED_PRODUCT_ITEM);
+export const clearProductReviewData = createAction(CLEAR_PRODUCT_REVIEW);
 
 
 export const clearSearchData = (arr) => (dispatch) => {
@@ -51,6 +53,9 @@ export const clearSearchData = (arr) => (dispatch) => {
 };
 export const clearHintsData = (arr) => (dispatch) => {
   dispatch(getHintsData(arr));
+};
+export const clearProductReview = () => (dispatch) => {
+  dispatch(clearProductReviewData({}));
 };
    
 export const changeProductReview = (product_id, productItem) => (dispatch) => {
@@ -401,7 +406,11 @@ function ProductDuck(state = initialStateApp, action) {
             ...action.payload,
         }}
       };
-      
+    case CLEAR_PRODUCT_REVIEW :
+      return {
+        ...state,
+        productReview:{}
+      }
     default:
       return state;
   }

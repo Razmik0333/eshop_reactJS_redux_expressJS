@@ -11,3 +11,7 @@ module.exports.reviewById = async (req, res) => {
      const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? AND product_id = ? ", [userId,productId]);
      res.send(reviews);
 }
+module.exports.getLatestReviews = async(req, res) => {
+     const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 3");
+     res.send(reviews);
+}

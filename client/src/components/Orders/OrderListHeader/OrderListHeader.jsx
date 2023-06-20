@@ -34,7 +34,7 @@ function OrderListHeader({ind, id, status, price}) {
                               {orderListHeader?.status} ։ {getStatus(+status)?.title} 
                          </li>
                          {
-                              statusIndex === 3 &&
+                              statusIndex === 4 &&
                               <li className="order__list__header__item remove"
                                    data-id={`${id}`}
                                    onClick={changeRemoveOrder}

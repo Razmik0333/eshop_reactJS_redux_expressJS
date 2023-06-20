@@ -25,9 +25,9 @@ function OrderListFooter({ind}) {
      const userObject = getOrdersFromStatus(orders, statusIndex);
      return (
           <>
-               <button data-id={userObject[ind]?.id}  className={statusIndex === 3 ?  "confirm_receipt" : 'confirm_receipt_active'}
+               <button data-id={userObject[ind]?.id}  className={statusIndex === 3 || statusIndex === 4 ?  "confirm_receipt" : 'confirm_receipt_active'}
                onClick={confirmOrder}
-               disabled={statusIndex === 3}
+               disabled={statusIndex === 3 || statusIndex === 4}
                >
                     {orderConfirm?.confirm}
                </button>
