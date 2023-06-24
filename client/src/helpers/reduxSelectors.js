@@ -54,6 +54,8 @@ export const isConfirmedSelector = ({ OrderDuck }) => OrderDuck.isConfirmed; //
 export const getDeliveredOrdersByUserSelector = ({ OrderDuck }) => OrderDuck.deliveredOrders; //
 export const getCurrentTabNameSelector = ({ ReviewDuck }) => ReviewDuck.tabName; //
 export const getReviewsByProductSelector = ({ ReviewDuck }) => ReviewDuck.reviewsByProduct; //
+export const getLatestReviewsSelector = ({ ReviewDuck }) => ReviewDuck.latestReviews; //
+export const getReviewIdSelector = ({ ReviewDuck }) => ReviewDuck.reviewId; //
 export const getReviewByProductIdAndUserId = ({ ReviewDuck }) => ReviewDuck.reviewByUserAndProduct; //
 export const getWishListIdsSelector = ({ WishListDuck }) => WishListDuck.wishList; //
 export const getWishListDataSelector = ({ WishListDuck }) => WishListDuck.wishListData; //

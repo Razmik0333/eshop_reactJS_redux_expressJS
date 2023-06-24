@@ -366,3 +366,7 @@ export const getCategoryFromProductId = (arr, id) => {
      
      return arr[id]?.category
 }
+
+export const getTime = (time) => {
+    return time < 10 ? `0${time}` : time
+}
