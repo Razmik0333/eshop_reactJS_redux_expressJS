@@ -1,42 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import { currentProductIdSelector, currentProductSelector, getDeliveredOrdersByUserSelector, getEvaluateSelector, getReviewByProductIdAndUserId, getUserId, modalCloseSelector, productReviewDataSelector } from '../../../../helpers/reduxSelectors';
+import React, { useState } from 'react'
+import { getEvaluateSelector, getUserId, productReviewDataSelector } from '../../../../helpers/reduxSelectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductsByOrderId } from '../../../../redux/ducks/orderDuck';
-import { hasValueInObject } from '../../../../helpers/functions/functions';
 import Rating from '../../../Base/Rating/Rating';
 import { root } from '../../../../helpers/constants/constants';
-import { changeModal } from '../../../../redux/ducks/configsDuck';
 import './styles/_evaluate-content.scss'
-import { fetchReviewByUserAndProduct } from '../../../../redux/ducks/reviewDuck';
-import { changeEvaluatedProducts, changeEvaluatedProductsData, changeProductReview } from '../../../../redux/ducks/productDuck';
-export default function EvaluateContent({product}) {
+import { changeProductReview } from '../../../../redux/ducks/productDuck';
+export default function EvaluateContent({product, ind}) {
      const dispatch = useDispatch();
-     const currentUserId = useSelector(getUserId);
-     const currentProductId = useSelector(currentProductIdSelector);
+     const userId = useSelector(getUserId);
      const productReview = useSelector(productReviewDataSelector)
-     const reviewItem = useSelector(getReviewByProductIdAndUserId);
      const [userReview, setUserReview] = useState(productReview?.[product?.id]?.review);     
-     //console.log("🚀 ~ file: EvaluateContent.js:17 ~ EvaluateContent ~ userReview:", userReview)
-     const currentProduct = useSelector(currentProductSelector);
-     const deliveredOrders = useSelector(getDeliveredOrdersByUserSelector);
-
-     const purchacedByUser = hasValueInObject(+currentProduct?.id,deliveredOrders);
+     const evaluateOrderId = useSelector(getEvaluateSelector)
      const changeUserReview = (e) => {
           setUserReview(e.target.value);
           dispatch(changeProductReview(
                product?.id,{
                     review : e.target.value
-               }))
+               }
+          ))
      }
 
   return (
-     <div className="product__review__content">
+     <div className="product__review__content"  >
           <div className="picture__item">
-               <img src={`${root}/images/${product?.id}.jpg`} alt="" />
+               <img src={`${root}/images/products/${product?.id}.jpg`} alt="" />
           </div>
           <p className="product_desc">
                {product?.descr}
           </p>
+          <input type="hidden" name="order_id" value={evaluateOrderId} onChange={() =>{}} />
+          <input type="hidden" name="user_id" value={userId} onChange={() =>{}} />
           <input type="hidden" name="product_id" value={product?.id} onChange={() =>{}} />
           <div className="product__rating__add">
                <p className="product__review__add">Your rating</p>
@@ -47,6 +40,10 @@ export default function EvaluateContent({product}) {
                     </div>
                     <span className="review__good">Good</span>
                </div>
+          </div>
+          <div className="product__review__picture">
+               <input type="file" name={`${product?.id}`} id="" multiple accept="image/jpeg" />
+               <div className="product__review__picture__header">Insert Picture</div>
           </div>
           <div className="product__review__text">
                <p>Your Review</p>

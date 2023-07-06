@@ -1,54 +1,30 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import EvaluateContent from './EvaluateContent/EvaluateContent';
 import { getEvaluateProductsSelector, getEvaluateSelector, getReviewByProductIdAndUserId, getUserDataSelector, modalCloseSelector, productReviewDataSelector } from '../../../helpers/reduxSelectors';
 import { useState } from 'react';
 import { changeModal } from '../../../redux/ducks/configsDuck';
-import { fetchProductsByOrderId } from '../../../redux/ducks/orderDuck';
+import { fetchProductsByOrderId, getOrderStatus } from '../../../redux/ducks/orderDuck';
 import { useEffect } from 'react';
 import { root } from '../../../helpers/constants/constants';
 import { clearProductReview } from '../../../redux/ducks/productDuck';
 import Modal from '../../Base/Modal/Modal';
-import { useNavigate } from 'react-router-dom';
 
 export default function Evaluate() {
      const dispatch = useDispatch();
-     const navigate = useNavigate()
-     const reviewItem = useSelector(getReviewByProductIdAndUserId);
+     const formRef = useRef(null);
      const currentUser = useSelector(getUserDataSelector);
      const modalIsClose = useSelector(modalCloseSelector);
 
      const [userName, setUserName] = useState(currentUser?.name);
      const [userEmail, setUserEmail] = useState(currentUser?.email);
      const evaluateOrderId = useSelector(getEvaluateSelector)
-     console.log("🚀 ~ file: Evaluate.jsx:19 ~ Evaluate ~ evaluateOrderId:", evaluateOrderId)
      useEffect(() => {
           dispatch(fetchProductsByOrderId(evaluateOrderId));
-          //dispatch(fetchReviewByUserAndProduct(currentUserId,product?.id))
-
      }, []);
-     /*{
-          products : [
-               product_id : {
-                    rating,
-                    review,
-               },
-               product_id : {
-                    rating,
-                    review,
-               },
-               product_id : {
-                    rating,
-                    review,
-               }
-          ]
-          user_id,
-          name,
-          email
-     }*/
+
      const evaluatedProducts = useSelector(getEvaluateProductsSelector);
      const productReview = useSelector(productReviewDataSelector)
-     console.log("🚀 ~ file: Evaluate.jsx:43 ~ Evaluate ~ productReview:", productReview)
      const changeUserName = (e) => {
           setUserName(e.target.value)
      }
@@ -56,27 +32,27 @@ export default function Evaluate() {
           setUserEmail(e.target.value)
      }
      const handleSendReview = async(e) => {
-
+          e.preventDefault();
+          const data = new FormData(formRef.current);
+          data.evaluate = {
+               review:productReview,
+               orderId:evaluateOrderId,
+               user : {
+                    userId: currentUser?.id,
+                    userName,
+                    userEmail
+               }
+          }   
           await fetch(`${root}/api/product/evaluate`, {
                method: 'POST',
-               headers: {
-                    "Content-Type":"application/json"
-               },
-               body: JSON.stringify({
-                    review:productReview,
-                    orderId:evaluateOrderId,
-                    user : {
-                         userId: currentUser?.id,
-                         userName,
-                         userEmail
-                    }
-               })    
+               body: data
           })
           .then(res => res.json())
           .then(res => {
                if( res === '1'){
                     dispatch(clearProductReview());
                     dispatch(changeModal(true))
+                    dispatch(getOrderStatus(4))
                     //navigate('/orders')
                }
           })
@@ -91,10 +67,12 @@ export default function Evaluate() {
 
           }
           <div className="container">
-               <div className="product__review">
+               <form className="product__review" method="POST" ref={formRef} onSubmit={handleSendReview} encType="multipart/form-data">
                     {
-                         evaluatedProducts.map(product => {
-                         return <EvaluateContent product={product} key={`evaluate_${product?.id}`} />
+                         evaluatedProducts.map((product, pos) => {
+                         return <>
+                              <EvaluateContent product={product} ind = {pos}  key={`evaluate_${product?.id}`} />
+                         </>
                          
                          })
                     }
@@ -121,7 +99,7 @@ export default function Evaluate() {
                          <button className="continue" onClick={handleSendReview}>CONTINUE</button>
                     </div>
 
-               </div>
+               </form>
           </div>
 
      </>

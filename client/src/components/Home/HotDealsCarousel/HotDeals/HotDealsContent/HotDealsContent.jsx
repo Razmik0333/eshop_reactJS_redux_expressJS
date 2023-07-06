@@ -45,7 +45,7 @@ function HotDealsContent() {
                <div className="hot__deals__content">
                     <div className="hot-deals-picture-part">
                          <div className="hot-deals-picture">
-                              <img src={`${root}/images/${arr?.id}.jpg`} alt="" />
+                              <img src={`${root}/images/products/${arr?.id}.jpg`} alt="" />
                               <button type="button" className="add-cart" data-id={arr?.id}>
                                    
                                    <span className="add-cart-text"

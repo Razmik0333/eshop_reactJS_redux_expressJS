@@ -6,7 +6,6 @@ const getTokensForQuery = functions.query;
 
 module.exports.cartById = async (req, res) => {
      const userId = req.params.user_id;
-     const productCount = req.params.count;     
      const [cartByUser] = await realyze("SELECT cart FROM `user_interest` WHERE `user_id`= ? ", [userId]); 
      if (cartByUser === undefined) {
           await realyze("INSERT INTO `user_interest`(user_id, wish, cart) VALUES ( ?, ?, ?)  ", [userId, '', ''])

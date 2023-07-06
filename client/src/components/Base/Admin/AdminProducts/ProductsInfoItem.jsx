@@ -72,8 +72,7 @@ function ProductsInfoItem({product}) {
                          onClick={getProductId}
                          className="link__action"
                          >
-                          Update
-
+                         Update
                     </NavLink>
                </div>
                <div className="product__item__data__info">
@@ -86,7 +85,6 @@ function ProductsInfoItem({product}) {
                </div>
           </div>
           </>
-        
      )    
 }
 

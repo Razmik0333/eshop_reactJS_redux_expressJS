@@ -29,8 +29,6 @@ function ProductCreateUpdate() {
 
      useEffect(() => {
           dispatch(fetchProductItem(currentProductId))
-
-          
      }, []);
      useEffect(() => {
         setProductName(currentProduct?.descr);
@@ -122,7 +120,8 @@ function ProductCreateUpdate() {
                                    value={`${categories[selectedCat- 1]?.arm_name}`} 
                                    onChange={() => {}} 
                                    />
-                         { currentProduct &&
+                         { 
+                              currentProduct &&
                               <input 
                                    type="hidden" 
                                    name="id" 
@@ -138,15 +137,14 @@ function ProductCreateUpdate() {
                                    name="descr" 
                                    id="" 
                                    placeholder="Enter  Description" 
-                                   value={  productName}
+                                   value={productName}
                                    onChange={(e) => {
                                         setProductName(e.target.value)
                                    }}
                               />
-
                          </div>
                          <div className="form__item">
-                               <div className="form__item__header">Description</div>
+                              <div className="form__item__header">Description</div>
                               <textarea 
                               type="text" 
                               name="main" 

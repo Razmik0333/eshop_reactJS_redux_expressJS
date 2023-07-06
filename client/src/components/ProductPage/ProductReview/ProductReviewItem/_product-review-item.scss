@@ -1,0 +1,28 @@
+.reviews{
+     display: flex;
+     flex-direction: column;
+     padding: 10px;
+     outline: 1px solid #c2c2c2;
+     .user__info{
+          width: 10%;
+          padding: 10px;
+     }
+     .review__info{
+          width: 75%;
+          height: 75px;
+          padding: 5px;
+          .product__name{
+               margin-top: 10px;
+          }
+     }
+     .review_pictures{
+          width: 100%;
+          height: auto;
+          padding: 5px;
+          img{
+               width: 120px;
+               height: auto;
+               margin-left: 10px;
+          }
+     }
+}

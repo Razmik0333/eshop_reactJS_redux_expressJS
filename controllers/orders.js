@@ -18,8 +18,6 @@ module.exports.getProductsByOrder = async (req, res) => {
      const orderId = req.params.id;
      const order = await realyze(`SELECT * FROM orders WHERE id = ? `, [orderId]);
      const [resArray] = await getProductsFromOrdersList(order)
-
-     console.log("🚀 ~ file: orders.js:21 ~ module.exports.getProductsByOrder= ~ resArray:", resArray)
      res.send(resArray?.user_order)
 }
 module.exports.ordersByStatus = async (req, res) => {

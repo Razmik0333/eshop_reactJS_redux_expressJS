@@ -1,8 +1,6 @@
 function ProductsInfoHeader() {
      return (
           <>
-
-
                <div className="products__info__titles">
                     <div className="product__title"><input type="checkbox"/></div>
                     <div className="product__title">Number</div>

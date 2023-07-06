@@ -156,7 +156,7 @@ function OrderUpdate() {
                                                   currentOrderProducts.map((item,ind) => {
                                                        return <li className="current__order__info" key={`current__order__${ind}`}>
                                                             <>
-                                                            <img src={`${root}/images/${item.id}.jpg`} alt="" />X 
+                                                            <img src={`${root}/images/products/${item.id}.jpg`} alt="" />X 
                                                             <span>{`${item?.quantity}հտ`}</span>
                                                             </>
 

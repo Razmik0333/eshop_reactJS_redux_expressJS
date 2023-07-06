@@ -30,8 +30,8 @@ module.exports.create = async(req, res) => {
 
 module.exports.update = async(req, res) => {
      const body = req.body;
-       await realyze("UPDATE `products` SET category = ?, alias= ?, arm_name=?, descr= ?, cost= ?, discount= ?, is_recomended= ?, availability= ?, main= ?, `1c_articul`= ?, time_add= ? WHERE id = ?",
-            [body.category, body.alias,  body.arm_name, body.descr, body.cost, body.discount, body.is_recomended, body.availability,body.main, body[`1c_articul`], Date.now(), body.id])
-       const updatedProduct = await realyze("SELECT * FROM products WHERE id = ? ", [body?.id])
+     await realyze("UPDATE `products` SET category = ?, alias= ?, arm_name=?, descr= ?, cost= ?, discount= ?, is_recomended= ?, availability= ?, main= ?, `1c_articul`= ?, time_add= ? WHERE id = ?",
+          [body.category, body.alias,  body.arm_name, body.descr, body.cost, body.discount, body.is_recomended, body.availability,body.main, body[`1c_articul`], Date.now(), body.id])
+     const updatedProduct = await realyze("SELECT * FROM products WHERE id = ? ", [body?.id])
      res.send(updatedProduct)
 }

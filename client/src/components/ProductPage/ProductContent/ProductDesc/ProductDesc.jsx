@@ -53,8 +53,8 @@ function ProductDesc({currentProduct}) {
                     <div className="product stars">
                          <RatingMapping rating = {rating} />
                      </div>
-                    <span className="reviews">
-                         <span className="reviews__count">{reviewsByProduct.length} {product_page_content?.reviews}</span> {/* 0 ->  */}
+                    <span className="reviews__desc">
+                         <span className="reviews__count">{reviewsByProduct.length} {reviewsByProduct.length <= 1 ? product_page_content?.review : product_page_content?.reviews }</span> {/* 0 ->  */}
                          <a href="/">{product_page_content?.add_review}</a>
                     </span>
                </div>

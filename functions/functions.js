@@ -37,7 +37,7 @@ const upload = () => {
 }
 
 const getProductsFromOrdersList = async (arr) => {
-     return  await Promise.all(arr.map(async(item,pos) => {
+          return  await Promise.all(arr.map(async(item,pos) => {
           const user_order = JSON.parse(item?.user_order);
           const productsKeys = Object.keys(user_order);
           const productsValues = Object.values(user_order);

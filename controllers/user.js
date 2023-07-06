@@ -25,16 +25,13 @@ module.exports.login = async (req, res) => {
 
 module.exports.register = async (req, res) => {
      const user = req.body;
-     console.log("🚀 ~ file: user.js:28 ~ module.exports.register= ~ user:", user)
      const passwordHash = await bcrypt.hash(user.password, 10)
      const emailExist = await realyze("SELECT * FROM `user` WHERE `email` = ? OR `login` = ? ", [user.email, user.login])
-     console.log("🚀 ~ file: user.js:31 ~ module.exports.register= ~ emailExist:", emailExist)
      if(emailExist.length === 0){
           await realyze("INSERT INTO `user` (login, password, email, name, gender, role, time_add) VALUES ( ?, ?, ?, ?, ?, ?, ?) ",
           [user.login, passwordHash, user.email, user.name, user.gender,'user', Date.now()]);
           res.send('1')
      }else{
-
           res.send('0')
      }
 }

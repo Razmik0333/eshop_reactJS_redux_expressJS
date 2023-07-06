@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path')
 const realyze = require('../config').realyze;
 const functions = require('../functions/functions')
 
@@ -32,10 +30,8 @@ module.exports.filteredProducts = async (req, res) => {
 }
 module.exports.productById = async (req, res) => {
      const [result] = await realyze("SELECT * FROM `products` WHERE `id` = ? ", [req.params.id]);
-     result['url'] = `/images/${req.params.id}.jpg`;
+     result['url'] = `/images/products/${req.params.id}.jpg`;
      res.send(result);
-     
-
 }
 module.exports.productsByIds = async (req, res) => {
      const ids = req.params.ids;
@@ -99,15 +95,21 @@ module.exports.sold = async (req, res) => {
 }
 
 module.exports.evaluateProducts = async( req, res) => {
-     const products = req.body.review;
-     const user = req.body.user;
-     const orderId = req.body.orderId;
-     console.log(req.body);
-     for (const key in products) {
-          realyze("INSERT INTO reviews (user_id, product_id, rating, review, user_name, user_email, time_add) VALUES (?, ?, ?, ?, ?, ?, ?)", 
-          [user?.userId, key, products[key]?.rating, products[key]?.review, user?.userName, user?.userEmail, `${Date.now()}`]
+     const {
+          rating,
+          review,
+          user_name,
+          product_id,
+          user_id,
+          order_id,
+          user_email
+     } = req.body;
+     product_id.forEach((item, pos) => {
+          realyze("INSERT INTO reviews (user_id,order_id, product_id, rating, review, user_name, user_email, time_add) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+          [user_id[0], order_id[0], item, rating[pos], review[pos], user_name, user_email, `${Math.floor(Date.now()/1000)}`]
           )
-     }
-     realyze("UPDATE `orders` SET `user_status` = ? WHERE id = ? ", [4, orderId])
+     })
+
+     realyze("UPDATE `orders` SET `user_status` = ? WHERE id = ? ", [4, order_id[0]])
      res.send(JSON.stringify('1'))
 }
