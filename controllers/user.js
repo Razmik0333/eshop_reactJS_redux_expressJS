@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
-
-
+const path = require('path')
+const fsPromises = require('fs/promises')
 const realyze = require('../config').realyze
 
 
@@ -35,3 +35,19 @@ module.exports.register = async (req, res) => {
           res.send('0')
      }
 }
+
+module.exports.avatar = async (req, res) => {
+    // console.log(  `/images/users/${req.body.user_id}`);
+    try {
+     const url = `/images/users/${req.body.user_id}`
+     const files =  await fsPromises.readdir(`public${url}`)
+     console.log("🚀 ~ file: user.js:44 ~ module.exports.avatar= ~ files:", files)
+     res.send(JSON.stringify(`${url}/${files[files.length - 1]}`))
+         
+    } catch (error) {
+         console.log(error);
+    }
+     //res.send(req.body.user_id))
+     
+}
+

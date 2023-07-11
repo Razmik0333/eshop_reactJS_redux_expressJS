@@ -18,7 +18,6 @@ import Buy from './components/Cart/Order/Buy';
 //import Orders from ';
 
 
-import Cabinet from './components/Base/User/cabinet/Cabinet';
 import Admin from './components/Base/Admin/admin/Admin';
 import AdminProducts from './components/Base/Admin/AdminProducts/AdminProducts';
 import ProductForm from './components/Base/Admin/AdminProducts/ProductForm';
@@ -28,6 +27,7 @@ import Wishlist from './components/Wishlist/Wishlist';
 import ViewedProducts from './components/Home/ViewedProducts/ViewedProducts';
 import Loader from './components/Base/Loader/Loader';
 import Evaluate from './components/Orders/Evaluate/Evaluate';
+import Page from './components/Base/User/cabinet/page/Page/Page';
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
 function App() {
@@ -45,8 +45,8 @@ function App() {
               element={<Register />} 
               />
               <Route
-              path="/cabinet" 
-              element={<Cabinet />} 
+              path="/page" 
+              element={<Page />} 
               />
 
               <Route

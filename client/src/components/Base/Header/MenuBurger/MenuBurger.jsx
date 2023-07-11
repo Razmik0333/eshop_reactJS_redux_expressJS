@@ -26,7 +26,7 @@ function MenuBurger() {
      }
      const goCabinet = (e) => {
           e.preventDefault();
-         return userId ? navigate('/cabinet') : navigate('/login')
+         return userId ? navigate('/page') : navigate('/login')
      }
      const goOrders = (e) => {
           e.preventDefault();
@@ -52,7 +52,7 @@ function MenuBurger() {
                                                   </li>
                                                   :
                                                   <li className="burger_list_item">
-                                                       <NavLink to={"/cabinet"} onClick={goCabinet} className="register-link">{headerLangData?.profile}</NavLink>
+                                                       <NavLink to={"/page"} onClick={goCabinet} className="register-link">{headerLangData?.profile}</NavLink>
 
                                                   </li>
 

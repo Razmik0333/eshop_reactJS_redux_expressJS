@@ -38,6 +38,7 @@ export const idProductsFromStartSelector = ({ ConfigsDuck }) => ConfigsDuck.idPr
 export const getCurrentCurrencySelector = ({ ConfigsDuck }) => ConfigsDuck.currentCurrency; //
 export const getCurrentLanguageSelector = ({ ConfigsDuck }) => ConfigsDuck.currentLanguage; //
 export const getUserId = ({ UserDuck }) => UserDuck.userId; //
+export const getAvatartUrl = ({ UserDuck }) => UserDuck.avatarURL; //
 export const getUserDataSelector = ({ UserDuck }) => UserDuck.userData; //
 export const getCartSelector = ({ CartDuck }) => CartDuck.cartData; //
 export const getCartCountSelector = ({ CartDuck }) => CartDuck.countItems; //

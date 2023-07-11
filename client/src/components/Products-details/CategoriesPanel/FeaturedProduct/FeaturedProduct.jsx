@@ -21,7 +21,7 @@ function FeaturedProduct({recommendProduct}) {
      return (
           <div className="featured__product">
                <div className="feateured__product__picture">
-                    <img src={`${root}/images/${recommendProduct.id}.jpg`} alt="" />
+                    <img src={`${root}/images/products/${recommendProduct.id}.jpg`} alt="" />
                </div>
                <div className="feateured__product__desc">
                     <p className="product__title">

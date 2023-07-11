@@ -21,7 +21,6 @@ router.get('/recommend', getRecommendedProducts);
 router.get('/filter/product/:id', getFilteredProducts);
 router.get('/product/:id', getProductById);
 router.post('/product/evaluate', uploadForReview.any(), evaluateProducts);
-//router.put('/admin/product/create', upload.single('image'), createProduct)
 router.get('/list/product/:ids', getProductsByIds);
 router.get('/cost', getProductsBetweenCosts);
 router.get('/search', getSearchedProducts);

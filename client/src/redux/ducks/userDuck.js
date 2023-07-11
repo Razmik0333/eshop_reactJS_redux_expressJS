@@ -2,14 +2,16 @@ import { createAction } from "../../helpers/redux";
 import { root } from "../../helpers/constants/constants";
 const USER_ID = 'user/USER_ID';
 const USER_DATA = 'user/USER_DATA';
+const USER_AVATAR = 'user/USER_AVATAR';
 
 export const getUserId = createAction(USER_ID);
 export const getUserDataAction = createAction(USER_DATA);
+export const getUserAvatar = createAction(USER_AVATAR);
 
 
 const initialState = {
   userId: null,
-
+  avatarURL: `${root}/icons/config/user_no_have_picture.png`,
   userData:{},
 };
 
@@ -19,6 +21,11 @@ export const currentUser = (id) => (dispatch) => {
   }else{
     dispatch(getUserId(null));
   }
+};
+export const userAvatarURL = (url) => (dispatch) => {
+
+    dispatch(getUserAvatar(url));
+  
 };
 
 export const getUserData = (id) => async(dispatch) => {
@@ -48,6 +55,11 @@ const UserDuck = (state = initialState, action) => {
       return {
         ...state,
         userData: action.payload,
+      };
+    case USER_AVATAR:
+      return {
+        ...state,
+        avatarURL: action.payload,
       };
     default:
       return state;

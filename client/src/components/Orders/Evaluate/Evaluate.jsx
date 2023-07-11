@@ -44,7 +44,7 @@ export default function Evaluate() {
                }
           }   
           await fetch(`${root}/api/product/evaluate`, {
-               method: 'POST',
+               method: "POST",
                body: data
           })
           .then(res => res.json())

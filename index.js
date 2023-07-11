@@ -1,8 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
-const path = require('path');
-const bodyParser = require('body-parser')
+
 const categoryRoutes = require('./routes/category')
 const cartRoutes = require('./routes/cart')
 const productRoutes = require('./routes/products')
