@@ -1,24 +1,39 @@
+
 .user_page_avatar{
-     padding: 20px;
+     padding: 10px;
+     cursor: pointer;
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
+     align-content: center;
+     flex-direction: column;
      .avatar{
-          width: 82px;
-          height: 82px;
+          width: 120px;
+          height: auto;
           border-radius: 50%;
           input[type=file]{
-              // display: none;
+               display: none;
           }
           img{
                cursor: pointer;
                width: 100%;
+               border-radius: 50%;
+               &:hover{
+                    background-color: #d2d0d06b;
+               }
           }
-          &:hover{
-               background-color: #d2d0d06b;
+     }
+     .user__data{
+          &:nth-child(even){
+               padding: 10px 0;
+
           }
 
      }
      .user__name{
           font-weight: 900;
           font-size: 2vw;
-          padding: 10px 0;
      }
+
+
 }

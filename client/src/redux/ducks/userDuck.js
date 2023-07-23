@@ -13,6 +13,8 @@ const initialState = {
   userId: null,
   avatarURL: `${root}/icons/config/user_no_have_picture.png`,
   userData:{},
+  
+
 };
 
 export const currentUser = (id) => (dispatch) => {
@@ -59,7 +61,10 @@ const UserDuck = (state = initialState, action) => {
     case USER_AVATAR:
       return {
         ...state,
-        avatarURL: action.payload,
+        userData: {
+          ...state.userData,
+          picture: action.payload
+        },
       };
     default:
       return state;

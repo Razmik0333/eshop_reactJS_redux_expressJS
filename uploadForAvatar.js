@@ -8,11 +8,15 @@ const storage = multer.diskStorage({
      destination: async (req, file, cb) => {
 
           try {
+               console.log(req.body);
+               
+               
                const userId = file.fieldname;
                if(!fs.existsSync(usersPath + `${userId}`)){
                     fs.mkdirSync(usersPath + `${userId}`);
                }
                else{
+                    
                     fs.readdir(usersPath + `${userId}`, (err, files) => {
                          if (err) throw err;
                        

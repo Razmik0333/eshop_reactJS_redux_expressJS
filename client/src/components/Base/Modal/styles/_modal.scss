@@ -8,21 +8,62 @@
      z-index: 99999;
      .modal__block{
           width: 40%;
-          height: 200px;
           background-color: var(--white);
           position: absolute;
           left: 30%;
           top: 10%;
           border-radius: 5px;
           text-align: center;
+          .close{
+               position: absolute;
+               right: 0;
+               cursor: pointer;
+               &:hover{
+                    fill: var(--orange);
+               }
+          }
           .modal__header{
                padding: 10px ;
                font-size: 20px;
                text-align: center;
+               margin: 10px 0;
           }
           .modal__content{
                margin-top: 10px;
                padding: 10px;
+               .user_page_avatar{
+                    padding: 10px;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: center;
+                    flex-direction: column;
+                    .avatar{
+                         width: 120px;
+                         height: auto;
+                         border-radius: 50%;
+                         input[type=file]{
+                              display: none;
+                         }
+                         img{
+                              cursor: pointer;
+                              width: 80%;
+                         }
+               
+                    }
+                    .new_avatar{
+                         .new_avatar_header{
+                              padding: 10px 0;
+                              font-weight: 600;
+                         }
+                    }
+                    .user__name{
+                         font-weight: 900;
+                         font-size: 2vw;
+                         padding: 10px 0;
+                    }
+               }
           }
           
           .modal__button{

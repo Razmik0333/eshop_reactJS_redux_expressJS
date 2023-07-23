@@ -12,7 +12,8 @@ const avatarUser = require('../controllers/user').avatar;
 router.get('/user/:id', getUserById)
 router.post('/login',  loginUser)
 router.post('/register', registerUser)
-router.post('/avatar', uploadAvatar.any(), avatarUser)
+router.post('/avatar', avatarUser)
+
 
 
 
