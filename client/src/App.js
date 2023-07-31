@@ -28,6 +28,7 @@ import ViewedProducts from './components/Home/ViewedProducts/ViewedProducts';
 import Loader from './components/Base/Loader/Loader';
 import Evaluate from './components/Orders/Evaluate/Evaluate';
 import Page from './components/Base/User/cabinet/page/Page/Page';
+import Personal from './components/Base/User/cabinet/personal/Personal/styles/Personal';
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
 function App() {
@@ -47,6 +48,10 @@ function App() {
               <Route
               path="/page" 
               element={<Page />} 
+              />
+              <Route
+              path="/personal" 
+              element={<Personal />} 
               />
 
               <Route

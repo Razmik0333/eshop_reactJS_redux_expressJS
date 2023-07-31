@@ -69,14 +69,14 @@ module.exports.avatar = async (req, res) => {
                
                     for (const file of files) {
                          fs.unlink(path.join(usersPath + `${userId}`, file), (err) => {
-                               if (err) throw err;
-                               fs.writeFile(url,data,{encoding:'base64'}, async function(err) {
-                                    if (err) throw err;
-                                     else {
-                                         const avatars =  await fsPromises.readdir(`public/images/users/${userId}`)
-                                         res.send(JSON.stringify(`/images/users/${userId}/${avatars[0]}`))
-                                    }
-                               })
+                              if (err) throw err;
+                              fs.writeFile(url,data,{encoding:'base64'}, async function(err) {
+                                   if (err) throw err;
+                                   else {
+                                        const avatars =  await fsPromises.readdir(`public/images/users/${userId}`)
+                                        res.send(JSON.stringify(`/images/users/${userId}/${avatars[0]}`))
+                                   }
+                              })
                          });
                     }
                    
@@ -94,3 +94,13 @@ module.exports.avatar = async (req, res) => {
      
 }
 
+module.exports.name = async ( req, res) => {
+     //console.log(req.body);
+     
+     const userName = req.body.user_name;
+     const userId = req.body.user_id;
+     await realyze("UPDATE user SET name = ? WHERE id = ?", [userName, userId]);
+     const [newUserName] = await realyze("SELECT * FROM user WHERE id = ?", [userId]);
+     console.log("🚀 ~ file: user.js:104 ~ module.exports.name= ~ newUserName:", [newUserName])
+     res.send(JSON.stringify(newUserName['name']));
+}

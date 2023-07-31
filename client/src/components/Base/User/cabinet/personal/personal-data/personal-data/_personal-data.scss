@@ -1,0 +1,29 @@
+.user__data{
+     display: flex;
+     flex-direction: column;
+     margin-left: 10px;
+     label{
+          padding: 10px 0;
+          button{
+               background-color: var(--white);
+               height: 30px;
+               outline: 0;
+               border: 0;
+               &:hover{
+                    background-color: var(--orange);
+               }
+               img{
+                    width: 20px;
+                    height: auto;
+                    vertical-align: middle;
+                    margin-left: 5px;
+               }
+          }
+          input{
+               width: 200px;
+               height: 30px;
+     
+          }
+
+     }
+}
