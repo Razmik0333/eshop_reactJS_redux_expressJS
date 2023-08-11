@@ -1,26 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { 
-     getOrderIdDelete,
-     getProductsCounts,
      getStatusIndex,
      getUserDataSelector,
      getUserOrders,
-     getUserProducts,
-     isConfirmedSelector,
      modalCloseSelector
 } from "../../../helpers/reduxSelectors";
-import { clearOrders,
-     fetchOrderData,
+import { 
      fetchUserOrders,
      fetchUserOrdersByStatus,
-     getOrderStatus,
 } from "../../../redux/ducks/orderDuck";
 import OrderLists from "../OrderLists/OrderLists";
-import { checkEmptyObject, getOrdersFromStatus,
-     getUserOrdersFromArray,
-     sortDesc
-} from "../../../helpers/functions/functions";
 import "./styles/_orders.scss"
 import OrderDetails from "../OrderDetails/OrderDetails";
 
@@ -45,11 +35,7 @@ function Orders() {
           setIsLoad(true);
      }, [statusIndex]);
      const orders = useSelector(getUserOrders);
-     console.log("🚀 ~ file: Orders.jsx:54 ~ Orders ~ orders:", orders)
-
-     console.log("🚀 ~ file: Orders.jsx:44 ~ Orders ~ statusIndex:", statusIndex)
-
-
+     
      return <>
           {
                modalIsClose ?

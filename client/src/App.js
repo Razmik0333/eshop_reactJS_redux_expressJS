@@ -29,6 +29,9 @@ import Loader from './components/Base/Loader/Loader';
 import Evaluate from './components/Orders/Evaluate/Evaluate';
 import Page from './components/Base/User/cabinet/page/Page/Page';
 import Personal from './components/Base/User/cabinet/personal/Personal/styles/Personal';
+import UserOrders from './components/Base/User/cabinet/user-orders/UserOrders';
+import UserProducts from './components/Base/User/cabinet/user-products/UserProducts';
+import UserReviews from './components/Base/User/cabinet/user-reviews/UserReviews';
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
 function App() {
@@ -48,6 +51,18 @@ function App() {
               <Route
               path="/page" 
               element={<Page />} 
+              />
+              <Route
+              path="/user/orders" 
+              element={<UserOrders />} 
+              />
+              <Route
+              path="/user/products" 
+              element={<UserProducts />} 
+              />
+              <Route
+              path="/user/reviews" 
+              element={<UserReviews />} 
               />
               <Route
               path="/personal" 

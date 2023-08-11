@@ -11,7 +11,7 @@ function ModalPopup() {
           <div className=" modal__popup">
               <div className="picture-block">
              
-                    <img src={`${root}/images/${pictureId}.jpg`} alt="" />
+                    <img src={`${root}/images/products/${pictureId}.jpg`} alt="" />
               </div>
 
                <div className="button-block">

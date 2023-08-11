@@ -18,7 +18,7 @@ function Modal({message}) {
                <button className="modal__button" type="button"
                 onClick={() => {
                     dispatch(changeModal(false));
-                    navigate(-1)
+                    //navigate(-1)
                }}
                >ԼԱՎ</button>
           </div>

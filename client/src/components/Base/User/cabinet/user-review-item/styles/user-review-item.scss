@@ -1,0 +1,65 @@
+.user__review__item{
+     width: 100%;
+     height: auto;
+     border-radius: 10px;
+     padding: 10px;
+     border: 2px solid var(--orange);
+     position: relative;
+          
+     .delete_button{
+          width: 30px;
+          height: 30px;
+          background-color: var(--orange);
+          cursor: pointer;
+          position: absolute;
+          right: 20px;
+          top: 20px;
+          &:hover{
+               background-color: var(--black);
+               color: var(--white);
+          }
+     }
+
+     img{
+          width:60px;
+          height: auto;
+          border-radius: 10px;
+     }
+     .user_product_item{
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          .user_product_content{
+               padding: 10px;
+               .user_product_title{
+                    font-weight: bolder;
+                    padding: 5px 0;
+               }
+               
+          }
+     }
+     .user__review__content{
+          .user_review{
+               padding: 10px 0;
+               textarea{
+                    width: 1000px;
+                    height: 50px;
+               }
+
+          }
+          .review_pictures{
+               padding: 10px 0;
+          }
+     }
+     .change_review{
+          width: 150px;
+          height: 30px;
+          background-color: var(--orange);
+          cursor: pointer;
+          &:hover{
+               background-color: var(--black);
+               color: var(--white);
+          }
+     }
+}

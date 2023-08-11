@@ -7,6 +7,7 @@ const FETCH_REVIEWS = 'reviewDuck/FETCH_REVIEWS';
 const REVIEW_BY_USER_AND_PRODUCT = 'reviewDuck/REVIEW_BY_USER_AND_PRODUCT';
 const LATEST_REVIEW = 'reviewDuck/LATEST_REVIEW';
 const REVIEW_ID = 'reviewDuck/REVIEW_ID';
+const REVIEW_BY_USER = 'reviewDuck/REVIEW_BY_USER';
 // const CHANGE_ORDER_CONFIRMED_ID = 'orderDuck/CHANGE_ORDER_CONFIRMED_ID';
 // const CONFIRMED = 'orderDuck/CONFIRMED';
 // const CLEAR_ORDER_FROM_STATUS = 'orderDuck/CLEAR_ORDER_FROM_STATUS';
@@ -16,6 +17,7 @@ export const currentTabName = createAction(CURRENT_TAB_NAME);
 export const fetchReviews = createAction(FETCH_REVIEWS);
 export const getReviewByUserAndProduct = createAction(REVIEW_BY_USER_AND_PRODUCT);
 export const getLatestReviews = createAction(LATEST_REVIEW);
+export const getReviewsByUser = createAction(REVIEW_BY_USER);
 export const getReviewId = createAction(REVIEW_ID);
 // export const changeOrderForConfirm = createAction(CHANGE_ORDER_CONFIRMED_ID);
 // export const changeConfirmed = createAction(CONFIRMED);
@@ -26,6 +28,7 @@ export const getReviewId = createAction(REVIEW_ID);
 const initialStateApp = {
   tabName : 'desc',
   reviewsByProduct :[],
+  reviewsByUser :[],
   reviewByUserAndProduct :{},
   latestReviews : [],
   reviewId : 0
@@ -62,7 +65,19 @@ export const fetchLatestReviews = () => async(dispatch) => {
       console.log('error from reviewDuck', e)
     }
 };
+export const fetchReviewsByUser = (user_id) => async(dispatch) => {
+    try {
+      const data = await(await fetch(`${root}/api/review/user/${user_id}`)).json();
+      dispatch(getReviewsByUser(data));
 
+    } catch (e) {
+      console.log('error from reviewDuck', e)
+    }
+};
+
+export const changeReviewData = (data) => async(dispatch) => {
+  dispatch(getReviewsByUser(data));
+} 
 
 export const fetchReviewByUserAndProduct = (userId, productId) => async (dispatch) => {
 
@@ -114,6 +129,11 @@ const ReviewDuck = (state = initialStateApp, action) => {
         return {
           ...state,
           reviewId: action.payload,
+        }      
+    case REVIEW_BY_USER:
+        return {
+          ...state,
+          reviewsByUser: action.payload,
         }      
     default:
       return state;

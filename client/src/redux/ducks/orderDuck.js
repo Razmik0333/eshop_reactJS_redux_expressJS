@@ -122,9 +122,9 @@ export const fetchUserOrdersByStatus = (id,status) => async(dispatch) => {
       body:JSON.stringify({
         status
       })
-    })).json()
+    })).json();
+    
     dispatch(fetchOrders(data));
-    console.log("🚀 ~ file: orderDuck.js:95 ~ fetchUserOrdersByStatus ~ data:", data)
   } catch (e) {
     console.log('error from orderDuck', e)
   }

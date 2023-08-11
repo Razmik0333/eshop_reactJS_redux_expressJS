@@ -11,7 +11,6 @@ function OrderListFooter({ind}) {
 
      const dispatch = useDispatch();
      const orderConfirm = useSelector(currentLanguageDataSelector)?.order?.header;
-     console.log("🚀 ~ file: OrderListFooter.jsx:13 ~ OrderListFooter ~ orderConfirm:", orderConfirm)
      const statusIndex = useSelector(getStatusIndex);
      const confirmOrder = (e) => { 
           dispatch(changeModal(true));         

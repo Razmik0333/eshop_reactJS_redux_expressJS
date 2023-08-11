@@ -9,7 +9,7 @@ module.exports.userById = async (req, res) => {
      try {
           const userId = req.params.id;
           const users = await realyze("SELECT * FROM `user` WHERE `id`= ? ", [userId]);
-          const modDataUser = await Promise.all(users.map(async(item) => {
+          const [modDataUser] = await Promise.all(users.map(async(item) => {
                const url = `public/images/users/${userId}`
                const files =  await fsPromises.readdir(url)
                return await {
