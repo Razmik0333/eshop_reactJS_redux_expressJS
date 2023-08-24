@@ -10,7 +10,6 @@ function Carousel() {
      const carouselRef= useRef(null);
      const [leftVal, setLeftVal] = useState(0);
      const shopNow = useSelector(currentLanguageDataSelector)?.home?.carousel?.shop_now;
-
      const arrowRight = () => {
           leftVal <  -carouselRef.current?.clientWidth ? setLeftVal(0) :
           setLeftVal(leftVal - carouselRef.current?.clientWidth);
@@ -63,10 +62,6 @@ function Carousel() {
                               <p>SAVE UP TO 50% OF ALL FURNITURE</p>
                          </div>
                     </div>
-                     
-
-               </div>
-               <div className="current__picture">
                      
 
                </div>

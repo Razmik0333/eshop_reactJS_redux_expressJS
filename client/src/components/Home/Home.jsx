@@ -17,7 +17,7 @@ function Home() {
                <LastViewedProducts />
                <SpecialOffers />
                <LatestBlog />
-               <ClientFeedback />
+               {/* <ClientFeedback /> */}
           </>
      )
 }

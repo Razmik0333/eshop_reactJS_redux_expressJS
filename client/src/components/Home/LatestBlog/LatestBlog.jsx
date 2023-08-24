@@ -1,30 +1,34 @@
+import { useEffect } from "react";
 import LatestBlogItem from "./LatestBlogItem/LatestBlogItem";
 import './styles/_latest-blog.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLatestReviews } from "../../../redux/ducks/reviewDuck";
+import { getLatestReviewsSelector, getReviewIdSelector } from "../../../helpers/reduxSelectors";
+import LatestBlogHeader from "./LatestBlogHeader/LatestBlogHeader";
+
 function LatestBlog() {
+     const dispatch = useDispatch()
+     useEffect(() => {
+          dispatch(fetchLatestReviews())
+     }, []);
+     const latestReviews = useSelector(getLatestReviewsSelector) 
+     const reviewId = useSelector(getReviewIdSelector)
+     const start = (reviewId - 1) * 3;
+
+     const filtered = latestReviews.filter((item, pos) => {
+          return pos >= start && pos <= start + 2
+     })
      return(
           <div className="latest__blog">
           <div className="container latest__blog__container">
-               <div className="latest__blog__header">
-                    <p className="latest-blog-header">
-                         LATEST BLOG
-                    </p>
-                    
-                    <div className="latest__blog_line__circles">
-                         <div className="latest__blog__line">
-     
-                         </div>
-                         <div className="circles">
-                              <div className="circle active"></div>
-                              <div className="circle"></div>
-                              <div className="circle"></div>
-                         </div>
-                    </div>
-               </div>
+               <LatestBlogHeader />
                <div className="latest__blog__content">
                     <div className="latest__blog__items">
-                         <LatestBlogItem />
-                         <LatestBlogItem />
-                         <LatestBlogItem />
+                         {
+                              filtered.map((item,pos) => {
+                                   return  <LatestBlogItem key={`latest_blog_${pos}`} blog={item} />
+                              })
+                         }
                     </div>
                </div>
           </div>

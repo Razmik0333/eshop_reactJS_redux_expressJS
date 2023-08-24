@@ -4,6 +4,7 @@ import { getUserDataSelector } from '../../../../../../helpers/reduxSelectors'
 import "./styles/_user-data.scss"
 export default function UserData() {
      const currentUser = useSelector(getUserDataSelector);
+     console.log("🚀 ~ file: UserData.jsx:7 ~ UserData ~ currentUser:", currentUser)
 
 
   return (

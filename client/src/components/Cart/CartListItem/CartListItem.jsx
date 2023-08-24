@@ -45,7 +45,7 @@ function CartListItem({product, text}) {
                {text?.sale}
                </div>
                <div className="product-pictures">
-               <img src={`${root}/images/${product.id}.jpg`} alt="" />
+               <img src={`${root}/images/products/${product.id}.jpg`} alt="" />
 
                </div>
                <div className="product-details">

@@ -1,0 +1,51 @@
+.client__feedback__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-around;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.client__feedback__content .feedback__text {
+  font-size: 14px;
+  font-weight: 300;
+  color: #818181;
+  width: 80%;
+  text-align: center;
+  margin-top: 25px;
+  line-height: 1.8;
+}
+.client__feedback__content .feedback__author {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+}
+.client__feedback__content .feedback__author .feedback__author__pictures {
+  width: 45px;
+  height: 40px;
+  border-radius: 5px;
+  vertical-align: middle;
+}
+.client__feedback__content .feedback__author .feedback__author__pictures img {
+  width: 100%;
+  height: auto;
+}
+.client__feedback__content .feedback__author .feedback__author__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 25px;
+  padding: 10px 10px 0 10px;
+}
+.client__feedback__content .feedback__author .feedback__author__info .feedback__author__name {
+  font-size: 16px;
+  color: #747474;
+}
+.client__feedback__content .feedback__author .feedback__author__info .feedback__author__type {
+  font-size: 14px;
+  color: #818181;
+  margin-top: 5px;
+}

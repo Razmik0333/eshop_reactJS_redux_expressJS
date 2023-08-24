@@ -21,11 +21,14 @@
           align-items: flex-end;
           justify-content: center;
           .feedback__author__pictures{
-               background-color: #818181;
                width: 45px;
                height: 40px;
                border-radius: 5px;
                vertical-align: middle;
+               img{
+                    width: 100%;
+                    height: auto;
+               }
           }
           .feedback__author__info{
                display: flex;

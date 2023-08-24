@@ -4,4 +4,5 @@ uploads
 public/icons
 public/images
 client/public/images
+*/dist
 .env

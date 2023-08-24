@@ -29,8 +29,7 @@ module.exports.reviewById = async (req, res) => {
      res.send(reviews);
 }
 module.exports.updateReviewById = async (req, res) => {
-     console.log(req.params);
-     console.log(req.body);
+
      
      const reviewId = req.params.review_id;
      const review = req.body.review_value;
@@ -60,8 +59,6 @@ module.exports.updateReviewById = async (req, res) => {
      //res.send(reviews);
 }
 module.exports.deleteReviewById = async (req, res) => {
-     console.log(req.params);
-     console.log(req.body);
      const userId = req.body.user_id;
 
      const reviewId = req.params.review_id;
@@ -84,9 +81,7 @@ module.exports.deleteReviewById = async (req, res) => {
           
      } catch (error) {
           console.log(error);
-          
      }
-     //res.send(reviews);
 }
 module.exports.reviewByUserId = async (req, res) => {
      
@@ -110,9 +105,38 @@ module.exports.reviewByUserId = async (req, res) => {
           console.log(error);
           
      }
-     // res.send(JSON.stringify(reviews));
 }
 module.exports.getLatestReviews = async(req, res) => {
-     const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 3");
-     res.send(reviews);
+     const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 9");
+     
+     try {
+          const modReviews = await Promise.all(reviews.map(async(item) => {
+               const avatarUrl = `public/images/users/${item.user_id}`;
+               const productUrl = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`;
+               const productId = item.product_id;
+
+               const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
+               
+               const avatarFiles =  await fsPromises.readdir(avatarUrl);
+               const productPictures =  await fsPromises.readdir(productUrl);
+               return await {
+                    ...item,
+                    product: productItem,
+                    productPictures: productPictures,
+                    avatarPicture: avatarFiles[0],
+               }
+          }))
+          res.send(modReviews)
+          
+     } catch (error) {
+          console.log(error);
+     }
+     //res.send(reviews);
+}
+
+module.exports.getRatedReviews = async (req,res) => {
+
+     const reviews = await realyze("SELECT * FROM reviews ORDER BY rating DESC LIMIT 3");
+     console.log("🚀 ~ file: review.js:135 ~ module.exports.getRatedReviews= ~ reviews:", reviews)
+     res.send(reviews)
 }

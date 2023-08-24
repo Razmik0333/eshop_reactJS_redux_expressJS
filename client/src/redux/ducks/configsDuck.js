@@ -69,6 +69,7 @@ export const getPopupItemId = (id) => (dispatch) => {
 };
 
 
+
 export const getHotDealsTimerSecond = (second) => (dispatch) => {
   dispatch(changeHotDealsTimerSecond(second));
 };
