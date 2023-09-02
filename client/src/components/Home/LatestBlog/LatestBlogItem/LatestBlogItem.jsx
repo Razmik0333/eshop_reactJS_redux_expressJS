@@ -7,7 +7,6 @@ import { useRef } from "react";
 function LatestBlogItem({blog}) {
      const imgRef = useRef(null);
      const [leftVal, setLeftVal] = useState(0)
-     console.log("🚀 ~ file: LatestBlogItem.jsx:10 ~ LatestBlogItem ~ leftVal:", leftVal)
      const date = blog?.time_add
      const year = new Date(+date).getFullYear() 
      const month = getTime(new Date(+date).getMonth()+1)
@@ -31,8 +30,8 @@ function LatestBlogItem({blog}) {
                     ref={imgRef}
                >
                     {
-                         blog?.productPictures.map(item => {
-                              return <div className="latest__blog__item__picture">
+                         blog?.productPictures.map((item,pos) => {
+                              return <div className="latest__blog__item__picture" key={`productPictures_${pos}`}>
                                         <img src={`${root}/images/reviews/${blog?.user_id}/${blog?.order_id}/${blog?.product_id}/${item}`} alt="" />
 
                               </div>

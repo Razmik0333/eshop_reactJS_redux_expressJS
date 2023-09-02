@@ -17,13 +17,14 @@ export const currentHintsData = ({ ProductDuck }) => ProductDuck.hintsData; //
 export const maxDiscountDataSelector = ({ ProductDuck }) => ProductDuck.maxDiscountData; //
 export const productReviewDataSelector = ({ ProductDuck }) => ProductDuck.productReview; //
 export const getEvaluateProductsSelector = ({ OrderDuck }) => OrderDuck.evaluatedProducts; //
-
+export const getMostestProductSelector = ({ProductDuck}) => ProductDuck.mostestProduct;
 export const isSearchSelector = ({ NavigationDuck }) => NavigationDuck.isSearch; //
 export const isFocusedSelector = ({ NavigationDuck }) => NavigationDuck.isFocused; //
 export const showTypeSelector = ({ ConfigsDuck }) => ConfigsDuck.showType; //
 export const sortTypeSelector = ({ ConfigsDuck }) => ConfigsDuck.sortType; //
 export const hotDealsSelector = ({ ConfigsDuck }) => ConfigsDuck.hotDealsId; //
 export const languagesSelector = ({ ConfigsDuck }) => ConfigsDuck.languages; //
+export const mostestIndex = ({ ConfigsDuck }) => ConfigsDuck.mostestIndex; //
 export const currentLanguageDataSelector = ({ ConfigsDuck }) => ConfigsDuck.currentLanguageData; //
 export const currenciesSelector = ({ ConfigsDuck }) => ConfigsDuck.currencies; //
 export const countElementsSelector = ({ ConfigsDuck }) => ConfigsDuck.countItems; //

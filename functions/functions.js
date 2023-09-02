@@ -53,6 +53,39 @@ const getProductsFromOrdersList = async (arr) => {
      })) 
 }
 
+const getMostestProduct = (data, fieldName) => {
+     return data.reduce((acc, curr) => {
+          const productData = JSON.parse(curr[fieldName]);
+          for (const key in productData) {                    
+               if (!(key in acc)) {
+                    acc[key] = {
+                         count:+productData[key]
+                    }
+               }else{
+                    acc[key] = {
+                         count: +acc[key].count + +productData[key]
+                    }
+               }
+          }
+          return acc;
+     }, {});
+}
+const getMostestMaxObject = (data) => {
+     let max = 0;
+     let maxObj = {}
+     for (const key in data) {
+          if (data[key].count > max) {
+               max = data[key].count; 
+               maxObj = {
+                    product_id : key,
+                    count: max,
+                    rating: data[key].rating
+               } 
+          }
+     }
+     return maxObj;
+}
+
 module.exports = {
      solded : [
           getMaxSoldedProducts,
@@ -63,7 +96,9 @@ module.exports = {
      idsArray :getIdsArray,
      summArray:getSummArray,
      uploadFile : upload,
-     getProductsFromOrdersList :getProductsFromOrdersList
+     getProductsFromOrdersList :getProductsFromOrdersList,
+     mostestProduct: getMostestProduct,
+     mostestMaxObject: getMostestMaxObject
 
 }
 

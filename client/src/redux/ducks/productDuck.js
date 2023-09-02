@@ -1,6 +1,6 @@
 import { createAction } from '../../helpers/redux';
 import { root } from '../../helpers/constants/constants';
-import { checkEmptyObject, getBestSellers, getObjectFromSoldedOrders, numInArray } from '../../helpers/functions/functions';
+import { checkEmptyObject, getBestSellers, getMostestURL, getObjectFromSoldedOrders, numInArray } from '../../helpers/functions/functions';
 const FETCH_PRODUCTS = 'productDuck/FETCH_PRODUCTS';
 const FETCH_PRODUCTS_CATEGORY = 'productDuck/FETCH_PRODUCTS_CATEGORY';
 const FETCH_PRODUCTS_CATEGORY_LENGTH = 'productDuck/FETCH_PRODUCTS_CATEGORY_LENGTH';
@@ -22,6 +22,8 @@ const VIEWED_PRODUCTS_DATA = 'productDuck/VIEWED_PRODUCTS_DATA';
 const EVALUATED_PRODUCTS_DATA = 'productDuck/EVALUATED_PRODUCTS_DATA';
 const EVALUATED_PRODUCT_ITEM = 'productDuck/EVALUATED_PRODUCT_ITEM';
 const CLEAR_PRODUCT_REVIEW = 'productDuck/CLEAR_PRODUCT_REVIEW';
+const FETCH_MOSTEST = 'productDuck/FETCH_MOSTEST';
+const FETCH_MOSTEST_SALE = 'productDuck/FETCH_MOSTEST_SALE';
 
 
 export const getProducts = createAction(FETCH_PRODUCTS);
@@ -46,6 +48,8 @@ export const changeViewedProductsData = createAction(VIEWED_PRODUCTS_DATA);
 export const changeProductReviewData = createAction(EVALUATED_PRODUCTS_DATA);
 export const changeEvaluatedProductItem = createAction(EVALUATED_PRODUCT_ITEM);
 export const clearProductReviewData = createAction(CLEAR_PRODUCT_REVIEW);
+export const changeMostest = createAction(FETCH_MOSTEST);
+//export const changeMostestSale = createAction(FETCH_MOSTEST_SALE);
 
 
 export const clearSearchData = (arr) => (dispatch) => {
@@ -136,7 +140,6 @@ export const changeHints = (user_id, hint) => async(dispatch) =>  {
       })
     }) ).json();
 
-    console.log("🚀 ~ file: productDuck.js:110 ~ changeHints ~ data:", data)
   } catch (e) {
     console.log('error from productDuck', e)
   }  
@@ -226,11 +229,21 @@ export const fetchVerySoldedProducts = () => async(dispatch) => {
   try {
     const data = await (await fetch(`${root}/api/package/sold`)).json();
     dispatch(getVerySoldedProducts(data));
-
   } catch (e) {
     console.log('error from productDuck', e)
   }
 };
+
+export const fetchMostestProduct = (id) => async(dispatch) => {
+  const urlPath = getMostestURL(id)
+  try {
+    const data = await (await fetch(`${root}/api/mostest/${urlPath?.url}`)).json();
+    dispatch(changeMostest(data));
+  } catch (e) {
+    console.log('error from productDuck', e)
+  }
+};
+
 
 export const currentProduct = (id) => (dispatch) => {
   dispatch(getCurrentProductId(id));
@@ -266,7 +279,8 @@ export const initialStateApp = {
   rating : null,
   hintsData:[],
   productReview: {},
-  evaluatedProductItem: {}
+  evaluatedProductItem: {},
+  mostestProduct:{}
 };
 
 function ProductDuck(state = initialStateApp, action) {
@@ -410,6 +424,11 @@ function ProductDuck(state = initialStateApp, action) {
       return {
         ...state,
         productReview:{}
+      }
+    case FETCH_MOSTEST :
+      return {
+        ...state,
+        mostestProduct:action.payload
       }
     default:
       return state;

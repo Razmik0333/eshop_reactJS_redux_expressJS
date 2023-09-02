@@ -14,6 +14,10 @@ const hint = require('../controllers/products').hint;
 const hintAdd = require('../controllers/products').hintAdd;
 
 const evaluateProducts = require('../controllers/products').evaluateProducts
+const getMostestRatingProducts = require('../controllers/products').mostestRating;
+const getMostestSaleProducts = require('../controllers/products').mostestSale;
+const getMostestRecentAddProducts = require('../controllers/products').mostestRecent;
+const getMostestDesiredProducts = require('../controllers/products').mostestDesired;
 
 router.get('/main/:id', getProductsByCategory);
 router.get('/discount', getProductsByLargeDiscount);
@@ -27,6 +31,10 @@ router.get('/search', getSearchedProducts);
 router.put('/hint', hint);
 router.put('/hint/add/:hint', hintAdd);
 router.get('/package/sold', getVerySoldedProducts);
+router.get('/mostest/rating', getMostestRatingProducts);
+router.get('/mostest/sale', getMostestSaleProducts);
+router.get('/mostest/recent', getMostestRecentAddProducts);
+router.get('/mostest/desired', getMostestDesiredProducts);
 
 
 module.exports = router;

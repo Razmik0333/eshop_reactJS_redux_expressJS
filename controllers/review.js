@@ -62,7 +62,6 @@ module.exports.deleteReviewById = async (req, res) => {
      const userId = req.body.user_id;
 
      const reviewId = req.params.review_id;
-     // const productId = req.params.product_id;
      await realyze("DELETE  FROM reviews  WHERE id = ? ", [ reviewId])
      const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? ", [userId]);
      try {

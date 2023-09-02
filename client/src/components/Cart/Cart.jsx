@@ -2,18 +2,14 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { checkEmptyObject, getCartSumm } from "../../helpers/functions/functions";
-import { currentLanguageDataSelector, getCartSelector, getProductsInCart, getTotalPriceSelector, getUserId } from "../../helpers/reduxSelectors";
-import { fetchProductsByString } from "../../redux/ducks/productDuck";
+import { currentLanguageDataSelector, getCartSelector, getUserId } from "../../helpers/reduxSelectors";
 
 import CartListItem from "../Cart/CartListItem/CartListItem";
 import './styles/_cart.scss';
-import { fetchCurrentCart } from "../../redux/ducks/cartDuck";
 function Cart() {
      const dispatch = useDispatch();
      const navigate = useNavigate()
      const cartData = useSelector(getCartSelector);
-     console.log("🚀 ~ file: Cart.jsx:14 ~ Cart ~ cartData:", cartData)
-     const productsData = useSelector(getProductsInCart);
      //const cartSumm = useSelector(getTotalPriceSelector);
      const cartSumm = getCartSumm(cartData)
 

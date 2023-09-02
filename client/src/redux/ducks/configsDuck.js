@@ -17,6 +17,8 @@ const CURRENT_LANGUAGE = 'configsDuck/CURRENT_LANGUAGE';
 const CURRENT_LANGUAGE_DATA = 'configsDuck/CURRENT_LANGUAGE_DATA';
 const LANGUAGES = 'configsDuck/LANGUAGES';
 const CURRENCIES = 'configsDuck/CURRENCIES';
+const MOSTEST_OPTIONS_INDEX = 'configsDuck/MOSTEST_OPTIONS_INDEX'
+
 
 export const getShowType = createAction(CHANGE_SHOW_TYPE);
 export const getSortType = createAction(CHANGE_SORT_TYPE);
@@ -34,7 +36,7 @@ export const changeHotDealsTimerSecond = createAction(HOT_DEALS_TIMER_SECONDS);
 export const changeCurrentCurrency = createAction(CURRENT_CURRENCY);
 export const changeCurrentLanguage = createAction(CURRENT_LANGUAGE);
 export const changeCurrentLanguageData = createAction(CURRENT_LANGUAGE_DATA);
-
+export const changeCurrentMostestIndex = createAction(MOSTEST_OPTIONS_INDEX)
 
 
 export const changeShowType = (str) => (dispatch) => {
@@ -81,6 +83,9 @@ export const changeCurrency = (val) => (dispatch) => {
 };
 export const changeLanguage = (lang) => (dispatch) => {
   dispatch(changeCurrentLanguage(lang));
+};
+export const changeMostestIndex = (id) => (dispatch) => {
+  dispatch(changeCurrentMostestIndex(id));
 };
 export const changeLanguages = () => async(dispatch) => {
   try {
@@ -139,7 +144,8 @@ const initialStateConfigs = {
     currencies : [],
     currentLanguageData : [],
     idProductsFromStart : 1,
-    hotDealsTimerSeconds : 3 * 24 * 60 * 60
+    hotDealsTimerSeconds : 3 * 24 * 60 * 60,
+    mostestIndex : 0
 };
 
 const ConfigsDuck = (state = initialStateConfigs, action) => {
@@ -234,6 +240,11 @@ const ConfigsDuck = (state = initialStateConfigs, action) => {
       return {
         ...state,
         currencies: action.payload,
+      };
+    case MOSTEST_OPTIONS_INDEX:
+      return {
+        ...state,
+        mostestIndex: action.payload,
       };
     
     default:

@@ -35,6 +35,12 @@
             "money" : "MONEY BACK GUARANTEE",
             "discount" : "MEMBER dISCOUNT FIRST ORDER"
         },
+        "mostest" : [
+            "FEATURED",
+            "POPULAR",
+            "SALE OFF",
+            "TOP RATED"
+          ],
         "newest" : "NEWEST PRODUCTS"
     },
     "details" : {

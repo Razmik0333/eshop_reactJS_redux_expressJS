@@ -183,6 +183,28 @@ export const getCategoryName = (num) => {
                break;
      }
 }
+export const getMostestURL = (num) => {
+     switch (num) {
+          case "0":
+               return {
+                    url: `recent`
+               }     
+          case "1":
+               return {
+                    url: `sale`
+               }     
+          case "2":
+               return {
+                    url: `desired`
+               }     
+          case "3":
+               return {
+                    url: `rating`
+               }     
+          default:
+               break;
+     }
+}
 
 export const hasValueInObject = (val, arr) => {
      
@@ -370,3 +392,4 @@ export const getCategoryFromProductId = (arr, id) => {
 export const getTime = (time) => {
     return time < 10 ? `0${time}` : time
 }
+

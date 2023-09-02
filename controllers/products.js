@@ -5,6 +5,9 @@ const [
      getMaxSoldedProducts,
      getMaxSoldedProductIds
 ] = functions.solded
+
+const getMostestProductData = functions.mostestProduct;
+const getMostestMaxObject = functions.mostestMaxObject;
 module.exports.productsByCategory = async (req, res) => {
      const params = req.params.id;
      if (typeof +params === 'number' && !isNaN(+params)) {
@@ -36,8 +39,9 @@ module.exports.productById = async (req, res) => {
 module.exports.productsByIds = async (req, res) => {
      const ids = req.params.ids;
      const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
-     res.send(result)
+     res.send(result);
 }
+
 
 module.exports.productsBetweenCosts = async (req, res) => {
      const category = req.query.category;
@@ -113,3 +117,62 @@ module.exports.evaluateProducts = async( req, res) => {
      realyze("UPDATE `orders` SET `user_status` = ? WHERE id = ? ", [4, order_id[0]])
      res.send(JSON.stringify('1'))
 }
+
+module.exports.mostestRating = async (req, res) => {
+     const mostestData = await realyze("SELECT product_id, rating FROM reviews WHERE rating = 5 ", []);
+     const mostData = mostestData.reduce((acc, curr) => {
+          if(!(curr.product_id in acc) ){
+               acc[curr.product_id] = {
+                    rating : curr.rating,
+                    count : 1
+               }
+          }else {
+               acc[curr.product_id] = {
+                    ...acc[curr.product_id],
+                    count : ++acc[curr.product_id].count
+               }
+          }
+          return acc;
+     },{});
+     let max = 0;
+     let maxObj = {}
+     for (const key in mostData) {
+          if (mostData[key].count > max) {
+               max = mostData[key].count; 
+               maxObj = {
+                    product_id : key,
+                    count: max,
+                    rating: mostData[key].rating
+               } 
+          }
+     }
+     const [maxRated] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
+     res.send(JSON.stringify(maxRated))
+}
+
+module.exports.mostestSale = async(req, res) => {
+     const saleProducts = await realyze("SELECT user_order FROM orders WHERE user_status = 4 ", []);
+     const productsCounts = getMostestProductData(saleProducts,"user_order")
+    const maxObj = getMostestMaxObject(productsCounts);
+     const [maxSaled] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
+     res.send(JSON.stringify(maxSaled))
+}
+
+module.exports.mostestRecent = async(req, res) => {
+     const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products ")
+     const [recentAddedProduct] = await realyze("SELECT * FROM products WHERE id = ? ", [lastProductId.max])
+     res.send(JSON.stringify(recentAddedProduct))
+}
+
+
+module.exports.mostestDesired = async(req, res) => {
+     const cartsByUsers = await realyze("SELECT cart FROM user_interest");
+     const filteredCart = cartsByUsers.filter(item => Boolean(item.cart) === true);
+     const desiredProducts = getMostestProductData(filteredCart,"cart")
+     const maxObj = getMostestMaxObject(desiredProducts);
+     const [maxDesired] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
+     
+     res.send(JSON.stringify(maxDesired))
+}
+
+

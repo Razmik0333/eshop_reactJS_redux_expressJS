@@ -31,7 +31,7 @@ const initialStateApp = {
   reviewsByUser :[],
   reviewByUserAndProduct :{},
   latestReviews : [],
-  reviewId : 0
+  reviewId : 1
 };
 
 

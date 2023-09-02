@@ -36,6 +36,12 @@
               "money" : "ԳՈՒՄԱՐԻ ՎԵՐԱԴԱՐՁԻ ԵՐԱՇԽԻՔ",
               "discount" : "ԶԵՂՉ ԱՌԱՋԻՆ ՊԱՏՎԵՐԻ ՀԱՄԱՐ"
           },
+          "mostest" : [
+            "RECENT",
+            "POPULAR",
+            "DESIRED",
+            "TOP RATED"
+          ],
           "newest" : "ԱՄԵՆԱՆՈՐ ԱՊՐԱՆՔՆԵՐԸ"
       },
       "details" : {

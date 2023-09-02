@@ -5,14 +5,17 @@ import { fetchVerySoldedProducts } from "../../../redux/ducks/productDuck";
 import Product from "../../Base/Product/Product";
 import './styles/_newest-products-header.scss';
 function BestSellers() {
-     const dispatch = useDispatch()
+     const dispatch = useDispatch();
+
      useEffect(() => {
           dispatch(fetchVerySoldedProducts())
           
      }, []);
+     const langData = useSelector(currentLanguageDataSelector);
      const ordersBestSellers = useSelector(verySoldedProductsSelector);
-     const bestSellers = useSelector(currentLanguageDataSelector)?.product_page;
-     const productItemText = useSelector(currentLanguageDataSelector)?.product_item;
+     console.log("🚀 ~ file: BestSellers.jsx:14 ~ BestSellers ~ ordersBestSellers:", ordersBestSellers)
+     const bestSellers = langData?.product_page;
+     const productItemText = langData?.product_item;
 
      return (
           <div className="newest__products">
