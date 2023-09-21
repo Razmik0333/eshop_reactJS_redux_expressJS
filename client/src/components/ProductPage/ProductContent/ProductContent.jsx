@@ -10,7 +10,6 @@ function ProductContent() {
      const dispatch = useDispatch();
      const currentProductId = useSelector(currentProductIdSelector) 
      const currentProduct = useSelector(currentProductSelector);
-     console.log("🚀 ~ file: ProductContent.jsx:13 ~ ProductContent ~ currentProduct:", currentProduct)
 
      useEffect(() => {
           dispatch(fetchCurrentProduct(currentProductId));

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const getReviewList = require('../controllers/review').reviewList;
+const getRatingList = require('../controllers/review').ratingCounts;
 const getReviewById = require('../controllers/review').reviewById;
 const getLatestReviews = require('../controllers/review').getLatestReviews;
 const getReviewsByUser = require('../controllers/review').reviewByUserId;
@@ -10,6 +11,7 @@ const deleteReviewById = require('../controllers/review').deleteReviewById;
 const getRatedReviews = require('../controllers/review').getRatedReviews;
 
 router.get('/review/list/:id', getReviewList);
+router.get('/rating/count/:id', getRatingList);
 router.get('/review/user/:user_id', getReviewsByUser);
 router.get('/review/item/:user_id/:product_id', getReviewById);
 router.get('/review/latest', getLatestReviews);

@@ -13,7 +13,6 @@ function BestSellers() {
      }, []);
      const langData = useSelector(currentLanguageDataSelector);
      const ordersBestSellers = useSelector(verySoldedProductsSelector);
-     console.log("🚀 ~ file: BestSellers.jsx:14 ~ BestSellers ~ ordersBestSellers:", ordersBestSellers)
      const bestSellers = langData?.product_page;
      const productItemText = langData?.product_item;
 

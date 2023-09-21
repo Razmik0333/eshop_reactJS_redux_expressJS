@@ -2,7 +2,6 @@ const realyze = require('../config').realyze
 const fsPromises = require('fs/promises');
 module.exports.reviewList = async (req, res) => {
      const productId = req.params.id;
-     console.log("🚀 ~ file: review.js:5 ~ module.exports.reviewList= ~ productId:", productId)
      const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ? ", [productId]);
      try {
           const newReviews = await Promise.all(reviews.map(async(item) => {
@@ -14,6 +13,7 @@ module.exports.reviewList = async (req, res) => {
 
                }
           }))
+          
           res.send(newReviews)
           
      } catch (error) {
@@ -28,9 +28,25 @@ module.exports.reviewById = async (req, res) => {
      const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? AND product_id = ? ", [userId,productId]);
      res.send(reviews);
 }
-module.exports.updateReviewById = async (req, res) => {
+module.exports.ratingCounts = async (req, res) => {
+     const productId = req.params.id;
+     const reviews = await realyze("SELECT id, rating FROM reviews WHERE product_id = ? ", [productId]);
+     const ratingCounts = reviews.reduce((acc, curr) => {
+          if (!(curr.rating in acc)) {
+               acc[curr.rating] = {
+                    count : 1
+               }
+          }else{
+               acc[curr.rating] = {
+                    count : +acc[curr.rating].count + 1
+               }
+          }
+          return acc
+     },{})
+     res.send(ratingCounts);
+}
 
-     
+module.exports.updateReviewById = async (req, res) => {
      const reviewId = req.params.review_id;
      const review = req.body.review_value;
      const rating = req.body.rating;

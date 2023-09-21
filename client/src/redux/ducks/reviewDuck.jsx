@@ -4,6 +4,7 @@ import { root } from "../../helpers/constants/constants";
 
 const CURRENT_TAB_NAME = 'reviewDuck/CURRENT_TAB_NAME';
 const FETCH_REVIEWS = 'reviewDuck/FETCH_REVIEWS';
+const FETCH_RATINGS = 'reviewDuck/FETCH_RATINGS';
 const REVIEW_BY_USER_AND_PRODUCT = 'reviewDuck/REVIEW_BY_USER_AND_PRODUCT';
 const LATEST_REVIEW = 'reviewDuck/LATEST_REVIEW';
 const REVIEW_ID = 'reviewDuck/REVIEW_ID';
@@ -15,6 +16,7 @@ const REVIEW_BY_USER = 'reviewDuck/REVIEW_BY_USER';
 
 export const currentTabName = createAction(CURRENT_TAB_NAME);
 export const fetchReviews = createAction(FETCH_REVIEWS);
+export const fetchRatings = createAction(FETCH_RATINGS);
 export const getReviewByUserAndProduct = createAction(REVIEW_BY_USER_AND_PRODUCT);
 export const getLatestReviews = createAction(LATEST_REVIEW);
 export const getReviewsByUser = createAction(REVIEW_BY_USER);
@@ -28,6 +30,7 @@ export const getReviewId = createAction(REVIEW_ID);
 const initialStateApp = {
   tabName : 'desc',
   reviewsByProduct :[],
+  ratingList :[],
   reviewsByUser :[],
   reviewByUserAndProduct :{},
   latestReviews : [],
@@ -48,8 +51,20 @@ const initialStateApp = {
 
 export const fetchCurrentProductsReviews = (productId) => async(dispatch) => {
     try {
+      
       const data = await(await fetch(`${root}/api/review/list/${productId}`)).json();
       dispatch(fetchReviews(data));
+
+    } catch (e) {
+      console.log('error from reviewDuck', e)
+    }
+};
+
+export const fetchCurrentProductsRatings = (productId) => async(dispatch) => {
+    try {
+      
+      const data = await(await fetch(`${root}/api/rating/count/${productId}`)).json();
+      dispatch(fetchRatings(data));
 
     } catch (e) {
       console.log('error from reviewDuck', e)
@@ -133,6 +148,11 @@ const ReviewDuck = (state = initialStateApp, action) => {
         return {
           ...state,
           reviewsByUser: action.payload,
+        }      
+    case FETCH_RATINGS:
+        return {
+          ...state,
+          ratingList: action.payload,
         }      
     default:
       return state;

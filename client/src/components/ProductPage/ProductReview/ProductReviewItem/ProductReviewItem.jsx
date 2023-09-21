@@ -3,7 +3,6 @@ import RatingMapping from '../../../Base/RatingMapping/RatingMapping'
 import '../ProductReviewItem/_product-review-item.scss';
 import { root } from '../../../../helpers/constants/constants';
 export default function ProductReviewItem({review}) {
-     console.log(review);
   return (
      <div className="reviews">
      <div className="user__info">

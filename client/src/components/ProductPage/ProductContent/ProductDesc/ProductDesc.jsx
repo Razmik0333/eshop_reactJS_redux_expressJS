@@ -11,7 +11,7 @@ function ProductDesc({currentProduct}) {
      const reviewsByProduct = useSelector(getReviewsByProductSelector);
      const currentCurrency = useSelector(getCurrentCurrencySelector);
      const product_page_content = useSelector(currentLanguageDataSelector)?.product_page?.content;
-
+     
      const discountedPrice = currentProduct.cost *(1 - currentProduct.discount / 100);
 
 
@@ -19,7 +19,6 @@ function ProductDesc({currentProduct}) {
      
      const dispatch = useDispatch();
      const addProductToCart = (e) => {
-          console.log(e.target);
           
           e.stopPropagation()
           dispatch(getCartItem({

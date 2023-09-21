@@ -393,3 +393,15 @@ export const getTime = (time) => {
     return time < 10 ? `0${time}` : time
 }
 
+export const getMiddleRating = (obj) => {
+     let sumRating = 0;
+     let countRating = 0;
+     for (const key in obj) {
+          sumRating += +key * +obj[key]?.count;
+          countRating += +obj[key]?.count;
+          
+     }
+     
+     return parseFloat(sumRating / countRating).toFixed(1);
+}
+

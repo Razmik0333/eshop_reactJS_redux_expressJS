@@ -60,6 +60,7 @@ export const getLatestReviewsSelector = ({ ReviewDuck }) => ReviewDuck.latestRev
 export const getReviewIdSelector = ({ ReviewDuck }) => ReviewDuck.reviewId; //
 export const getReviewByProductIdAndUserId = ({ ReviewDuck }) => ReviewDuck.reviewByUserAndProduct; //
 export const getReviewByUserId = ({ ReviewDuck }) => ReviewDuck.reviewsByUser; //
+export const getRatingListSelector = ({ ReviewDuck }) => ReviewDuck.ratingList; //
 export const getWishListIdsSelector = ({ WishListDuck }) => WishListDuck.wishList; //
 export const getWishListDataSelector = ({ WishListDuck }) => WishListDuck.wishListData; //
 export const getViewedProductsSelector = ({ ProductDuck }) => ProductDuck.viewedProducts; //
