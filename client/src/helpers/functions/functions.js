@@ -1,4 +1,3 @@
-
 export const  getArrFromField = (arr, field) =>  {
      return arr.reduce((acc, curr) => {
           acc.push(curr[field]);

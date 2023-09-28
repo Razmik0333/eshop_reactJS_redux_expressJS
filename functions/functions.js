@@ -85,7 +85,13 @@ const getMostestMaxObject = (data) => {
      }
      return maxObj;
 }
-
+const getMiddleRating = (arr) => {
+     const summ = arr.reduce((acc, curr) => {
+              return acc += curr.rating
+     }, 0)
+     return parseFloat(summ/arr.length).toFixed(2);
+         
+}
 module.exports = {
      solded : [
           getMaxSoldedProducts,
@@ -98,7 +104,8 @@ module.exports = {
      uploadFile : upload,
      getProductsFromOrdersList :getProductsFromOrdersList,
      mostestProduct: getMostestProduct,
-     mostestMaxObject: getMostestMaxObject
-
+     mostestMaxObject: getMostestMaxObject,
+     middleRating : getMiddleRating
 }
+
 

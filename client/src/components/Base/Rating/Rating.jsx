@@ -12,7 +12,11 @@ function Rating({id, rating}) {
      const dispatch = useDispatch();
      return(
           <>
-               <input type="hidden"  value={ratingSelected ? ratingSelected : rating}  name="rating" onChange={() => {}} />
+               <input type="hidden"
+                    value={ratingSelected ? ratingSelected : rating}
+                    name="rating" 
+                    onChange={() => {}}
+               />
                <div className="product-rating" 
                     onMouseOver={(e)=> {
                          setOverRating(e.target.dataset.rating)
@@ -29,7 +33,7 @@ function Rating({id, rating}) {
                               rating
                          }))
                     }}
-                    onChange={() => {}}
+                   
                >
                {
                    

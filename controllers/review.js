@@ -1,18 +1,22 @@
-const realyze = require('../config').realyze
+const fs = require('fs')
 const fsPromises = require('fs/promises');
+const realyze = require('../config').realyze;
 module.exports.reviewList = async (req, res) => {
      const productId = req.params.id;
      const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ? ", [productId]);
      try {
           const newReviews = await Promise.all(reviews.map(async(item) => {
-               const url = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`
-               const files =  await fsPromises.readdir(url)
+               const url = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`;
+               console.log(url)
+               const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
+               //console.log("🚀 ~ file: review.js:10 ~ newReviews ~ files:", files)
                return await {
                     ...item,
                     pictures: files,
-
                }
           }))
+
+          console.log(newReviews);
           
           res.send(newReviews)
           
@@ -59,7 +63,8 @@ module.exports.updateReviewById = async (req, res) => {
                const productId = item.product_id;
                const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
                const url = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`
-               const files =  await fsPromises.readdir(url)
+               const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
+
                return await {
                     ...item,
                     product: productItem,
@@ -85,7 +90,7 @@ module.exports.deleteReviewById = async (req, res) => {
                const productId = item.product_id;
                const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
                const url = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`
-               const files =  await fsPromises.readdir(url)
+               const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
                return await {
                     ...item,
                     product: productItem,
@@ -107,7 +112,7 @@ module.exports.reviewByUserId = async (req, res) => {
                const productId = item.product_id;
                const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
                const url = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`
-               const files =  await fsPromises.readdir(url)
+               const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
                return await {
                     ...item,
                     product: productItem,
@@ -123,6 +128,7 @@ module.exports.reviewByUserId = async (req, res) => {
 }
 module.exports.getLatestReviews = async(req, res) => {
      const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 9");
+     console.log('lat');
      
      try {
           const modReviews = await Promise.all(reviews.map(async(item) => {
@@ -131,9 +137,11 @@ module.exports.getLatestReviews = async(req, res) => {
                const productId = item.product_id;
 
                const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
-               
-               const avatarFiles =  await fsPromises.readdir(avatarUrl);
-               const productPictures =  await fsPromises.readdir(productUrl);
+              // const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
+
+               const avatarFiles = fs.existsSync(avatarUrl) ?  await fsPromises.readdir(avatarUrl) : [];
+               const productPictures = fs.existsSync(productUrl) ? await fsPromises.readdir(productUrl) 
+               :[];
                return await {
                     ...item,
                     product: productItem,

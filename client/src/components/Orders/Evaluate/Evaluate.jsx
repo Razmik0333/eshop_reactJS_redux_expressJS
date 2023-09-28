@@ -7,7 +7,7 @@ import { changeModal } from '../../../redux/ducks/configsDuck';
 import { fetchProductsByOrderId, getOrderStatus } from '../../../redux/ducks/orderDuck';
 import { useEffect } from 'react';
 import { root } from '../../../helpers/constants/constants';
-import { clearProductReview } from '../../../redux/ducks/productDuck';
+import { changeProductsRating, clearProductReview } from '../../../redux/ducks/productDuck';
 import Modal from '../../Base/Modal/Modal';
 
 export default function Evaluate() {
@@ -52,7 +52,10 @@ export default function Evaluate() {
                if( res === '1'){
                     dispatch(clearProductReview());
                     dispatch(changeModal(true))
-                    dispatch(getOrderStatus(4))
+                    dispatch(getOrderStatus(4));
+                 
+                    dispatch(changeProductsRating(Object.keys(data.evaluate.review)))
+                   // dispatch(changeProductRating)
                     //navigate('/orders')
                }
           })
@@ -70,9 +73,8 @@ export default function Evaluate() {
                <form className="product__review" method="POST" ref={formRef} onSubmit={handleSendReview} encType="multipart/form-data">
                     {
                          evaluatedProducts.map((product, pos) => {
-                         return <>
-                              <EvaluateContent product={product} ind = {pos}  key={`evaluate_${product?.id}`} />
-                         </>
+                              return <EvaluateContent product={product} ind = {pos}  key={`evaluate_${pos}`} />
+                              
                          
                          })
                     }
@@ -81,6 +83,7 @@ export default function Evaluate() {
                               type="hidden" 
                               name="user_id" 
                               value={currentUser?.id}
+                              onChange={() => {}}
                          />
                          <input 
                               type="text" 

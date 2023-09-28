@@ -18,8 +18,8 @@ export default function ProductReviewItem({review}) {
      </div>
      <div className="review_pictures">
           {
-               review?.pictures.map(item => {
-                    return <img src={`${root}/images/reviews/${review?.user_id}/${review?.order_id}/${review?.product_id}/${item}`} alt="" />
+               review?.pictures.map((item,pos) => {
+                    return <img src={`${root}/images/reviews/${review?.user_id}/${review?.order_id}/${review?.product_id}/${item}`} alt="" key={`picture_${pos}`} />
                })
           }
      </div>

@@ -14,7 +14,6 @@ export default function ProductReviewCounts() {
      }, []);
      const ratingCounts = useSelector(getRatingListSelector)
      const middleRating = getMiddleRating(ratingCounts)
-     console.log("🚀 ~ file: ProductReviewCounts.jsx:16 ~ ProductReviewCounts ~ ratingCounts:", ratingCounts)
      return (
                <div className="product__rating__block">
                     <div className="middle__rating">{middleRating}</div>

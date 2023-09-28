@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { summRating } from '../../../../helpers/functions/functions';
-import { allVerySoldedProductsSelector, currentLanguageDataSelector, getCurrentCurrencySelector, getReviewsByProductSelector } from '../../../../helpers/reduxSelectors';
+import { allSoldedProductsSelector, currentLanguageDataSelector, getCurrentCurrencySelector, getReviewsByProductSelector } from '../../../../helpers/reduxSelectors';
 import { getCartItem, getCountOfCart, getTotalPriceValue } from '../../../../redux/ducks/cartDuck';
 import RatingMapping from '../../../Base/RatingMapping/RatingMapping';
 import { getNewCurrency } from '../../../../helpers/functions/functions';
@@ -41,7 +41,7 @@ function ProductDesc({currentProduct}) {
           setCountOfProducts(+target.value)
 
      }
-     const allOrderedProducts = useSelector(allVerySoldedProductsSelector)
+     const allOrderedProducts = useSelector(allSoldedProductsSelector)
 
      return (
           <div className="product__desc">

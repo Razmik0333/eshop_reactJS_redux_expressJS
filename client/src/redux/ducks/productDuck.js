@@ -11,7 +11,7 @@ const CURRENT_PRODUCT = 'productDuck/CURRENT_PRODUCT';
 const FETCH_PRODUCT_RATING = 'productDuck/FETCH_PRODUCT_RATING';
 const FETCH_CART_PRODUCTS = 'productDuck/FETCH_CART_PRODUCTS';
 const FETCH_VERY_SOLDED_PRODUCTS = 'productDuck/FETCH_VERY_SOLDED_PRODUCTS';
-const FETCH_ALL_VERY_SOLDED_PRODUCTS = 'productDuck/FETCH_ALL_VERY_SOLDED_PRODUCTS';
+const FETCH_ALL_SOLDED_PRODUCTS = 'productDuck/FETCH_ALL_SOLDED_PRODUCTS';
 const STEPS_COUNTS = 'productDuck/STEPS_COUNTS';
 const COST_ELEMENTS = 'productDuck/COST_ELEMENTS';
 const SEARCH_DATA = 'productDuck/SEARCH_DATA';
@@ -37,7 +37,7 @@ export const getNewestProducts = createAction(FETCH_NEWEST_PRODUCTS);
 export const getProductRating = createAction(FETCH_PRODUCT_RATING);
 export const getCartProducts = createAction(FETCH_CART_PRODUCTS);
 export const getVerySoldedProducts = createAction(FETCH_VERY_SOLDED_PRODUCTS);
-export const getAllVerySoldedProducts = createAction(FETCH_ALL_VERY_SOLDED_PRODUCTS);
+export const getAllSoldedProducts = createAction(FETCH_ALL_SOLDED_PRODUCTS);
 export const getSearchData = createAction(SEARCH_DATA);
 export const getHintsData = createAction(HINTS_DATA);
 export const getMaxDiscountData = createAction(MAX_DISCOUNT_DATA);
@@ -181,14 +181,14 @@ export const fetchRecomendedProducts = () => async(dispatch) => {
     console.log('error from productDuck', e)
   }
 };
-export const changeProductRating = (productId,rating) => (dispatch) => {
-  
-  fetch(`${root}/rating/addRating/${productId}/${rating}`) 
-    .then((res) => res.json())
-    .then((res) => {
-      dispatch(getProductRating(res));
-    })
-    .catch((e) => console.log('error from productDuck', e));
+export const changeProductsRating = (productIds) => async(dispatch) => {
+
+  try {
+    const data = await (await fetch(`${root}/api/product/rating/${productIds}`)).json()
+
+  } catch (error) {
+    
+  }
 };
 export const fetchProductsByString = (arr) => async(dispatch) => {
   //arr.length === 0 ? dispatch(getCartProducts([])) :
@@ -233,9 +233,20 @@ export const fetchVerySoldedProducts = () => async(dispatch) => {
     console.log('error from productDuck', e)
   }
 };
+export const fetchAllSoldedProducts = () => async(dispatch) => {
+  
+  try {
+    const data = await (await fetch(`${root}/api/package/delivered/all`)).json();
+    dispatch(getAllSoldedProducts(data));
+  } catch (e) {
+    console.log('error from productDuck', e)
+  }
+};
 
 export const fetchMostestProduct = (id) => async(dispatch) => {
   const urlPath = getMostestURL(id)
+  console.log(typeof id);
+  
   try {
     const data = await (await fetch(`${root}/api/mostest/${urlPath?.url}`)).json();
     dispatch(changeMostest(data));
@@ -272,14 +283,13 @@ export const initialStateApp = {
   currentProductId : null,
   cartProducts:[],
   verySolded:[],
-  allVerySolded:[],
+  allSolded:[],
   currentProduct : [],
   viewedProducts : [],
   viewedProductsData : [],
   rating : null,
   hintsData:[],
   productReview: {},
-  evaluatedProductItem: {},
   mostestProduct:{}
 };
 
@@ -340,12 +350,10 @@ function ProductDuck(state = initialStateApp, action) {
         ...state,
         verySolded: action.payload,
       };
-    case FETCH_ALL_VERY_SOLDED_PRODUCTS:
-
-     
+    case FETCH_ALL_SOLDED_PRODUCTS:
       return {
         ...state,
-        allVerySolded: action.payload,
+        allSolded: action.payload,
       };
     case SEARCH_DATA:
       return {
@@ -385,9 +393,7 @@ function ProductDuck(state = initialStateApp, action) {
         ...state,
         viewedProductsData: action.payload
       };
-    case EVALUATED_PRODUCTS_DATA:
-      console.log(state.productReview);
-          
+    case EVALUATED_PRODUCTS_DATA:         
       if(!checkEmptyObject(state.productReview)){
         const newInd = Object.keys(action.payload)[0];
         if (newInd in state.productReview) {

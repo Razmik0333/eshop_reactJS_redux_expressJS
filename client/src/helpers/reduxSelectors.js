@@ -9,7 +9,7 @@ export const currentCategorySelector = ({ NavigationDuck }) => NavigationDuck.cu
 export const currentProductIdSelector = ({ ProductDuck }) => ProductDuck.currentProductId; //
 export const currentProductSelector = ({ ProductDuck }) => ProductDuck.currentProduct; //
 export const verySoldedProductsSelector = ({ ProductDuck }) => ProductDuck.verySolded; //
-export const allVerySoldedProductsSelector = ({ ProductDuck }) => ProductDuck.allVerySolded; //
+export const allSoldedProductsSelector = ({ ProductDuck }) => ProductDuck.allSolded; //
 export const productStepCountsSelector = ({ ProductDuck }) => ProductDuck.stepCounts; //
 export const currentSearchSelector = ({ NavigationDuck }) => NavigationDuck.searchWord; //
 export const currentSearchData = ({ ProductDuck }) => ProductDuck.searchData; //

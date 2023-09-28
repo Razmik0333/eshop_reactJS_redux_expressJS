@@ -27,6 +27,21 @@ module.exports.ordersByStatus = async (req, res) => {
      const resArray = await getProductsFromOrdersList(orders)
      res.send(JSON.stringify(resArray, undefined, 2));
 }
+module.exports.allSoldedProducts = async (req, res) => {
+     const orders = await realyze("SELECT user_order FROM orders WHERE user_status = ?", [4]);
+     const parsedData = orders.map(item => JSON.parse(item?.user_order));
+     const countsData = parsedData.reduce((acc, curr) => {
+          for (const key in curr) {
+               if(!(key in acc)){
+                    acc[key] = 1
+               }else{
+                    acc[key] = +acc[key] + 1
+               }
+          }
+          return acc;
+     }, {});
+     res.send(JSON.stringify(countsData, undefined, 2))
+}
 module.exports.updateStatus = async (req, res) => {
      const id = req.params.id;
      const status = req.body.status;

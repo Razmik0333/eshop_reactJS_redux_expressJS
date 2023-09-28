@@ -145,7 +145,7 @@ const initialStateConfigs = {
     currentLanguageData : [],
     idProductsFromStart : 1,
     hotDealsTimerSeconds : 3 * 24 * 60 * 60,
-    mostestIndex : 0
+    mostestIndex : "0"
 };
 
 const ConfigsDuck = (state = initialStateConfigs, action) => {

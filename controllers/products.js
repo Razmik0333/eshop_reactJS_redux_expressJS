@@ -8,6 +8,7 @@ const [
 
 const getMostestProductData = functions.mostestProduct;
 const getMostestMaxObject = functions.mostestMaxObject;
+const getMiddleRating = functions.middleRating;
 module.exports.productsByCategory = async (req, res) => {
      const params = req.params.id;
      if (typeof +params === 'number' && !isNaN(+params)) {
@@ -36,6 +37,7 @@ module.exports.productById = async (req, res) => {
      result['url'] = `/images/products/${req.params.id}.jpg`;
      res.send(result);
 }
+
 module.exports.productsByIds = async (req, res) => {
      const ids = req.params.ids;
      const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
@@ -108,13 +110,27 @@ module.exports.evaluateProducts = async( req, res) => {
           order_id,
           user_email
      } = req.body;
-     product_id.forEach((item, pos) => {
-          realyze("INSERT INTO reviews (user_id,order_id, product_id, rating, review, user_name, user_email, time_add) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+     product_id.forEach(async(item, pos) => {
+          await realyze("INSERT INTO reviews (user_id,order_id, product_id, rating, review, user_name, user_email, time_add) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
           [user_id[0], order_id[0], item, rating[pos], review[pos], user_name, user_email, `${Math.floor(Date.now()/1000)}`]
           )
+          
      })
 
-     realyze("UPDATE `orders` SET `user_status` = ? WHERE id = ? ", [4, order_id[0]])
+     
+     await realyze("UPDATE `orders` SET `user_status` = ? WHERE id = ? ", [4, order_id[0]]);
+     
+     res.send(JSON.stringify('1'))
+}
+module.exports.productsRating = async( req, res) => {
+     const productsIdsString = req.params.id;
+     const productsIdsData = productsIdsString.trim("").split(',');
+     productsIdsData.forEach(async(item, pos) => {
+         const productItem =  await realyze("SELECT rating FROM reviews WHERE product_id = ? ", [item]);
+          const current = getMiddleRating(productItem)
+          console.log("🚀 ~ file: products.js:131 ~ productsIdsData.forEach ~ current:", current)
+          await realyze("UPDATE products SET rating = ?  WHERE id = ? ", [current, item] )
+     })
      res.send(JSON.stringify('1'))
 }
 
