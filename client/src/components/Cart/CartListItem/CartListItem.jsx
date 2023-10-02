@@ -5,7 +5,7 @@ import { getCartSelector, getUserId } from '../../../helpers/reduxSelectors';
 import { fetchAddCart, fetchRemoveOnCart, getCartItem, getCartToRemove, getCountOfCart, getModifiedCart, getTotalPrice, getTotalPriceValue } from '../../../redux/ducks/cartDuck';
 import { currentProduct } from '../../../redux/ducks/productDuck';
 import { root } from '../../../helpers/constants/constants';
-import Rating from '../../Base/Rating/Rating';
+import RatingMapping from '../../Base/RatingMapping/RatingMapping';
 
 import './_cartListItem.scss';
 
@@ -65,7 +65,7 @@ function CartListItem({product, text}) {
                     }
                     
                </div>
-               <Rating rating={product.rating}  />
+               <RatingMapping rating={product.rating}  />
 
                <div className="product-options">
                     <div className="product-description">

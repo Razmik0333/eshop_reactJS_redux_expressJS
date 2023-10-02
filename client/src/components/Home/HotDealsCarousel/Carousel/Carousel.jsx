@@ -31,36 +31,36 @@ function Carousel() {
                <div className="pictures__block" style={{left:leftVal}}>
                     <div className="carousel__body">
                          <div className="carousel__picture">
-                              <img alt='carousel_item_1'  src={`${root}/icons/carusel/carousel_1.jpg`}/>
+                              <img alt='carousel_item_1'  src={`${root}/images/services/glass.jpg`}/>
                          </div>
-                         <div className="carousel__content">
+                         {/* <div className="carousel__content">
                               <h1 className="carousel-body-header">
                                    INDOOR <span>FURNITURE</span>
                               </h1>
                               <p>SAVE UP TO 50% OF ALL FURNITURE</p>
-                         </div>
+                         </div> */}
                     </div>
                     <div className="carousel__body">
                          <div className="carousel__picture">
-                              <img alt='carousel_item_1'  src={`${root}/icons/carusel/carousel_1.jpg`}/>
+                              <img alt='carousel_item_1'  src={`${root}/images/services/mike.jpg`}/>
                          </div>
-                         <div className="carousel__content">
+                         {/* <div className="carousel__content">
                               <h1 className="carousel-body-header">
                                    INDOOR <span>FURNITURE</span>
                               </h1>
                               <p>SAVE UP TO 50% OF ALL FURNITURE</p>
-                         </div>
+                         </div> */}
                     </div>
                     <div className="carousel__body">
                          <div className="carousel__picture">
-                              <img alt='carousel_item_1'  src={`${root}/icons/carusel/carousel_1.jpg`}/>
+                              <img alt='carousel_item_1'   src={`${root}/images/services/laser.jpg`}/>
                          </div>
-                         <div className="carousel__content">
+                         {/* <div className="carousel__content">
                               <h1 className="carousel-body-header">
                                    INDOOR <span>FURNITURE</span>
                               </h1>
                               <p>SAVE UP TO 50% OF ALL FURNITURE</p>
-                         </div>
+                         </div> */}
                     </div>
                      
 

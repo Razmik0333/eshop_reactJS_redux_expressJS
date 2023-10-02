@@ -1,3 +1,6 @@
+const fs = require('fs')
+const fsPromises = require('fs/promises')
+
 const realyze = require('.././config').realyze;
 
 const getMaxSoldedProducts = (arr) => {
@@ -92,6 +95,7 @@ const getMiddleRating = (arr) => {
      return parseFloat(summ/arr.length).toFixed(2);
          
 }
+
 module.exports = {
      solded : [
           getMaxSoldedProducts,
@@ -105,7 +109,7 @@ module.exports = {
      getProductsFromOrdersList :getProductsFromOrdersList,
      mostestProduct: getMostestProduct,
      mostestMaxObject: getMostestMaxObject,
-     middleRating : getMiddleRating
+     middleRating : getMiddleRating,
 }
 
 

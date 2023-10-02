@@ -11,6 +11,7 @@ export default function PersonalData() {
      const [nameDisabled, setNameDisabled] = useState(true);
      const [emailDisabled, setEmailDisabled] = useState(true);
      const currentUser = useSelector(getUserDataSelector);
+     console.log("🚀 ~ file: PersonalData.jsx:14 ~ PersonalData ~ currentUser:", currentUser)
      const [userName, setUserName] = useState(currentUser.name);
      const [userEmail, setUserEmail] = useState(currentUser.email);
      const modalIsClose = useSelector(modalCloseSelector);
@@ -33,7 +34,10 @@ export default function PersonalData() {
           setEmailDisabled(!emailDisabled)      
           setNameDisabled(true)                             
      }
-
+     const path = currentUser.picture.length > 0 ? `${root}/images/users/${currentUser.id}/${currentUser.picture}` 
+     :`${root}/images/users/no-image.png`;
+     console.log(path);
+     console.log(currentUser.picture);
   return (
      <>
           {
@@ -44,7 +48,7 @@ export default function PersonalData() {
                <div className="avatar" >
                     <div className="user_page_avatar" onClick={modalShow}  >
                          <div className="avatar">
-                              <img src={currentUser.picture} alt="" />
+                              <img src={path} alt="" />
                          </div>
                     </div>
                     <div className="user__data">

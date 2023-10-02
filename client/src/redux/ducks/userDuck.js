@@ -24,12 +24,11 @@ export const currentUser = (id) => (dispatch) => {
     dispatch(getUserId(null));
   }
 };
-export const userAvatarURL = (url) => (dispatch) => {
+export const userAvatarPicture = (url) => (dispatch) => {
     dispatch(getUserAvatar(url));
 };
 
 export const getUserData = (id) => async(dispatch) => {
-  console.log(id);
     if(id){
       try {
         const data = await (await fetch(`${root}/api/user/${id}`)).json();
@@ -53,7 +52,6 @@ export const changeUserName = (user_id,user_name) => async(dispatch) => {
             user_id, user_name
           })
         })).json();
-        console.log(userName);
         dispatch(getUserName(userName));
     } catch (error) {
       console.log(error)

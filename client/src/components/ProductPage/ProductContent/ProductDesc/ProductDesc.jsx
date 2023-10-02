@@ -101,23 +101,6 @@ function ProductDesc({currentProduct}) {
                     <p>{product_page_content?.sold} : <span className="sold">{allOrderedProducts[currentProduct.id] ? `${allOrderedProducts[currentProduct.id]} ` : `${0} ` }{product_page_content?.pcs}</span></p>
                </div>
                <div className="social__networks">
-                         {/* <ul>
-                         <li className="social__network">
-
-                         </li>
-                         <li className="social__network">
-
-                         </li>
-                         <li className="social__network">
-
-                         </li>
-                         <li className="social__network">
-
-                         </li>
-                         <li className="social__network">
-
-                         </li>
-                    </ul>  */}
                     <a href="/">
                          <button className="social__network facebook">
                               <span>

@@ -24,14 +24,12 @@ function UserReview() {
           dispatch(fetchReviewByUserAndProduct(currentUserId,currentProductId))
           
      }, []);
-     console.log("🚀 ~ file: UserReview.jsx ~ line 22 ~ UserReview ~ reviewItem", reviewItem);
      const currentProduct = useSelector(currentProductSelector);
 
      const deliveredOrders = useSelector(getDeliveredOrdersByUserSelector);
      const modalIsOpen = useSelector(modalCloseSelector);
 
      const purchacedByUser = hasValueInObject(+currentProduct?.id,deliveredOrders);
-     console.log("🚀 ~ file: UserReview.jsx:34 ~ UserReview ~ purchacedByUser:", purchacedByUser)
      const changeUserReview = (e) => {
           setUserReview(e.target.value)
      }

@@ -12,7 +12,6 @@ export default function OffersButton() {
      const userId = useSelector(getUserId);
      const wishListData = useSelector(getWishListDataSelector);
      const mostestProductItem = useSelector(getMostestProductSelector)
-     console.log("🚀 ~ file: OffersButton.jsx:14 ~ OffersButton ~ mostestProductItem:", mostestProductItem)
      const wishListIds = wishListData.map(item => item?.id);
      const addProductToWishList = (e) => {
           const target = e.target; 

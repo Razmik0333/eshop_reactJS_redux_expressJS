@@ -10,7 +10,7 @@ export default function ProductReviewItem({review}) {
      </div>
      <div className="review__info">
           <div className="user__rating">
-          <RatingMapping rating={review?.rating} />
+               <RatingMapping rating={review?.rating} />
           </div>
           <div className="user__comment">
                {review?.review}

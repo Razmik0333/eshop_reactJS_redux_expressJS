@@ -110,12 +110,20 @@ module.exports.evaluateProducts = async( req, res) => {
           order_id,
           user_email
      } = req.body;
-     product_id.forEach(async(item, pos) => {
+
+     typeof product_id === "object" ? 
+          product_id.forEach(async(item, pos) => {
+               await realyze("INSERT INTO reviews (user_id,order_id, product_id, rating, review, user_name, user_email, time_add) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+               [user_id[0], order_id[0], item, rating[pos], review[pos], user_name, user_email, `${Math.floor(Date.now()/1000)}`]
+               )
+               
+          }) :
+
           await realyze("INSERT INTO reviews (user_id,order_id, product_id, rating, review, user_name, user_email, time_add) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
-          [user_id[0], order_id[0], item, rating[pos], review[pos], user_name, user_email, `${Math.floor(Date.now()/1000)}`]
-          )
-          
-     })
+               [user_id[0], order_id, product_id, rating, review, user_name, user_email, `${Math.floor(Date.now()/1000)}`]
+               )
+
+
 
      
      await realyze("UPDATE `orders` SET `user_status` = ? WHERE id = ? ", [4, order_id[0]]);
@@ -128,7 +136,6 @@ module.exports.productsRating = async( req, res) => {
      productsIdsData.forEach(async(item, pos) => {
          const productItem =  await realyze("SELECT rating FROM reviews WHERE product_id = ? ", [item]);
           const current = getMiddleRating(productItem)
-          console.log("🚀 ~ file: products.js:131 ~ productsIdsData.forEach ~ current:", current)
           await realyze("UPDATE products SET rating = ?  WHERE id = ? ", [current, item] )
      })
      res.send(JSON.stringify('1'))

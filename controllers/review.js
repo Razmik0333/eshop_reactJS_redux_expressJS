@@ -1,22 +1,23 @@
 const fs = require('fs')
 const fsPromises = require('fs/promises');
 const realyze = require('../config').realyze;
+const path = require('path')
 module.exports.reviewList = async (req, res) => {
      const productId = req.params.id;
      const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ? ", [productId]);
      try {
+          const urlReview = path.resolve() + `/public/images/reviews`;
+
           const newReviews = await Promise.all(reviews.map(async(item) => {
-               const url = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`;
-               console.log(url)
+               
+               const url = `${urlReview}/${item.user_id}/${item.order_id}/${item.product_id}`;
                const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
-               //console.log("🚀 ~ file: review.js:10 ~ newReviews ~ files:", files)
                return await {
                     ...item,
                     pictures: files,
                }
           }))
 
-          console.log(newReviews);
           
           res.send(newReviews)
           
@@ -127,9 +128,7 @@ module.exports.reviewByUserId = async (req, res) => {
      }
 }
 module.exports.getLatestReviews = async(req, res) => {
-     const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 9");
-     console.log('lat');
-     
+     const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 9");    
      try {
           const modReviews = await Promise.all(reviews.map(async(item) => {
                const avatarUrl = `public/images/users/${item.user_id}`;

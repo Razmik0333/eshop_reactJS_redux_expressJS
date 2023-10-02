@@ -46,6 +46,7 @@
   border: 0ch;
   margin-top: 15px;
   color: var(--white);
+  cursor: pointer;
 }
 .featured__products .featured__product:hover .add-cart {
   background-color: var(--orange);

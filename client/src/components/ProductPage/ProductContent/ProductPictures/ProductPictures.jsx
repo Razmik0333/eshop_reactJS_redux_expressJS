@@ -8,7 +8,6 @@ function ProductPictures({path}) {
      const dispatch = useDispatch();
      const popupIsShow = useSelector(popupCloseSelector);
      const currentProductId = useSelector(currentProductIdSelector);
-     console.log(path);
      const showProductPopup = (e) => {
           dispatch(getPopupItemId(e.target.dataset.id));
 

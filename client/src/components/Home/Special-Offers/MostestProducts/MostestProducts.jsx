@@ -12,7 +12,6 @@ function MostestProducts() {
      
      const dispatch = useDispatch()
      const mostestId = useSelector(mostestIndex);
-     console.log("🚀 ~ file: MostestProducts.jsx:15 ~ MostestProducts ~ mostestId:", typeof mostestId)
 
      useEffect(() => {
           dispatch(fetchMostestProduct(mostestId))

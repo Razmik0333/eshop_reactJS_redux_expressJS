@@ -9,7 +9,7 @@ import { fetchProductsForDelete, resetIsDeleted } from "../../../redux/ducks/adm
 import { changeModal } from "../../../redux/ducks/configsDuck";
 import "./styles/_modal.scss"
 import { root } from "../../../helpers/constants/constants";
-import { userAvatarURL } from "../../../redux/ducks/userDuck";
+import { userAvatarPicture } from "../../../redux/ducks/userDuck";
 import 'react-image-crop/src/ReactCrop.scss';
 import "../Modal/styles/_modal.scss";
 
@@ -18,7 +18,9 @@ function ModalUploadAvatar() {
      const userId = useSelector(getUserId);
      const avatarRef = useRef(null)
      const currentUser = useSelector(getUserDataSelector);
-     const [avatarUrl, setAvatarUrl] = useState(currentUser.picture);
+     const path = currentUser.picture.length > 0 ?  `${root}/images/users/${currentUser.id}/${currentUser.picture}` 
+     :`${root}/images/users/no-image.png`
+     const [avatarUrl, setAvatarUrl] = useState(path);
      const [src, setSrc] = useState(null);
      const [preview, setPreview] = useState(null);
      const closeModal = () => {
@@ -30,7 +32,6 @@ function ModalUploadAvatar() {
     const  onCrop = view => {
           setPreview(view)
     }
-
 
      const handleSubmit = async (e) => {
           e.preventDefault();
@@ -46,10 +47,8 @@ function ModalUploadAvatar() {
           })
           .then(res => res.json())
           .then(res => {
-               console.log(res);
-
-               dispatch(userAvatarURL(`${root}${res}`))
-               setAvatarUrl(`${root}${res}`)
+               dispatch(userAvatarPicture(`${res}`))
+               setAvatarUrl(`${res}`)
                dispatch(changeModal(false))
           })
           .catch (e => console.log(e))

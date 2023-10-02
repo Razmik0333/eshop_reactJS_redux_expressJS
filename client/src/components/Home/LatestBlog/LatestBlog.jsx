@@ -12,7 +12,6 @@ function LatestBlog() {
           dispatch(fetchLatestReviews())
      }, []);
      const latestReviews = useSelector(getLatestReviewsSelector) 
-     console.log("🚀 ~ file: LatestBlog.jsx:15 ~ LatestBlog ~ latestReviews:", latestReviews)
      const reviewId = useSelector(getReviewIdSelector)
      const start = (reviewId - 1) * 3;
 

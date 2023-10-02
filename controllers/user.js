@@ -3,21 +3,21 @@ const path = require('path')
 const fs = require('fs')
 const fsPromises = require('fs/promises')
 const realyze = require('../config').realyze
-
+const getWriteUploadFile = require('../functions/functions').writeUploadFile
 
 module.exports.userById = async (req, res) => {
      try {
           const userId = req.params.id;
           const users = await realyze("SELECT * FROM `user` WHERE `id`= ? ", [userId]);
           const [modDataUser] = await Promise.all(users.map(async(item) => {
-               const url = `public/images/users/${userId}`
-               const files =  await fsPromises.readdir(url)
+               const url = `public/images/users/${userId}`;
+               const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
                return await {
                     ...item,
-                    picture:`images/users/${userId}/${files}` ,
-
+                    picture:files ,
                }
           }))
+          console.log(`modDataUser`, modDataUser)
           res.send(modDataUser)
           
      } catch (error) {
@@ -66,19 +66,33 @@ module.exports.avatar = async (req, res) => {
                const data = req.body.preview.replace(/^data:image\/\w+;base64,/, '');
                fs.readdir(usersPath + `${userId}`,async (err, files) => {
                     if (err) throw err;
-               
-                    for (const file of files) {
-                         fs.unlink(path.join(usersPath + `${userId}`, file), (err) => {
-                              if (err) throw err;
-                              fs.writeFile(url,data,{encoding:'base64'}, async function(err) {
+                    if(files.length > 0){
+                         for (const file of files) {
+                         
+                              fs.unlink(path.join(usersPath + `${userId}`, file), (err) => {
                                    if (err) throw err;
-                                   else {
-                                        const avatars =  await fsPromises.readdir(`public/images/users/${userId}`)
-                                        res.send(JSON.stringify(`/images/users/${userId}/${avatars[0]}`))
-                                   }
-                              })
-                         });
+
+                                   fs.writeFile(url,data,{encoding:'base64'}, async function(err) {
+                                         if (err) throw err;
+                                         else {
+                                              const avatars =  await fsPromises.readdir(`public/images/users/${userId}`)
+                                              res.send(JSON.stringify(`${avatars[0]}`))
+                                         }
+                                    })
+                              });
+                         }
+                    }else{
+
+                          fs.writeFile(url,data,{encoding:'base64'}, async function(err) {
+                              if (err) throw err;
+                              else {
+                                   const avatars =  await fsPromises.readdir(`public/images/users/${userId}`)
+                                   res.send(JSON.stringify(`${avatars[0]}`))
+                              }
+                         }) 
                     }
+                    
+
                    
                });
               

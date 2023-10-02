@@ -30,7 +30,6 @@ function Login() {
           })
           .then(res => res.json())
           .then(res => {
-               console.log(res);
                if (res) {
                     setEmailLoginExist(true);
                     dispatch(currentUser(res));

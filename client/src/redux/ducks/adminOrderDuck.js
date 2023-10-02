@@ -62,7 +62,7 @@ export const fetchOrdersList = (id) => async(dispatch) => {
     console.log('error from AdminOrderDuck', e)
   }
 };
-export const fetchOrderItem = (userId, orderId) => async (dispatch) => {
+export const fetchOrderItem = ( orderId) => async (dispatch) => {
     try {
       const data = await (await fetch(`${root}/api/admin/order/${orderId}`)).json()
       dispatch(getOrderForUpdate(data));
@@ -72,6 +72,7 @@ export const fetchOrderItem = (userId, orderId) => async (dispatch) => {
 
 };
 export const fetchOrderProducts = (orderId) => async (dispatch) => {
+  
     try {
       const data = await (await fetch(`${root}/api/admin/order/products/${orderId}`)).json()
       dispatch(getCurrentOrderProducts(data));

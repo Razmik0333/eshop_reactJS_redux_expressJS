@@ -12,8 +12,8 @@ function OrderUpdate() {
      const dispatch = useDispatch();
      const currentOrderId = useSelector(adminOrderIdSelector);
      useEffect(() => {
-          dispatch(fetchOrderItem(userId, currentOrderId));
-          dispatch(fetchOrderProducts(userId, currentOrderId));
+          dispatch(fetchOrderItem( currentOrderId));
+          dispatch(fetchOrderProducts( currentOrderId));
      }, []);
      const [isChanged, setIsChanged] = useState(false);
      const [isUpdated, setIsUpdated] = useState(false);

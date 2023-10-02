@@ -4,7 +4,7 @@ import ProductReviewCountItem from './ProductReviewCountItem'
 import { useDispatch, useSelector } from 'react-redux';
 import { currentProductIdSelector, currentProductSelector, getRatingListSelector } from '../../../../helpers/reduxSelectors';
 import { fetchCurrentProductsRatings, fetchCurrentProductsReviews } from '../../../../redux/ducks/reviewDuck';
-import { getMiddleRating } from '../../../../helpers/functions/functions';
+import { getMiddleRating, getObjectSize } from '../../../../helpers/functions/functions';
 
 export default function ProductReviewCounts() {
      const dispatch = useDispatch();
@@ -13,7 +13,9 @@ export default function ProductReviewCounts() {
          dispatch(fetchCurrentProductsRatings(productId))
      }, []);
      const ratingCounts = useSelector(getRatingListSelector)
-     const middleRating = getMiddleRating(ratingCounts)
+     console.log("🚀 ~ file: ProductReviewCounts.jsx:16 ~ ProductReviewCounts ~ ratingCounts:", ratingCounts)
+     const middleRating = getObjectSize(ratingCounts) === 0 ? `0.0` : getMiddleRating(ratingCounts)
+     console.log("🚀 ~ file: ProductReviewCounts.jsx:17 ~ ProductReviewCounts ~ middleRating:", middleRating)
      return (
                <div className="product__rating__block">
                     <div className="middle__rating">{middleRating}</div>

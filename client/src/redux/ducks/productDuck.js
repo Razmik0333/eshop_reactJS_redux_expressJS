@@ -244,9 +244,7 @@ export const fetchAllSoldedProducts = () => async(dispatch) => {
 };
 
 export const fetchMostestProduct = (id) => async(dispatch) => {
-  const urlPath = getMostestURL(id)
-  console.log(typeof id);
-  
+  const urlPath = getMostestURL(id) 
   try {
     const data = await (await fetch(`${root}/api/mostest/${urlPath?.url}`)).json();
     dispatch(changeMostest(data));
