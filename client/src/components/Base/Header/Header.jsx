@@ -95,7 +95,7 @@ function Header() {
                               <span>
 
                               <NavLink to={"/about"} className="setting__currency">
-                              {headerLangData?.about}</NavLink>
+                              {headerLangData?.menu_burger?.about}</NavLink>
                               </span>
 
                          </li>
@@ -116,7 +116,7 @@ function Header() {
                                    {
                                         !userId &&
                                         <>
-                                             <NavLink to={"/login"} className="register-link">{headerLangData?.login}</NavLink>
+                                             <NavLink to={"/login"} className="register-link">{headerLangData?.menu_burger?.login}</NavLink>
                                         </>
                                    
                                    }
@@ -128,8 +128,8 @@ function Header() {
 
                               {
                                    userId ? 
-                                   <div className="register-link">{`Hello ${userData?.name}`}</div>
-                                   : <NavLink to={"/register"} className="register-link">{headerLangData?.signup}</NavLink>
+                                   <div className="register-link">{`${headerLangData?.hello} ${userData?.name}`}</div>
+                                   : <NavLink to={"/register"} className="register-link">{headerLangData?.menu_burger?.signup}</NavLink>
                               }  
                          </div>
                          <MenuBurger />

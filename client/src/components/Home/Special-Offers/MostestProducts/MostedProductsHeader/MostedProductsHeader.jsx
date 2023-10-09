@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { currentLanguageDataSelector, mostestIndex } from '../../../../../helpers/reduxSelectors';
 import { changeMostestIndex } from '../../../../../redux/ducks/configsDuck';
 
-export default function FurnitureGaleryHeader() {
+export default function MostestProductsHeader() {
      const dispatch = useDispatch();
      const langData = useSelector(currentLanguageDataSelector)
-     const mostest = langData?.home?.mostest;
+     const mostest = langData?.home?.mostest_products;
 
      const mostestId = useSelector(mostestIndex);
      const changeMostestId = (e) => {
@@ -16,7 +16,7 @@ export default function FurnitureGaleryHeader() {
   return <div className="offers-categories">
                <ul className="offers-items">
                     {
-                         mostest?.map((item,pos) => {
+                         mostest?.products?.map((item,pos) => {
                              return <li className={`offers-item ${+mostestId === +pos ? `active`:``}`}
                                   data-id={`${pos}`} 
                                   onClick={changeMostestId}

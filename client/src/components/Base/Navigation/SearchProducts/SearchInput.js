@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { currentCategoryIdSelector, currentSearchSelector, getUserId } from "../../../../helpers/reduxSelectors";
+import { currentCategoryIdSelector, currentLanguageDataSelector, currentSearchSelector, getUserId } from "../../../../helpers/reduxSelectors";
 import { clearCostValues } from "../../../../redux/ducks/configsDuck";
 import {  currentSearch,  getIsFocused,  isSearch } from "../../../../redux/ducks/navigationDuck";
 import { changeHints, clearHintsData, clearProductsByCosts, clearSearchData, fetchSearchedHints } from "../../../../redux/ducks/productDuck";
@@ -10,7 +10,7 @@ function SearchInput() {
      const dispatch = useDispatch();
      const searchWord = useSelector(currentSearchSelector);
      const [searchValue, setSearchValue] = useState('');
-    // console.log("🚀 ~ file: SearchInput.js:13 ~ SearchInput ~ searchValue:", searchValue)
+     const headerLangData = useSelector(currentLanguageDataSelector)?.navigation;
      const userId = useSelector(getUserId);
      const categoryId = useSelector(currentCategoryIdSelector)
      useEffect(() => {
@@ -61,7 +61,7 @@ function SearchInput() {
                     type="text"
                     className="search-input"
                     name="" id="" 
-                    placeholder="Search products..." 
+                    placeholder={`${headerLangData?.search}`} 
                     value={searchValue} 
                     onInput={changeSearchField}
                     onBlur={changeInput}

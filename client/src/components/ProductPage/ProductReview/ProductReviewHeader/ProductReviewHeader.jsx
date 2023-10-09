@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { hasValueInObject } from "../../../../helpers/functions/functions";
-import { currentProductSelector, getCurrentTabNameSelector, getDeliveredOrdersByUserSelector, getReviewsByProductSelector } from "../../../../helpers/reduxSelectors";
+import { currentLanguageDataSelector, currentProductSelector, getCurrentTabNameSelector, getDeliveredOrdersByUserSelector, getReviewsByProductSelector } from "../../../../helpers/reduxSelectors";
 import { changeTabName } from "../../../../redux/ducks/reviewDuck";
 
 function ProductReviewHeader() {
      const dispatch = useDispatch();
      const currentProduct = useSelector(currentProductSelector);
+     const user_review_header = useSelector(currentLanguageDataSelector)?.product_page?.review?.header;
+     console.log("🚀 ~ file: ProductReviewHeader.jsx:10 ~ ProductReviewHeader ~ user_review_header:", user_review_header)
 
      const deliveredOrders = useSelector(getDeliveredOrdersByUserSelector);
 
@@ -13,14 +15,9 @@ function ProductReviewHeader() {
      const reviewsByProduct = useSelector(getReviewsByProductSelector)
 
      const changeCurrentTab = (e) => {
-          //console.log(e.target.dataset.tabname);
           dispatch(changeTabName(e.target.dataset.tab));
      }
      const tabName = useSelector(getCurrentTabNameSelector)
-     // const getReviewsByProduct = () => {
-
-     //      dispatch(fetchCurrentProductsReviews(currentProduct?.id))
-     // }
 
      return(
           <div className="product__review__header">
@@ -31,9 +28,9 @@ function ProductReviewHeader() {
                                    YOUR REVIEW
                          </li> : <></>
                     }
-                    <li className={`product__review__item ${tabName === 'desc' ? 'active' : ''}`} data-tab="desc">DESCRIPTION</li>
-                    <li className={`product__review__item ${tabName === 'reviews' ? 'active' : ''}`} data-tab="reviews">REVIEWS ({reviewsByProduct.length})</li>
-                    <li className={`product__review__item ${tabName === 'spec' ? 'active' : ''}`} data-tab="spec">SPECIFICATION</li>
+                    <li className={`product__review__item ${tabName === 'desc' ? 'active' : ''}`} data-tab="desc">{user_review_header?.description}</li>
+                    <li className={`product__review__item ${tabName === 'reviews' ? 'active' : ''}`} data-tab="reviews">{user_review_header?.reviews}({reviewsByProduct.length})</li>
+                    <li className={`product__review__item ${tabName === 'spec' ? 'active' : ''}`} data-tab="spec">{user_review_header?.recommendation}</li>
                </ul>
           </div>
      )

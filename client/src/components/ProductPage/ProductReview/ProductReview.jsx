@@ -19,9 +19,6 @@ function ProductReview() {
      }, []);
      const tabName = useSelector(getCurrentTabNameSelector)
      
-
-
-
      const handleSubmit = async (e) => {
           e.preventDefault();
           const data = new FormData(formRef.current);

@@ -27,13 +27,10 @@ function CategoriesFilterPrice() {
      let leftVal = getPositiveNumber(value);
      const startRef = useRef(null);
 
-     
      const finalRef = useRef(null);
      
-
      const minPrice = Math.floor((min + (max - min) * ((parseInt(startRef.current?.style.left))/283 )));
      const maxPrice = Math.floor((min + (max - min) * ((parseInt(finalRef.current?.style.left))/283 )));
-
 
      return ( 
           <div className="categories__filter__price">
@@ -133,7 +130,7 @@ function CategoriesFilterPrice() {
                     </div>
                </div>
                <div className="filter-price">
-                    <button className="filter-button" type="button">FILTER</button>
+                    <button className="filter-button" type="button">{productPriceText?.filter}</button>
                     <span className="price-numbers">
                     {
                          startRef.current === null ? <></> :

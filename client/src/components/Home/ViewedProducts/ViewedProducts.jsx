@@ -13,6 +13,8 @@ function ViewedProducts() {
       }, [viewedProducts]);
      const viewedProductsData =  useSelector(getViewedProductsDataSelector)
      const productItemText = useSelector(currentLanguageDataSelector)?.product_item;
+     const viewedProductsText = useSelector(currentLanguageDataSelector)?.home;
+     console.log("🚀 ~ file: ViewedProducts.jsx:17 ~ ViewedProducts ~ viewedProductsText:", viewedProductsText)
 
      return(
           <div className="products__list">
@@ -21,7 +23,7 @@ function ViewedProducts() {
                          viewedProducts.length > 0 &&
                          <>
                          
-                              <div className="viewed-products">VIEWED PRODUCTS</div>
+                              <div className="viewed-products">{viewedProductsText?.viewed}</div>
                               <div className="products-list">
                                    {
                                    

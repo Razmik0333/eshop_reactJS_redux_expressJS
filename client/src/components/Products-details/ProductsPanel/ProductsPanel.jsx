@@ -12,7 +12,6 @@ function ProductsPanel(){
           <div className="products__panel">
                <ProductsDetailsList />
                <ProductsList /> 
-
                <RefreshButton /> 
           </div>
 

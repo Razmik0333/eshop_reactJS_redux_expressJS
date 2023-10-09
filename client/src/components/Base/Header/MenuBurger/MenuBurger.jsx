@@ -10,7 +10,7 @@ import "./styles/_menu-burger.scss";
 function MenuBurger() {
      const dispatch = useDispatch();
      const navigate = useNavigate();
-     const headerLangData = useSelector(currentLanguageDataSelector)?.header;
+     const headerLangData = useSelector(currentLanguageDataSelector)?.header?.menu_burger;
      const userId = useSelector(getUserId);
      const changeLogout = (e) => {        
 

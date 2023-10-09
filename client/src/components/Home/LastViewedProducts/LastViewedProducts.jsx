@@ -16,6 +16,7 @@ function LastViewedProducts() {
      const viewedProductsData =  useSelector(getViewedProductsDataSelector)
      const lastViewedProductsData = viewedProductsData.filter((_, pos) => pos < 4 )
      const productItemText = useSelector(currentLanguageDataSelector)?.product_item;
+     const viewedProductsText = useSelector(currentLanguageDataSelector)?.home;
 
      return(
           <div className="products__list">
@@ -24,7 +25,7 @@ function LastViewedProducts() {
                          lastViewedProductsData.length > 0 &&
                          <>
                          <div className="categories">
-                              <span className="viewed">VIEWED PRODUCTS
+                              <span className="viewed">{viewedProductsText?.viewed}
                                    <NavLink className="viewed-link" to={'/viewed'}>
 
                                         <img src={`${root}/icons/config/arrow_right.svg`} alt="" />

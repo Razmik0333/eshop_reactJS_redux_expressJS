@@ -1,36 +1,59 @@
+import { useDispatch, useSelector } from "react-redux";
 import {root} from "../../../helpers/constants/constants";
+import { currentLanguageDataSelector, getUserId } from "../../../helpers/reduxSelectors";
 
 import './styles/_footer.scss';
+import { NavLink, useNavigate } from "react-router-dom";
+import { currentUser, getUserData } from "../../../redux/ducks/userDuck";
+import { changeOrdersFromLogout } from "../../../redux/ducks/orderDuck";
 function Footer() {
+     const dispatch = useDispatch();
+     const navigate = useNavigate();
+     const footerLangData = useSelector(currentLanguageDataSelector)?.footer;
+     console.log("🚀 ~ file: Footer.jsx:8 ~ Footer ~ footerLangData:", footerLangData)
+     const userId = useSelector(getUserId);
+     const changeLogout = (e) => {        
+
+          dispatch(currentUser(null))
+          dispatch(getUserData(null))
+          dispatch(changeOrdersFromLogout());
+         // dispatch(fetchAddWishList(null, 20))
+          navigate('/home')
+    }
      return(
           <footer>
                <div className="container footer__container">
                     <div className="footer__top">
                          <div className="footer__row">
                               <ul className="footer__row__categories">
-                                   <li className="footer__row__category">INFORMATION</li>
-                                   <li className="footer__row__category">About us</li>
-                                   <li className="footer__row__category">Privacy</li>
-                                   <li className="footer__row__category">Conditions</li>
-                                   <li className="footer__row__category">Online support</li>
+                                   <li className="footer__row__category"> {footerLangData?.information?.info}</li>
+                                   <li className="footer__row__category"><NavLink to={'/about'}>{footerLangData?.information?.about}</NavLink></li>
+                                   <li className="footer__row__category"><NavLink to={'/privacy'}>{footerLangData?.information?.privacy}</NavLink></li>
+                                   <li className="footer__row__category"><NavLink to={'/payment'}>{footerLangData?.information?.payment}</NavLink></li>
+                                   <li className="footer__row__category"><NavLink to={'/online'}>{footerLangData?.information?.online}</NavLink></li>
                               </ul>
                          </div>
                          <div className="footer__row">
                               <ul className="footer__row__categories">
-                                   <li className="footer__row__category">MY ACCOUNT</li>
-                                   <li className="footer__row__category">Login</li>
-                                   <li className="footer__row__category">My Cart</li>
-                                   <li className="footer__row__category">Wishlist</li>
-                                   <li className="footer__row__category">Checkout</li>
+                                   <li className="footer__row__category">{footerLangData?.my_account?.site}</li>
+                                   <li className="footer__row__category">
+                                        {
+                                             userId ? <NavLink to={'/'} onClick={changeLogout}>{footerLangData?.my_account?.logout}</NavLink> 
+                                             : <NavLink to={'/login'}>{footerLangData?.my_account?.login}</NavLink>
+                                        }
+                                   </li>
+                                   <li className="footer__row__category"><NavLink to={'/cart'}>{footerLangData?.my_account?.cart}</NavLink></li>
+                                   <li className="footer__row__category"><NavLink to={'/wishlist'}>{footerLangData?.my_account?.wishlist}</NavLink></li>
+                                   <li className="footer__row__category"><NavLink to={'/checkout'}>{footerLangData?.my_account?.checkout}</NavLink></li>
                               </ul>
                          </div>
                          <div className="footer__row">
                               <ul className="footer__row__categories">
-                                   <li className="footer__row__category">INFORMATION</li>
-                                   <li className="footer__row__category">Specials</li>
-                                   <li className="footer__row__category">New Products</li>
-                                   <li className="footer__row__category">Best Sellers</li>
-                                   <li className="footer__row__category">Our Stores</li>
+                                   <li className="footer__row__category">{footerLangData?.services?.all}</li>
+                                   <li className="footer__row__category"><NavLink to={'/laser'}>{footerLangData?.services?.laser}</NavLink></li>
+                                   <li className="footer__row__category"><NavLink to={'/plotter'}>{footerLangData?.services?.plotter}</NavLink></li>
+                                   <li className="footer__row__category"><NavLink to={'/print'}>{footerLangData?.services?.print}</NavLink></li>
+                                   <li className="footer__row__category"><NavLink to={'/brosh'}>{footerLangData?.services?.brosh}</NavLink></li>
                               </ul>
                          </div>
                          <div className="footer__row">

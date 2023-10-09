@@ -1,6 +1,6 @@
 
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './styles/_navigation.scss';
 import { 
      fetchCatgories, 
@@ -11,12 +11,15 @@ import SearchInput from './SearchProducts/SearchInput';
 
 import { root } from '../../../helpers/constants/constants';
 import Categories from './Categories/Categories';
+import { currentLanguageDataSelector } from '../../../helpers/reduxSelectors';
 
 function Navigation() {
      const dispatch = useDispatch();
      useEffect(() => {
           dispatch(fetchCatgories());
      }, []);
+     const headerLangData = useSelector(currentLanguageDataSelector)?.navigation;
+
      const changeMouseOut = () => {
           dispatch(getIsFocused(false))
      }
@@ -44,7 +47,7 @@ function Navigation() {
                                    <span className="select-icon">
                                         <img src={`${root}/icons/config/menu.svg`} alt="" />
                                    </span>
-                                   <span className="select-text">Select a category</span>
+                                   <span className="select-text">{headerLangData?.select}</span>
                                    <span className="select-dropdown">
                                         <img src={`${root}/icons/config/triangle.svg`} alt="" />
                                    </span>

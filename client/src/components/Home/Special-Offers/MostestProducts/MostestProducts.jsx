@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getMostestProductSelector, mostestIndex } from "../../../../helpers/reduxSelectors";
+import { currentLanguageDataSelector, getMostestProductSelector, mostestIndex } from "../../../../helpers/reduxSelectors";
 import RatingMapping from "../../../Base/RatingMapping/RatingMapping";
-import FurnitureGaleryHeader from "./MostedProductsHeader/MostedProductsHeader";
+import MostestProductsHeader from "./MostedProductsHeader/MostedProductsHeader";
 import { fetchMostestProduct } from "../../../../redux/ducks/productDuck";
 import MostestProduct from "./MostestProduct/MostestProduct";
 import { root } from "../../../../helpers/constants/constants";
@@ -18,11 +18,14 @@ function MostestProducts() {
 
      }, [mostestId]);
      const mostestRatingData = useSelector(getMostestProductSelector);
+     const mostestProductsData = useSelector(currentLanguageDataSelector)?.home?.mostest_products;
+     console.log("🚀 ~ file: MostestProducts.jsx:22 ~ MostestProducts ~ mostestProductsData:", mostestProductsData)
+
      return (
           <div className="furniture__gallery">
-          <p className="furniture__gallery__header">MOSTEST PRODUCTS</p>
+          <p className="furniture__gallery__header">{mostestProductsData?.mostest}</p>
           <div className="furniture__gallery__content">
-               <FurnitureGaleryHeader />
+               <MostestProductsHeader />
                <div className="offers-informations">
                     <div className="current-offer">
                     <img src={`${root}/images/products/${mostestRatingData?.id}.jpg`} alt="" className="current-offer" />

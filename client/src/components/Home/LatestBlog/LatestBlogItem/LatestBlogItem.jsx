@@ -3,8 +3,12 @@ import { getTime } from "../../../../helpers/functions/functions";
 import RatingMapping from "../../../Base/RatingMapping/RatingMapping";
 import { root } from "../../../../helpers/constants/constants";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { currentLanguageDataSelector } from "../../../../helpers/reduxSelectors";
 
 function LatestBlogItem({blog}) {
+     const latestBlogData = useSelector(currentLanguageDataSelector)?.home?.latest_blog;
+
      const imgRef = useRef(null);
      const [leftVal, setLeftVal] = useState(0)
      const date = blog?.time_add
@@ -90,7 +94,7 @@ function LatestBlogItem({blog}) {
                          }
                     </div>
                     <div className="latest-blog-footer">
-                         <button className="latest_blog_button">Read More</button>
+                         <button className="latest_blog_button">{latestBlogData?.read_more}</button>
                     </div>
                </div>
           </div>

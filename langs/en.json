@@ -1,15 +1,22 @@
 {
     "header" : {
-        "home" : "Home",
-        "about": "ABOUT",
-        "admin": "Admin",
-        "signup": "Signup",
-        "profile": "Profile",
-        "my_profile": "My Profile",
-        "my_orders": "My Orders",
-        "login": "Login",
-        "logout": "Logout"
+        "hello" : "Hello",
+        "menu_burger" : {
+            "home" : "Home",
+            "about": "ABOUT",
+            "admin": "Admin",
+            "signup": "Signup",
+            "profile": "Profile",
+            "my_profile": "My Profile",
+            "my_orders": "My Orders",
+            "login": "Login",
+            "logout": "Logout"
+        }
     },
+    "navigation" : {
+        "select" : "Select a category",
+        "search" : "Search products..."
+      },
     "product_item" : {
         "sale": "Sale",
         "quick_view": "Quick View",
@@ -35,12 +42,20 @@
             "money" : "MONEY BACK GUARANTEE",
             "discount" : "MEMBER dISCOUNT FIRST ORDER"
         },
-        "mostest" : [
-            "FEATURED",
-            "POPULAR",
-            "SALE OFF",
-            "TOP RATED"
-          ],
+        "mostest_products" : {
+            "mostest" : "MOSTEST PRODUCTS",
+            "products" : [
+                "FEATURED",
+                "POPULAR",
+                "SALE OFF",
+                "TOP RATED"
+            ]
+        },
+        "latest_blog":{
+            "latest":"LATEST BLOG",
+            "read_more":"Read More"
+        },
+        "viewed" : "VIEWED PRODUCTS",
         "newest" : "NEWEST PRODUCTS"
     },
     "details" : {
@@ -57,6 +72,7 @@
             "rating : lowest first",
             "rating : highest first"
         ],
+        "filter" : "FILTER",
         "filter_price" : "FILTER BY PRICE"
     },
     "product_page" : {
@@ -70,6 +86,13 @@
             "category":"Category",
             "sold" :"Sold",
             "pcs":"pcs"
+        },
+        "review": {
+            "header" : {
+                "description" : "DESCRIPTION",
+                "reviews" : "REVIEWS", 
+                "recommendation" : "SIMILAR"
+            }
         },
         "home" : "HOME",
         "best_seller" : "BEST SELLER"
@@ -156,28 +179,39 @@
         "inc_val": "Incorrect value",
         "buy_info" : "Buy success"
     },
+    "personal" : {
+        "menu_bar" : {
+            "general":"GENERAL",
+            "orders":"ORDERS",
+            "products":"PRODUCTS",
+            "personal":"PERSONAL",
+            "reviews":"REVIEWS"
+        }
+      },
     "footer" : {
-        "about" : [
-            "Information",
-            "About us",
-            "Privacy",
-            "Conditions",
-            "Online support"
-        ],
-        "my_account" : [
-            "My Account",
-            "Login",
-            "My Cart",
-            "Wishlist",
-            "Checkout"
-        ],
-        "information" : [
-            "Information",
-            "Specials",
-            "New Products",
-            "Best Sellers",
-            "Our Stores"
-        ],
+        "information" : {
+            "info":"Information",
+            "about":"About us",
+            "privacy":"Privacy",
+            "payment":"Payment Methods",
+            "online":"Online support"
+        },
+        "my_account" : {
+            "site":"My Account",
+            "login":"Login",
+            "logout":"Logout",
+
+            "cart":"My Cart",
+            "wishlist":"Wishlist",
+            "checkout":"Checkout"
+        },
+        "services" : {
+            "all":"SERVICES",
+            "laser":"Laser engraving",
+            "plotter":"Plotter work",
+            "print":"Printing",
+            "brosh":"Making brooches"
+        },
         "orders" : [
             "Orders",
             "Payment options",

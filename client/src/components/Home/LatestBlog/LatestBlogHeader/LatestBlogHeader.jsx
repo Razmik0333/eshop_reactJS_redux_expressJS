@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getLatestReviewsSelector, getReviewIdSelector } from '../../../../helpers/reduxSelectors'
+import { currentLanguageDataSelector, getLatestReviewsSelector, getReviewIdSelector } from '../../../../helpers/reduxSelectors'
 import { changeReviewId } from '../../../../redux/ducks/reviewDuck'
 
 export default function LatestBlogHeader() {
@@ -10,11 +10,12 @@ export default function LatestBlogHeader() {
           dispatch(changeReviewId(+e.target.dataset.id))
      }
      const reviewId = useSelector(getReviewIdSelector)
+     const latestBlogData = useSelector(currentLanguageDataSelector)?.home?.latest_blog;
 
   return (
           <div className="latest__blog__header">
           <p className="latest-blog-header">
-               LATEST BLOG
+               {latestBlogData?.latest}
           </p>
           <div className="latest__blog_line__circles">
                <div className="latest__blog__line">

@@ -1,19 +1,21 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { currentProduct } from '../../../../../redux/ducks/productDuck';
 import { root } from '../../../../../helpers/constants/constants';
 import './styles/_products-details-list.scss';
 import { changePopup, getPopupItemId } from '../../../../../redux/ducks/configsDuck';
-import { popupCloseSelector } from '../../../../../helpers/reduxSelectors';
+import { getUserId, popupCloseSelector } from '../../../../../helpers/reduxSelectors';
 import ModalPopup from '../../../../Base/Modal/ModalPopup';
-import { getCartItem, getCountOfCart, getTotalPriceValue } from '../../../../../redux/ducks/cartDuck';
+import { fetchAddCart, getCartItem, getCountOfCart, getTotalPriceValue } from '../../../../../redux/ducks/cartDuck';
 import RatingMapping from '../../../../Base/RatingMapping/RatingMapping';
 
 function ProductByList({product, text}) {
      const dispatch = useDispatch();
+     const navigate = useNavigate();
      const location = useLocation();
      const pathRef = useRef(null);
+     const userId = useSelector(getUserId)
      const discountedPrice = product.cost *(1 - product.discount / 100);
      
      const popupIsShow = useSelector(popupCloseSelector);
@@ -29,13 +31,11 @@ function ProductByList({product, text}) {
           document.body.style.overflow = "hidden";
      }
      const addProductToCart = (e) => {
-          //e.stopPropagation()
-          dispatch(getCartItem({
-                    [e.target.dataset.id] : 1 
-               }
-          ))
-          dispatch(getCountOfCart(1));
-          dispatch(getTotalPriceValue(discountedPrice));
+          userId ? 
+          dispatch(fetchAddCart(userId ,{
+               [e.target.dataset.id] : 1
+          }))
+          : navigate('/login')
      }
      return (
           <>
@@ -45,8 +45,12 @@ function ProductByList({product, text}) {
                     {text['sale']}
                     </div>
                     <div className="product-pictures">
-                    <img src={`${root}/images/products/${product.id}.jpg`} alt=""  data-id={`${product.id}`} onClick={showProductPopup}/>
-
+                         <img 
+                              src={`${root}/images/products/${product.id}.jpg`} 
+                              alt={`${product.descr}`}
+                              data-id={`${product.id}`}
+                              onClick={showProductPopup}                              
+                         />
                     </div>
                     <div 
                     className="product-details" 
@@ -73,10 +77,8 @@ function ProductByList({product, text}) {
                                    {`${product.cost *(1 - product.discount / 100)}Դ`}
                                    </span>
                          }
-                         
                     </div>
                     <RatingMapping rating={product.rating}  />
-
                     <div className="product-options">
                          <div className="product-description">
                               {
@@ -87,8 +89,7 @@ function ProductByList({product, text}) {
                               <button className="product-button button-favorite"></button>
                               <button className="product-button button-compare"></button>
                               <button className="add-to-cart"
-
-                                  data-id={product.id}
+                                   data-id={product.id}
                                    onClick={addProductToCart}>
                               <img src={`${root}/icons/config/cart.svg`} alt="" />
                                    {text['add_to_cart']}
