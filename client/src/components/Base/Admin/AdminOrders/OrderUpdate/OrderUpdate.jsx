@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { adminCurrentOrderInfoSelector, adminCurrentOrderSelector, adminOrderIdSelector, adminOrderProductsSelector, adminOrderSelector, getUserId, modalCloseSelector } from "../../../../../helpers/reduxSelectors";
+import { adminCurrentOrderSelector, adminOrderIdSelector, adminOrderProductsSelector, getUserId, modalCloseSelector } from "../../../../../helpers/reduxSelectors";
 import { root } from "../../../../../helpers/constants/constants";
 import { changeModal } from "../../../../../redux/ducks/configsDuck";
 import Modal from "../../../Modal/Modal";
 import ProductCreateUpdateFooter from "../../AdminProducts/ProductCreateUpdateFooter";
 import { getStatus, checkEmptyObject } from "../../../../../helpers/functions/functions";
-import { clearCurrentOrder, fetchOrderItem, fetchOrderProducts, fetchOrdersByString } from "../../../../../redux/ducks/adminOrderDuck";
+import { fetchOrderItem, fetchOrderProducts} from "../../../../../redux/ducks/adminOrderDuck";
 import Loader from "../../../Loader/Loader";
 function OrderUpdate() {
      const dispatch = useDispatch();
@@ -21,15 +21,11 @@ function OrderUpdate() {
      const [customerName, setCustomerName] = useState(``);
      const [customerPhone, setCustomerPhone] = useState(``);
      const [customerComment, setCustomerComment] = useState(``);
-     const [customerOrder, setCustomerOrder] = useState({});
      const [orderPrice, setOrderPrice] = useState("");
      const [orderStatus, setOrderStatus] = useState('');
      const currentOrderProducts = useSelector(adminOrderProductsSelector)
-     console.log("🚀 ~ file: OrderUpdate.jsx:28 ~ OrderUpdate ~ currentOrderProducts:", currentOrderProducts)
 
      const currentOrder = useSelector(adminCurrentOrderSelector);
-       console.log("🚀 ~ file: OrderUpdate.jsx:26 ~ OrderUpdate ~ currentOrder", currentOrder)
-     const userId = useSelector(getUserId);
 
      useEffect(() => {
        
@@ -38,7 +34,6 @@ function OrderUpdate() {
                setCustomerName(currentOrder?.user_name);
                setCustomerPhone(currentOrder?.user_phone);
                setCustomerComment(currentOrder?.user_comment);
-               //setCustomerOrder(JSON.parse(currentOrder?.user_order));
                setOrderPrice( currentOrder?.user_price);
                setOrderStatus(currentOrder?.user_status);
                setIsChanged(true)

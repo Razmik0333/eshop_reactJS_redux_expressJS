@@ -9,7 +9,6 @@ function ServicesPart() {
           <div className="container services__part__container">
                <div className="service__part">
                     <div className="service-logo">    
-                         {/* <!-- <img src="../icons/truck.svg" alt="">  --> */}
                          <svg version="1.1" width="256" height="256" viewBox="0 0 256 256" >
                               <g transform="translate(128 128) scale(0.72 0.72)">
                                    <g  transform="translate(-175.05 -175.05000000000004) scale(3.89 3.89)" >

@@ -5,7 +5,6 @@ import { costsValuesSelector, countElementsSelector, countItemsOfPageSelector, c
 import { changeCountElements } from "../../../../redux/ducks/configsDuck";
 import { clearProductsByCosts, fetchProductsByCategory, fetchProductsByCosts } from "../../../../redux/ducks/productDuck";
 import Product from "../../../Base/Product/Product";
-//import Product from "../../../Base/Product/Product";
 import ProductByList from "./ProductByList/ProductByList";
 
 function ProductsList() {
@@ -22,14 +21,11 @@ function ProductsList() {
           dispatch(fetchProductsByCategory(currentCategory,countsElementsOfPage));
           dispatch(changeCountElements(6));
           dispatch(clearProductsByCosts())
-          //dispatch(clearCostValues())
      }, [currentCategory]);
 
      useEffect(() => {
           const id = setTimeout(() => {
-               if(!checkEmptyObject(costObject)){
-                    console.log('work');
-                    
+               if(!checkEmptyObject(costObject)){                    
                     dispatch(fetchProductsByCosts({'category' : [currentCategory]},costObject,countsOfProducts));
                }
           }, 200);
@@ -41,7 +37,6 @@ function ProductsList() {
 
      const productsByCategory = useSelector(productsByCategorySelector); // all products by category 
      
-     //const productData = (searchData.length > 0 && isSearchValue) ? searchData : productsByCategory;
      
      const sortedArray = 
           getObjectSize(sortType) > 0 ? 

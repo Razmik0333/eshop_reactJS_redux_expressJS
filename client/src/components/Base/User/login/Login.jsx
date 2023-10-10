@@ -1,11 +1,8 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import {  checkCapitalLetter,
-          checkEmail,
+import {  checkEmail,
           checkPassword,
-          checkStrLength,
-          checkStrWithNumber
      } from "../../../../helpers/functions/formFunctions";
 import { currentUser, getUserData } from "../../../../redux/ducks/userDuck";
 import { root } from "../../../../helpers/constants/constants";
@@ -34,9 +31,7 @@ function Login() {
                     setEmailLoginExist(true);
                     dispatch(currentUser(res));
                     dispatch(getUserData(res));
-                //    dispatch(fetchCurrentWishList(res))
-
-                   navigate('/home')
+                    navigate('/home')
                }else{
                    
                     setEmailLoginExist(false);

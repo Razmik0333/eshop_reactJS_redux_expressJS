@@ -1,12 +1,9 @@
 import { useDispatch } from "react-redux";
 import { changeModal } from "../../../redux/ducks/configsDuck";
 import "./styles/_modal.scss"
-import { useNavigate } from "react-router-dom";
 
 function Modal({message}) {
      const dispatch = useDispatch();
-     const navigate = useNavigate()
-     console.log(message);
      return <div className="modal container">
           <div className="modal__block">
                <div className="modal__header">

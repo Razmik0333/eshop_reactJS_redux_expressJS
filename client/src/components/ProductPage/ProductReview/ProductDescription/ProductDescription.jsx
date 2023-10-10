@@ -1,4 +1,4 @@
-function ProductDescription(params) {
+function ProductDescription() {
      return (<>ProductDescription</>)
 }
 

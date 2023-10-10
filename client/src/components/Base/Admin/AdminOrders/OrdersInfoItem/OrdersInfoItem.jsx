@@ -1,8 +1,8 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCurrentOrder, currentOrderId, fetchOrderItem } from "../../../../../redux/ducks/adminOrderDuck";
-import {  getUserId, modalCloseSelector } from "../../../../../helpers/reduxSelectors";
+import { currentOrderId } from "../../../../../redux/ducks/adminOrderDuck";
+import { modalCloseSelector } from "../../../../../helpers/reduxSelectors";
 import ModalOrderDelete from "../../../Modal/ModalOrderDelete";
 import { changeModal } from "../../../../../redux/ducks/configsDuck";
 
@@ -11,18 +11,13 @@ import { getStatus } from "../../../../../helpers/functions/functions";
 
 function OrdersInfoItem({order}) {
      const dispatch = useDispatch();
-     const userId = useSelector(getUserId)
      const modalIsClose = useSelector(modalCloseSelector);
      const getOrderId = (e) => {
-          //dispatch(clearCurrentOrder());
-          //console.log(e.target.dataset.id);
           dispatch(currentOrderId(e.target.dataset.id))
      }
      const deleteOrderItem = (e) => {
-          dispatch(changeModal(true))
-          console.log(e.target.dataset.id);
-          dispatch(currentOrderId(e.target.dataset.id))
-      
+          dispatch(changeModal(true));
+          dispatch(currentOrderId(e.target.dataset.id));
      }
      
      return (
@@ -52,11 +47,10 @@ function OrdersInfoItem({order}) {
                </div>
                <div className="order__item__data__info">
                     {
-
                          <div className={`status__order ${getStatus(+order?.user_status)?.status}`}>
                               {
                                    getStatus(+order?.user_status)?.title
-                                   }
+                              }
                          </div>
                     }
 
@@ -71,13 +65,13 @@ function OrdersInfoItem({order}) {
                          onClick={getOrderId}
                          className="link__action"
                          >
-                          Update
+                         Update
 
                     </NavLink>
                </div>
                <div className="order__item__data__info">
                    <NavLink to={`#`} data-id={`${order?.id}`}
-                     onClick={deleteOrderItem}
+                    onClick={deleteOrderItem}
                     className="link__action"
                    >
                     Delete

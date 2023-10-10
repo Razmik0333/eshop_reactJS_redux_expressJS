@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { countElementsSelector, currentHintsData, currentSearchData, currentSearchSelector, isFocusedSelector, isSearchSelector } from "../../../../helpers/reduxSelectors";
 import { changeCountElements } from "../../../../redux/ducks/configsDuck";
-import { currentCategory, getIsFocused, isSearch } from "../../../../redux/ducks/navigationDuck";
+import { currentCategory, getIsFocused } from "../../../../redux/ducks/navigationDuck";
 import { clearHintsData, clearProductsByCosts, fetchSearchedData } from "../../../../redux/ducks/productDuck";
 import SearchItem from "../SearchItem/SearchItem"
 import HintsItem from "../HintsItem/HintsItem";

@@ -4,8 +4,8 @@ import { fetchAddCart, getCartItem, getCountOfCart, getTotalPriceValue } from '.
 import { currentProduct } from '../../../redux/ducks/productDuck'; 
 import ModalPopup from "../../Base/Modal/ModalPopup";
 import { root } from '../../../helpers/constants/constants';
-import { changePopup, getIsLogin, getPopupItemId } from '../../../redux/ducks/configsDuck';
-import { getCurrentCurrencySelector, getUserId, getWishListDataSelector, getWishListIdsSelector, popupCloseSelector } from '../../../helpers/reduxSelectors';
+import { changePopup, getPopupItemId } from '../../../redux/ducks/configsDuck';
+import { getCurrentCurrencySelector, getUserId, getWishListDataSelector, popupCloseSelector } from '../../../helpers/reduxSelectors';
 import { getNewCurrency, numInArray } from '../../../helpers/functions/functions';
 import RatingMapping from '../RatingMapping/RatingMapping';
 import './styles/_products.scss';
@@ -19,7 +19,6 @@ function Product({product, text}) {
      const discountedPrice = product.cost *(1 - product.discount / 100);
      const popupIsShow = useSelector(popupCloseSelector);
      const currentCurrency = useSelector(getCurrentCurrencySelector);
-     //const wishListIds = useSelector(getWishListIdsSelector)
      const userId = useSelector(getUserId);
      const wishListData = useSelector(getWishListDataSelector);
      const wishListIds = wishListData.map(item => item?.id);
@@ -58,7 +57,6 @@ function Product({product, text}) {
                     : <></>
                }
                <div className="product-pictures">
-                    {/* <img src={`../template/images/${product.id}.jpg`} alt="" /> */}
                     <img src={`${root}/images/products/${product?.id}.jpg`} alt="" />
                     <button 
                          className="quick-view" 

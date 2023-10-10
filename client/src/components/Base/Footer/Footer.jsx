@@ -10,14 +10,12 @@ function Footer() {
      const dispatch = useDispatch();
      const navigate = useNavigate();
      const footerLangData = useSelector(currentLanguageDataSelector)?.footer;
-     console.log("🚀 ~ file: Footer.jsx:8 ~ Footer ~ footerLangData:", footerLangData)
      const userId = useSelector(getUserId);
      const changeLogout = (e) => {        
 
           dispatch(currentUser(null))
           dispatch(getUserData(null))
           dispatch(changeOrdersFromLogout());
-         // dispatch(fetchAddWishList(null, 20))
           navigate('/home')
     }
      return(

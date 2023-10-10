@@ -3,7 +3,6 @@ import RatingMapping from '../../../../Base/RatingMapping/RatingMapping'
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentCurrencySelector } from '../../../../../helpers/reduxSelectors';
 import { getNewCurrency } from '../../../../../helpers/functions/functions';
-import { root } from '../../../../../helpers/constants/constants';
 import { NavLink } from 'react-router-dom';
 import { currentProduct } from '../../../../../redux/ducks/productDuck';
 export default function MostestProduct({product}) {

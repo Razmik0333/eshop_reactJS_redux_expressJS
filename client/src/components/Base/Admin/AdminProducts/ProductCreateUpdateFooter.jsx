@@ -1,10 +1,9 @@
 import { useDispatch } from "react-redux";
-import { currentProductClear } from "../../../../redux/ducks/adminProductDuck";
 import { changeModal } from "../../../../redux/ducks/configsDuck";
 
 function ProductCreateUpdateFooter() {
      const dispatch = useDispatch();
-     const confirmCreate = (e) => { 
+     const confirmCreate = () => { 
           dispatch(changeModal(true));                
      }
      return (

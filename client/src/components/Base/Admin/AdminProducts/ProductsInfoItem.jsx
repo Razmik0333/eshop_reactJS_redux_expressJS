@@ -1,16 +1,11 @@
 import { NavLink } from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { currentProductID, fetchProductItem, fetchProductsForDelete } from "../../../../redux/ducks/adminProductDuck";
-import { root } from "../../../../helpers/constants/constants";
-import { adminProductIsDeletedSelector, getUserId, modalCloseSelector } from "../../../../helpers/reduxSelectors";
-import { useState } from "react";
-import ModalProductDelete from "../../Modal/ModalProductDelete";
+import { useDispatch } from 'react-redux';
+import { currentProductID, fetchProductItem } from "../../../../redux/ducks/adminProductDuck";
 import { changeModal } from "../../../../redux/ducks/configsDuck";
 
 
 function ProductsInfoItem({product}) {
-     const [forDeleted, setforDeleted] = useState(false)
      const dispatch = useDispatch();
      const getProductId = (e) => {
           dispatch(currentProductID(e.target.dataset.id))

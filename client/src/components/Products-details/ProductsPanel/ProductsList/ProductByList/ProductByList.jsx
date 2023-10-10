@@ -7,7 +7,7 @@ import './styles/_products-details-list.scss';
 import { changePopup, getPopupItemId } from '../../../../../redux/ducks/configsDuck';
 import { getUserId, popupCloseSelector } from '../../../../../helpers/reduxSelectors';
 import ModalPopup from '../../../../Base/Modal/ModalPopup';
-import { fetchAddCart, getCartItem, getCountOfCart, getTotalPriceValue } from '../../../../../redux/ducks/cartDuck';
+import { fetchAddCart } from '../../../../../redux/ducks/cartDuck';
 import RatingMapping from '../../../../Base/RatingMapping/RatingMapping';
 
 function ProductByList({product, text}) {
@@ -16,7 +16,6 @@ function ProductByList({product, text}) {
      const location = useLocation();
      const pathRef = useRef(null);
      const userId = useSelector(getUserId)
-     const discountedPrice = product.cost *(1 - product.discount / 100);
      
      const popupIsShow = useSelector(popupCloseSelector);
      useEffect(() => {

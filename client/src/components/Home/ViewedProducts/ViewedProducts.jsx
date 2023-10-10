@@ -14,8 +14,6 @@ function ViewedProducts() {
      const viewedProductsData =  useSelector(getViewedProductsDataSelector)
      const productItemText = useSelector(currentLanguageDataSelector)?.product_item;
      const viewedProductsText = useSelector(currentLanguageDataSelector)?.home;
-     console.log("🚀 ~ file: ViewedProducts.jsx:17 ~ ViewedProducts ~ viewedProductsText:", viewedProductsText)
-
      return(
           <div className="products__list">
                <div className="container product__list__container">

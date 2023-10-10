@@ -3,9 +3,8 @@
 import { useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { adminProductIdSelector,  getAvatartUrl,  getUserDataSelector,  getUserId } from "../../../helpers/reduxSelectors";
+import { getUserDataSelector,  getUserId } from "../../../helpers/reduxSelectors";
 import Avatar from "react-avatar-edit";
-import { fetchProductsForDelete, resetIsDeleted } from "../../../redux/ducks/adminProductDuck";
 import { changeModal } from "../../../redux/ducks/configsDuck";
 import "./styles/_modal.scss"
 import { root } from "../../../helpers/constants/constants";

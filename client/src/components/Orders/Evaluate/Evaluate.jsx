@@ -1,14 +1,14 @@
 import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import EvaluateContent from './EvaluateContent/EvaluateContent';
-import { getEvaluateProductsSelector, getEvaluateSelector, getReviewByProductIdAndUserId, getUserDataSelector, modalCloseSelector, productReviewDataSelector } from '../../../helpers/reduxSelectors';
+import { getEvaluateProductsSelector, getEvaluateSelector, getUserDataSelector, modalCloseSelector, productReviewDataSelector } from '../../../helpers/reduxSelectors';
 import { useState } from 'react';
 import { changeModal } from '../../../redux/ducks/configsDuck';
 import { fetchProductsByOrderId, getOrderStatus } from '../../../redux/ducks/orderDuck';
 import { useEffect } from 'react';
-import { root } from '../../../helpers/constants/constants';
 import { changeProductsRating, clearProductReview } from '../../../redux/ducks/productDuck';
 import Modal from '../../Base/Modal/Modal';
+import { root } from '../../../helpers/constants/constants';
 
 export default function Evaluate() {
      const dispatch = useDispatch();
@@ -53,10 +53,7 @@ export default function Evaluate() {
                     dispatch(clearProductReview());
                     dispatch(changeModal(true))
                     dispatch(getOrderStatus(4));
-                 
                     dispatch(changeProductsRating(Object.keys(data.evaluate.review)))
-                   // dispatch(changeProductRating)
-                    //navigate('/orders')
                }
           })
           .catch (e => console.log('error from orderDuck', e))
@@ -74,8 +71,6 @@ export default function Evaluate() {
                     {
                          evaluatedProducts.map((product, pos) => {
                               return <EvaluateContent product={product} ind = {pos}  key={`evaluate_${pos}`} />
-                              
-                         
                          })
                     }
                     <div className="user__info">

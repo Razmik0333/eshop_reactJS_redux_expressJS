@@ -17,7 +17,7 @@ function CategoryLineCircle() {
                </div>
                <div className="circles">
                     {
-                         categories.map((item,pos) => {
+                         categories.map((_,pos) => {
                               return  <div className={
                                    idProductsFromStart === pos + 1? "circle active" : "circle"
                               } key={`circle_${pos}`} data-id={`${pos+1}`} onClick={changeIdProducts}></div>

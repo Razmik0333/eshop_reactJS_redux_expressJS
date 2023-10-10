@@ -53,7 +53,7 @@ export const getStatusIndex = ({ OrderDuck }) => OrderDuck.currentStatus; //
 export const getConfirmIdSelector = ({ OrderDuck }) => OrderDuck.orderConfirmId; //
 export const getEvaluateSelector = ({ OrderDuck }) => OrderDuck.orderId; //
 export const isConfirmedSelector = ({ OrderDuck }) => OrderDuck.isConfirmed; //
-export const getDeliveredOrdersByUserSelector = ({ OrderDuck }) => OrderDuck.deliveredOrders; //
+// export const getDeliveredOrdersByUserSelector = ({ OrderDuck }) => OrderDuck.deliveredOrders; //
 export const getCurrentTabNameSelector = ({ ReviewDuck }) => ReviewDuck.tabName; //
 export const getReviewsByProductSelector = ({ ReviewDuck }) => ReviewDuck.reviewsByProduct; //
 export const getLatestReviewsSelector = ({ ReviewDuck }) => ReviewDuck.latestReviews; //

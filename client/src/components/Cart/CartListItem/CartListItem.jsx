@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getCartSelector, getUserId } from '../../../helpers/reduxSelectors';
-import { fetchAddCart, fetchRemoveOnCart, getCartItem, getCartToRemove, getCountOfCart, getModifiedCart, getTotalPrice, getTotalPriceValue } from '../../../redux/ducks/cartDuck';
+import { fetchAddCart, fetchRemoveOnCart } from '../../../redux/ducks/cartDuck';
 import { currentProduct } from '../../../redux/ducks/productDuck';
 import { root } from '../../../helpers/constants/constants';
 import RatingMapping from '../../Base/RatingMapping/RatingMapping';

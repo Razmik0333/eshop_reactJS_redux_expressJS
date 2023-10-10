@@ -2,11 +2,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getCartSelector, getWishListDataSelector, hotDealsTimerSelector } from '../../../helpers/reduxSelectors';
-import './styles/_header-down.scss';
-import { root } from '../../../helpers/constants/constants'; 
 import { useEffect } from 'react';
 import { getHotDealsTimerSecond } from '../../../redux/ducks/configsDuck';
 import { getProductCount } from '../../../helpers/functions/functions';
+import { root } from '../../../helpers/constants/constants'; 
+import './styles/_header-down.scss';
 function HeaderDown() {
      const dispatch = useDispatch();
      const cartData = useSelector(getCartSelector);

@@ -11,19 +11,16 @@ export default function UserReviews() {
      const userId = useSelector(getUserId);
      const modalIsClose = useSelector(modalCloseSelector)
 
-     console.log("🚀 ~ file: UserReviews.jsx:10 ~ UserReviews ~ userId:", userId)
      useEffect(() => {
           dispatch(fetchReviewsByUser(userId));
      }, []);
      const getReviewByUser = useSelector(getReviewByUserId)
-     console.log("🚀 ~ file: UserReviews.jsx:16 ~ UserReviews ~ getReviewByUser:", getReviewByUser)
   return <>
   
   {
-                    modalIsClose ?
-                         <Modal message={'Կարծիքը պահպանված է'} /> 
+               modalIsClose ?
+                    <Modal message={'Կարծիքը պահպանված է'} /> 
                : <></>
-               //<ModalOrderConfirm message={'Դուք ստացե՞լ եք Ձեր փաթեթը'} />
                }
   <div className="container user_list_container">
        <MenuBar/>

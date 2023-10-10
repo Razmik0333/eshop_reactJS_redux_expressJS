@@ -2,14 +2,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkEmptyObject, getObjectSize, getSortedArray } from "../../helpers/functions/functions";
 import { costsValuesSelector, countElementsSelector, currentCategoryIdSelector, currentLanguageDataSelector, currentSearchData, currentSearchSelector, elementsCostsSelector, isSearchSelector, showTypeSelector, sortTypeSelector } from "../../helpers/reduxSelectors";
-import { clearCostValues } from "../../redux/ducks/configsDuck";
 import { clearProductsByCosts, fetchProductsByCosts } from "../../redux/ducks/productDuck";
 import NonFound from "../Base/NonFound/NonFound";
 import Product from "../Base/Product/Product";
 import CategoriesPanel from "../Products-details/CategoriesPanel/CategoriesPanel";
 import ProductsDetailsList from "../Products-details/ProductsPanel/ProductsDetailsList/ProductsDetailsList";
 import ProductByList from "../Products-details/ProductsPanel/ProductsList/ProductByList/ProductByList";
-import ProductsPanel from "../Products-details/ProductsPanel/ProductsPanel";
 import RefreshButton from "../Products-details/ProductsPanel/RefreshButton/RefreshButton";
 import './styles/_search.scss';
 function Search(){
@@ -19,7 +17,6 @@ function Search(){
      const searchData = useSelector(currentSearchData);
      const isSearchValue = useSelector(isSearchSelector);
      const costObject = useSelector(costsValuesSelector);
-     console.log("🚀 ~ file: Search.jsx ~ line 19 ~ Search ~ costObject", costObject)
      const currentCategory = useSelector(currentCategoryIdSelector);
      const costItems = useSelector(elementsCostsSelector);
      const searchWord = useSelector(currentSearchSelector);

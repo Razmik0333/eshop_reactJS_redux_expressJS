@@ -78,7 +78,6 @@
     "product_page" : {
         "content" : {
             "reviews" : "reviews",
-            "add_review": "Add Your Review",
             "add_to_cart": "Add To Cart",
             "quantity":"Quantity",
             "name":"Name",
@@ -94,6 +93,7 @@
                 "recommendation" : "SIMILAR"
             }
         },
+        "missing": "Reviews are missing",
         "home" : "HOME",
         "best_seller" : "BEST SELLER"
     },
@@ -200,7 +200,6 @@
             "site":"My Account",
             "login":"Login",
             "logout":"Logout",
-
             "cart":"My Cart",
             "wishlist":"Wishlist",
             "checkout":"Checkout"

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import './styles/_client-feedback.scss';
 
 import ClientFeedBackHeader from './ClientFeedBackHeader/ClientFeedBackHeader';
 import ClientFeedbackContent from './ClientFeedBackContent/ClientFeedbackContent';
 import { useDispatch } from 'react-redux';
 import { fetchLatestReviews } from '../../../redux/ducks/reviewDuck';
+import './styles/_client-feedback.scss';
 
 function ClientFeedback() {
      const dispatch = useDispatch()

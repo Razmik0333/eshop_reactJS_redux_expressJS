@@ -11,7 +11,6 @@ function Wishlist() {
      const userId = useSelector(getUserId);
      const navigate = useNavigate()
 
-     const wishListIds = useSelector(getWishListIdsSelector)
      const wishList = useSelector(currentLanguageDataSelector)?.wishlist;
      const productItem = useSelector(currentLanguageDataSelector)?.product_item;
      useEffect(() => {

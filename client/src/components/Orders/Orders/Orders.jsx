@@ -41,8 +41,6 @@ function Orders() {
                modalIsClose ?
                  <ModalOrderConfirm message={'Դուք Ցանկանում եք հեռացնել Ձեր փաթեթը'} /> 
                  : <></>
-                 //<ModalOrderConfirm message={'Դուք ստացե՞լ եք Ձեր փաթեթը'} />
-
           }
           <div className="products__list">
                <div className="container order__list__container">

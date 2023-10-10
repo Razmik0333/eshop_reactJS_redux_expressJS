@@ -1,16 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getOrdersFromStatus, getStatus, getNewCurrency } from "../../../helpers/functions/functions";
-import { currentLanguageDataSelector, getCurrentCurrencySelector, getStatusIndex, getUserId, getUserOrders } from "../../../helpers/reduxSelectors";
+import { getStatus, getNewCurrency } from "../../../helpers/functions/functions";
+import { currentLanguageDataSelector, getCurrentCurrencySelector, getStatusIndex, getUserId } from "../../../helpers/reduxSelectors";
 import "./styles/_order-list-header.scss";
-import { changeModal } from "../../../redux/ducks/configsDuck";
-import { fetchDeletedOrder, orderDeleteId } from "../../../redux/ducks/orderDuck";
+import { fetchDeletedOrder } from "../../../redux/ducks/orderDuck";
 
 function OrderListHeader({ind, id, status, price}) {
      const statusIndex = useSelector(getStatusIndex)
-     const orders =  useSelector(getUserOrders);
      const dispatch = useDispatch();
      const user_id = useSelector(getUserId)
-     const userObject = getOrdersFromStatus(orders, statusIndex);
      const orderListHeader = useSelector(currentLanguageDataSelector)?.order?.header?.order_item_header;
      const currentCurrency = useSelector(getCurrentCurrencySelector);
      const changeRemoveOrder = (e) => {

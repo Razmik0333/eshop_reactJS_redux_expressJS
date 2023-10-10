@@ -1,15 +1,14 @@
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminOrderIdSelector, adminProductIdSelector, adminProductSelector, categoriesSelector, getUserId, modalCloseSelector } from "../../../../helpers/reduxSelectors";
+import { adminProductIdSelector, adminProductSelector, categoriesSelector, modalCloseSelector } from "../../../../helpers/reduxSelectors";
 import { root } from '../../../../helpers/constants/constants';
 import Modal from '../../Modal/Modal';
 import { changeModal } from '../../../../redux/ducks/configsDuck';
 import ProductCreateUpdateFooter from './ProductCreateUpdateFooter';
-
-import "./styles/_product-create-update-form.scss";
-import { fetchOrderItem } from '../../../../redux/ducks/adminOrderDuck';
 import { changeCurrentProduct, fetchProductItem } from '../../../../redux/ducks/adminProductDuck';
+import "./styles/_product-create-update-form.scss";
+
 function ProductCreateUpdate() {
      const [isCreated, setIsCreated] = useState(false);
      const modalIsClose = useSelector(modalCloseSelector);
@@ -19,12 +18,8 @@ function ProductCreateUpdate() {
      const [productDiscount, setProductDiscount] = useState(``);
      const [productArticul, setProductArticul] = useState("");
      const [selectedCat, setSelectedCat] = useState('');
-
      const dispatch = useDispatch();
-     
      const currentProduct = useSelector(adminProductSelector);
-
-     const userId = useSelector(getUserId);
      const currentProductId = useSelector(adminProductIdSelector)
 
      useEffect(() => {
@@ -39,11 +34,8 @@ function ProductCreateUpdate() {
           setSelectedCat(currentProduct?.category)
      }, [currentProductId, currentProduct]);
      
-
      const changeCategory = (e) => {
-          
           setSelectedCat(+e.target.value);
-          
      }
      const formRef = useRef(null);
      const handleSubmit = async (e) => {
@@ -55,15 +47,11 @@ function ProductCreateUpdate() {
 
           await fetch(url, {
                method: 'PUT',
-               //  headers: {
-               //       "Content-Type" :"multipart/form-data"
-               //  },
                body: data,    
           })
           .then(res => res.json())
           .then(res => {
                currentProduct && dispatch(changeCurrentProduct(res[0]))
-               console.log(res);
                setIsCreated(res);
                dispatch(changeModal(true))
                            

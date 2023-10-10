@@ -14,7 +14,6 @@ export default function UserReviewItem({review}) {
      const reviewRef = useRef(null);
      const userId = useSelector(getUserId);
      const updatedRatingValue = useSelector(productReviewDataSelector);
-     console.log("🚀 ~ file: UserReviewItem.jsx:16 ~ UserReviewItem ~ updatedRatingValue:", updatedRatingValue)
      const [updatedRating] = Object.values(updatedRatingValue) 
      const changeReviewValue = (e) => {
           setChangeReviewValue(e.target.value)
@@ -37,8 +36,6 @@ export default function UserReviewItem({review}) {
                     }
                )
           }) ).json();
-          console.log(reviewData);
-          //dispatch(changeModal(true))
           dispatch(changeReviewData(reviewData));
      }
      const handleUpdate = async (e) => {
@@ -57,15 +54,12 @@ export default function UserReviewItem({review}) {
                     }
                )
           }) ).json();
-          console.log(reviewData);
           dispatch(changeModal(true))
           dispatch(changeReviewData(reviewData));
           setChangeReview(false)
      }
      return (
-
           <>
-
                <form method="PUT" className="user__review__item" ref={reviewRef} >
                     <div className="user_product_item">
                          <div className="user_product_picture">

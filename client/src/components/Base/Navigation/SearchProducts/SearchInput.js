@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { currentCategoryIdSelector, currentLanguageDataSelector, currentSearchSelector, getUserId } from "../../../../helpers/reduxSelectors";
@@ -26,7 +26,6 @@ function SearchInput() {
      }, [searchWord]);
 
      useEffect(() => {
-          
            dispatch(currentSearch(''));
            dispatch(clearSearchData([]));
            dispatch(clearProductsByCosts());
@@ -52,7 +51,6 @@ function SearchInput() {
           }else{
                dispatch(currentSearch(e.target.value));
           }
-
      }
 
      return (

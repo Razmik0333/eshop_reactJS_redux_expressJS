@@ -11,7 +11,6 @@ function HotDeals() {
                <HotDealsHeader />
                <HotDealsContent />
                <HotDealsTimer />
-
           </div>
      )
 }

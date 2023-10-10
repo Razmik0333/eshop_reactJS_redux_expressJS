@@ -6,7 +6,7 @@ import {root} from '../../../../../helpers/constants/constants' ;
 import ModalPopup from "../../../../Base/Modal/ModalPopup";
 import { getNewCurrency } from "../../../../../helpers/functions/functions";
 import { currentProduct, fetchMaxDiscountProduct } from "../../../../../redux/ducks/productDuck";
-import { fetchAddCart, getCartItem, getCountOfCart, getTotalPriceValue } from "../../../../../redux/ducks/cartDuck";
+import { fetchAddCart } from "../../../../../redux/ducks/cartDuck";
 import { changePopup, getPopupItemId } from "../../../../../redux/ducks/configsDuck";
 import RatingMapping from "../../../../Base/RatingMapping/RatingMapping";
 import "./styles/_hot-deals-content.scss"
@@ -29,7 +29,6 @@ function HotDealsContent() {
           dispatch(currentProduct(e.target.dataset.id));
      }
      const addProductToCart = (e) => {
-          console.log(e.target);
           dispatch(fetchAddCart(userId ,{
                [e.target.dataset.id] : 1
           }))

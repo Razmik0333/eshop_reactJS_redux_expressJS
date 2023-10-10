@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { currentLanguageDataSelector, getMostestProductSelector, mostestIndex } from "../../../../helpers/reduxSelectors";
-import RatingMapping from "../../../Base/RatingMapping/RatingMapping";
 import MostestProductsHeader from "./MostedProductsHeader/MostedProductsHeader";
 import { fetchMostestProduct } from "../../../../redux/ducks/productDuck";
 import MostestProduct from "./MostestProduct/MostestProduct";
-import { root } from "../../../../helpers/constants/constants";
 import OffersButton from "./OffersButtons/OffersButton";
+import { root } from "../../../../helpers/constants/constants";
 
 function MostestProducts() {
      
@@ -15,12 +14,9 @@ function MostestProducts() {
 
      useEffect(() => {
           dispatch(fetchMostestProduct(mostestId))
-
      }, [mostestId]);
      const mostestRatingData = useSelector(getMostestProductSelector);
      const mostestProductsData = useSelector(currentLanguageDataSelector)?.home?.mostest_products;
-     console.log("🚀 ~ file: MostestProducts.jsx:22 ~ MostestProducts ~ mostestProductsData:", mostestProductsData)
-
      return (
           <div className="furniture__gallery">
           <p className="furniture__gallery__header">{mostestProductsData?.mostest}</p>
@@ -39,7 +35,6 @@ function MostestProducts() {
                              <MostestProduct product={mostestRatingData}/>
                          </div>
                     </div>
-                    {/* <!-- <img src="" alt="" className="current-offer"> --> */}
                </div>
           </div>
           </div>

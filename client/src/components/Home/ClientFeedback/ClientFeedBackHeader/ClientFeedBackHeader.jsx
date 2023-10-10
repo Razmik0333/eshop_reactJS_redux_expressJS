@@ -7,9 +7,7 @@ export default function ClientFeedBackHeader() {
      const  dispatch = useDispatch();
      const latestReviews = useSelector(getLatestReviewsSelector);
      const reviewId = useSelector(getReviewIdSelector)
-
      const setReviewId = (e) => {
-          console.log(e.target.dataset.id);
           dispatch(changeReviewId(e.target.dataset.id))
      }
   return (
@@ -19,9 +17,6 @@ export default function ClientFeedBackHeader() {
           </p>
           <div className="client__feedback_line__circles">
                <div className="client__feedback__line"></div>
-
-
-
                <div className="circles">
                     {
                          latestReviews.map((_, pos) => {

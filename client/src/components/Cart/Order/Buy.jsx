@@ -1,21 +1,16 @@
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkEmail, checkPhoneNumber, checkStrLength } from '../../../helpers/functions/formFunctions';
-import { currentLanguageDataSelector, getCartSelector, getTotalPriceSelector, getUserDataSelector, modalCloseSelector } from '../../../helpers/reduxSelectors';
+import { currentLanguageDataSelector, getCartSelector, getUserDataSelector, modalCloseSelector } from '../../../helpers/reduxSelectors';
 import { root } from '../../../helpers/constants/constants';
 import Modal from '../../Base/Modal/Modal';
-import { changeModal } from '../../../redux/ducks/configsDuck';
 import './styles/_buy.scss';
-import { fetchClearCart, getClearedCart, getCountOfCart, getTotalPriceValue, readCurrentCart } from '../../../redux/ducks/cartDuck';
-import { getCartProductsItems } from '../../../redux/ducks/productDuck';
+import { readCurrentCart } from '../../../redux/ducks/cartDuck';
 import { useNavigate } from 'react-router-dom';
 function Buy() {
      const navigate = useNavigate()
      const userData = useSelector(getUserDataSelector);
-     console.log("🚀 ~ file: Buy.jsx:14 ~ Buy ~ userData:", userData)
      const cartData = useSelector(getCartSelector);
-     console.log("🚀 ~ file: Buy.jsx:15 ~ Buy ~ cartData:", cartData)
-    // const totalPrice = useSelector(getTotalPriceSelector);
      const dispatch = useDispatch();
      const cartDataForOrder = cartData.reduce((acc, curr) => {
           acc[curr?.id] = curr?.quantity
@@ -26,7 +21,6 @@ function Buy() {
           
           return acc
      }, 0)
-     console.log(cartDataForOrder)
      const buy = useSelector(currentLanguageDataSelector)?.buy;
      const modalIsClose = useSelector(modalCloseSelector);
      const [userName, setUserName] = useState(userData?.name);
@@ -50,101 +44,90 @@ function Buy() {
           } catch (e) {
                console.log(e)
           }
-            
-               // dispatch(changeModal(true));
-               // dispatch(getClearedCart({}))                          
-               // dispatch(getCartProductsItems({}))                          
-               // dispatch(getTotalPriceValue(0))                          
-               // dispatch(getCountOfCart(0))   
-                                     
-
-
-
      }
 
      return  <>
-               {
-                    modalIsClose ?
-                      <Modal message={`${buy?.buy_info}`} /> 
-                      : <></>
+                    {
+                         modalIsClose ?
+                         <Modal message={`${buy?.buy_info}`} /> 
+                         : <></>
 
-               }
-               <form className="order__info container" onSubmit={handleSubmit} ref={orderRef}>
-                         <h3>
-                              {buy?.your_info}
-                         </h3>  
-                         <div className="user__info">
-                              <div className="order__block">
-                                   <input type="hidden" name="user_id" value={userData?.id} onChange={()=>{}} />
-                              </div>
-                              <div className="order__block">
-                                   <input 
-                                        type="text"
-                                        className="order__input__item"
-                                        name="user_name" 
-                                        id="" 
-                                        placeholder={`${buy?.name}*`}
-                                        value = {userName}
-                                        autoComplete="off"
-                                        onChange={changeUserName}
-                                   />
-                                   <span className="user__name__output">
+                    }
+                    <form className="order__info container" onSubmit={handleSubmit} ref={orderRef}>
+                              <h3>
+                                   {buy?.your_info}
+                              </h3>  
+                              <div className="user__info">
+                                   <div className="order__block">
+                                        <input type="hidden" name="user_id" value={userData?.id} onChange={()=>{}} />
+                                   </div>
+                                   <div className="order__block">
+                                        <input 
+                                             type="text"
+                                             className="order__input__item"
+                                             name="user_name" 
+                                             id="" 
+                                             placeholder={`${buy?.name}*`}
+                                             value = {userName}
+                                             autoComplete="off"
+                                             onChange={changeUserName}
+                                        />
+                                        <span className="user__name__output">
+                                             {
+                                                  userName && checkStrLength(userName, 2) ? '' : `${buy?.inc_val}`
+                                             }
+                                        </span>     
+                                   </div>
+                                   <div className="order__block">
+                                        <input 
+                                             type="email" 
+                                             className="order__input__item"
+                                             name=""
+                                             id="" 
+                                             placeholder={`${buy?.email}*`}
+                                             value = {userEmail}
+                                             onChange={changeEmail}
+                                        />
+                                        <span className="user__email__output">
+                                             {
+                                                  userEmail && checkEmail(userEmail) ? '' : `${buy?.inc_val}`
+                                             }
+                                        </span>     
+                                   </div>
+                                   <div className="order__block">
+                                        <input
+                                             type="text"
+                                             className="order__input__item"
+                                             name="user_phone"
+                                             id=""
+                                             placeholder={`${buy?.phone}*`}
+                                             onChange={changePhoneNumber}
+                                             value={userPhone}
+                                        />
+                                        <span className="user__phone__output">
                                         {
-                                             userName && checkStrLength(userName, 2) ? '' : `${buy?.inc_val}`
+                                             checkStrLength(userPhone, 6) && !checkPhoneNumber(userPhone) ? '' : `${buy?.inc_val}`
                                         }
-                                   </span>     
-                              </div>
-                              <div className="order__block">
-                                   <input 
-                                        type="email" 
-                                        className="order__input__item"
-                                        name=""
-                                        id="" 
-                                        placeholder={`${buy?.email}*`}
-                                        value = {userEmail}
-                                        onChange={changeEmail}
-                                   />
-                                   <span className="user__email__output">
-                                        {
-                                             userEmail && checkEmail(userEmail) ? '' : `${buy?.inc_val}`
-                                        }
-                                   </span>     
-                              </div>
-                              <div className="order__block">
-                                   <input
-                                        type="text"
-                                        className="order__input__item"
-                                        name="user_phone"
-                                        id=""
-                                        placeholder={`${buy?.phone}*`}
-                                        onChange={changePhoneNumber}
-                                        value={userPhone}
-                                   />
-                                   <span className="user__phone__output">
-                                   {
-                                        checkStrLength(userPhone, 6) && !checkPhoneNumber(userPhone) ? '' : `${buy?.inc_val}`
-                                   }
-                                   </span>
-                              </div>
-                              <div className="order__block">
-                                   <textarea className="order__input__item" name="user_comment" placeholder={`${buy?.your_review}`}>
+                                        </span>
+                                   </div>
+                                   <div className="order__block">
+                                        <textarea className="order__input__item" name="user_comment" placeholder={`${buy?.your_review}`}>
 
-                                   </textarea>    
+                                        </textarea>    
+                                   </div>
+                                   <div className="order__block">
+                                        <input type="hidden" name="user_order" value={JSON.stringify(cartDataForOrder)} onChange={()=>{}} />
+                                   </div>
+                                   <div className="order__block">
+                                        <input type="hidden" name="user_price" value={totalPrice} onChange={()=>{}} />
+                                   </div>
+                                   <div className="order__block">
+                                        <input type="hidden" name="user_status" value="0" onChange={()=>{}} />
+                                   </div>
+                                   <button className="continue" >{buy?.continue}</button>
                               </div>
-                              <div className="order__block">
-                                   <input type="hidden" name="user_order" value={JSON.stringify(cartDataForOrder)} onChange={()=>{}} />
-                              </div>
-                              <div className="order__block">
-                                   <input type="hidden" name="user_price" value={totalPrice} onChange={()=>{}} />
-                              </div>
-                              <div className="order__block">
-                                   <input type="hidden" name="user_status" value="0" onChange={()=>{}} />
-                              </div>
-                              <button className="continue" >{buy?.continue}</button>
-                         </div>
-               </form>
-
-     </>
+                    </form>
+               </>
      
 }
 export default Buy;

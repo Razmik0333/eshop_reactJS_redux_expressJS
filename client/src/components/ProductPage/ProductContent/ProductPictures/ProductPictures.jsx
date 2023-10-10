@@ -27,7 +27,7 @@ function ProductPictures({path}) {
                          onClick={showProductPopup}
                          > </button>
                     </div>
-                    <div className="other__pictures">
+                    {/* <div className="other__pictures">
                          <div className="other__pictures__items">
                               <img src="../img/36.jpg" alt="" />
                               <img src="../img/36.jpg" alt="" />
@@ -47,7 +47,7 @@ function ProductPictures({path}) {
 
                               </button>
                          </div>
-                    </div>
+                    </div> */}
                </div>
 
           </>

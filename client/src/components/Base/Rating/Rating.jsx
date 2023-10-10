@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { changeEvaluatedProducts, changeProductRating, changeProductReview } from '../../../redux/ducks/productDuck';
+import { changeProductReview } from '../../../redux/ducks/productDuck';
 import RatingMapping from '../RatingMapping/RatingMapping';
 import './styles/_rating.scss';
 
@@ -33,10 +33,8 @@ function Rating({id, rating}) {
                               rating
                          }))
                     }}
-                   
                >
                {
-                   
                     <RatingMapping rating={currentRating} />
                }
                </div>

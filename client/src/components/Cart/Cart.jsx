@@ -7,10 +7,8 @@ import { currentLanguageDataSelector, getCartSelector, getUserId } from "../../h
 import CartListItem from "../Cart/CartListItem/CartListItem";
 import './styles/_cart.scss';
 function Cart() {
-     const dispatch = useDispatch();
      const navigate = useNavigate()
      const cartData = useSelector(getCartSelector);
-     //const cartSumm = useSelector(getTotalPriceSelector);
      const cartSumm = getCartSumm(cartData)
 
      const cartObject = useSelector(currentLanguageDataSelector)?.cart;

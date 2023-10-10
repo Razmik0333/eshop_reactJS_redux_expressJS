@@ -2,12 +2,12 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentProduct } from '../../../../redux/ducks/productDuck';
-import './styles/_featured-products.scss';
-import { root } from '../../../../helpers/constants/constants';
 import RatingMapping from '../../../Base/RatingMapping/RatingMapping';
 import { currentLanguageDataSelector, getCurrentCurrencySelector, getUserId } from '../../../../helpers/reduxSelectors';
 import { getNewCurrency } from '../../../../helpers/functions/functions';
 import { fetchAddCart } from '../../../../redux/ducks/cartDuck';
+import './styles/_featured-products.scss';
+import { root } from '../../../../helpers/constants/constants';
 
 
 function FeaturedProduct({recommendProduct}) {

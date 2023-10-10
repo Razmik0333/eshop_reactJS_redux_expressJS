@@ -19,12 +19,8 @@ function ProductsInfo() {
      const modalIsClose = useSelector(modalCloseSelector);
 
      useEffect(() => {
-         // if(isDeleted){
-               dispatch(fetchProductsList(userId));
-               dispatch(resetIsDeleted(false))
-
-        //  }
-          
+          dispatch(fetchProductsList(userId));
+          dispatch(resetIsDeleted(false)) 
      }, [isDeleted]);
 
      

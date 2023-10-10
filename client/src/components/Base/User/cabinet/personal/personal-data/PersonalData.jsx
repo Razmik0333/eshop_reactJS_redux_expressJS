@@ -11,7 +11,6 @@ export default function PersonalData() {
      const [nameDisabled, setNameDisabled] = useState(true);
      const [emailDisabled, setEmailDisabled] = useState(true);
      const currentUser = useSelector(getUserDataSelector);
-     console.log("🚀 ~ file: PersonalData.jsx:14 ~ PersonalData ~ currentUser:", currentUser)
      const [userName, setUserName] = useState(currentUser.name);
      const [userEmail, setUserEmail] = useState(currentUser.email);
      const modalIsClose = useSelector(modalCloseSelector);

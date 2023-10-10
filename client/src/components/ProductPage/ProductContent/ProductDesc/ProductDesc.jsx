@@ -54,7 +54,6 @@ function ProductDesc({currentProduct}) {
                      </div>
                     <span className="reviews__desc">
                          <span className="reviews__count">{reviewsByProduct.length} {reviewsByProduct.length <= 1 ? product_page_content?.review : product_page_content?.reviews }</span> {/* 0 ->  */}
-                         <a href="/">{product_page_content?.add_review}</a>
                     </span>
                </div>
                <div className="product__price">

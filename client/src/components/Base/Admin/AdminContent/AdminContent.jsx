@@ -9,15 +9,13 @@ import { fetchProductsList } from "../../../../redux/ducks/adminProductDuck";
 
 function AdminContent() {
      const dispatch = useDispatch()
-     const userId = useSelector(getUserId)
      useEffect(() => {
           dispatch(fetchUsersList());
           dispatch(fetchProductsList());
           
 
      }, []);
-     console.log('jhjh');
-     
+    
      return (
           <div className="admin__content">
                     <TotalInfos />

@@ -2,13 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrdersFromStatus } from "../../../helpers/functions/functions";
 import { currentLanguageDataSelector, getStatusIndex, getUserOrders } from "../../../helpers/reduxSelectors";
 import { changeModal } from "../../../redux/ducks/configsDuck";
-import { changeOrderStatus, orderConfirmId, orderEvaluateId } from "../../../redux/ducks/orderDuck";
+import { orderConfirmId, orderEvaluateId } from "../../../redux/ducks/orderDuck";
 import "./styles/_order-list-footer.scss";
 import { NavLink } from "react-router-dom";
 
 function OrderListFooter({ind}) {
-     //changeOrderStatus
-
      const dispatch = useDispatch();
      const orderConfirm = useSelector(currentLanguageDataSelector)?.order?.header;
      const statusIndex = useSelector(getStatusIndex);

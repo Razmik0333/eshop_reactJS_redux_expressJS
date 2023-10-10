@@ -1,9 +1,7 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getTotalPrice } from '../../../../helpers/functions/functions';
-import { adminOrderSelector, adminUserListSelector, getUserId } from '../../../../helpers/reduxSelectors';
-import { fetchProductsList } from '../../../../redux/ducks/adminProductDuck';
-import { fetchUsersList } from '../../../../redux/ducks/adminUserDuck';
+import { adminOrderSelector, adminUserListSelector } from '../../../../helpers/reduxSelectors';
+
 
 
 import '../admin/styles/_total-infos.scss'

@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { anotherMethod, getArrayByOrderAndTime, getArrayOfDatasets, getFilteredArrayByDay, getProductsListFromIdAndCategory } from '../../../../../../helpers/functions/functions';
 import { adminOrderSelector, adminTimeObjectProductSelector } from '../../../../../../helpers/reduxSelectors';
 import {adminProductsSelector} from '../../../../../../helpers/reduxSelectors.js';
-import { dates } from '../../../../../../helpers/constants/constants';
 
 function ProductGraphContent() {
   const ordersList = useSelector(adminOrderSelector);

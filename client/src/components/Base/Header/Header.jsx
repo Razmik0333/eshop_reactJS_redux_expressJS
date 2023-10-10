@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { currenciesSelector, currentLanguageDataSelector, getCurrentCurrencySelector, getCurrentLanguageSelector, getUserDataSelector, getUserId, languagesSelector } from '../../../helpers/reduxSelectors';
 import { changeCurrencies, changeCurrency, changeLanguage, changeLanguages, fetchLanguageData } from '../../../redux/ducks/configsDuck';
-import { changeOrdersFromLogout } from '../../../redux/ducks/orderDuck';
-import { currentUser, getUserData } from '../../../redux/ducks/userDuck';
 import MenuBurger from './MenuBurger/MenuBurger';
 import './styles/_header.scss';
 import { fetchCurrentCart } from '../../../redux/ducks/cartDuck';
@@ -14,7 +12,6 @@ function Header() {
      const dispatch = useDispatch();
      const userId = useSelector(getUserId);
      const userData = useSelector(getUserDataSelector);
-     const navigate = useNavigate();
      const currentCurrency = useSelector(getCurrentCurrencySelector);
      const currentLanguage = useSelector(getCurrentLanguageSelector);
      const languages = useSelector(languagesSelector);
@@ -32,14 +29,7 @@ function Header() {
           dispatch(fetchCurrentCart(userId))
           
      }, [userId]);
-     const changeLogout = (e) => {        
 
-           dispatch(currentUser(null))
-           dispatch(getUserData(null))
-           dispatch(changeOrdersFromLogout());
-          // dispatch(fetchAddWishList(null, 20))
-           navigate('/home')
-     }
      const changeCurrentCurrency = (e) => {
           dispatch(changeCurrency(e.target.dataset.currency))
      }

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { changeModal, changePopup, getPopupItemId } from "../../../redux/ducks/configsDuck";
+import { changePopup, getPopupItemId } from "../../../redux/ducks/configsDuck";
 import { root } from "../../../helpers/constants/constants";
-import "./styles/_modal.scss"
 import { popupItemIdSelector } from "../../../helpers/reduxSelectors";
+import "./styles/_modal.scss"
 
 function ModalPopup() {
      const dispatch = useDispatch();

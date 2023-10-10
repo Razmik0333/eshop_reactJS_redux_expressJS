@@ -1,21 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { adminOrderIdSelector,  getOrderIdDelete,  getUserId } from "../../../helpers/reduxSelectors";
-import { fetchOrdersForDelete, resetIsDeleted } from "../../../redux/ducks/adminOrderDuck";
+import { adminOrderIdSelector } from "../../../helpers/reduxSelectors";
+import { fetchOrdersForDelete } from "../../../redux/ducks/adminOrderDuck";
 import { changeModal } from "../../../redux/ducks/configsDuck";
 import "./styles/_modal.scss"
-import { fetchDeletedOrder } from "../../../redux/ducks/orderDuck";
 
 function ModalOrderDelete({message}) {
      const dispatch = useDispatch();
-     const userId = useSelector(getUserId);
      const orderIdForDelete = useSelector(adminOrderIdSelector);
      
      const orderDelete = (e) => {
-          console.log("🚀 ~ file: ModalOrderDelete.jsx ~ line 11 ~ orderIdForDelete ~ orderIdForDelete", orderIdForDelete)
           dispatch(fetchOrdersForDelete(orderIdForDelete));
-          // dispatch(fetchDeletedOrder())
            dispatch(changeModal(false))
-          // dispatch(resetIsDeleted(false))
      }
      
 

@@ -5,8 +5,8 @@ import {Chart as ChartJS} from 'chart.js/auto';
 import {Doughnut} from 'react-chartjs-2';
 
 
-import { adminOrderSelector, adminProductsSelector } from '../../../../../../helpers/reduxSelectors';
-import { getArrayForChartRating, getArrayForChartStatus } from '../../../../../../helpers/functions/functions';
+import { adminProductsSelector } from '../../../../../../helpers/reduxSelectors';
+import { getArrayForChartRating } from '../../../../../../helpers/functions/functions';
 
 function ProductRatingInfo() {
   const productsList = useSelector(adminProductsSelector);

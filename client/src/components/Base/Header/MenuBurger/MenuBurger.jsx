@@ -17,7 +17,6 @@ function MenuBurger() {
           dispatch(currentUser(null))
           dispatch(getUserData(null))
           dispatch(changeOrdersFromLogout());
-         // dispatch(fetchAddWishList(null, 20))
           navigate('/home')
     }
      const [clicked, setClicked] = useState(false);

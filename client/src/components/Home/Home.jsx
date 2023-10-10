@@ -4,7 +4,6 @@ import Collections from "./Collections/Collections";
 import ProductsList from "./ProductsList/ProductsList";
 import SpecialOffers from "./Special-Offers/SpecialOffers";
 import LatestBlog from "./LatestBlog/LatestBlog";
-import ClientFeedback from "./ClientFeedback/ClientFeedback";
 import LastViewedProducts from "./LastViewedProducts/LastViewedProducts";
 
 function Home() {

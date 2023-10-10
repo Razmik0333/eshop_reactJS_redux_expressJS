@@ -13,7 +13,6 @@ function OrderChartHeader() {
      const ordersYears = ordersList.map(item => +item.time_add);
 
       const min = (new Date(getMinMax(ordersYears, 'min'))).getFullYear()
-      console.log("🚀 ~ file: OrderChartHeader.jsx:17 ~ OrderChartHeader ~ min:", min)
       const max = (new Date(getMinMax(ordersYears, 'max'))).getFullYear()
       const minMaxArr = generateArrayFromMaxMin([min, max]);
 

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { adminProductIdSelector,  getUserId } from "../../../helpers/reduxSelectors";
-import { fetchProductsForDelete, resetIsDeleted } from "../../../redux/ducks/adminProductDuck";
+import { fetchProductsForDelete } from "../../../redux/ducks/adminProductDuck";
 import { changeModal } from "../../../redux/ducks/configsDuck";
 import "./styles/_modal.scss"
 
@@ -14,7 +14,6 @@ function ModalProductDelete({message}) {
      const productDelete = (e) => {
           dispatch(fetchProductsForDelete(productIdForUpdate));
           dispatch(changeModal(false))
-          //dispatch(resetIsDeleted(false))
      }
      
 

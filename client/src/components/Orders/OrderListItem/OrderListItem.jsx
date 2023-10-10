@@ -1,14 +1,13 @@
-import { memo, useRef } from 'react';
+import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import { currentProduct } from '../../../redux/ducks/productDuck';
-import Rating from '../../Base/Rating/Rating';
-import './styles/_orderListItem.scss'
 import { root } from '../../../helpers/constants/constants';
 import { getNewCurrency } from '../../../helpers/functions/functions';
 import { currentLanguageDataSelector, getCurrentCurrencySelector } from '../../../helpers/reduxSelectors';
 import RatingMapping from '../../Base/RatingMapping/RatingMapping';
+import './styles/_orderListItem.scss'
 function OrderListItem({product, counts}) {
      const dispatch = useDispatch();
      const orderTextItem = useSelector(currentLanguageDataSelector)?.product_item;

@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchProductsByOrder } from "../../../redux/ducks/orderDuck";
 import OrderListFooter from "../OrderListFooter/OrderListFooter";
 import OrderListHeader from "../OrderListHeader/OrderListHeader";
 import OrderListItem from "../OrderListItem/OrderListItem";

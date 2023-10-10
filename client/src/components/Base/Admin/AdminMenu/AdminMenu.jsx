@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { root } from '../../../../helpers/constants/constants';
 import { getUserDataSelector } from '../../../../helpers/reduxSelectors';
 

@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchLatestReviews } from '../../../../redux/ducks/reviewDuck';
+import React from 'react'
+import { useSelector } from 'react-redux';
 import { getLatestReviewsSelector, getReviewIdSelector } from '../../../../helpers/reduxSelectors';
 import { getTime } from '../../../../helpers/functions/functions';
 import { root } from '../../../../helpers/constants/constants';
@@ -8,7 +7,6 @@ import { root } from '../../../../helpers/constants/constants';
 export default function ClientFeedbackContent() {
 
      const latestReviews = useSelector(getLatestReviewsSelector) 
-     console.log("🚀 ~ file: ClientFeedbackContent.jsx:11 ~ ClientFeedbackContent ~ latestReviews:", latestReviews)
      const reviewId = useSelector(getReviewIdSelector)
      const date = latestReviews[reviewId]?.time_add
      const year = new Date(+date).getFullYear() 
@@ -35,8 +33,6 @@ export default function ClientFeedbackContent() {
                          {
                               `
                               ${day}-${month}-${year}
-
-                              
                               `
                          }
                     </div>

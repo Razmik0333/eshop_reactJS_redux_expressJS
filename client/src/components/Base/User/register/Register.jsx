@@ -2,10 +2,8 @@ import { useRef, useState } from 'react';
 import { NavLink, useNavigate } from "react-router-dom"
 import { checkEmail,
           checkStrLength,
-           checkCapitalLetter,
-           checkStrWithNumber,
-           checkConfirmPassword,
-           checkPassword
+          checkConfirmPassword,
+          checkPassword
      } from '../../../../helpers/functions/formFunctions';
 import { root } from '../../../../helpers/constants/constants';
      import './_register.scss';
