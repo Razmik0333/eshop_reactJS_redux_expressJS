@@ -212,12 +212,16 @@
             "print":"Printing",
             "brosh":"Making brooches"
         },
-        "orders" : [
-            "Orders",
-            "Payment options",
-            "Shipping and delivery",
-            "Returns",
-            "Shipping"
-        ]        
+        "orders" : {
+            "all":"Orders",
+            "payment_methods":"Payment options",
+            "shipping":"Shipping and delivery",
+            "product_return":"Returns",
+            "money_return":"Money return"
+        },
+        "down" : {
+            "copyright" : "Copyright",
+            "rights" : "All Rights Reserved"
+        }  
     }
 }
