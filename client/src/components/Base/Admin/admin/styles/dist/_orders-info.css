@@ -1,0 +1,73 @@
+.orders__info {
+  padding: 25px;
+  background-color: #fff;
+  margin-left: 32px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 92%;
+}
+.orders__info .orders__info__titles {
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+}
+.orders__info .orders__info__titles .order__title {
+  padding: 10px;
+  font-size: 14px;
+  width: 15%;
+  font-weight: 700;
+}
+.orders__info .orders__info__titles .order__title:first-child {
+  width: 5%;
+}
+.orders__info .order__item__info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.orders__info .order__item__info .order__item__data__info {
+  padding: 10px;
+  width: 15%;
+  font-size: 14px;
+}
+.orders__info .order__item__info .order__item__data__info button {
+  border-radius: 50%;
+  background-color: var(--white);
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+.orders__info .order__item__info .order__item__data__info button:hover {
+  border: 1px solid var(--orange);
+}
+.orders__info .order__item__info .order__item__data__info button:hover svg {
+  fill: var(--orange);
+}
+.orders__info .order__item__info .order__item__data__info button svg {
+  width: 25px;
+  height: 25px;
+  fill: #ccc;
+}
+.orders__info .order__item__info .order__item__data__info:first-child {
+  width: 5%;
+}
+.orders__info .order__item__info .order__item__data__info .status__order {
+  padding: 5px;
+  color: var(--white);
+}
+.orders__info .order__item__info .order__item__data__info .accept {
+  background-color: blue;
+}
+.orders__info .order__item__info .order__item__data__info .reached {
+  color: var(--black);
+  background-color: yellow;
+}
+.orders__info .order__item__info .order__item__data__info .delivered {
+  background-color: green;
+}
+.orders__info .order__item__info .order__item__data__info .delivered_PS {
+  background-color: yellowgreen;
+}
+.orders__info .order__item__info .order__item__data__info .finished {
+  background-color: #7b9e36;
+}

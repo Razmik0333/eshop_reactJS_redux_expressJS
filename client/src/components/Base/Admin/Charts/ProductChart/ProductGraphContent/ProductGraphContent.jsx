@@ -15,6 +15,7 @@ function ProductGraphContent() {
   const timeObj = useSelector(adminTimeObjectProductSelector);
   const filteredByTime = getFilteredArrayByDay(Object.values(arrByOrderAndTime),timeObj)
   const result = anotherMethod(filteredByTime,productsListFromIdAndCategory);
+  console.log("🚀 ~ file: ProductGraphContent.jsx:18 ~ ProductGraphContent ~ result:", result)
   const [orderData, setOrderData] = useState({
     labels: Object.keys(result).map(item =>  +item),
     datasets:getArrayOfDatasets(Object.values(result),[1,2,3])

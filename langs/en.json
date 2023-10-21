@@ -185,7 +185,98 @@
             "orders":"ORDERS",
             "products":"PRODUCTS",
             "personal":"PERSONAL",
-            "reviews":"REVIEWS"
+            "reviews":"REVIEWS",
+            "logout":"LOGOUT"
+        }
+      },
+    "admin" : {
+        "menu_bar" : {
+            "dashboard":"DASHBOARD",
+            "administrator":"ADMINISTRATOR",
+            "orders":"ORDERS",
+            "products":"PRODUCTS",
+            "change":"CHANGE",
+            "reviews":"REVIEWS",
+            "logout":"LOGOUT"
+        },
+        "total_infos" :{
+            "order_received" : "ORDER RECEIVED",
+            "total_charges" : "TOTAL CHARGES",
+            "total_users" : "TOTAL USERS"
+        },
+        "charts" : {
+            "orders":{
+                "header":"QUANTITIES OF PRODUCTS SOLD BY TIME",
+                "order" : "Orders"
+            },
+            "products":{
+                "header":"QUANTITIES OF PRODUCTS SOLD BY CATEGORIES"
+            },
+            "time":{
+                "year":"Year",
+                "month":"Month"
+            }
+        },
+        "orders" : {
+            "newest_orders" : "NEWEST ORDERS",
+            "all_orders" : "ALL ORDERS",
+            "header" : [
+                "Number",
+                "Customer",
+                "Phone Number",
+                "Comment",
+                "Price",
+                "Status",
+                "Action",
+                "Action"
+            ],
+            "actions" : {
+                "update":"Update",
+                "delete":"Delete"
+            }
+        },
+        "products" : {
+            "all_products" : "ALL PRODUCTS",
+
+            "header" : [
+                "Number",
+                "Category",
+                "Alias",
+                "Cat. Name",
+                "Descr",
+                "Price",
+                "Discount",
+                "Rating",
+                "Update",
+                "Delete"
+            ],
+            "actions" : {
+                "update":"Update",
+                "delete":"Delete"
+            },
+            "create":"Create Product",
+            "product_create_page" : {
+                "placeholders" : {
+                    "select_category":"Select Category",
+                    "description" : "Enter Description",
+                    "text" : "Enter Your Text",
+                    "price" : "Enter price",
+                    "discount" : "Enter discount",
+                    "articul" : "Enter articul"
+                },
+                "headers" : {
+                    "cat_index" : "Category Index",
+                    "name" : "Name",
+                    "description" : "Description",
+                    "price" : "Price",
+                    "discount" : "Discount",
+                    "articul" : "1c articul",
+                    "insert_pictures" : "Insert Picture",
+                    "current_pictures" : "Current Picture",
+                    "save" : "Save Product"
+
+                }
+            }
         }
       },
     "footer" : {

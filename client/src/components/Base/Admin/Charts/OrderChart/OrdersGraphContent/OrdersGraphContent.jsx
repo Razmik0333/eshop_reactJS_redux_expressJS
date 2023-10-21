@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from "react-redux";
 import {Line, Bar} from 'react-chartjs-2';
 import { getArrayForChartByTime, getFilteredArrayByDay, getFilteredArrayByMonth } from '../../../../../../helpers/functions/functions';
-import { adminOrderSelector, adminTimeObjectSelector } from '../../../../../../helpers/reduxSelectors';
+import { adminOrderSelector, adminTimeObjectSelector, currentLanguageDataSelector } from '../../../../../../helpers/reduxSelectors';
 import {Chart as ChartJS} from 'chart.js/auto';
 import { months_arm, months_eng } from '../../../../../../helpers/constants/constants';
 
 
 function OrdersGraphContent() {
+     const ordersChartsLangData = useSelector(currentLanguageDataSelector)?.admin?.charts;
+
      const ordersList = useSelector(adminOrderSelector);
      const timeObj = useSelector(adminTimeObjectSelector);
      const filteredArrayByTime = timeObj?.month === undefined ? getFilteredArrayByMonth(ordersList, timeObj)
@@ -19,7 +21,7 @@ function OrdersGraphContent() {
           }),
           datasets:[
           {
-               label: "Orders",
+               label: ordersChartsLangData?.orders?.order,
                data: Object.values(ordersForChartMonth).map(item => item?.user_price),
           }
      ]
@@ -32,13 +34,13 @@ function OrdersGraphContent() {
                }),
                datasets:[
                {
-                    label: "Orders",
+                    label: ordersChartsLangData?.orders?.order,
                     data: Object.values(ordersForChartMonth).map(item => item?.user_price),
                }
           ]
        })
           
-     }, [timeObj.year, timeObj.month]);
+     }, [timeObj.year, timeObj.month,ordersChartsLangData?.orders?.order]);
   return (
      <div className="orders_graph_content">
           {

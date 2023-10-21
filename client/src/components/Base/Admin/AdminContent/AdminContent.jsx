@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserId } from "../../../../helpers/reduxSelectors";
+import { useDispatch } from "react-redux";
 import { fetchUsersList } from "../../../../redux/ducks/adminUserDuck";
 import ChartsContent from "../Charts/ChartsContent";
 import OrdersInfo from "../OrdersInfo/OrdersInfo";

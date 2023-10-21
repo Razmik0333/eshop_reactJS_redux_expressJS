@@ -1,20 +1,20 @@
+import { useSelector } from "react-redux";
+import { currentLanguageDataSelector } from "../../../../helpers/reduxSelectors";
+
 function OrdersInfoHeader() {
+     const ordersInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.orders;
+
      return (
           <>
-               <div className="orders__info__header">
-                    Table Format / User Data
-               </div>
-
                <div className="orders__info__titles">
                     <div className="order__title"><input type="checkbox"/></div>
-                    <div className="order__title">Numberrrr</div>
-                    <div className="order__title">Customer</div>
-                    <div className="order__title">Phone Number</div>
-                    <div className="order__title">Comment</div>
-                    <div className="order__title">Price</div>
-                    <div className="order__title">Status</div>
-                    <div className="order__title">Action</div>
-                    <div className="order__title">Action</div>
+                    {
+                         ordersInfoLangData?.header.map((item, pos) => {
+                              return <div className="order__title" key={`order__title__${pos}`}>{item}</div>
+                         })
+                    }
+                    
+                    
                </div>
           </>
      )

@@ -1,32 +1,44 @@
 import { memo } from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { root } from '../../../../helpers/constants/constants';
-import { getUserDataSelector } from '../../../../helpers/reduxSelectors';
+import { currentLanguageDataSelector, getUserDataSelector } from '../../../../helpers/reduxSelectors';
 
 
 import '../admin/styles/_admin-menu.scss';
+import { currentUser, getUserData } from '../../../../redux/ducks/userDuck';
+import { changeOrdersFromLogout } from '../../../../redux/ducks/orderDuck';
 
 function AdminMenu() {
-     const userData = useSelector (getUserDataSelector)
+     const dispatch = useDispatch()
+     const navigate = useNavigate()
+     const userData = useSelector(getUserDataSelector);
+     const adminMenuLangData = useSelector(currentLanguageDataSelector)?.admin?.menu_bar;
+     const changeLogout = (e) => {        
+          dispatch(currentUser(null))
+          dispatch(getUserData(null))
+          dispatch(changeOrdersFromLogout());
+          navigate('/home')
+    }
      return (
           <div className="admin__menu">
                     <div className="admin_picture">
-                         <div className="admin__img">
+                         {/* <div className="admin__img">
                               <img src={`${root}/icons/config/admin.png`} alt='' />
                               <p className="admin__name">
                                    {userData?.name}
                               </p>
-                         </div>
+                         </div> */}
                          <div className="admin_nav">
                               <ul className="admin_nav_items">
-                                   <li className="admin_nav_item"><NavLink to={'/admin'} className="admin_nav_link">Dashboard</NavLink></li>
-                                   <li className="admin_nav_item"><a href='#' className="admin_nav_link">Administrator</a></li>
-                                   <li className="admin_nav_item"><NavLink to={"/admin/orders"} className="admin_nav_link">Orders</NavLink></li>
-                                   <li className="admin_nav_item"><NavLink to={'/admin/product'} className="admin_nav_link">Products</NavLink></li>
+                                   <li className="admin_nav_item"><NavLink to={'/admin'} className="admin_nav_link">{adminMenuLangData?.dashboard}</NavLink></li>
+                                   <li className="admin_nav_item"><NavLink to={"/admin/page"} className="admin_nav_link">{adminMenuLangData?.administrator}</NavLink></li>
+                                   <li className="admin_nav_item"><NavLink to={"/admin/orders"} className="admin_nav_link">{adminMenuLangData?.orders}</NavLink></li>
+                                   <li className="admin_nav_item"><NavLink to={'/admin/product'} className="admin_nav_link">{adminMenuLangData?.products}</NavLink></li>
+                                   <li className="admin_nav_item"><NavLink to={"/admin/personal"} className="admin_nav_link">{adminMenuLangData?.change}</NavLink></li>
                                    <li className="admin_nav_item"><a href='#' className="admin_nav_link">Earning status</a></li>
                                    <li className="admin_nav_item"><a href='#' className="admin_nav_link">Settings</a></li>
-                                   <li className="admin_nav_item"><a href='#' className="admin_nav_link">Logout</a></li>
+                                   <li className="admin_nav_item"><NavLink to={'/'} className="admin_nav_link" onClick={changeLogout} >{adminMenuLangData?.logout}</NavLink></li>
                               </ul>
                               
                          </div>

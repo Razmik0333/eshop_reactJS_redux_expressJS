@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserDataSelector, getUserId, modalCloseSelector } from '../../../../../../helpers/reduxSelectors';
-import { getModalOpenClose } from '../../../../../../redux/ducks/configsDuck';
-import ModalUploadAvatar from '../../../../Modal/ModalUploadAvatar';
-import { root } from '../../../../../../helpers/constants/constants';
+import { getUserDataSelector, getUserId, modalCloseSelector } from '../../../helpers/reduxSelectors';
+import { getModalOpenClose } from '../../../redux/ducks/configsDuck';
+import ModalUploadAvatar from '../Modal/ModalUploadAvatar';
+import { root } from '../../../helpers/constants/constants';
 import "./personal-data/_personal-data.scss"
-import { changeUserName } from '../../../../../../redux/ducks/userDuck';
+import { changeUserName } from '../../../redux/ducks/userDuck';
 export default function PersonalData() {
      const dispatch = useDispatch();
      const [nameDisabled, setNameDisabled] = useState(true);

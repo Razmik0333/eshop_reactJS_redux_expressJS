@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminProductIsDeletedSelector, adminProductsSelector, getUserId, modalCloseSelector } from '../../../../helpers/reduxSelectors';
+import { adminProductIsDeletedSelector, adminProductsSelector, currentLanguageDataSelector, getUserId, modalCloseSelector } from '../../../../helpers/reduxSelectors';
 import { fetchProductsList, resetIsDeleted } from '../../../../redux/ducks/adminProductDuck';
 
 
@@ -17,6 +17,7 @@ function ProductsInfo() {
      const isDeleted = useSelector(adminProductIsDeletedSelector);
      const productsList = useSelector(adminProductsSelector);
      const modalIsClose = useSelector(modalCloseSelector);
+     const productsInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.products;
 
      useEffect(() => {
           dispatch(fetchProductsList(userId));
@@ -31,7 +32,7 @@ function ProductsInfo() {
           }    
           <div className="product__info__block">
                <div className="products__info__header">
-                    Products
+                    {productsInfoLangData?.all_products}
                </div>
 
                <div className="products__info">

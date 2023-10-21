@@ -1,12 +1,15 @@
 import { NavLink } from "react-router-dom";
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { currentProductID, fetchProductItem } from "../../../../redux/ducks/adminProductDuck";
 import { changeModal } from "../../../../redux/ducks/configsDuck";
+import { currentLanguageDataSelector } from "../../../../helpers/reduxSelectors";
 
 
 function ProductsInfoItem({product}) {
      const dispatch = useDispatch();
+     const productsInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.products;
+
      const getProductId = (e) => {
           dispatch(currentProductID(e.target.dataset.id))
           dispatch(fetchProductItem(e.target.dataset.id))
@@ -67,7 +70,7 @@ function ProductsInfoItem({product}) {
                          onClick={getProductId}
                          className="link__action"
                          >
-                         Update
+                         {productsInfoLangData?.actions?.update}
                     </NavLink>
                </div>
                <div className="product__item__data__info">
@@ -75,7 +78,7 @@ function ProductsInfoItem({product}) {
                     onClick={deleteProductItem}
                     className="link__action"
                    >
-                    Delete
+                    {productsInfoLangData?.actions?.delete}
                    </NavLink>
                </div>
           </div>

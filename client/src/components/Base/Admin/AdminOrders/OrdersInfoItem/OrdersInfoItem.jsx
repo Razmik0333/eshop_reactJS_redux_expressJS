@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { currentOrderId } from "../../../../../redux/ducks/adminOrderDuck";
-import { modalCloseSelector } from "../../../../../helpers/reduxSelectors";
+import { currentLanguageDataSelector, getCurrentLanguageSelector, modalCloseSelector } from "../../../../../helpers/reduxSelectors";
 import ModalOrderDelete from "../../../Modal/ModalOrderDelete";
 import { changeModal } from "../../../../../redux/ducks/configsDuck";
 
@@ -11,6 +11,9 @@ import { getStatus } from "../../../../../helpers/functions/functions";
 
 function OrdersInfoItem({order}) {
      const dispatch = useDispatch();
+     const ordersInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.orders;
+     const currentLang = useSelector(getCurrentLanguageSelector); 
+     console.log("🚀 ~ file: OrdersInfoItem.jsx:16 ~ OrdersInfoItem ~ currentLang:", currentLang)
      const modalIsClose = useSelector(modalCloseSelector);
      const getOrderId = (e) => {
           dispatch(currentOrderId(e.target.dataset.id))
@@ -49,7 +52,8 @@ function OrdersInfoItem({order}) {
                     {
                          <div className={`status__order ${getStatus(+order?.user_status)?.status}`}>
                               {
-                                   getStatus(+order?.user_status)?.title
+                                   currentLang === "am" ? 
+                                        getStatus(+order?.user_status)?.title : getStatus(+order?.user_status)?.status
                               }
                          </div>
                     }
@@ -65,7 +69,9 @@ function OrdersInfoItem({order}) {
                          onClick={getOrderId}
                          className="link__action"
                          >
-                         Update
+                         {ordersInfoLangData?.actions?.update
+                              
+                         }
 
                     </NavLink>
                </div>
@@ -74,7 +80,7 @@ function OrdersInfoItem({order}) {
                     onClick={deleteOrderItem}
                     className="link__action"
                    >
-                    Delete
+                    {ordersInfoLangData?.actions?.delete}
                    </NavLink>
                </div>
           </div>

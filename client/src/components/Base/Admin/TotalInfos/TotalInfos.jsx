@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { getTotalPrice } from '../../../../helpers/functions/functions';
-import { adminOrderSelector, adminUserListSelector } from '../../../../helpers/reduxSelectors';
+import { adminOrderSelector, adminUserListSelector, currentLanguageDataSelector } from '../../../../helpers/reduxSelectors';
 
 
 
@@ -8,6 +8,7 @@ import '../admin/styles/_total-infos.scss'
 
 function TotalInfos() {
 
+     const adminMenuLangData = useSelector(currentLanguageDataSelector)?.admin?.total_infos;
 
      const ordersList = useSelector(adminOrderSelector);
 
@@ -32,7 +33,7 @@ function TotalInfos() {
                                    </span>
                               </span>
                               <span className="total__text">
-                              ORDER RECEIVED
+                              {adminMenuLangData?.order_received}
                               </span>
                          </div>
                          <div className="total__info">
@@ -48,7 +49,8 @@ function TotalInfos() {
                                    </span>
                               </span>
                               <span className="total__text">
-                                   TOTAL CHARGES
+                              {adminMenuLangData?.total_charges}
+
                               </span>
                          </div>
                          <div className="total__info">
@@ -64,7 +66,7 @@ function TotalInfos() {
                                    </span>
                               </span>
                               <span className="total__text">
-                              TOTAL USERS
+                              {adminMenuLangData?.total_users}
                               </span>
                          </div>
                     </div>

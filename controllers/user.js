@@ -17,7 +17,6 @@ module.exports.userById = async (req, res) => {
                     picture:files ,
                }
           }))
-          console.log(`modDataUser`, modDataUser)
           res.send(modDataUser)
           
      } catch (error) {
@@ -30,7 +29,6 @@ module.exports.userById = async (req, res) => {
 module.exports.login = async (req, res) => {     
      const [email, password] = [req.body.email, req.body.password]
      const [user] = await realyze("SELECT * FROM `user` WHERE `email`= ? ", [email]);
-     console.log(user['id']);
      
      if(user && await bcrypt.compare(password, user.password)){
           //req.session.user = user;
@@ -108,13 +106,10 @@ module.exports.avatar = async (req, res) => {
      
 }
 
-module.exports.name = async ( req, res) => {
-     //console.log(req.body);
-     
+module.exports.name = async ( req, res) => {     
      const userName = req.body.user_name;
      const userId = req.body.user_id;
      await realyze("UPDATE user SET name = ? WHERE id = ?", [userName, userId]);
      const [newUserName] = await realyze("SELECT * FROM user WHERE id = ?", [userId]);
-     console.log("🚀 ~ file: user.js:104 ~ module.exports.name= ~ newUserName:", [newUserName])
      res.send(JSON.stringify(newUserName['name']));
 }

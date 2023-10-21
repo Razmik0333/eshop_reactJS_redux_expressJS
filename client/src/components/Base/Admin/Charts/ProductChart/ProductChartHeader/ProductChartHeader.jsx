@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { generateArrayFromMaxMin, getMinMax } from '../../../../../../helpers/functions/functions';
-import { adminOrderSelector } from '../../../../../../helpers/reduxSelectors';
+import { adminOrderSelector, currentLanguageDataSelector } from '../../../../../../helpers/reduxSelectors';
 import { months_eng, root } from '../../../../../../helpers/constants/constants';
 import { createMonth, createYear, resetTimeObject } from '../../../../../../redux/ducks/adminProductDuck';
 function ProductChartHeader() {
@@ -9,7 +9,7 @@ function ProductChartHeader() {
      const [currentYear, setCurrentYear] = useState(null);
      const [currentMonth, setCurrentMonth] = useState(null);
      const ordersList = useSelector(adminOrderSelector);
-     
+     const productsChartsLangData = useSelector(currentLanguageDataSelector)?.admin?.charts;
      const ordersYears = ordersList.map(item => +item.time_add);
 
       const min = (new Date(getMinMax(ordersYears, 'min'))).getFullYear()
@@ -35,14 +35,14 @@ function ProductChartHeader() {
     <>
 
     
-     <p className="">ՎԱՃԱՌՎԱԾ ԱՊՐԱՆՔՆԵՐԻ ՔԱՆԱԿՆԵՐԸ ԸՍՏ ԿԱՏԵԳՈՐԻԱՆԵՐԻ</p>
+     <p className="">{productsChartsLangData?.products?.header}</p>
      <div className="orders_graph_header">
      <div className="graf_for_time">
        <ul className="grafs_time">
            <li className="graf_time">
                <span className="years_head">
                {
-                    currentYear ? currentYear : 'Year'
+                    currentYear ? currentYear : productsChartsLangData?.time?.year
                }
                    <img src={`${root}/template/images/icons/triangle.svg`} alt="" />
                </span>
@@ -58,7 +58,7 @@ function ProductChartHeader() {
            <li className="graf_time active">
                <span className="months_head">
                     {
-                         currentMonth? currentMonth : 'Month'
+                         currentMonth? currentMonth : productsChartsLangData?.time?.month
                     }  
                    <img src={`${root}/template/images/icons/triangle.svg`} alt="" />
                </span>
@@ -84,7 +84,7 @@ function ProductChartHeader() {
      <div className="sales">
        
        <ul className="sale_items">
-         <li className="sale_item"> </li>
+         <li className="sale_item">{productsChartsLangData?.products?.product} </li>
        </ul>
      </div>
    </div>

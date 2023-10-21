@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminProductIdSelector, adminProductSelector, categoriesSelector, modalCloseSelector } from "../../../../helpers/reduxSelectors";
+import { adminProductIdSelector, adminProductSelector, categoriesSelector, currentLanguageDataSelector, modalCloseSelector } from "../../../../helpers/reduxSelectors";
 import { root } from '../../../../helpers/constants/constants';
 import Modal from '../../Modal/Modal';
 import { changeModal } from '../../../../redux/ducks/configsDuck';
@@ -21,6 +21,7 @@ function ProductCreateUpdate() {
      const dispatch = useDispatch();
      const currentProduct = useSelector(adminProductSelector);
      const currentProductId = useSelector(adminProductIdSelector)
+     const productsUpdateLangData = useSelector(currentLanguageDataSelector)?.admin?.products?.product_create_page;
 
      useEffect(() => {
           dispatch(fetchProductItem(currentProductId))
@@ -71,12 +72,12 @@ function ProductCreateUpdate() {
                <form onSubmit={handleSubmit} ref={formRef} encType="multipart/form-data" >
                     <div className="form__items">
                          <div className="form__item">
-                              <div className="form__item__header">Category Index</div>
+                              <div className="form__item__header">{productsUpdateLangData?.headers?.cat_index}</div>
                               <label htmlFor="cat_index">
                                    <select onChange={changeCategory} id="cat_index" name="category"
                                    value={selectedCat}
                                    >
-                                        <option>Select Category</option>
+                                        <option>{productsUpdateLangData?.placeholders?.select_category}</option>
                                         {
                                              categories.map(cat => {
                                                   
@@ -119,12 +120,12 @@ function ProductCreateUpdate() {
                                    />
                          }
                         <div className="form__item">
-                              <div className="form__item__header">Name</div>
+                              <div className="form__item__header">{productsUpdateLangData?.headers?.name}</div>
                               <input 
                                    type="text" 
                                    name="descr" 
                                    id="" 
-                                   placeholder="Enter  Description" 
+                                   placeholder={productsUpdateLangData?.placeholders?.description} 
                                    value={productName}
                                    onChange={(e) => {
                                         setProductName(e.target.value)
@@ -132,12 +133,12 @@ function ProductCreateUpdate() {
                               />
                          </div>
                          <div className="form__item">
-                              <div className="form__item__header">Description</div>
+                              <div className="form__item__header">{productsUpdateLangData?.headers?.description}</div>
                               <textarea 
                               type="text" 
                               name="main" 
                               id="" 
-                              placeholder="Enter  Your Text" 
+                              placeholder={productsUpdateLangData?.placeholders?.text}
                               value={productDesc}
                               onChange={(e) => {
                                    setProductDesc(e.target.value)
@@ -148,11 +149,11 @@ function ProductCreateUpdate() {
 
                          </div>
                          <div className="form__item">
-                              <div className="form__item__header">Price</div>
+                              <div className="form__item__header">{productsUpdateLangData?.headers?.price}</div>
                               <input 
                               type="text" 
                               name="cost" id="" 
-                              placeholder="Enter price" 
+                              placeholder={productsUpdateLangData?.placeholders?.price}
                               value={productCost}
                               onChange={(e) => {
                                    setProductCost(e.target.value)
@@ -160,12 +161,12 @@ function ProductCreateUpdate() {
                               />
                          </div>
                          <div className="form__item">
-                              <div className="form__item__header">Discount</div>
+                              <div className="form__item__header">{productsUpdateLangData?.headers?.discount}</div>
                               <input 
                               type="text" 
                               name="discount" 
                               id="" 
-                              placeholder="Enter Discount" 
+                              placeholder={productsUpdateLangData?.placeholders?.discount}
                               value={productDiscount}
                               onChange={(e) => {
                                    setProductDiscount(e.target.value)
@@ -173,11 +174,11 @@ function ProductCreateUpdate() {
                               />
                          </div>
                          <div className="form__item">
-                              <div className="form__item__header">1c_articul</div>
+                              <div className="form__item__header">{productsUpdateLangData?.headers?.articul}</div>
                               <input 
                               type="text" 
                               name="1c_articul" 
-                              placeholder="Enter Articul"  
+                              placeholder={productsUpdateLangData?.placeholders?.articul}
                               value={productArticul}
                               onChange={(e) => {
                                    setProductArticul(e.target.value)
@@ -188,14 +189,14 @@ function ProductCreateUpdate() {
                               currentProduct ? 
 
                               <div className="form__item">
-                                   <div className="form__item__header">Current Picture</div>
-                                   <img src={`${root}/images/${currentProduct.id}.jpg`} alt="" /> 
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.current_pictures}</div>
+                                   <img src={`${root}/images/products/${currentProduct.id}.jpg`} alt="" /> 
                               </div>:
 
                               <></>
                          }
                          <div className="form__item form__item__insert__picture">
-                              <div className="form__item__header">Insert Picture</div>
+                              <div className="form__item__header">{productsUpdateLangData?.headers?.insert_pictures}</div>
                               <input type="file" name="image" id="" />
                          </div>
                               <input type="hidden" name="availability" id="" value={`${currentProduct?.availability || 1}`} onChange={() => {}} />

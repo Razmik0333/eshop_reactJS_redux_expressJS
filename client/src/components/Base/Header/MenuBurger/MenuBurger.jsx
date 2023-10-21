@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { currentLanguageDataSelector, getUserId } from "../../../../helpers/reduxSelectors";
+import { currentLanguageDataSelector, getUserDataSelector, getUserId } from "../../../../helpers/reduxSelectors";
 import { currentUser, getUserData } from '../../../../redux/ducks/userDuck';
 import { changeOrdersFromLogout } from '../../../../redux/ducks/orderDuck';
 
@@ -11,6 +11,7 @@ function MenuBurger() {
      const dispatch = useDispatch();
      const navigate = useNavigate();
      const headerLangData = useSelector(currentLanguageDataSelector)?.header?.menu_burger;
+     const userData = useSelector(getUserDataSelector);
      const userId = useSelector(getUserId);
      const changeLogout = (e) => {        
 
@@ -44,7 +45,7 @@ function MenuBurger() {
                               {
                                    <>
                                         {
-                                             userId === 2 ?  
+                                             userData?.role === "admin" ?  
                                                   <li className="burger_list_item">
                                                        <NavLink to={"/admin"} className="register-link">{headerLangData?.admin}</NavLink>
 
@@ -80,4 +81,4 @@ function MenuBurger() {
              </div>
 }
 
-export default MenuBurger;
+export default memo(MenuBurger);

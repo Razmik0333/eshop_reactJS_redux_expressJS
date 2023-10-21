@@ -28,10 +28,12 @@ import ViewedProducts from './components/Home/ViewedProducts/ViewedProducts';
 import Loader from './components/Base/Loader/Loader';
 import Evaluate from './components/Orders/Evaluate/Evaluate';
 import Page from './components/Base/User/cabinet/page/Page/Page';
-import Personal from './components/Base/User/cabinet/personal/Personal/styles/Personal';
+import Personal from './components/Base/User/cabinet/personal/Personal';
 import UserOrders from './components/Base/User/cabinet/user-orders/UserOrders';
 import UserProducts from './components/Base/User/cabinet/user-products/UserProducts';
 import UserReviews from './components/Base/User/cabinet/user-reviews/UserReviews';
+import AdminPage from './components/Base/Admin/admin-page/AdminPage/AdminPage';
+import AdminPersonal from './components/Base/Admin/admin-page/AdminPersonal/AdminPersonal';
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
 function App() {
@@ -72,6 +74,16 @@ function App() {
               <Route
               path="/admin/product" 
               element={<AdminProducts />} 
+              />
+
+              <Route
+              path="/admin/personal" 
+              element={<AdminPersonal />} 
+              />
+
+              <Route
+              path="/admin/page" 
+              element={<AdminPage />} 
               />
               <Route
               path="/admin/product/create/page" 
