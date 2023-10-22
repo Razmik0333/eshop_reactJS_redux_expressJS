@@ -19,6 +19,7 @@ const getMostestRatingProducts = require('../controllers/products').mostestRatin
 const getMostestSaleProducts = require('../controllers/products').mostestSale;
 const getMostestRecentAddProducts = require('../controllers/products').mostestRecent;
 const getMostestDesiredProducts = require('../controllers/products').mostestDesired;
+const getSimilarProducts = require('../controllers/products').similarProducts;
 
 router.get('/main/:id', getProductsByCategory);
 router.get('/discount', getProductsByLargeDiscount);
@@ -26,6 +27,7 @@ router.get('/recommend', getRecommendedProducts);
 router.get('/filter/product/:id', getFilteredProducts);
 router.get('/product/:id', getProductById);
 router.get('/product/rating/:id', getProductRatings);
+router.get('/product/similar/:catid/:prodid', getSimilarProducts);
 router.post('/product/evaluate', uploadForReview.any(), evaluateProducts);
 router.get('/list/product/:ids', getProductsByIds);
 router.get('/cost', getProductsBetweenCosts);

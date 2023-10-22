@@ -3,6 +3,7 @@ export const categoriesSelector = ({ NavigationDuck }) => NavigationDuck.categor
 export const productsSelector = ({ ProductDuck }) => ProductDuck.products; //
 export const recommendProductsSelector = ({ ProductDuck }) => ProductDuck.recommend; //
 export const productsByCategorySelector = ({ ProductDuck }) => ProductDuck.productsByCategory; //
+export const productsSimilarSelector = ({ ProductDuck }) => ProductDuck.productsSimilar; //
 export const productsByCategoryLengthSelector = ({ ProductDuck }) => ProductDuck.productsByCategoryLength; //
 export const currentCategoryIdSelector = ({ NavigationDuck }) => NavigationDuck.categoryID; //
 export const currentCategorySelector = ({ NavigationDuck }) => NavigationDuck.currentCategory; //

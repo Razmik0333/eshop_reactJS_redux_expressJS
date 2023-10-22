@@ -21,10 +21,7 @@ function ProductReview() {
                          <ProductReviewHeader />
                          {
                               tabName === 'desc' ? 
-                                   <ProductDescription /> : 
-                                        tabName === 'reviews' ? 
-                                             <ProductReviews /> : 
-                                                  <ProductSpecification /> 
+                                   <ProductDescription /> : <ProductReviews /> 
                          }
 
 

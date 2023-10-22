@@ -16,7 +16,6 @@ function ProductReviewHeader() {
                <ul className="product__review__items" onClick={changeCurrentTab}>
                     <li className={`product__review__item ${tabName === 'desc' ? 'active' : ''}`} data-tab="desc">{user_review_header?.description}</li>
                     <li className={`product__review__item ${tabName === 'reviews' ? 'active' : ''}`} data-tab="reviews">{user_review_header?.reviews}({reviewsByProduct.length})</li>
-                    <li className={`product__review__item ${tabName === 'spec' ? 'active' : ''}`} data-tab="spec">{user_review_header?.recommendation}</li>
                </ul>
           </div>
      )

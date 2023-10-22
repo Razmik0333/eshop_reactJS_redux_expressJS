@@ -18,6 +18,16 @@ module.exports.productsByCategory = async (req, res) => {
           res.send([]);
      }
 }
+module.exports.similarProducts = async (req, res) => {
+     const catId = req.params.catid;
+     const prodId = req.params.prodid;
+     if (typeof +catId === 'number' && !isNaN(+catId)) {
+          const result = await realyze("SELECT * FROM `products` WHERE `category`= ? AND `id` != ? ORDER BY id DESC LIMIT ?", [catId, prodId, 8]);
+          res.send(result);
+     }else{
+          res.send([]);
+     }
+}
 module.exports.productsByLargeDiscount = async (req, res) => {
      const result = await realyze("SELECT MAX(discount) AS max FROM `products` ");
      const max = result[0]?.max;

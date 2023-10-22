@@ -73,7 +73,9 @@
             "rating : highest first"
         ],
         "filter" : "FILTER",
-        "filter_price" : "FILTER BY PRICE"
+        "filter_price" : "FILTER BY PRICE",
+        "home" : "HOME"
+
     },
     "product_page" : {
         "content" : {
@@ -89,13 +91,14 @@
         "review": {
             "header" : {
                 "description" : "DESCRIPTION",
-                "reviews" : "REVIEWS", 
-                "recommendation" : "SIMILAR"
+                "reviews" : "REVIEWS"
             }
         },
         "missing": "Reviews are missing",
         "home" : "HOME",
-        "best_seller" : "BEST SELLER"
+        "best_seller" : "BEST SELLER",
+        "similar" : "SIMILAR PRODUCTS"
+
     },
     "cart" : {
         "cart" : "CART",

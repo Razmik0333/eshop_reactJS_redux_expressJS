@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { currentCategorySelector, currentLanguageDataSelector, currentSearchData, currentSearchSelector, elementsCostsSelector, productsByCategorySelector } from '../../../../helpers/reduxSelectors';
+import { currentCategorySelector,getCurrentLanguageSelector, currentLanguageDataSelector, currentSearchData, currentSearchSelector, elementsCostsSelector, productsByCategorySelector } from '../../../../helpers/reduxSelectors';
 import { changeCountElements, changeCountItemsOfPage, changeSortType, changeShowType } from '../../../../redux/ducks/configsDuck';
 import { getStepsCounts } from '../../../../redux/ducks/productDuck';
 import './styles/_products-panel-show.scss';
@@ -12,6 +12,7 @@ function ProductsDetailsList() {
      const [filterItems, setFilterItems] = useState(null);
      const searchData = useSelector(currentSearchData);
      const searchWord = useSelector(currentSearchSelector);
+     const currentLang = useSelector(getCurrentLanguageSelector)
 
      const productsByCategory = useSelector(productsByCategorySelector);
      const productsByCosts = useSelector(elementsCostsSelector);
@@ -46,7 +47,9 @@ function ProductsDetailsList() {
                
                <div className="current__category">
                     {
-                         searchData.length === 0 ? category?.['arm_name']:`ԴՈՒՔ ՓՆՏՐԵԼ ԵՔ\` ${searchWord}`
+                        // 
+                         searchData.length > 0 ? `ԴՈՒՔ ՓՆՏՐԵԼ ԵՔ\` ${searchWord}` : currentLang === "am" ? category?.arm_name : `${category?.alias}`.toUpperCase()
+                          //category?.['arm_name']:
                     }
                     
                </div>

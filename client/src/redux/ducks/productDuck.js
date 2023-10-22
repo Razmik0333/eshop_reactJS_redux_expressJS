@@ -2,6 +2,7 @@ import { createAction } from '../../helpers/redux';
 import { root } from '../../helpers/constants/constants';
 import { checkEmptyObject, getBestSellers, getMostestURL, getObjectFromSoldedOrders, numInArray } from '../../helpers/functions/functions';
 const FETCH_PRODUCTS = 'productDuck/FETCH_PRODUCTS';
+const FETCH_PRODUCTS_SIMILAR = 'productDuck/FETCH_PRODUCTS_SIMILAR';
 const FETCH_PRODUCTS_CATEGORY = 'productDuck/FETCH_PRODUCTS_CATEGORY';
 const FETCH_PRODUCTS_CATEGORY_LENGTH = 'productDuck/FETCH_PRODUCTS_CATEGORY_LENGTH';
 const FETCH_RECOMMEND_PRODUCTS = 'productDuck/FETCH_RECOMMEND_PRODUCTS';
@@ -27,6 +28,7 @@ const FETCH_MOSTEST_SALE = 'productDuck/FETCH_MOSTEST_SALE';
 
 
 export const getProducts = createAction(FETCH_PRODUCTS);
+export const getProductsSimilar = createAction(FETCH_PRODUCTS_SIMILAR);
 export const getCurrentProductId = createAction(CURRENT_PRODUCT_ID);
 export const getCurrentProduct = createAction(CURRENT_PRODUCT);
 export const getProductsByCategory = createAction(FETCH_PRODUCTS_CATEGORY);
@@ -80,6 +82,15 @@ export const fetchProductsForStartingPage = (id) => async (dispatch) => {
   try {
     const data = await(await fetch(`${root}/api/main/${id}`)).json()
     dispatch(getProducts(data));
+  } catch (e) {
+    console.log('error from productDuck', e)
+  }
+};
+export const fetchSimilarProducts = (catId, prodId) => async (dispatch) => {
+  try {
+    const data = await(await fetch(`${root}/api/product/similar/${catId}/${prodId}`)).json()
+    dispatch(getProductsSimilar(data));
+    console.log("🚀 ~ file: productDuck.js:93 ~ fetchSimilarProducts ~ data:", data)
   } catch (e) {
     console.log('error from productDuck', e)
   }
@@ -271,6 +282,7 @@ export const getViewedProducts = (id) => (dispatch) => {
 };
 export const initialStateApp = {
   products: [], //
+  productsSimilar: [], //
   productsByCategory: [], //
   productsByCategoryLength: null, //
   stepCounts : null,
@@ -297,6 +309,11 @@ function ProductDuck(state = initialStateApp, action) {
       return {
         ...state,
         products: action.payload,
+      };
+    case FETCH_PRODUCTS_SIMILAR:
+      return {
+        ...state,
+        productsSimilar: action.payload,
       };
     case FETCH_PRODUCTS_CATEGORY:
       return {

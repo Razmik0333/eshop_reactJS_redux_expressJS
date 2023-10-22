@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { categoriesSelector } from '../../../../helpers/reduxSelectors';
+import { categoriesSelector, getCurrentLanguageSelector } from '../../../../helpers/reduxSelectors';
 import { NavLink } from 'react-router-dom';
 import { currentCategory, currentSearch, fetchCurrentCatgory } from '../../../../redux/ducks/navigationDuck';
 import { clearSearchData } from '../../../../redux/ducks/productDuck';
@@ -8,7 +8,8 @@ import { clearSearchData } from '../../../../redux/ducks/productDuck';
 export default function Categories() {
      const dispatch = useDispatch()
      const categories = useSelector(categoriesSelector);
-     
+     const currentLang = useSelector(getCurrentLanguageSelector)
+     console.log("🚀 ~ file: PathPanel.jsx:11 ~ PathPanel ~ currentLang:", currentLang)
      const changeCategory = (e) => {
           dispatch(currentCategory(e.target.dataset.id));
           dispatch(fetchCurrentCatgory(e.target.dataset.id));
@@ -27,7 +28,10 @@ export default function Categories() {
                                         key={item.id} 
                                         onClick = {changeCategory} >
                                         <NavLink to={`/category/${item.id}`} data-id={item.id}>
-                                             {item.arm_name}
+
+                                             {
+                                                  currentLang === "am" ? item?.arm_name : `${item?.alias}`.toUpperCase()
+                                             }
                                         </NavLink>
                                    </li>
                          })
