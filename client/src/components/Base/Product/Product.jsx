@@ -15,7 +15,7 @@ import { deleteWishListItem, fetchAddWishList } from '../../../redux/ducks/wishL
 function Product({product, text}) {
     
      const dispatch = useDispatch();
-     const  navigate = useNavigate();
+     const navigate = useNavigate();
      const discountedPrice = product.cost *(1 - product.discount / 100);
      const popupIsShow = useSelector(popupCloseSelector);
      const currentCurrency = useSelector(getCurrentCurrencySelector);

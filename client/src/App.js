@@ -15,8 +15,6 @@ import Cart from './components/Cart/Cart';
 import Buy from './components/Cart/Order/Buy';
 
 
-//import Orders from ';
-
 
 import Admin from './components/Base/Admin/admin/Admin';
 import AdminProducts from './components/Base/Admin/AdminProducts/AdminProducts';
@@ -34,6 +32,8 @@ import UserProducts from './components/Base/User/cabinet/user-products/UserProdu
 import UserReviews from './components/Base/User/cabinet/user-reviews/UserReviews';
 import AdminPage from './components/Base/Admin/admin-page/AdminPage/AdminPage';
 import AdminPersonal from './components/Base/Admin/admin-page/AdminPersonal/AdminPersonal';
+import NonFound from './components/Base/NonFound/NonFound';
+import Error404 from './components/Base/Error404/Error404';
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
 function App() {
@@ -153,10 +153,12 @@ function App() {
               path="/" 
               element={<Home />} 
               />
+              <Route 
+              path="*" 
+              element={<Error404 />} 
+              />
             </Routes>
         </Suspense>
-            
-            
         <Footer />
       </div>
       
