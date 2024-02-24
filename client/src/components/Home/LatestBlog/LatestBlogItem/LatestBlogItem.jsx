@@ -1,14 +1,17 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { getTime } from "../../../../helpers/functions/functions";
 import RatingMapping from "../../../Base/RatingMapping/RatingMapping";
 import { root } from "../../../../helpers/constants/constants";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-import { currentLanguageDataSelector } from "../../../../helpers/reduxSelectors";
+import { currentLanguageDataSelector, getReviewIdSelector } from "../../../../helpers/reduxSelectors";
 
 function LatestBlogItem({blog}) {
+     const reviewId = useSelector(getReviewIdSelector)
      const latestBlogData = useSelector(currentLanguageDataSelector)?.home?.latest_blog;
-
+     useEffect(() => {
+          setLeftVal(0)
+     }, [reviewId]);
      const imgRef = useRef(null);
      const [leftVal, setLeftVal] = useState(0)
      const date = blog?.time_add

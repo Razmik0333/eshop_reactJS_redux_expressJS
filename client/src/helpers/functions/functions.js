@@ -5,7 +5,7 @@ export const  getArrFromField = (arr, field) =>  {
      }, [])
 }
 export const numInArray = (arr, id) => {
-  return   arr.filter(item => item === id).length === 0
+  return arr.filter(item => item === id).length === 0
 }
 export const summRating = (arr) => {
   return   arr.reduce((acc, curr) => {
@@ -404,3 +404,8 @@ export const getMiddleRating = (obj) => {
      return parseFloat(sumRating / countRating).toFixed(1);
 }
 
+export const getDataFromInterval = (data, params) => {
+     return data.filter((item, pos) => {
+          return pos >= params.start && pos <= params.start + params.count
+     })
+}

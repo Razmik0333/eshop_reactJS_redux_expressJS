@@ -1,0 +1,34 @@
+.reviews {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 3px solid var(--orange);
+}
+.reviews .user__info {
+  width: 10%;
+  padding: 10px;
+}
+.reviews .user__info .time__review {
+  font-size: 14px;
+  padding: 5px 0;
+}
+.reviews .review__info {
+  width: 75%;
+  height: 75px;
+  padding: 5px;
+}
+.reviews .review__info .product__name {
+  margin-top: 10px;
+}
+.reviews .review_pictures {
+  width: 100%;
+  height: auto;
+  padding: 5px;
+}
+.reviews .review_pictures img {
+  width: 120px;
+  height: auto;
+  margin-left: 10px;
+}

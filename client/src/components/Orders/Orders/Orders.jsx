@@ -20,8 +20,8 @@ import Loader from "../../Base/Loader/Loader";
 
 import ModalOrderConfirm from "../../Base/Modal/ModalOrderConfirm";
 function Orders() {
-      const [isLoad, setIsLoad] = useState(false);
-      const modalIsClose = useSelector(modalCloseSelector);
+     const [isLoad, setIsLoad] = useState(false);
+     const modalIsClose = useSelector(modalCloseSelector);
      const dispatch = useDispatch();
      const userData = useSelector(getUserDataSelector);
      const statusIndex = useSelector(getStatusIndex);
@@ -29,9 +29,8 @@ function Orders() {
 
      useEffect(() => {
           statusIndex === -1 ? 
-          
-          dispatch(fetchUserOrders(userData?.id)):
-               dispatch(fetchUserOrdersByStatus(userData?.id, statusIndex))
+               dispatch(fetchUserOrders(userData?.id)):
+                    dispatch(fetchUserOrdersByStatus(userData?.id, statusIndex))
           setIsLoad(true);
      }, [statusIndex]);
      const orders = useSelector(getUserOrders);

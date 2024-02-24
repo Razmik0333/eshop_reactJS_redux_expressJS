@@ -10,7 +10,7 @@ export default function ProductReviewCounts() {
      const productId = useSelector(currentProductIdSelector);
      useEffect(() => {
          dispatch(fetchCurrentProductsRatings(productId))
-     }, []);
+     }, [productId]);
      const ratingCounts = useSelector(getRatingListSelector)
      const middleRating = getObjectSize(ratingCounts) === 0 ? `0.0` : getMiddleRating(ratingCounts)
      return (

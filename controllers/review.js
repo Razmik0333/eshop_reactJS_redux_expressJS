@@ -1,29 +1,51 @@
 const fs = require('fs')
 const fsPromises = require('fs/promises');
+const path = require('path');
+const functions = require('../functions/functions');
+const fs_functions = require('../functions/fs_functions');
 const realyze = require('../config').realyze;
-const path = require('path')
-module.exports.reviewList = async (req, res) => {
-     const productId = req.params.id;
-     const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ? ", [productId]);
+const variables = require('../variables/variables');
+const getReviewsFromProducts = functions.reviewsFromProducts;
+const getReviewsByUser = functions.reviewsByUser;
+const getReviewsByProduct = functions.reviewsByProduct;
+const getRatingCounts = functions.ratingCounts;
+const getSizeOfObject = functions.sizeOfObject;
+module.exports.getReviewListByProductId = async (req, res) => {
      try {
-          const urlReview = path.resolve() + `/public/images/reviews`;
+          const productId = req.params.id;
+          const cachesPath = variables.caches.review;
 
-          const newReviews = await Promise.all(reviews.map(async(item) => {
+          
+          if (fs.existsSync(`${cachesPath}/reviews/reviewsByProduct.json`)) {
+               fs.readFile(`${cachesPath}/reviews/reviewsByProduct.json`, 'utf-8', 
+               async function(err, data) {
+                    if (err) throw err;
+                    else {                                   
+                         const [lastReviewByProductId] = await realyze("SELECT COUNT(id) AS count FROM reviews WHERE product_id = ?  ", [productId])
+                         if (JSON.parse(data).length === lastReviewByProductId.count) {
+                              res.send(data);
+                         }else{
+                              const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ? ", [productId]);
+                              const newReviews = await getReviewsByProduct(reviews);
+                              fs_functions.writeCacheFile(
+                                   `${cachesPath}/reviews/reviewsByProduct.json`,
+                                   newReviews);
+                              res.send(newReviews);  
+                         }
+                    }
+               })
+          } else {
+               const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ? ", [productId]);
+               const newReviews = await getReviewsByProduct(reviews);
+               fs_functions.writeCacheFile(
+                    `${cachesPath}/reviews/reviewsByProduct.json`,
+                    newReviews
+               );
                
-               const url = `${urlReview}/${item.user_id}/${item.order_id}/${item.product_id}`;
-               const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
-               return await {
-                    ...item,
-                    pictures: files,
-               }
-          }))
-
-          
-          res.send(newReviews)
-          
+               res.send(newReviews);
+          }
      } catch (error) {
           console.log(error);
-          
      }
      
 }
@@ -35,45 +57,62 @@ module.exports.reviewById = async (req, res) => {
 }
 module.exports.ratingCounts = async (req, res) => {
      const productId = req.params.id;
-     const reviews = await realyze("SELECT id, rating FROM reviews WHERE product_id = ? ", [productId]);
-     const ratingCounts = reviews.reduce((acc, curr) => {
-          if (!(curr.rating in acc)) {
-               acc[curr.rating] = {
-                    count : 1
-               }
-          }else{
-               acc[curr.rating] = {
-                    count : +acc[curr.rating].count + 1
-               }
-          }
-          return acc
-     },{})
-     res.send(ratingCounts);
+     console.log("🚀 ~ module.exports.ratingCounts= ~ productId:", productId)
+     const cachesPath = variables.caches.review;
+     if (fs.existsSync(`${cachesPath}/reviews/ratingByProduct.json`,)) {
+          fs.readFile(`${cachesPath}/reviews/ratingByProduct.json`, 'utf-8',
+          async function(err, data) {
+               if (err) throw err;
+               else {
+                         const [lastReviewByProductId] = await realyze("SELECT MAX(id) AS max FROM reviews WHERE product_id = ?  ", [productId])
+                         console.log("🚀 ~ function ~ lastReviewByProductId:", lastReviewByProductId)
+                         if (JSON.parse(data).length === lastReviewByProductId.max) {
+                              console.log('read');
+                              
+                              const ratingCounts = getRatingCounts(JSON.parse(data));
+                              res.send(ratingCounts);
+                         }else{
+                              const reviews = await realyze("SELECT id, rating FROM reviews WHERE product_id = ? ", [productId]);
+                              console.log("🚀 ~ function ~ reviews:", reviews)
+                              fs_functions.writeCacheFile(
+                                   `${cachesPath}/reviews/ratingByProduct.json`,
+                                   reviews
+                              );
+                              const ratingCounts = getRatingCounts(reviews);
+                              console.log("🚀 ~ function ~ ratingCounts:", ratingCounts)
+                              res.send(ratingCounts);
+                         }
+                    }                            
+               
+          })
+     } else {
+          const reviews = await realyze("SELECT id, rating FROM reviews WHERE product_id = ? ", [productId]);
+          fs_functions.writeCacheFile(
+               `${cachesPath}/reviews/ratingByProduct.json`,
+               reviews
+          );
+          const ratingCounts = getRatingCounts(reviews);
+          res.send(ratingCounts);
+          
+     }
 }
 
 module.exports.updateReviewById = async (req, res) => {
-     const reviewId = req.params.review_id;
-     const review = req.body.review_value;
-     const rating = req.body.rating;
-     const userId = req.body.user_id;
-     // const productId = req.params.product_id;
-     await realyze("UPDATE reviews SET review = ?, rating = ?  WHERE id = ? ", [ review, rating,reviewId])
-     const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? ", [userId]);
      try {
-          const modReviews = await Promise.all(reviews.map(async(item) => {
-               const productId = item.product_id;
-               const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
-               const url = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`
-               const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
-
-               return await {
-                    ...item,
-                    product: productItem,
-                    pictures: files,
-               }
-          }))
+          const reviewId = req.params.review_id;
+          const review = req.body.review_value;
+          const rating = req.body.rating;
+          const userId = req.body.user_id;
+          // const productId = req.params.product_id;
+          const cachesPath = variables.caches.review;
+          await realyze("UPDATE reviews SET review = ?, rating = ?  WHERE id = ? ", [ review, rating,reviewId])
+          const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? ORDER BY id DESC ", [userId]);
+          const modReviews = await getReviewsByUser(reviews);
+          fs_functions.writeCacheFile(
+               `${cachesPath}/reviews/reviewsByUser.json`,
+               modReviews
+          );
           res.send(modReviews)
-          
      } catch (error) {
           console.log(error);
           
@@ -81,23 +120,18 @@ module.exports.updateReviewById = async (req, res) => {
      //res.send(reviews);
 }
 module.exports.deleteReviewById = async (req, res) => {
-     const userId = req.body.user_id;
-
-     const reviewId = req.params.review_id;
-     await realyze("DELETE  FROM reviews  WHERE id = ? ", [ reviewId])
-     const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? ", [userId]);
      try {
-          const modReviews = await Promise.all(reviews.map(async(item) => {
-               const productId = item.product_id;
-               const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
-               const url = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`
-               const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
-               return await {
-                    ...item,
-                    product: productItem,
-                    pictures: files,
-               }
-          }))
+          const userId = req.body.user_id;
+          const cachesPath = variables.caches.review;
+          const reviewId = req.params.review_id;
+          await realyze("DELETE  FROM reviews  WHERE id = ? ", [reviewId])
+          const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? ORDER BY id DESC ", [userId]);
+
+          const modReviews = await getReviewsByUser(reviews);
+          fs_functions.writeCacheFile(
+               `${cachesPath}/reviews/reviewsByUser.json`,
+               modReviews
+          );
           res.send(modReviews)
           
      } catch (error) {
@@ -106,59 +140,88 @@ module.exports.deleteReviewById = async (req, res) => {
 }
 module.exports.reviewByUserId = async (req, res) => {
      
-      const userId = req.params.user_id;
-      const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ?  ", [userId]);
-      try {
-          const modReviews = await Promise.all(reviews.map(async(item) => {
-               const productId = item.product_id;
-               const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
-               const url = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`
-               const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
-               return await {
-                    ...item,
-                    product: productItem,
-                    pictures: files,
-               }
-          }))
-          res.send(modReviews)
-          
+     try {
+          const cachesPath = variables.caches.review;
+          const userId = req.params.user_id;
+          if (fs.existsSync(`${cachesPath}/reviews/reviewsByUser.json`)) {
+               fs.readFile(`${cachesPath}/reviews/reviewsByUser.json`, 'utf-8',
+               async function(err, data) {
+                    if (err) throw err;
+                    else {  
+                            
+                         if(JSON.parse(data).length === 0) res.send([]);  
+                         else{
+
+                              const [lastReviewId] = await realyze("SELECT MAX(id) AS max FROM reviews WHERE user_id = ?", [userId]);
+
+                              if (JSON.parse(data)[0].id < lastReviewId.max) {
+                                   const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? ORDER BY id DESC  ", [userId]);
+                                   const modReviews = await getReviewsByUser(reviews);
+     
+                                   fs_functions.writeCacheFile(
+                                        `${cachesPath}/reviews/reviewsByUser.json`,
+                                        modReviews
+                                   );
+                                   res.send(modReviews)
+     
+                              }else{
+                                   res.send(data);
+                              }
+                         }                            
+                    }
+               })
+          } else {
+               const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? ORDER BY id DESC  ", [userId]);
+               const modReviews = await getReviewsByUser(reviews);
+               fs_functions.writeCacheFile(
+                    `${cachesPath}/reviews/reviewsByUser.json`,
+                    modReviews
+               );
+               res.send(modReviews)
+          }
      } catch (error) {
           console.log(error);
-          
      }
 }
 module.exports.getLatestReviews = async(req, res) => {
-     const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 9");    
      try {
-          const modReviews = await Promise.all(reviews.map(async(item) => {
-               const avatarUrl = `public/images/users/${item.user_id}`;
-               const productUrl = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`;
-               const productId = item.product_id;
-
-               const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
-              // const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
-
-               const avatarFiles = fs.existsSync(avatarUrl) ?  await fsPromises.readdir(avatarUrl) : [];
-               const productPictures = fs.existsSync(productUrl) ? await fsPromises.readdir(productUrl) 
-               :[];
-               return await {
-                    ...item,
-                    product: productItem,
-                    productPictures: productPictures,
-                    avatarPicture: avatarFiles[0],
-               }
-          }))
-          res.send(modReviews)
-          
+          const cachesPath = variables.caches.review;          
+          if (fs.existsSync(`${cachesPath}/reviews/latest.json`)) {
+               fs.readFile(`${cachesPath}/reviews/latest.json`, 'utf-8',
+               async function(err, data) {
+                    if (err) throw err;
+                    else {                                   
+                         const [lastReviewId] = await realyze("SELECT MAX(id) AS max FROM reviews ")
+                         if (JSON.parse(data)[0].id < lastReviewId.max) {
+                              const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 9");    
+                              const modReviews = await getReviewsFromProducts(reviews);
+                             
+                              fs_functions.writeCacheFile(
+                                   `${cachesPath}/reviews/latest.json`,
+                                   modReviews);
+                              res.send(modReviews);  
+                         }else{
+                              res.send(data);
+                         }
+                    }
+               })
+          } else {
+               const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 9");    
+               const modReviews = await getReviewsFromProducts(reviews)
+               fs_functions.writeCacheFile(
+                    `${cachesPath}/reviews/latest.json`,
+                    modReviews
+               );
+               res.send(modReviews);
+          }
      } catch (error) {
           console.log(error);
      }
-     //res.send(reviews);
 }
 
 module.exports.getRatedReviews = async (req,res) => {
 
      const reviews = await realyze("SELECT * FROM reviews ORDER BY rating DESC LIMIT 3");
-     console.log("🚀 ~ file: review.js:135 ~ module.exports.getRatedReviews= ~ reviews:", reviews)
+     console.log("🚀 ~ module.exports.getRatedReviews= ~ reviews:", reviews)
      res.send(reviews)
 }

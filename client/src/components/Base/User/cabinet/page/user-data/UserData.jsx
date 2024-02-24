@@ -5,6 +5,7 @@ import { root } from '../../../../../../helpers/constants/constants';
 import "./styles/_user-data.scss"
 export default function UserData() {
      const currentUser = useSelector(getUserDataSelector);
+     console.log("🚀 ~ UserData ~ currentUser:", currentUser)
 
      const path = currentUser.picture.length > 0 ?  `${root}/images/users/${currentUser.id}/${currentUser.picture}` 
      :`${root}/images/users/no-image.png`

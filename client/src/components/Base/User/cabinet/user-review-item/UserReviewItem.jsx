@@ -5,12 +5,15 @@ import RatingMapping from '../../../RatingMapping/RatingMapping';
 import Rating from '../../../Rating/Rating';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserId, productReviewDataSelector } from '../../../../../helpers/reduxSelectors';
-import { changeReviewData } from '../../../../../redux/ducks/reviewDuck';
+import { changeReviewData, changeReviewIsDeleted } from '../../../../../redux/ducks/reviewDuck';
 import { changeModal } from '../../../../../redux/ducks/configsDuck';
+import { useNavigate } from 'react-router-dom';
 export default function UserReviewItem({review}) {
      const dispatch = useDispatch();
+     const navigate= useNavigate();
      const [changeReview, setChangeReview] = useState(false);
-     const [review_value, setChangeReviewValue] = useState(review.review);
+     const [review_value, setChangeReviewValue] = useState(review?.review);
+     const [isDeleted, setIsDeleted] = useState(false);
      const reviewRef = useRef(null);
      const userId = useSelector(getUserId);
      const updatedRatingValue = useSelector(productReviewDataSelector);
@@ -18,6 +21,9 @@ export default function UserReviewItem({review}) {
      const changeReviewValue = (e) => {
           setChangeReviewValue(e.target.value)
      }
+     const refreshPage = () => {
+          navigate(0);
+      }
      const changeReviewFieldStatus = (e) => {
           e.preventDefault()
           setChangeReview(!changeReview);
@@ -37,6 +43,8 @@ export default function UserReviewItem({review}) {
                )
           }) ).json();
           dispatch(changeReviewData(reviewData));
+          refreshPage();
+          setChangeReview(false)
      }
      const handleUpdate = async (e) => {
           e.preventDefault()
@@ -54,7 +62,8 @@ export default function UserReviewItem({review}) {
                     }
                )
           }) ).json();
-          dispatch(changeModal(true))
+          dispatch(changeModal(true));
+
           dispatch(changeReviewData(reviewData));
           setChangeReview(false)
      }
@@ -83,7 +92,25 @@ export default function UserReviewItem({review}) {
                          {
                               <>
                                    <p className="user_review">
-                                        <textarea disabled = {!changeReview} name="" id="" cols="30" rows="10" value={review_value} onChange={changeReviewValue}></textarea>
+                                       { 
+                                        changeReview ?
+                                        <textarea 
+                                             disabled = {!changeReview} 
+                                             name="" 
+                                             id="" 
+                                             cols="30" 
+                                             rows="10" 
+                                             defaultValue={review.review}  
+                                             value={review_value} 
+                                             onChange={changeReviewValue}>
+
+                                        </textarea>
+                                        :
+                                        <p>
+                                             {review_value}
+                                        </p>
+                                        
+                                        }
                                    </p>
                                    {
                                         changeReview ? 

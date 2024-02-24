@@ -1,8 +1,7 @@
-const fs = require('fs')
-const fsPromises = require('fs/promises')
-
 const realyze = require('.././config').realyze;
-
+const fs = require('fs');
+const fsPromises = require('fs/promises');
+const path = require('path');
 const getMaxSoldedProducts = (arr) => {
      return arr
      .map(item => JSON.parse(item?.user_order))
@@ -16,6 +15,15 @@ const getMaxSoldedProducts = (arr) => {
           }
           return acc
      },{})
+}
+const getProductsWithCounts = (data, quantities) => {
+    return data.reduce((acc, curr, pos) => {
+          acc.push({
+               ...curr,
+               quantity: quantities[pos]
+          });
+          return acc;
+     },[]);
 }
 const getMaxSoldedProductIds = (productObj) => {
      return  Object.entries(productObj).sort((a, b) => {
@@ -34,10 +42,11 @@ const getSummArray = (arr) => {
           return +acc + +curr
      }, 0)
 }
-const upload = () => {
-     
-     
+
+const getSizeOfObject = (obj) => {
+     return Object.keys(obj).length;
 }
+
 
 const getProductsFromOrdersList = async (arr) => {
           return  await Promise.all(arr.map(async(item,pos) => {
@@ -95,6 +104,100 @@ const getMiddleRating = (arr) => {
      return parseFloat(summ/arr.length).toFixed(2);
          
 }
+const getStatus = (num) => {
+     switch (num) {
+          case 0:
+               return {
+                    title: 'Ընդունված',
+                    status : 'accept' 
+               }
+          case 1:
+               return {
+                    title: 'Ուղարկված',
+                    status : 'reached' 
+               }
+          case 2:
+               return {
+                    title: 'Հանձնված Փ/Բ',
+                    status : 'delivered_PS' 
+               }
+          case 3:
+               return {
+                    title: 'Հանձնված',
+                    status : 'delivered' 
+               }     
+          case 4:
+               return {
+                    title: 'Ավարտված',
+                    status : 'finished' 
+               }     
+          default:
+               break;
+     }
+}
+
+const getReviewsFromProducts = async(data) => {
+    return await Promise.all(data.map(async(item) => {
+          const avatarUrl = `public/images/users/${item.user_id}`;
+          const productUrl = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`;
+          const productId = item.product_id;
+
+          const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
+
+          const avatarFiles = fs.existsSync(avatarUrl) ?  await fsPromises.readdir(avatarUrl) : [];
+          const productPictures = fs.existsSync(productUrl) ? await fsPromises.readdir(productUrl) : [];
+          return await {
+               ...item,
+               product: productItem,
+               productPictures: productPictures,
+               avatarPicture: avatarFiles[0],
+          }
+     }))
+}
+
+const getReviewsByUser = async (data) => {
+     return await Promise.all(data.map(async(item) => {
+          const productId = item.product_id;
+          const [productItem] = await realyze("SELECT * FROM products WHERE id = ?  ", [productId]);
+          const url = `public/images/reviews/${item.user_id}/${item.order_id}/${item.product_id}`
+          const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
+          return await {
+               ...item,
+               product: productItem,
+               pictures: files,
+          }
+     }));
+}
+const getReviewListFromProduct = async (data) => {
+     const urlReview = path.resolve() + `/public/images/reviews`;
+
+     return await Promise.all(data.map(async(item) => {
+               
+          const url = `${urlReview}/${item.user_id}/${item.order_id}/${item.product_id}`;
+          const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
+          return await {
+               ...item,
+               pictures: files,
+          }
+     }))
+}
+
+const getRatingCounts = (data) => {
+     console.log(typeof data);
+     
+     return data.reduce((acc, curr) => {
+          if (!(curr.rating in acc)) {
+               acc[curr.rating] = {
+                    count : 1
+               }
+          }else{
+               acc[curr.rating] = {
+                    count : +acc[curr.rating].count + 1
+               }
+          }
+          return acc
+     },{})
+}
 
 module.exports = {
      solded : [
@@ -105,11 +208,17 @@ module.exports = {
      query :getTokensForQuery,
      idsArray :getIdsArray,
      summArray:getSummArray,
-     uploadFile : upload,
+     sizeOfObject: getSizeOfObject,
      getProductsFromOrdersList :getProductsFromOrdersList,
      mostestProduct: getMostestProduct,
      mostestMaxObject: getMostestMaxObject,
      middleRating : getMiddleRating,
+     productsWithCounts:getProductsWithCounts,
+     statusIndex : getStatus,
+     reviewsFromProducts:getReviewsFromProducts,
+     reviewsByUser:getReviewsByUser,
+     reviewsByProduct:getReviewListFromProduct,
+     ratingCounts : getRatingCounts
 }
 
 

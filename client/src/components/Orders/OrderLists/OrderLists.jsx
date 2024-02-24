@@ -4,14 +4,14 @@ import OrderListItem from "../OrderListItem/OrderListItem";
 import "./styles/_order-lists.scss";
 function OrderLists({ind,order}) {  
      const orderProducts = order?.user_order;
-     console.log("🚀 ~ file: OrderLists.jsx:10 ~ OrderLists ~ orderProducts:", orderProducts)
      const productQuantities = order?.quantities;
      return <div className="orders-list">
           <OrderListHeader 
                ind = {ind} 
                id={order?.id} 
                status={order?.user_status} 
-               price = {order?.user_price} />
+               price = {order?.user_price}
+               time = {order?.time_add} />
           {
                orderProducts.map((orderProduct,ind) => {
                     

@@ -3,15 +3,16 @@ import RatingMapping from '../../../Base/RatingMapping/RatingMapping'
 import "./styles/_product-review-counts.scss"
 import { useSelector } from 'react-redux';
 import { getRatingListSelector } from '../../../../helpers/reduxSelectors';
+import { getObjectSize } from '../../../../helpers/functions/functions';
 
 export default function ProductReviewCountItem({ind, count}) {
      
      const ratingCounts = useSelector(getRatingListSelector)
-     const summRating = Object.values(ratingCounts).reduce((acc, curr) => {      
+     const summRating = getObjectSize(ratingCounts) === 0 ? 0 : Object.values(ratingCounts).reduce((acc, curr) => {      
           acc += curr.count;
           return acc
      }, 0);
-     console.log((100 * count) / summRating);
+     
   return (
      <div className="review__count">
 

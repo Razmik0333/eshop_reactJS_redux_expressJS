@@ -65,6 +65,7 @@ export const getRatingListSelector = ({ ReviewDuck }) => ReviewDuck.ratingList; 
 export const getWishListIdsSelector = ({ WishListDuck }) => WishListDuck.wishList; //
 export const getWishListDataSelector = ({ WishListDuck }) => WishListDuck.wishListData; //
 export const getViewedProductsSelector = ({ ProductDuck }) => ProductDuck.viewedProducts; //
+export const getViewedProductIdSelector = ({ ConfigsDuck }) => ConfigsDuck.viewedProductId; //
 export const getViewedProductsDataSelector = ({ ProductDuck }) => ProductDuck.viewedProductsData; //
 
 

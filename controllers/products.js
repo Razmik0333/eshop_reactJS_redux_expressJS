@@ -1,6 +1,11 @@
+const fs = require('fs');
+const fsPromises = require('fs/promises')
 const realyze = require('../config').realyze;
-const functions = require('../functions/functions')
+const variables = require('../variables/variables');
 
+const functions = require('../functions/functions');
+const fs_functions = require('../functions/fs_functions');
+const path = require('path')
 const [
      getMaxSoldedProducts,
      getMaxSoldedProductIds
@@ -9,51 +14,270 @@ const [
 const getMostestProductData = functions.mostestProduct;
 const getMostestMaxObject = functions.mostestMaxObject;
 const getMiddleRating = functions.middleRating;
+const getReviewsByUser = functions.reviewsByUser;
+
 module.exports.productsByCategory = async (req, res) => {
      const params = req.params.id;
-     if (typeof +params === 'number' && !isNaN(+params)) {
-          const result = await realyze("SELECT * FROM `products` WHERE `category`= ?  ORDER BY id DESC LIMIT ?", [params, 12]);
-          res.send(result);
-     }else{
-          res.send([]);
+     const cachesPath = variables.caches.product;
+     try {
+          if (typeof +params === 'number' && !isNaN(+params)) {
+               const categories = await realyze("SELECT * FROM `category` ");             
+               if(fs.existsSync(cachesPath + `products`)){
+                    
+                    if (fs.existsSync(`${cachesPath}/products/${[categories[params - 1]?.alias]}.json`)) {
+                         fs.readFile( `${cachesPath}/products/${[categories[params -1]?.alias]}.json`,"utf-8",
+                         async function(err, data) {
+                              if (err) throw err;
+                              else {                                   
+                                   const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ?", [params])
+                                   if (JSON.parse(data)[0].id < lastProductId.max) {
+                                        const result = await realyze("SELECT * FROM `products` WHERE `category`= ?  ORDER BY id DESC LIMIT ?", [params, 12]);
+                                        fs_functions.writeCacheFile(
+                                             `${cachesPath}/products/${[categories[params - 1]?.alias]}.json`,
+                                             result);
+                                             
+                                             res.send(result);
+                                   }else{
+                                        res.send(data);
+                                   }
+                              }
+                         })
+                    }else{
+                         const result = await realyze("SELECT * FROM `products` WHERE `category`= ?  ORDER BY id DESC LIMIT ?", [params, 12]);
+                         fs_functions.writeCacheFile(
+                              `${cachesPath}/products/${[categories[params - 1]?.alias]}.json`,
+                              result
+                         )
+                         res.send(result);
+                    }
+               }
+          }else{
+               res.send([]);
+          }
+          
+     } catch (err) {
+          throw err;
      }
 }
 module.exports.similarProducts = async (req, res) => {
-     const catId = req.params.catid;
-     const prodId = req.params.prodid;
-     if (typeof +catId === 'number' && !isNaN(+catId)) {
-          const result = await realyze("SELECT * FROM `products` WHERE `category`= ? AND `id` != ? ORDER BY id DESC LIMIT ?", [catId, prodId, 8]);
-          res.send(result);
-     }else{
-          res.send([]);
+     
+     try {
+          const catId = req.params.catid;
+          const prodId = req.params.prodid;
+          if (typeof +catId === 'number' && !isNaN(+catId)) {
+
+               const cachesPath = variables.caches.product;    
+               if (fs.existsSync(`${cachesPath}/similar/similar.json`)) {
+                    fs.readFile(`${cachesPath}/similar/similar.json`, "utf-8",
+                    async function(err, data) {
+                         if (err) throw err;
+                         else { 
+                              const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ?", [catId])
+
+                              if (JSON.parse(data)[0].id < lastProductId.max) {
+                                   const result = await realyze("SELECT * FROM `products` WHERE `category`= ? AND `id` != ? ORDER BY id DESC LIMIT ?", [catId, prodId, 8]);
+                                   fs_functions.writeCacheFile(
+                                        `${cachesPath}/similar/similar.json`,
+                                        result);
+                                   res.send(result);
+                              }else{
+                                   res.send(data);
+                              }                             
+                         }
+                    })
+               
+               }else{
+                    const result = await realyze("SELECT * FROM `products` WHERE `category`= ? AND `id` != ? ORDER BY id DESC LIMIT ?", [catId, prodId, 8]);
+                    fs_functions.writeCacheFile(
+                         `${cachesPath}/similar/similar.json`,
+                         result
+                    )
+                    res.send(result)
+               }
+          }else{
+               res.send([]);
+          }
+     } catch (err) {
+          throw err;
      }
 }
 module.exports.productsByLargeDiscount = async (req, res) => {
-     const result = await realyze("SELECT MAX(discount) AS max FROM `products` ");
-     const max = result[0]?.max;
-     const discountedProducts = await realyze("SELECT * FROM `products` WHERE discount = ? ORDER BY id DESC LIMIT ?", [max, 3])
-     res.send(discountedProducts);
+     try {
+          const cachesPath = variables.caches.product;
+          if(fs.existsSync(cachesPath + `large_discount`)){
+               if (fs.existsSync(`${cachesPath}/large_discount/large_discount.json`)) {
+                    fs.readFile( `${cachesPath}/large_discount/large_discount.json`,"utf-8",
+                    async function(err, data) {
+                         if (err) throw err;
+                         else {                                   
+                              res.send(data);
+                         }
+                    })
+                    
+               }else{
+                    const result = await realyze("SELECT MAX(discount) AS max FROM `products` ");
+                    const max = result[0]?.max;
+                    const discountedProducts = await realyze("SELECT * FROM `products` WHERE discount = ? ORDER BY id DESC LIMIT ?", [max, 3])
+                    fs_functions.writeCacheFile(
+                         `${cachesPath}/large_discount/large_discount.json`,
+                         discountedProducts
+                    )
+                    res.send(discountedProducts);
+               }
+          }
+     } catch (err) {
+          throw err;
+     }
+
 }
 module.exports.recommendedProducts = async (req, res) => {
-     const result = await realyze("SELECT * FROM `products` WHERE `is_recomended` = ? ORDER BY id DESC LIMIT ?", [1, 5]);
-     res.send(result);
+     const cachesPath = variables.caches.product;
+     try {
+          if (fs.existsSync(`${cachesPath}/recomended/recomended.json`)) {
+               fs.readFile( `${cachesPath}/recomended/recomended.json`,"utf-8",
+                    async function(err, data) {
+                         if (err) throw err;
+                         else {                                   
+                              const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products WHERE `is_recomended` = ? ORDER BY id DESC LIMIT ?", [1, 5])
+                              if (JSON.parse(data)[0].id < lastProductId.max) {
+                                   const result = await realyze("SELECT * FROM `products` WHERE `is_recomended` = ? ORDER BY id DESC LIMIT ?", [1, 5]);
+                                   fs_functions.writeCacheFile(
+                                        `${cachesPath}/recomended/recomended.json`,
+                                        result);
+                                   res.send(result);
+                              }else{                                  
+                                   res.send(data);
+                              }
+                         }
+                    })
+          } else {
+               const result = await realyze("SELECT * FROM `products` WHERE `is_recomended` = ? ORDER BY id DESC LIMIT ?", [1, 5]);
+              fs_functions.writeCacheFile(
+                    `${cachesPath}/recomended/recomended.json`,
+                    result
+              ) 
+              res.send(result)
+          }
+     } catch (err) {
+          throw err;
+     }
+
+
 }
 module.exports.filteredProducts = async (req, res) => {
-     const result = await realyze("SELECT * FROM `products` WHERE `category` = ? ORDER BY id DESC ", [req.params.id, 8]);
-     res.send(result);
+     const cachesPath = variables.caches.product;    
+     const params = req.params.id;
+     try {
+          if (typeof +params === 'number' && !isNaN(+params)) {
+               const categories = await realyze("SELECT * FROM `category` ");
+               if(fs.existsSync(cachesPath + `filtered_products`)){
+                    if (fs.existsSync(`${cachesPath}/filtered_products/${[categories[params - 1]?.alias]}.json`)) {
+                         fs.readFile( `${cachesPath}/filtered_products/${[categories[params -1]?.alias]}.json`,"utf-8",
+                         async function(err, data) {
+                              if (err) throw err;
+                              else {                                   
+                                   const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ?", [params])
+                                   if (JSON.parse(data)[0].id < lastProductId.max) {
+                                        const result = await realyze("SELECT * FROM `products` WHERE `category` = ? ORDER BY id DESC ", [req.params.id]);
+                                        fs_functions.writeCacheFile(
+                                             `${cachesPath}/filtered_products/${[categories[params - 1]?.alias]}.json`,
+                                             result);
+                                        res.send(result);
+                                   }else{
+                                        res.send(data);
+                                   }
+                              }
+                         })
+                    }else{
+                         const result = await realyze("SELECT * FROM `products` WHERE `category` = ? ORDER BY id DESC ", [req.params.id]);
+                         fs_functions.writeCacheFile(
+                              `${cachesPath}/filtered_products/${[categories[params - 1]?.alias]}.json`,
+                              result
+                         )
+                    }
+               }
+          }else{
+               res.send([]);
+          }
+          
+     } catch (err) {
+          throw err;
+     }
+    
 }
 module.exports.productById = async (req, res) => {
-     const [result] = await realyze("SELECT * FROM `products` WHERE `id` = ? ", [req.params.id]);
-     result['url'] = `/images/products/${req.params.id}.jpg`;
-     res.send(result);
+     try {
+          
+          const cachesPath = variables.caches.product;
+          if(fs.existsSync(cachesPath + `large_discount`)){
+               if (fs.existsSync(`${cachesPath}/product_page/products.json`)) {
+                    fs.readFile( `${cachesPath}/product_page/products.json`,"utf-8",
+                    async function(err, data) {
+                         if (err) throw err;
+                         else {
+                              if (+JSON.parse(data)?.id !== +req.params.id) {                                  
+                                   const [result] = await realyze("SELECT * FROM `products` WHERE `id` = ? ", [req.params.id]);
+                                   result['url'] = `/images/products/${req.params.id}.jpg`;
+                                   fs_functions.writeCacheFile(
+                                        `${cachesPath}/product_page/products.json`,
+                                        result
+                                   )
+                                   res.send(result);
+                              } else {
+                                   res.send(data);
+                              }                                 
+                         }
+                    })
+               }else{
+                    const [result] = await realyze("SELECT * FROM `products` WHERE `id` = ? ", [req.params.id]);
+                    result['url'] = `/images/products/${req.params.id}.jpg`;
+                    fs_functions.writeCacheFile(
+                         `${cachesPath}/product_page/products.json`,
+                         result
+                    )
+                    res.send(result);
+               }
+          }
+     } catch (err) {
+          throw err;
+     }
 }
 
 module.exports.productsByIds = async (req, res) => {
-     const ids = req.params.ids;
-     const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
-     res.send(result);
+     try {
+          const ids = req.params.ids;
+          const cachesPath = variables.caches.product;    
+          if (fs.existsSync(`${cachesPath}/viewed/viewed.json`)) {
+               fs.readFile( `${cachesPath}/viewed/viewed.json`,"utf-8",
+               async function(err, data) {
+                    if (err) throw err;
+                    else {
+                         const arrOfCacheIds = JSON.parse(data).map(item => item.id);
+                         const arrOfNewIds = ids.split(',');
+                          if (arrOfNewIds.length > arrOfCacheIds.length) {                                  
+                              const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
+                              fs_functions.writeCacheFile(
+                                   `${cachesPath}/viewed/viewed.json`,
+                                   result
+                              )
+                              res.send(result);
+                         }else {
+                              res.send(data);
+                         }                                 
+                    }
+               })
+          } else {
+               const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
+               fs_functions.writeCacheFile(
+                    `${cachesPath}/viewed/viewed.json`,
+                    result
+               )
+               res.send(result);
+          }
+     } catch (err) {
+          throw err;
+     }
 }
-
 
 module.exports.productsBetweenCosts = async (req, res) => {
      const category = req.query.category;
@@ -70,7 +294,6 @@ module.exports.search = async (req, res) => {
 module.exports.hintAdd = async (req, res) => {
      const userId = req.body.user_id;
      const hint = req.params.hint;
-     console.log("🚀 ~ file: products.js:60 ~ module.exports.hintAdd= ~ userId:", userId)
      if (userId) {
           const [currentSearched] = await realyze("SELECT search_items FROM user_interest WHERE user_id = ? ", [userId])
           const search_items = currentSearched.search_items;
@@ -79,11 +302,9 @@ module.exports.hintAdd = async (req, res) => {
           await realyze("UPDATE `user_interest` SET `search_items` = ? WHERE `user_id`= ? ", [newHint,userId]);
           res.send(JSON.stringify(hint))
      }
-     
 }
 module.exports.hint = async (req, res) => {
      const userId = req.body.user_id;
-     
      if (userId) {
           const [currentSearched] = await realyze("SELECT search_items FROM user_interest WHERE user_id = ? ", [userId])
           const search_items = currentSearched.search_items;
@@ -98,16 +319,44 @@ module.exports.hint = async (req, res) => {
                               .sort((a, b) =>  b.id - a.id)
                               return res.send(hintArr)
      }
-     return  res.send([])
-
-
+     return  res.send([]);
 }
 module.exports.sold = async (req, res) => {
-     const user_orders = await realyze(`SELECT user_order FROM orders `);
-     const productObj = getMaxSoldedProducts(user_orders);
-     const productIds = getMaxSoldedProductIds(productObj);
-     const result = await realyze(`SELECT * FROM products WHERE id IN (? , ? , ?, ?)`, productIds);
-     res.send(result)
+     try {
+          const cachesPath = variables.caches.product;  
+
+          const user_orders = await realyze(`SELECT user_order FROM orders `);
+          const productObj = getMaxSoldedProducts(user_orders);
+          const productIds = getMaxSoldedProductIds(productObj);
+          if (fs.existsSync(`${cachesPath}/solded/solded.json`)) {
+               fs.readFile(`${cachesPath}/solded/solded.json`, "utf-8",
+               async function(err, data) {
+                    if (err) throw err;
+                    else { 
+                         const productSortedIds = productIds.sort((a, b) => a - b)                                  
+                        const newArr =  JSON.parse(data).filter((item, pos) => item['id'] === +productSortedIds[pos] );
+                         if (newArr.length === 4) res.send(data)
+                         else{
+                              const result = await realyze(`SELECT * FROM products WHERE id IN (? , ? , ?, ?)`, productIds);
+                              fs_functions.writeCacheFile(
+                                   `${cachesPath}/solded/solded.json`,
+                                   result
+                              )
+                              res.send(result)
+                         }
+                    }
+               })
+          }else{
+               const result = await realyze(`SELECT * FROM products WHERE id IN (? , ? , ?, ?)`, productIds);
+               fs_functions.writeCacheFile(
+                    `${cachesPath}/solded/solded.json`,
+                    result
+               )
+               res.send(result)
+          }
+     } catch (err) {
+          throw err;
+     }
 }
 
 module.exports.evaluateProducts = async( req, res) => {
@@ -120,7 +369,6 @@ module.exports.evaluateProducts = async( req, res) => {
           order_id,
           user_email
      } = req.body;
-
      typeof product_id === "object" ? 
           product_id.forEach(async(item, pos) => {
                await realyze("INSERT INTO reviews (user_id,order_id, product_id, rating, review, user_name, user_email, time_add) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
@@ -128,16 +376,10 @@ module.exports.evaluateProducts = async( req, res) => {
                )
                
           }) :
-
           await realyze("INSERT INTO reviews (user_id,order_id, product_id, rating, review, user_name, user_email, time_add) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
                [user_id[0], order_id, product_id, rating, review, user_name, user_email, `${Math.floor(Date.now()/1000)}`]
-               )
-
-
-
-     
+          )
      await realyze("UPDATE `orders` SET `user_status` = ? WHERE id = ? ", [4, order_id[0]]);
-     
      res.send(JSON.stringify('1'))
 }
 module.exports.productsRating = async( req, res) => {
@@ -186,7 +428,7 @@ module.exports.mostestRating = async (req, res) => {
 module.exports.mostestSale = async(req, res) => {
      const saleProducts = await realyze("SELECT user_order FROM orders WHERE user_status = 4 ", []);
      const productsCounts = getMostestProductData(saleProducts,"user_order")
-    const maxObj = getMostestMaxObject(productsCounts);
+     const maxObj = getMostestMaxObject(productsCounts);
      const [maxSaled] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
      res.send(JSON.stringify(maxSaled))
 }

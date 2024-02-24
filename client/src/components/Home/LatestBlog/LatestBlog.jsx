@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLatestReviews } from "../../../redux/ducks/reviewDuck";
 import { getLatestReviewsSelector, getReviewIdSelector } from "../../../helpers/reduxSelectors";
 import LatestBlogHeader from "./LatestBlogHeader/LatestBlogHeader";
+import { getDataFromInterval } from "../../../helpers/functions/functions";
 
 function LatestBlog() {
      const dispatch = useDispatch()
@@ -15,9 +16,13 @@ function LatestBlog() {
      const reviewId = useSelector(getReviewIdSelector)
      const start = (reviewId - 1) * 3;
 
-     const filtered = latestReviews.filter((item, pos) => {
-          return pos >= start && pos <= start + 2
-     })
+     const filtered = getDataFromInterval(
+          latestReviews,
+          {
+               start,
+               count : 2
+          }
+     )
      return(
           <div className="latest__blog">
           <div className="container latest__blog__container">

@@ -1,0 +1,22 @@
+
+          .product__list__container{
+
+               .circles{
+                    width: 90px;
+                    height: 15px;
+                    display: flex;
+                    margin-left: 35px;
+                    .circle{
+                         cursor: pointer;
+                         width: 5px;
+                         height: 5px;
+                         padding: 5px;
+                         margin-left: 15px;
+                         border-radius: 50%;
+                         background-color: #e2e2e2;
+                    }
+                    .active{
+                         background-color: #d58e32;
+                    }
+               }
+          }

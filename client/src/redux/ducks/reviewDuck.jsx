@@ -9,6 +9,7 @@ const REVIEW_BY_USER_AND_PRODUCT = 'reviewDuck/REVIEW_BY_USER_AND_PRODUCT';
 const LATEST_REVIEW = 'reviewDuck/LATEST_REVIEW';
 const REVIEW_ID = 'reviewDuck/REVIEW_ID';
 const REVIEW_BY_USER = 'reviewDuck/REVIEW_BY_USER';
+const REVIEW_IS_DELETED = 'reviewDuck/REVIEW_IS_DELETED';
 // const CHANGE_ORDER_CONFIRMED_ID = 'orderDuck/CHANGE_ORDER_CONFIRMED_ID';
 // const CONFIRMED = 'orderDuck/CONFIRMED';
 // const CLEAR_ORDER_FROM_STATUS = 'orderDuck/CLEAR_ORDER_FROM_STATUS';
@@ -21,6 +22,7 @@ export const getReviewByUserAndProduct = createAction(REVIEW_BY_USER_AND_PRODUCT
 export const getLatestReviews = createAction(LATEST_REVIEW);
 export const getReviewsByUser = createAction(REVIEW_BY_USER);
 export const getReviewId = createAction(REVIEW_ID);
+export const getReviewIsDeleted = createAction(REVIEW_IS_DELETED);
 // export const changeOrderForConfirm = createAction(CHANGE_ORDER_CONFIRMED_ID);
 // export const changeConfirmed = createAction(CONFIRMED);
 // export const clearOrders = createAction(CLEAR_ORDER_FROM_STATUS);createAction(CHANGE_ORDER_CONFIRMED_ID);
@@ -34,7 +36,8 @@ const initialStateApp = {
   reviewsByUser :[],
   reviewByUserAndProduct :{},
   latestReviews : [],
-  reviewId : 1
+  reviewId : 1,
+  isDeleted : false
 };
 
 
@@ -46,6 +49,10 @@ const initialStateApp = {
  export const changeReviewId = (id) => (dispatch) => {
 
    dispatch(getReviewId(id));
+ }
+ export const changeReviewIsDeleted = (bool) => (dispatch) => {
+
+   dispatch(getReviewIsDeleted(bool));
  }
 
 
@@ -90,7 +97,9 @@ export const fetchReviewsByUser = (user_id) => async(dispatch) => {
     }
 };
 
-export const changeReviewData = (data) => async(dispatch) => {
+export const changeReviewData = (data) => (dispatch) => {
+  console.log(data);
+  
   dispatch(getReviewsByUser(data));
 } 
 
@@ -153,6 +162,11 @@ const ReviewDuck = (state = initialStateApp, action) => {
         return {
           ...state,
           ratingList: action.payload,
+        }      
+    case REVIEW_IS_DELETED:
+        return {
+          ...state,
+          isDeleted: action.payload,
         }      
     default:
       return state;

@@ -3,8 +3,9 @@ import { getStatus, getNewCurrency } from "../../../helpers/functions/functions"
 import { currentLanguageDataSelector, getCurrentCurrencySelector, getStatusIndex, getUserId } from "../../../helpers/reduxSelectors";
 import "./styles/_order-list-header.scss";
 import { fetchDeletedOrder } from "../../../redux/ducks/orderDuck";
+import { getDateTemplate } from "../../../helpers/functions/timerFunctions";
 
-function OrderListHeader({ind, id, status, price}) {
+function OrderListHeader({ind, id, status, price, time}) {
      const statusIndex = useSelector(getStatusIndex)
      const dispatch = useDispatch();
      const user_id = useSelector(getUserId)
@@ -29,6 +30,9 @@ function OrderListHeader({ind, id, status, price}) {
                          </li>
                          <li className="order__list__header__item">
                               {orderListHeader?.status} ։ {getStatus(+status)?.title} 
+                         </li>
+                         <li className="order__list__header__item">
+                              {orderListHeader?.time} ։ {getDateTemplate(+time)} 
                          </li>
                          {
                               statusIndex === 4 &&

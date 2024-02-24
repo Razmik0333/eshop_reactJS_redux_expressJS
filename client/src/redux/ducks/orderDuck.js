@@ -99,6 +99,7 @@ export const fetchUserOrders = (id) => async(dispatch) => {
   try {
     const data = await (await fetch(`${root}/api/package/user/${id}`)).json()
     dispatch(fetchOrders(data));
+    console.log("🚀 ~ fetchUserOrders ~ data:", data)
   } catch (e) {
     console.log('error from orderDuck', e)
   }
@@ -107,7 +108,7 @@ export const fetchProductsByOrderId = (id) => async(dispatch) => {
   try {
     const data = await (await fetch(`${root}/api/package/${id}`)).json()
     dispatch(getEvaluateProducts(data));
-    //console.log("🚀 ~ file: orderDuck.js:110 ~ fetchProductsByOrderId ~ data:", data)
+    console.log("🚀 ~ file: orderDuck.js:110 ~ fetchProductsByOrderId ~ data:", data)
   } catch (e) {
     console.log('error from orderDuck', e)
   }

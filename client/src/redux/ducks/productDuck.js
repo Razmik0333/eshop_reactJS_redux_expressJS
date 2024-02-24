@@ -80,6 +80,8 @@ export const getEvaluatedProductItem = (obj) => (dispatch) => {
 
 export const fetchProductsForStartingPage = (id) => async (dispatch) => {
   try {
+    console.log(id);
+    
     const data = await(await fetch(`${root}/api/main/${id}`)).json()
     dispatch(getProducts(data));
   } catch (e) {
@@ -90,7 +92,6 @@ export const fetchSimilarProducts = (catId, prodId) => async (dispatch) => {
   try {
     const data = await(await fetch(`${root}/api/product/similar/${catId}/${prodId}`)).json()
     dispatch(getProductsSimilar(data));
-    console.log("🚀 ~ file: productDuck.js:93 ~ fetchSimilarProducts ~ data:", data)
   } catch (e) {
     console.log('error from productDuck', e)
   }

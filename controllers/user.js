@@ -8,6 +8,7 @@ const getWriteUploadFile = require('../functions/functions').writeUploadFile
 module.exports.userById = async (req, res) => {
      try {
           const userId = req.params.id;
+          
           const users = await realyze("SELECT * FROM `user` WHERE `id`= ? ", [userId]);
           const [modDataUser] = await Promise.all(users.map(async(item) => {
                const url = `public/images/users/${userId}`;
@@ -89,21 +90,11 @@ module.exports.avatar = async (req, res) => {
                               }
                          }) 
                     }
-                    
-
-                   
                });
-              
-               
-               
           }
-          
-          
      } catch (error) {
          console.log(error);
      }
-    
-     
 }
 
 module.exports.name = async ( req, res) => {     

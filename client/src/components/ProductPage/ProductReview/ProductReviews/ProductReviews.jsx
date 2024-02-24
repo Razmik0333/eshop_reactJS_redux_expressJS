@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { currentLanguageDataSelector, getReviewsByProductSelector } from "../../../../helpers/reduxSelectors";
-import "./styles/_product-reviews.scss";
 import ProductReviewItem from "../ProductReviewItem/ProductReviewItem";
 import ProductReviewCounts from "../ProductReviewCounts/ProductReviewCounts";
+import "./styles/_product-reviews.scss";
 function ProductReviews() {
      const reviewsByProduct = useSelector(getReviewsByProductSelector);
      const productsPageData = useSelector(currentLanguageDataSelector)?.product_page;
@@ -17,7 +17,7 @@ function ProductReviews() {
                }
 
                {
-                    <div>
+                    <div className="review-block">
                     {
                          reviewsByProduct.length > 0 ?
                               reviewsByProduct.map((review,pos) => {

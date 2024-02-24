@@ -17,8 +17,8 @@ const CURRENT_LANGUAGE = 'configsDuck/CURRENT_LANGUAGE';
 const CURRENT_LANGUAGE_DATA = 'configsDuck/CURRENT_LANGUAGE_DATA';
 const LANGUAGES = 'configsDuck/LANGUAGES';
 const CURRENCIES = 'configsDuck/CURRENCIES';
-const MOSTEST_OPTIONS_INDEX = 'configsDuck/MOSTEST_OPTIONS_INDEX'
-
+const MOSTEST_OPTIONS_INDEX = 'configsDuck/MOSTEST_OPTIONS_INDEX';
+const VIEWED_PRODUCT_ID = 'configsDuck/VIEWED_PRODUCT_ID'
 
 export const getShowType = createAction(CHANGE_SHOW_TYPE);
 export const getSortType = createAction(CHANGE_SORT_TYPE);
@@ -37,6 +37,7 @@ export const changeCurrentCurrency = createAction(CURRENT_CURRENCY);
 export const changeCurrentLanguage = createAction(CURRENT_LANGUAGE);
 export const changeCurrentLanguageData = createAction(CURRENT_LANGUAGE_DATA);
 export const changeCurrentMostestIndex = createAction(MOSTEST_OPTIONS_INDEX)
+export const changeViewedProductId = createAction(VIEWED_PRODUCT_ID)
 
 
 export const changeShowType = (str) => (dispatch) => {
@@ -68,6 +69,9 @@ export const changePopup = (bool) => (dispatch) => {
 };
 export const getPopupItemId = (id) => (dispatch) => {
   dispatch(changePopupItemId(id));
+};
+export const getViewedProductId = (id) => (dispatch) => {
+  dispatch(changeViewedProductId(id));
 };
 
 
@@ -145,7 +149,8 @@ const initialStateConfigs = {
     currentLanguageData : [],
     idProductsFromStart : 1,
     hotDealsTimerSeconds : 3 * 24 * 60 * 60,
-    mostestIndex : "0"
+    mostestIndex : "0",
+    viewedProductId : 1
 };
 
 const ConfigsDuck = (state = initialStateConfigs, action) => {
@@ -245,6 +250,11 @@ const ConfigsDuck = (state = initialStateConfigs, action) => {
       return {
         ...state,
         mostestIndex: action.payload,
+      };
+    case VIEWED_PRODUCT_ID:
+      return {
+        ...state,
+        viewedProductId: action.payload,
       };
     
     default:

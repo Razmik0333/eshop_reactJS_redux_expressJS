@@ -2,11 +2,14 @@ import React from 'react'
 import RatingMapping from '../../../Base/RatingMapping/RatingMapping'
 import '../ProductReviewItem/_product-review-item.scss';
 import { root } from '../../../../helpers/constants/constants';
+import { getDateTemplate } from '../../../../helpers/functions/timerFunctions';
 export default function ProductReviewItem({review}) {
   return (
      <div className="reviews">
      <div className="user__info">
           <p className="user__name">{review?.user_name}</p>
+          <p className="time__review">{getDateTemplate(+review?.time_add)}</p>
+{/*(new Date(getMinMax(ordersYears, 'min'))).getFullYear() */}
      </div>
      <div className="review__info">
           <div className="user__rating">
