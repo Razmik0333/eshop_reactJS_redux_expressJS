@@ -13,7 +13,6 @@ function OrdersInfoItem({order}) {
      const dispatch = useDispatch();
      const ordersInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.orders;
      const currentLang = useSelector(getCurrentLanguageSelector); 
-     console.log("🚀 ~ file: OrdersInfoItem.jsx:16 ~ OrdersInfoItem ~ currentLang:", currentLang)
      const modalIsClose = useSelector(modalCloseSelector);
      const getOrderId = (e) => {
           dispatch(currentOrderId(e.target.dataset.id))

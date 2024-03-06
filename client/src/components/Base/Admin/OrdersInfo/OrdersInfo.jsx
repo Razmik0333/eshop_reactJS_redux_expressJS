@@ -11,16 +11,17 @@ import OrdersInfoHeader from './OrdersInfoHeader';
 
 function OrdersInfo() {
      const dispatch = useDispatch();
-     const userId = useSelector(getUserId);
+     //const userId = useSelector(getUserId);
      const ordersChartsLangData = useSelector(currentLanguageDataSelector)?.admin?.orders;
 
      useEffect(() => {
-          dispatch(fetchOrdersList(userId));
+          dispatch(fetchOrdersList());
           
      }, []);
 
      const ordersList = useSelector(adminOrderSelector);
      const filteredOrders = ordersList.filter(item => +item?.user_status === 0)
+     console.log("🚀 ~ OrdersInfo ~ filteredOrders:", filteredOrders)
      return (
           <div className="orders__info">
                <div className="orders__info__header">

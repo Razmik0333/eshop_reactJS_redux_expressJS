@@ -6,14 +6,13 @@ import { changeModal } from "../../../../../redux/ducks/configsDuck";
 import Modal from "../../../Modal/Modal";
 import ProductCreateUpdateFooter from "../../AdminProducts/ProductCreateUpdateFooter";
 import { getStatus, checkEmptyObject } from "../../../../../helpers/functions/functions";
-import { fetchOrderItem, fetchOrderProducts} from "../../../../../redux/ducks/adminOrderDuck";
+import { fetchOrderItem} from "../../../../../redux/ducks/adminOrderDuck";
 import Loader from "../../../Loader/Loader";
 function OrderUpdate() {
      const dispatch = useDispatch();
      const currentOrderId = useSelector(adminOrderIdSelector);
      useEffect(() => {
           dispatch(fetchOrderItem( currentOrderId));
-          dispatch(fetchOrderProducts( currentOrderId));
      }, []);
      const [isChanged, setIsChanged] = useState(false);
      const [isUpdated, setIsUpdated] = useState(false);
@@ -23,7 +22,6 @@ function OrderUpdate() {
      const [customerComment, setCustomerComment] = useState(``);
      const [orderPrice, setOrderPrice] = useState("");
      const [orderStatus, setOrderStatus] = useState('');
-     const currentOrderProducts = useSelector(adminOrderProductsSelector)
 
      const currentOrder = useSelector(adminCurrentOrderSelector);
 
@@ -140,7 +138,7 @@ function OrderUpdate() {
                               </label>
                          </div>
                          { 
-                              currentOrderProducts ?
+                              currentOrder ?
                               <div className="form__item form__item_list">
                                    <div className="form__item__header">Current Order Info</div>
                                    {
@@ -148,7 +146,7 @@ function OrderUpdate() {
                                         <>                           
                                         <ul className="current__order__infos">
                                              {
-                                                  currentOrderProducts.map((item,ind) => {
+                                                  currentOrder?.products?.map((item,ind) => {
                                                        return <li className="current__order__info" key={`current__order__${ind}`}>
                                                             <>
                                                             <img src={`${root}/images/products/${item.id}.jpg`} alt="" />X 

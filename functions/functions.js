@@ -155,6 +155,28 @@ const getReviewsFromProducts = async(data) => {
      }))
 }
 
+const getAdminCurrentOrderData = async(data) => {
+     const currentOrder = JSON.parse(data.user_order);
+     const productIds = Object.keys(currentOrder)
+     const productCounts = Object.values(currentOrder)
+     const tokens = getTokensForQuery(productIds)
+     const productsList = await realyze(`SELECT * FROM products WHERE id IN (${tokens}) `, productIds)
+     const productData =  await productsList.reduce((acc, curr,pos) => {
+          acc.push({
+               ...curr,
+               quantity:productCounts[pos]
+          });
+          return acc;
+     },[]);
+
+     return await {
+          ...data,
+          products: productData
+     }
+}
+
+
+
 const getReviewsByUser = async (data) => {
      return await Promise.all(data.map(async(item) => {
           const productId = item.product_id;
@@ -209,6 +231,7 @@ module.exports = {
      idsArray :getIdsArray,
      summArray:getSummArray,
      sizeOfObject: getSizeOfObject,
+     adminOrderCurrentData:getAdminCurrentOrderData,
      getProductsFromOrdersList :getProductsFromOrdersList,
      mostestProduct: getMostestProduct,
      mostestMaxObject: getMostestMaxObject,

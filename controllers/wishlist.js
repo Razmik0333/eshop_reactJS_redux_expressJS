@@ -8,7 +8,7 @@ const getIdsArray = functions.idsArray;
 
 module.exports.wishListByUserId = async (req, res) => {
      try {
-          const cachesPath = variables.caches;
+          const cachesPath = variables.caches.interest;
 
           const userId = req.params.user_id;
           console.log("🚀 ~ module.exports.wishListByUserId= ~ userId:", userId)
@@ -66,7 +66,7 @@ module.exports.wishListByUserId = async (req, res) => {
 }
 
 module.exports.addToWishlist = async (req, res) => {
-     const cachesPath = variables.caches;
+     const cachesPath = variables.caches.interest;
      let productsIds = [];
      let products = [];
      let tokens = '';
@@ -97,7 +97,7 @@ module.exports.addToWishlist = async (req, res) => {
 }
 
 module.exports.removeFromWishlist = async (req, res) => {
-     const cachesPath = variables.caches;
+     const cachesPath = variables.caches.interest;
      const userId = req.body.user_id;
      const productsId = req.params.id;
      const [wishByUser] = await realyze("SELECT wish FROM `user_interest` WHERE `user_id`= ? ", [userId]); 

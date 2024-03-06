@@ -11,6 +11,7 @@ function TotalInfos() {
      const adminMenuLangData = useSelector(currentLanguageDataSelector)?.admin?.total_infos;
 
      const ordersList = useSelector(adminOrderSelector);
+     console.log("🚀 ~ TotalInfos ~ ordersList:", ordersList)
 
      const userList = useSelector(adminUserListSelector)
      return (
@@ -49,7 +50,7 @@ function TotalInfos() {
                                    </span>
                               </span>
                               <span className="total__text">
-                              {adminMenuLangData?.total_charges}
+                                   {adminMenuLangData?.total_charges}
 
                               </span>
                          </div>

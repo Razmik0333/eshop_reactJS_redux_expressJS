@@ -26,7 +26,7 @@ function MenuBar() {
                               <li className="user_nav_item"><NavLink to={'/user/products'} className="user_nav_link">{menuLangData?.products}</NavLink></li>
                               <li className="user_nav_item"><NavLink to={'/personal'} className="user_nav_link">{menuLangData?.personal}</NavLink></li>
                               <li className="user_nav_item"><NavLink to={'/user/reviews'} className="user_nav_link">{menuLangData?.reviews}</NavLink></li>
-                              <li className="user_nav_item"><a href='#' className="user_nav_link">Settings</a></li>
+                              {/* <li className="user_nav_item"><a href='#' className="user_nav_link">Settings</a></li> */}
                               <li className="user_nav_item" ><NavLink to={"/"}  className="user_nav_link" onClick={changeLogout}>{menuLangData?.logout}</NavLink></li>
                          </ul>
                                    

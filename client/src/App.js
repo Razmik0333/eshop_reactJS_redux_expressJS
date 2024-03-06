@@ -32,8 +32,9 @@ import UserProducts from './components/Base/User/cabinet/user-products/UserProdu
 import UserReviews from './components/Base/User/cabinet/user-reviews/UserReviews';
 import AdminPage from './components/Base/Admin/admin-page/AdminPage/AdminPage';
 import AdminPersonal from './components/Base/Admin/admin-page/AdminPersonal/AdminPersonal';
-import NonFound from './components/Base/NonFound/NonFound';
 import Error404 from './components/Base/Error404/Error404';
+import AdminReviews from './components/Base/Admin/AdminReviews/AdminReviews/AdminReviews.jsx';
+
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
 function App() {
@@ -100,6 +101,10 @@ function App() {
               <Route
               path="/admin/orders" 
               element={<AdminOrders />} 
+              />
+              <Route
+              path="/admin/reviews" 
+              element={<AdminReviews />} 
               />
               <Route
               path="/admin" 

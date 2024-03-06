@@ -15,7 +15,7 @@ module.exports.userById = async (req, res) => {
                const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
                return await {
                     ...item,
-                    picture:files ,
+                    picture:files,
                }
           }))
           res.send(modDataUser)

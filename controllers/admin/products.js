@@ -1,10 +1,40 @@
-const realyze = require('../../config').realyze
-
+const fs = require('fs');
+const realyze = require('../../config').realyze;
+const fs_functions = require('../../functions/fs_functions');
+const variables = require('../../variables/variables');
 
 module.exports.productsList = async(req, res) => {
      //const id = req.params.id; //
-     const products = await realyze("SELECT * FROM products ")
-     res.send(products)
+     const cachesPathAdmin = variables.cachesAdmin.product;
+     if (fs.existsSync(`${cachesPathAdmin}/caches_admin_product.json`)) {
+          fs.readFile(`${cachesPathAdmin}/caches_admin_product.json`, 'utf-8',
+          async function(err, data) {
+               if (err) throw err;
+               else {          
+                    const [productCounts] = await realyze("SELECT COUNT(id) AS count FROM products ")
+                    if (JSON.parse(data).length < productCounts.count) {
+                         const products = await realyze("SELECT * FROM products ");
+                         fs_functions.writeCacheFile(
+                              `${cachesPathAdmin}/caches_admin_product.json`,
+                              products
+                         )
+                         res.send(products);
+                    }else{
+                         console.log('read');
+                         res.send(data);
+                    }
+               }
+          }
+          )
+     }else{
+          const products = await realyze("SELECT * FROM products ");
+          fs_functions.writeCacheFile(
+               `${cachesPathAdmin}/caches_admin_product.json`,
+               products
+          )
+          res.send(products)
+
+     }
 }
 module.exports.delete = async (req, res) => {
      const productId = req.body.product_id

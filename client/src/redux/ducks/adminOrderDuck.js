@@ -53,7 +53,7 @@ export const resetIsDeleted = (bool) => (dispatch) => {
 export const resetTimeObject = () => (dispatch) => {
     dispatch(clearTimeObject())
 }
-export const fetchOrdersList = (id) => async(dispatch) => { 
+export const fetchOrdersList = () => async(dispatch) => { 
     
   try {
     const data = await (await fetch(`${root}/api/admin/orders/list`)).json();
@@ -71,16 +71,7 @@ export const fetchOrderItem = ( orderId) => async (dispatch) => {
     }
 
 };
-export const fetchOrderProducts = (orderId) => async (dispatch) => {
-  
-    try {
-      const data = await (await fetch(`${root}/api/admin/order/products/${orderId}`)).json()
-      dispatch(getCurrentOrderProducts(data));
-    } catch (e) {
-      console.log('error from AdminOrderDuck', e)
-    }
 
-};
 
 export const fetchOrdersByString = (arr) => (dispatch) => {
   fetch(`${root}/list/product/${arr}`) 
