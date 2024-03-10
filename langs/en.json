@@ -238,6 +238,23 @@
                 "delete":"Delete"
             }
         },
+        "reviews" : {
+            "all_reviews" : "ALL REVIEWS",
+            "header" : [
+                "Number",
+                "User",
+                "Order N",
+                "Product N",
+                "Review",
+                "Rating",
+                "Action",
+                "Action"
+            ],
+            "actions" : {
+                "update":"Պատասխանել",
+                "delete":"Վերացնել"
+            }
+        },
         "products" : {
             "all_products" : "ALL PRODUCTS",
 

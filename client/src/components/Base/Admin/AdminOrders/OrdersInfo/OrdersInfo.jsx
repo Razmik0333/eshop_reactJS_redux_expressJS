@@ -4,8 +4,8 @@ import { adminOrderIsDeletedSelector, adminOrderSelector, currentLanguageDataSel
 import { fetchOrdersList } from "../../../../../redux/ducks/adminOrderDuck";
 
 import OrdersInfoItem from "../OrdersInfoItem/OrdersInfoItem";
-import "../styles/_orders-info.scss"
 import OrdersInfoHeader from "../../OrdersInfo/OrdersInfoHeader";
+import "../styles/_orders-info.scss"
 
 function OrdersInfo() {
      const dispatch = useDispatch();
@@ -32,7 +32,6 @@ function OrdersInfo() {
                     <div className="orders__item__infos">
                     {
                          ordersList.map((order, ind) => {
-                         
                               return <OrdersInfoItem order = {order} key={`order_${ind}`}/>
                          })
                     }

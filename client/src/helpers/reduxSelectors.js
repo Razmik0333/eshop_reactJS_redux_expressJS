@@ -86,3 +86,4 @@ export const adminCurrentOrderInfoSelector = ({ AdminOrderDuck }) => AdminOrderD
 export const adminOrderIdSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrderId; //
 export const adminOrderIsDeletedSelector = ({ AdminOrderDuck }) => AdminOrderDuck.isDeleted; //
 export const adminUserListSelector = ({ AdminUserDuck }) => AdminUserDuck.usersList; //
+export const adminReviewListSelector = ({ AdminReviewDuck }) => AdminReviewDuck.reviewList; //

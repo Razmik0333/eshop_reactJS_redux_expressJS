@@ -1,6 +1,7 @@
-module.exports.getReviewsList = async (req,res) => {
+const fs = require('fs');
+const realyze = require('../../config').realyze;
 
-     const reviews = await realyze("SELECT * FROM reviews ORDER BY rating DESC LIMIT 3");
-     console.log("🚀 ~ module.exports.getRatedReviews= ~ reviews:", reviews)
+module.exports.reviewsList = async (req,res) => {
+     const reviews = await realyze("SELECT * FROM reviews ");
      res.send(reviews)
 }

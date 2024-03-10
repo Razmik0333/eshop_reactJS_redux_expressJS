@@ -13,8 +13,6 @@ function OrdersInfoHeader() {
                               return <div className="order__title" key={`order__title__${pos}`}>{item}</div>
                          })
                     }
-                    
-                    
                </div>
           </>
      )

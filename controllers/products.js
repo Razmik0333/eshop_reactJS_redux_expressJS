@@ -372,12 +372,12 @@ module.exports.evaluateProducts = async( req, res) => {
      typeof product_id === "object" ? 
           product_id.forEach(async(item, pos) => {
                await realyze("INSERT INTO reviews (user_id,order_id, product_id, rating, review, user_name, user_email, time_add) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
-               [user_id[0], order_id[0], item, rating[pos], review[pos], user_name, user_email, `${Math.floor(Date.now()/1000)}`]
+               [user_id[0], order_id[0], item, rating[pos], review[pos], user_name, user_email, `${Math.floor(Date.now())}`]
                )
                
           }) :
           await realyze("INSERT INTO reviews (user_id,order_id, product_id, rating, review, user_name, user_email, time_add) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
-               [user_id[0], order_id, product_id, rating, review, user_name, user_email, `${Math.floor(Date.now()/1000)}`]
+               [user_id[0], order_id, product_id, rating, review, user_name, user_email, `${Math.floor(Date.now())}`]
           )
      await realyze("UPDATE `orders` SET `user_status` = ? WHERE id = ? ", [4, order_id[0]]);
      res.send(JSON.stringify('1'))

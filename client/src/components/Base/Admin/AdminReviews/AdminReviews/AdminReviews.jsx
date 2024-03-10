@@ -5,11 +5,10 @@ import AdminReviewsInfo from '../AdminReviewsInfo/AdminReviewsInfo'
 export default function AdminReviews() {
   return (
      <div className="admin__panel">
-     <div className="container admin__panel__container">
-          <AdminMenu />
-          <AdminReviewsInfo />
+          <div className="container admin__panel__container">
+               <AdminMenu />
+               <AdminReviewsInfo />
+          </div>
      </div>
-
-</div>
   )
 }

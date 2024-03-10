@@ -21,7 +21,6 @@ function OrdersInfoItem({order}) {
           dispatch(changeModal(true));
           dispatch(currentOrderId(e.target.dataset.id));
      }
-     
      return (
           <>
           {
@@ -45,7 +44,6 @@ function OrdersInfoItem({order}) {
                </div>
                <div className="order__item__data__info">
                     {order?.user_price}
-
                </div>
                <div className="order__item__data__info">
                     {

@@ -81,7 +81,10 @@ function App() {
               path="/admin/personal" 
               element={<AdminPersonal />} 
               />
-
+              <Route
+              path="/admin/home" 
+              element={<Admin />} 
+              />
               <Route
               path="/admin/page" 
               element={<AdminPage />} 
@@ -106,10 +109,7 @@ function App() {
               path="/admin/reviews" 
               element={<AdminReviews />} 
               />
-              <Route
-              path="/admin" 
-              element={<Admin />} 
-              />
+
               <Route
               path="/login" 
               element={<Login />} 

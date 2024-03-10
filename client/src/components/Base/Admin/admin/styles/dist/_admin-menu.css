@@ -1,0 +1,45 @@
+.admin__menu {
+  width: 12%;
+}
+.admin__menu .admin_picture .admin__img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+.admin__menu .admin_picture .admin__img .admin__name {
+  font-size: 15px;
+  color: #ccc;
+  margin-top: 10px;
+}
+.admin__menu .admin_picture .admin__img img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+.admin__menu .admin_nav {
+  margin-top: 20px;
+}
+.admin__menu .admin_nav .admin_nav_items {
+  border: 1px solid #ccc;
+}
+.admin__menu .admin_nav .admin_nav_items .admin_nav_item .admin_nav_link {
+  padding: 15px;
+  font-size: 14px;
+  color: #ccc;
+  text-decoration: none;
+  width: 77%;
+  height: inherit;
+  display: block;
+  border-bottom: 1px solid #ccc;
+}
+.admin__menu .admin_nav .admin_nav_items .admin_nav_item .admin_nav_link:hover {
+  color: var(--white);
+  cursor: pointer;
+  background-color: var(--orange);
+}
+.admin__menu .admin_nav .admin_nav_items .admin_nav_item .active {
+  color: var(--white);
+  background-color: var(--orange);
+}

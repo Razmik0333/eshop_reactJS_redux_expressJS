@@ -14,6 +14,7 @@ const adminOrders = require('./routes/admin/orders')
 const adminProducts = require('./routes/admin/products')
 const adminCategories = require('./routes/admin/category')
 const adminUsers = require('./routes/admin/users')
+const adminReviews = require('./routes/admin/review')
 
 
 const app = express();
@@ -47,6 +48,7 @@ app.use('/api', adminOrders);
 app.use('/api', adminProducts);
 app.use('/api', adminCategories);
 app.use('/api', adminUsers);
+app.use('/api', adminReviews);
 
 
 

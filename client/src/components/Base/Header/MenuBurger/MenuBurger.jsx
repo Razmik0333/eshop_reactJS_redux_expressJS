@@ -47,7 +47,7 @@ function MenuBurger() {
                                         {
                                              userData?.role === "admin" ?  
                                                   <li className="burger_list_item">
-                                                       <NavLink to={"/admin"} className="register-link">{headerLangData?.admin}</NavLink>
+                                                       <NavLink to={"/admin/home"} className="register-link">{headerLangData?.admin}</NavLink>
 
                                                   </li>
                                                   :

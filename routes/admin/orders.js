@@ -1,6 +1,4 @@
 const express = require('express');
-const { getProductFromOrder } = require('../../controllers/admin/orders');
-const realyze = require('../../config').realyze;
 const router = express.Router();
 
 

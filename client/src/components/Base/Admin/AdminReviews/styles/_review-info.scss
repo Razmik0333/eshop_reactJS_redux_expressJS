@@ -1,10 +1,5 @@
-.order__info__block{
-     .orders__info__header{
-          font-size: 1.2em;
-          margin: 20px;
-          color: var(--orange);
-     }
-     .orders__info{
+.admin__panel__container{
+     .review__info{
           padding: 25px;
           background-color: #fff;
           margin-left: 32px;
@@ -14,11 +9,17 @@
           width: 105%;
           overflow-y: scroll;
           height: 500px;
-          .orders__info__titles{
+          .review__info__header{
+               font-size: 1.2em;
+               margin: 20px;
+               color: var(--orange);
+          }
+          .review__info__titles{
+     
                margin-top: 20px;
                display: flex;
                width: 100%;
-               .orders__title{
+               .review__title{
                     padding: 10px;
                     font-size: 14px;
                     width: 15%;
@@ -28,11 +29,11 @@
                     }
                }
           }
-          .order__item__info{
+          .review__item__info{
                display: flex;
                align-items: center;
                width: 100%;
-               .order__item__data__info{
+               .review__item__data__info{
                     padding: 10px;
                     width: 15%;
                     font-size: 12px;
@@ -40,21 +41,26 @@
                     flex: 0.5 0.5 auto;
                     height: auto;
                     a{
-                         background-color: var(--white);
-                         cursor: pointer;
-                         border: 1px solid #ccc;
-                         &:hover{
-                              border: 1px solid var(--orange);
-                              svg{
+                              background-color: var(--white);
+                              cursor: pointer;
+                              border: 1px solid #ccc;
      
-                                   fill: var(--orange);
+     
+                              &:hover{
+                                   border: 1px solid var(--orange);
+                                   svg{
+          
+                                        fill: var(--orange);
+                                   }
+          
+                                   
                               }
-                         }
-                         svg{
-                              width: 25px;
-                              height: 25px;
-                              fill: #ccc;
-                         }
+                              svg{
+                                   width: 25px;
+                                   height: 25px;
+                                   fill: #ccc;
+                          
+                              }
                     }
                     .link__action{
                          width: 50px;
@@ -88,6 +94,7 @@
                     .delivered_PS{
                          background-color: yellowgreen;
                     }
+     
                }
           }
           
