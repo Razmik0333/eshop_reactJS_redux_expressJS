@@ -204,7 +204,34 @@ export const getMostestURL = (num) => {
                break;
      }
 }
+export const sortingReviews = (data, type) => {
+     switch (type) {
+          case "newest":
+               return  data.sort((a, b) => {
+                    return b.id - a.id
+               })
+          case "oldest":
+               return  data.sort((a, b) => {
+                         return a.id - b.id
+                    })
+    
+          case "rating-low":
+               return  data.sort((a, b) => {
+                    return a.rating - b.rating
+               }) 
+          case "rating-high":
+               return  data.sort((a, b) => {
+                    return b.rating - a.rating
+               })  
+          default:
+               break;
+     }
+}
 
+export const getReviewsHavePicture = (data) => {
+     
+    return data.filter((item, pos) =>  item.pictures.length > 0)
+}
 export const hasValueInObject = (val, arr) => {
      
     return arr.find((item, pos) => val in arr[pos]) ? true : false

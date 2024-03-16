@@ -39,7 +39,6 @@ var getDateTemplate = function getDateTemplate(num) {
   var year = new Date(num).getFullYear();
   var hour = new Date(num).getHours() < 10 ? "0".concat(new Date(num).getHours()) : "".concat(new Date(num).getHours());
   var minute = new Date(num).getMinutes() < 10 ? "0".concat(new Date(num).getMinutes()) : "".concat(new Date(num).getMinutes());
-  console.log("".concat(date, "-").concat(month, "-").concat(year, ", ").concat(hour, ":").concat(minute));
   return "".concat(date, "-").concat(month, "-").concat(year, ", ").concat(hour, ":").concat(minute);
 };
 

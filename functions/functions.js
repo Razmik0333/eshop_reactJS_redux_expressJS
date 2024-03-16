@@ -192,14 +192,18 @@ const getReviewsByUser = async (data) => {
 }
 const getReviewListFromProduct = async (data) => {
      const urlReview = path.resolve() + `/public/images/reviews`;
+     const urlUsers = path.resolve() + `/public/images/users`;
 
      return await Promise.all(data.map(async(item) => {
                
           const url = `${urlReview}/${item.user_id}/${item.order_id}/${item.product_id}`;
+          const urlOfUserAvatar = `${urlUsers}/${item.user_id}`
           const files = fs.existsSync(url) ? await fsPromises.readdir(url) : []
+          const fileOfAvatar = fs.existsSync(urlOfUserAvatar) ? await fsPromises.readdir(urlOfUserAvatar) : []
           return await {
                ...item,
                pictures: files,
+               avatar: fileOfAvatar
           }
      }))
 }

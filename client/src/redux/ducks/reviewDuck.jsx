@@ -10,8 +10,8 @@ const LATEST_REVIEW = 'reviewDuck/LATEST_REVIEW';
 const REVIEW_ID = 'reviewDuck/REVIEW_ID';
 const REVIEW_BY_USER = 'reviewDuck/REVIEW_BY_USER';
 const REVIEW_IS_DELETED = 'reviewDuck/REVIEW_IS_DELETED';
-// const CHANGE_ORDER_CONFIRMED_ID = 'orderDuck/CHANGE_ORDER_CONFIRMED_ID';
-// const CONFIRMED = 'orderDuck/CONFIRMED';
+const REVIEW_SORT_TYPE = 'reviewDuck/REVIEW_SORT_TYPE';
+const REVIEW_FILTER_WITH_PICTURE = 'reviewDuck/REVIEW_FILTER_WITH_PICTURE';
 // const CLEAR_ORDER_FROM_STATUS = 'orderDuck/CLEAR_ORDER_FROM_STATUS';
 
 
@@ -23,8 +23,8 @@ export const getLatestReviews = createAction(LATEST_REVIEW);
 export const getReviewsByUser = createAction(REVIEW_BY_USER);
 export const getReviewId = createAction(REVIEW_ID);
 export const getReviewIsDeleted = createAction(REVIEW_IS_DELETED);
-// export const changeOrderForConfirm = createAction(CHANGE_ORDER_CONFIRMED_ID);
-// export const changeConfirmed = createAction(CONFIRMED);
+export const changeReviewSortType = createAction(REVIEW_SORT_TYPE);
+export const changeReviewFilterWithPicture = createAction(REVIEW_FILTER_WITH_PICTURE);
 // export const clearOrders = createAction(CLEAR_ORDER_FROM_STATUS);createAction(CHANGE_ORDER_CONFIRMED_ID);
 
 
@@ -37,7 +37,9 @@ const initialStateApp = {
   reviewByUserAndProduct :{},
   latestReviews : [],
   reviewId : 1,
-  isDeleted : false
+  isDeleted : false,
+  reviewSortType : "newest",
+  isFilter:false
 };
 
 
@@ -53,6 +55,14 @@ const initialStateApp = {
  export const changeReviewIsDeleted = (bool) => (dispatch) => {
 
    dispatch(getReviewIsDeleted(bool));
+ }
+ export const getReviewSortType = (obj) => (dispatch) => {
+
+   dispatch(changeReviewSortType(obj));
+ }
+ export const getReviewFilter = (bool) => (dispatch) => {
+
+   dispatch(changeReviewFilterWithPicture(bool));
  }
 
 
@@ -168,6 +178,18 @@ const ReviewDuck = (state = initialStateApp, action) => {
           ...state,
           isDeleted: action.payload,
         }      
+    case REVIEW_SORT_TYPE:
+        return {
+          ...state,
+          reviewSortType: action.payload,
+        }      
+    case REVIEW_FILTER_WITH_PICTURE:
+        return {
+          ...state,
+          isFilter: action.payload,
+        }      
+        
+
     default:
       return state;
   }

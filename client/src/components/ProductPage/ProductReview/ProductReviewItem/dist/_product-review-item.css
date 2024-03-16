@@ -6,11 +6,25 @@
   border-radius: 10px;
   border: 3px solid var(--orange);
 }
-.reviews .user__info {
-  width: 10%;
+.reviews .user__block {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+.reviews .user__block .user__avatar img {
+  width: 40px;
+  height: 40px;
+}
+.reviews .user__block .user__info {
+  width: 50%;
   padding: 10px;
 }
-.reviews .user__info .time__review {
+.reviews .user__block .user__info .user__name {
+  font-weight: 500;
+}
+.reviews .user__block .user__info .time__review {
   font-size: 14px;
   padding: 5px 0;
 }
@@ -18,6 +32,9 @@
   width: 75%;
   height: 75px;
   padding: 5px;
+}
+.reviews .review__info .product-rating {
+  margin-top: 0;
 }
 .reviews .review__info .product__name {
   margin-top: 10px;

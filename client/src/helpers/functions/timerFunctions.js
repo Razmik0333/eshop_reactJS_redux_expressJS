@@ -29,7 +29,6 @@ export const  getDay = (second) =>  {
      const year = new Date(num).getFullYear();
      const hour = new Date(num).getHours() < 10 ? `0${new Date(num).getHours()}`:`${new Date(num).getHours()}`
      const minute = new Date(num).getMinutes() < 10 ? `0${new Date(num).getMinutes()}`:`${new Date(num).getMinutes()}`;
-     console.log(`${date}-${month}-${year}, ${hour}:${minute}`);
     return `${date}-${month}-${year}, ${hour}:${minute}`
  }
  

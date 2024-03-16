@@ -3,5 +3,66 @@
           .review-block{
                padding: 10px;
           }
+          .actions{
+               display: flex;
+               flex-direction: row;
+               align-items: center;
+               flex-wrap: nowrap;
+               .sort{
+                    padding: 20px 10px;
+                    position: relative;
+                    width: 250px;
+                    .type-head{
+                         cursor: pointer;
+                         .type-icon{
+                              margin-left: 15px;
+                         }
+                         .sorting-types{
+                              display: none;
+          
+                         }
+                         &:hover{
+                              .sorting-types{
+                                   padding: 10px;
+                                   position: absolute;
+                                   background-color:var(--white);
+                                   display: block;
+                                   
+          
+                                   .sorting-type{
+                                        width: 200px;
+                                        height: 30px;
+                                        padding: 5px 10px;
+                                        border-bottom: 1px solid #000;
+                                        display: flex;
+                                        align-content: center;
+                                        align-items: center;
+                                        flex-direction: row;
+                                        flex-wrap: nowrap;
+                                        &:hover{
+     
+                                             background-color: var(--orange);
+                                        }
+                                   }
+                              }
+                         
+          
+                         }
+                         svg{
+          
+                              &:hover{
+                                   cursor: pointer;
+                                   fill: var(--orange);
+                                  
+                              }
+                         }
+     
+                    }
+               }
+               .filter{
+                    padding: 10px;
+                    
+               }
+          }
      }
 }

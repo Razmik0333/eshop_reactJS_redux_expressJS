@@ -21,11 +21,11 @@ module.exports.getReviewListByProductId = async (req, res) => {
                async function(err, data) {
                     if (err) throw err;
                     else {                                   
-                         const [lastReviewByProductId] = await realyze("SELECT COUNT(id) AS count FROM reviews WHERE product_id = ?  ", [productId])
+                         const [lastReviewByProductId] = await realyze("SELECT COUNT(id) AS count FROM reviews WHERE product_id = ? ", [productId])
                          if (JSON.parse(data).length === lastReviewByProductId.count) {
                               res.send(data);
                          }else{
-                              const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ? ", [productId]);
+                              const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ?  ORDER BY id DESC ", [productId]);
                               const newReviews = await getReviewsByProduct(reviews);
                               fs_functions.writeCacheFile(
                                    `${cachesPath}/reviews/reviewsByProduct.json`,
@@ -35,7 +35,7 @@ module.exports.getReviewListByProductId = async (req, res) => {
                     }
                })
           } else {
-               const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ? ", [productId]);
+               const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ?  ORDER BY id DESC  ", [productId]);
                const newReviews = await getReviewsByProduct(reviews);
                fs_functions.writeCacheFile(
                     `${cachesPath}/reviews/reviewsByProduct.json`,
@@ -57,7 +57,6 @@ module.exports.reviewById = async (req, res) => {
 }
 module.exports.ratingCounts = async (req, res) => {
      const productId = req.params.id;
-     console.log("🚀 ~ module.exports.ratingCounts= ~ productId:", productId)
      const cachesPath = variables.caches.review;
      if (fs.existsSync(`${cachesPath}/reviews/ratingByProduct.json`,)) {
           fs.readFile(`${cachesPath}/reviews/ratingByProduct.json`, 'utf-8',
@@ -65,7 +64,6 @@ module.exports.ratingCounts = async (req, res) => {
                if (err) throw err;
                else {
                          const [lastReviewByProductId] = await realyze("SELECT MAX(id) AS max FROM reviews WHERE product_id = ?  ", [productId])
-                         console.log("🚀 ~ function ~ lastReviewByProductId:", lastReviewByProductId)
                          if (JSON.parse(data).length === lastReviewByProductId.max) {
                               console.log('read');
                               
@@ -73,13 +71,11 @@ module.exports.ratingCounts = async (req, res) => {
                               res.send(ratingCounts);
                          }else{
                               const reviews = await realyze("SELECT id, rating FROM reviews WHERE product_id = ? ", [productId]);
-                              console.log("🚀 ~ function ~ reviews:", reviews)
                               fs_functions.writeCacheFile(
                                    `${cachesPath}/reviews/ratingByProduct.json`,
                                    reviews
                               );
                               const ratingCounts = getRatingCounts(reviews);
-                              console.log("🚀 ~ function ~ ratingCounts:", ratingCounts)
                               res.send(ratingCounts);
                          }
                     }                            
@@ -222,6 +218,5 @@ module.exports.getLatestReviews = async(req, res) => {
 module.exports.getRatedReviews = async (req,res) => {
 
      const reviews = await realyze("SELECT * FROM reviews ORDER BY rating DESC LIMIT 3");
-     console.log("🚀 ~ module.exports.getRatedReviews= ~ reviews:", reviews)
      res.send(reviews)
 }
