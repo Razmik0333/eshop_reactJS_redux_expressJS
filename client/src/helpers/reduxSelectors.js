@@ -89,3 +89,5 @@ export const adminOrderIdSelector = ({ AdminOrderDuck }) => AdminOrderDuck.curre
 export const adminOrderIsDeletedSelector = ({ AdminOrderDuck }) => AdminOrderDuck.isDeleted; //
 export const adminUserListSelector = ({ AdminUserDuck }) => AdminUserDuck.usersList; //
 export const adminReviewListSelector = ({ AdminReviewDuck }) => AdminReviewDuck.reviewList; //
+export const adminReviewIdSelector = ({ AdminReviewDuck }) => AdminReviewDuck.currentReviewId; //
+export const adminCurrentReviewSelector = ({ AdminReviewDuck }) => AdminReviewDuck.currentReview; //

@@ -143,13 +143,10 @@ module.exports.reviewByUserId = async (req, res) => {
                fs.readFile(`${cachesPath}/reviews/reviewsByUser.json`, 'utf-8',
                async function(err, data) {
                     if (err) throw err;
-                    else {  
-                            
+                    else {
                          if(JSON.parse(data).length === 0) res.send([]);  
                          else{
-
                               const [lastReviewId] = await realyze("SELECT MAX(id) AS max FROM reviews WHERE user_id = ?", [userId]);
-
                               if (JSON.parse(data)[0].id < lastReviewId.max) {
                                    const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? ORDER BY id DESC  ", [userId]);
                                    const modReviews = await getReviewsByUser(reviews);

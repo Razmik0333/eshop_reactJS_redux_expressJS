@@ -251,8 +251,8 @@
                 "Action"
             ],
             "actions" : {
-                "update":"Պատասխանել",
-                "delete":"Վերացնել"
+                "reply":"reply",
+                "delete":"Delete"
             }
         },
         "products" : {

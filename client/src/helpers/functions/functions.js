@@ -224,7 +224,7 @@ export const sortingReviews = (data, type) => {
                     return b.rating - a.rating
                })  
           default:
-               break;
+               return data;
      }
 }
 

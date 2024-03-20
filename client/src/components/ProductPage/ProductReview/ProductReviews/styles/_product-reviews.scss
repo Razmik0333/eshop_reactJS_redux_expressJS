@@ -9,7 +9,7 @@
                align-items: center;
                flex-wrap: nowrap;
                .sort{
-                    padding: 20px 10px;
+                    padding: 10px;
                     position: relative;
                     width: 250px;
                     .type-head{
@@ -25,10 +25,9 @@
                               .sorting-types{
                                    padding: 10px;
                                    position: absolute;
-                                   background-color:var(--white);
+                                   top: 40px;
+                                   background-color:#f9f9f9;
                                    display: block;
-                                   
-          
                                    .sorting-type{
                                         width: 200px;
                                         height: 30px;
@@ -42,6 +41,9 @@
                                         &:hover{
      
                                              background-color: var(--orange);
+                                        }
+                                        &:last-child{
+                                             border: 0;
                                         }
                                    }
                               }

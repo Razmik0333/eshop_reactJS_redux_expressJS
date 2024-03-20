@@ -4,14 +4,15 @@ import { currentOrderId } from "../../../../../redux/ducks/adminOrderDuck";
 import { currentLanguageDataSelector, getCurrentLanguageSelector, modalCloseSelector } from "../../../../../helpers/reduxSelectors";
 import ModalOrderDelete from "../../../Modal/ModalOrderDelete";
 import { changeModal } from "../../../../../redux/ducks/configsDuck";
+import { currentReviewId } from "../../../../../redux/ducks/adminReviewDuck";
 
 function AdminReviewsInfoItem({review}) {
      const dispatch = useDispatch();
-     const reviewInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.orders;
+     const reviewInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.reviews;
      const currentLang = useSelector(getCurrentLanguageSelector); 
      const modalIsClose = useSelector(modalCloseSelector);
-     const getOrderId = (e) => {
-          dispatch(currentOrderId(e.target.dataset.id))
+     const getReviewId = (e) => {
+          dispatch(currentReviewId(e.target.dataset.id))
      }
      const deleteOrderItem = (e) => {
           dispatch(changeModal(true));
@@ -46,13 +47,13 @@ function AdminReviewsInfoItem({review}) {
                </div>
                <div className="review__item__data__info">
                     <NavLink 
-                         to={`/admin/review/update/page`} 
+                         to={`/admin/review/reply/page`} 
                          data-id={`${review?.id}`} 
-                         onClick={getOrderId}
+                         onClick={getReviewId}
                          className="link__action"
                          >
                          {
-                              reviewInfoLangData?.actions?.update
+                              reviewInfoLangData?.actions?.reply
                          }
                     </NavLink>
                </div>

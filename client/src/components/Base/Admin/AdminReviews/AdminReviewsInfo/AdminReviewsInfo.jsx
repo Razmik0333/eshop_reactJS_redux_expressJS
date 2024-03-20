@@ -8,7 +8,6 @@ import "../styles/_review-info.scss";
 export default function AdminReviewsInfo() {
      const dispatch = useDispatch();
      const reviewsInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.reviews;
-     console.log("🚀 ~ AdminReviewsInfo ~ reviewsInfoLangData:", reviewsInfoLangData)
 
      useEffect(() => {
          dispatch(fetchReviewList())

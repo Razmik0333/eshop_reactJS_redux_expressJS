@@ -8,7 +8,7 @@
   flex-wrap: nowrap;
 }
 .product__review .product__review__container .actions .sort {
-  padding: 20px 10px;
+  padding: 10px;
   position: relative;
   width: 250px;
 }
@@ -24,7 +24,8 @@
 .product__review .product__review__container .actions .sort .type-head:hover .sorting-types {
   padding: 10px;
   position: absolute;
-  background-color: var(--white);
+  top: 40px;
+  background-color: #f9f9f9;
   display: block;
 }
 .product__review .product__review__container .actions .sort .type-head:hover .sorting-types .sorting-type {
@@ -40,6 +41,9 @@
 }
 .product__review .product__review__container .actions .sort .type-head:hover .sorting-types .sorting-type:hover {
   background-color: var(--orange);
+}
+.product__review .product__review__container .actions .sort .type-head:hover .sorting-types .sorting-type:last-child {
+  border: 0;
 }
 .product__review .product__review__container .actions .sort .type-head svg:hover {
   cursor: pointer;

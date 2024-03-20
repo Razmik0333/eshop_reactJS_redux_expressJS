@@ -1,0 +1,60 @@
+.review__form__container {
+  width: 87%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.review__form__container form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: center;
+}
+.review__form__container form .form__items {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50%;
+  border: 3px solid var(--orange);
+  border-radius: 10px;
+}
+.review__form__container form .form__items .form__item {
+  padding: 15px 0;
+  height: 50px;
+  width: 50%;
+  margin: 15px 0 0 0;
+}
+.review__form__container form .form__items .form__item .form__item__header {
+  margin: 10px 0 5px 0;
+}
+.review__form__container form .form__items .form__item input, .review__form__container form .form__items .form__item textarea {
+  font-size: 14px;
+  height: 30px;
+  width: 100%;
+  border-radius: 5px;
+  color: #ccc;
+}
+.review__form__container form .form__items .form__item textarea {
+  height: 50px;
+}
+.review__form__container form .form__items .form__item:last-child {
+  text-align: center;
+  padding: 20px 0;
+  margin: 0 0 15px 0;
+}
+.review__form__container form .form__items .form__item__insert__picture {
+  margin-top: 50px;
+}
+.review__form__container form .form__items .review__save {
+  width: 100px;
+  height: 30px;
+  background-color: var(--orange);
+  margin: 20px 0;
+  outline: 0;
+  cursor: pointer;
+}

@@ -11,7 +11,6 @@ function TotalInfos() {
      const adminMenuLangData = useSelector(currentLanguageDataSelector)?.admin?.total_infos;
 
      const ordersList = useSelector(adminOrderSelector);
-     console.log("🚀 ~ TotalInfos ~ ordersList:", ordersList)
 
      const userList = useSelector(adminUserListSelector)
      return (
