@@ -4,11 +4,8 @@ uploads
 public/icons
 public/images
 client/public/images
-cache_files/caches_category
-cache_files/caches_interest
-cache_files/caches_orders
-cache_files/caches_products
-cache_files/caches_review
+cache_files
+cache_files/caches_admin
 */dist
 */client/*/dist
 .env

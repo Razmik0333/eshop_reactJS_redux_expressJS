@@ -1,15 +1,16 @@
-.product__create__update{
+.admin__insert__file{
      width: 87%;
-     .form__container{
-          display: flex;
-          justify-content: center;
-          align-items: flex-start;
+margin: 0 auto;     .form__container{
+         display: flex;
+         justify-content: center;
+         align-items: flex-start;
           form{
                width: 100%;
                display: flex;
                flex-wrap: wrap;
-               align-content: stretch;
+               align-content: space-around;
                justify-content: center;
+               flex-direction: column;
                .form__items{
                     display: flex;
                     flex-direction: column;
@@ -21,7 +22,7 @@
                     margin-top: 30px;
                     border: 3px solid var(--orange);
                     border-radius: 10px;
-                    height: 710px;
+                    height: 200px;
                     .form__item{
                          padding: 15px 0 ;
                          height: 30px;
@@ -63,14 +64,10 @@
                               height: 50px;
                          }
                     }
-                    .form__item_list{
-                         height: 150px;
-                         width: 60%;
-                    }
-                    .form__item__insert__picture{
+                    .form__item__insert__file{
                          margin-top: 50px;
                     }
-                    .product__save{
+                    .list__save{
                          width:100px;
                          height: 30px;
                          background-color: var(--orange);
@@ -82,8 +79,5 @@
      
           }
      }
-
+          
 }
-     
-
-

@@ -79,6 +79,7 @@ function OrderUpdate() {
                                    onChange={(e) => {
                                         setCustomerName(e.target.value)
                                    }}
+                                   disabled
                               />
                          </div>
                          <div className="form__item">
@@ -92,6 +93,7 @@ function OrderUpdate() {
                                    onChange={(e) => {
                                         setCustomerPhone(e.target.value)
                                    }}
+                                   disabled
                               />
                          </div>
                          <div className="form__item">
@@ -102,6 +104,7 @@ function OrderUpdate() {
                                    id="" 
                                    placeholder="Enter  Your Text" 
                                    value={customerComment}
+                                   disabled
                                    onChange={(e) => {
                                    setCustomerComment(e.target.value)
                               }}>
@@ -115,6 +118,7 @@ function OrderUpdate() {
                                    name="user_price" 
                                    placeholder="Enter Articul"  
                                    value={orderPrice}
+                                   disabled
                                    onChange={(e) => {
                                    setOrderPrice(e.target.value)
                               }}

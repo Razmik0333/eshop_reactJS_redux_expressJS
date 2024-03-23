@@ -35,6 +35,7 @@ import AdminPersonal from './components/Base/Admin/admin-page/AdminPersonal/Admi
 import Error404 from './components/Base/Error404/Error404';
 import AdminReviews from './components/Base/Admin/AdminReviews/AdminReviews/AdminReviews.jsx';
 import AdminReviewForm from './components/Base/Admin/AdminReviews/AdminReviewForm/AdminReviewForm.jsx';
+import AdminAddProductsByList from './components/Base/Admin/AdminProducts/AdminAddProductsByList.jsx';
 
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
@@ -117,6 +118,10 @@ function App() {
               <Route
               path="/admin/reviews" 
               element={<AdminReviews />} 
+              />
+              <Route
+              path="/admin/list" 
+              element={<AdminAddProductsByList />} 
               />
 
               <Route

@@ -200,6 +200,7 @@
             "products":"PRODUCTS",
             "change":"CHANGE",
             "reviews":"REVIEWS",
+            "discount":"CHANGE DISCOUNT",
             "logout":"LOGOUT"
         },
         "total_infos" :{
@@ -296,6 +297,10 @@
                     "save" : "Save Product"
 
                 }
+            },
+            "product_from_list" : {
+                "insert_file" : "Insert a file",
+                "save" : "Save"
             }
         }
       },

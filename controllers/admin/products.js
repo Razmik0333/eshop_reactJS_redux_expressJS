@@ -65,3 +65,8 @@ module.exports.update = async(req, res) => {
      const updatedProduct = await realyze("SELECT * FROM products WHERE id = ? ", [body?.id])
      res.send(updatedProduct)
 }
+module.exports.addProductsWithList = async(req, res) => {
+     
+     console.log(req.body);
+     
+}

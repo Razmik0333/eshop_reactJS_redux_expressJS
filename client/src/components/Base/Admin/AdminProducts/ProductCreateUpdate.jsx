@@ -67,143 +67,145 @@ function ProductCreateUpdate() {
                  : <Modal message={'Wrong'} />  :<></>
 
           }
-
-          <div className="form__container">
-               <form onSubmit={handleSubmit} ref={formRef} encType="multipart/form-data" >
-                    <div className="form__items">
-                         <div className="form__item">
-                              <div className="form__item__header">{productsUpdateLangData?.headers?.cat_index}</div>
-                              <label htmlFor="cat_index">
-                                   <select onChange={changeCategory} id="cat_index" name="category"
-                                   value={selectedCat}
-                                   >
-                                        <option>{productsUpdateLangData?.placeholders?.select_category}</option>
-                                        {
-                                             categories.map(cat => {
-                                                  
-                                                  return  <option 
-                                                       value={`${cat?.id}`}
-                                                       key={`val__${cat?.id}`} 
-                                                       
-                                                  >{cat?.id}</option>
-
-                                             })
-                                        }
-                                   </select>
-                              </label>
-                         </div>
-                              <input 
-                                   type="hidden" 
-                                   name="alias" 
-                                   id="" 
-                                   value={
-                                         `${categories[selectedCat- 1]?.alias}`
-                                   } 
-                                   onChange={() => {}} 
-
-                              />
-                              <input 
-                                   type="hidden" 
-                                   name="arm_name" 
-                                   id="" 
-                                   value={`${categories[selectedCat- 1]?.arm_name}`} 
-                                   onChange={() => {}} 
-                                   />
-                         { 
-                              currentProduct &&
-                              <input 
-                                   type="hidden" 
-                                   name="id" 
-                                   id="" 
-                                   value={`${currentProduct.id}`} 
-                                   onChange={() => {}} 
-                                   />
-                         }
-                        <div className="form__item">
-                              <div className="form__item__header">{productsUpdateLangData?.headers?.name}</div>
-                              <input 
-                                   type="text" 
-                                   name="descr" 
-                                   id="" 
-                                   placeholder={productsUpdateLangData?.placeholders?.description} 
-                                   value={productName}
-                                   onChange={(e) => {
-                                        setProductName(e.target.value)
-                                   }}
-                              />
-                         </div>
-                         <div className="form__item">
-                              <div className="form__item__header">{productsUpdateLangData?.headers?.description}</div>
-                              <textarea 
-                              type="text" 
-                              name="main" 
-                              id="" 
-                              placeholder={productsUpdateLangData?.placeholders?.text}
-                              value={productDesc}
-                              onChange={(e) => {
-                                   setProductDesc(e.target.value)
-                              }}
-                              >
-                                   {productDesc}
-                              </textarea>
-
-                         </div>
-                         <div className="form__item">
-                              <div className="form__item__header">{productsUpdateLangData?.headers?.price}</div>
-                              <input 
-                              type="text" 
-                              name="cost" id="" 
-                              placeholder={productsUpdateLangData?.placeholders?.price}
-                              value={productCost}
-                              onChange={(e) => {
-                                   setProductCost(e.target.value)
-                              }}
-                              />
-                         </div>
-                         <div className="form__item">
-                              <div className="form__item__header">{productsUpdateLangData?.headers?.discount}</div>
-                              <input 
-                              type="text" 
-                              name="discount" 
-                              id="" 
-                              placeholder={productsUpdateLangData?.placeholders?.discount}
-                              value={productDiscount}
-                              onChange={(e) => {
-                                   setProductDiscount(e.target.value)
-                              }}
-                              />
-                         </div>
-                         <div className="form__item">
-                              <div className="form__item__header">{productsUpdateLangData?.headers?.articul}</div>
-                              <input 
-                              type="text" 
-                              name="1c_articul" 
-                              placeholder={productsUpdateLangData?.placeholders?.articul}
-                              value={productArticul}
-                              onChange={(e) => {
-                                   setProductArticul(e.target.value)
-                              }}
-                              />
-                         </div>
-                         {
-                              currentProduct ? 
-
+          <div className="product__create__update">
+               <div className="form__container">
+                    <form onSubmit={handleSubmit} ref={formRef} encType="multipart/form-data" >
+                         <div className="form__items">
                               <div className="form__item">
-                                   <div className="form__item__header">{productsUpdateLangData?.headers?.current_pictures}</div>
-                                   <img src={`${root}/images/products/${currentProduct.id}.jpg`} alt="" /> 
-                              </div>:
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.cat_index}</div>
+                                   <label htmlFor="cat_index">
+                                        <select onChange={changeCategory} id="cat_index" name="category"
+                                        value={selectedCat}
+                                        >
+                                             <option>{productsUpdateLangData?.placeholders?.select_category}</option>
+                                             {
+                                                  categories.map(cat => {
+                                                       
+                                                       return  <option 
+                                                            value={`${cat?.id}`}
+                                                            key={`val__${cat?.id}`} 
+                                                            
+                                                       >{cat?.id}</option>
 
-                              <></>
-                         }
-                         <div className="form__item form__item__insert__picture">
-                              <div className="form__item__header">{productsUpdateLangData?.headers?.insert_pictures}</div>
-                              <input type="file" name="image" id="" />
-                         </div>
-                              <input type="hidden" name="availability" id="" value={`${currentProduct?.availability || 1}`} onChange={() => {}} />
-                              <input type="hidden" name="is_recommended" id="" value={`${currentProduct?.is_recomended || 1}`} onChange={() => {}} />
-                        <ProductCreateUpdateFooter />
-                    </div>  
-               </form>
+                                                  })
+                                             }
+                                        </select>
+                                   </label>
+                              </div>
+                                   <input 
+                                        type="hidden" 
+                                        name="alias" 
+                                        id="" 
+                                        value={
+                                             `${categories[selectedCat- 1]?.alias}`
+                                        } 
+                                        onChange={() => {}} 
+
+                                   />
+                                   <input 
+                                        type="hidden" 
+                                        name="arm_name" 
+                                        id="" 
+                                        value={`${categories[selectedCat- 1]?.arm_name}`} 
+                                        onChange={() => {}} 
+                                        />
+                              { 
+                                   currentProduct &&
+                                   <input 
+                                        type="hidden" 
+                                        name="id" 
+                                        id="" 
+                                        value={`${currentProduct.id}`} 
+                                        onChange={() => {}} 
+                                        />
+                              }
+                         <div className="form__item">
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.name}</div>
+                                   <input 
+                                        type="text" 
+                                        name="descr" 
+                                        id="" 
+                                        placeholder={productsUpdateLangData?.placeholders?.description} 
+                                        value={productName}
+                                        onChange={(e) => {
+                                             setProductName(e.target.value)
+                                        }}
+                                   />
+                              </div>
+                              <div className="form__item">
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.description}</div>
+                                   <textarea 
+                                   type="text" 
+                                   name="main" 
+                                   id="" 
+                                   placeholder={productsUpdateLangData?.placeholders?.text}
+                                   value={productDesc}
+                                   onChange={(e) => {
+                                        setProductDesc(e.target.value)
+                                   }}
+                                   >
+                                        {productDesc}
+                                   </textarea>
+
+                              </div>
+                              <div className="form__item">
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.price}</div>
+                                   <input 
+                                   type="text" 
+                                   name="cost" id="" 
+                                   placeholder={productsUpdateLangData?.placeholders?.price}
+                                   value={productCost}
+                                   onChange={(e) => {
+                                        setProductCost(e.target.value)
+                                   }}
+                                   />
+                              </div>
+                              <div className="form__item">
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.discount}</div>
+                                   <input 
+                                   type="text" 
+                                   name="discount" 
+                                   id="" 
+                                   placeholder={productsUpdateLangData?.placeholders?.discount}
+                                   value={productDiscount}
+                                   onChange={(e) => {
+                                        setProductDiscount(e.target.value)
+                                   }}
+                                   />
+                              </div>
+                              <div className="form__item">
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.articul}</div>
+                                   <input 
+                                   type="text" 
+                                   name="1c_articul" 
+                                   placeholder={productsUpdateLangData?.placeholders?.articul}
+                                   value={productArticul}
+                                   onChange={(e) => {
+                                        setProductArticul(e.target.value)
+                                   }}
+                                   />
+                              </div>
+                              {
+                                   currentProduct ? 
+
+                                   <div className="form__item">
+                                        <div className="form__item__header">{productsUpdateLangData?.headers?.current_pictures}</div>
+                                        <img src={`${root}/images/products/${currentProduct.id}.jpg`} alt="" /> 
+                                   </div>:
+
+                                   <></>
+                              }
+                              <div className="form__item form__item__insert__picture">
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.insert_pictures}</div>
+                                   <input type="file" name="image" id="" />
+                              </div>
+                                   <input type="hidden" name="availability" id="" value={`${currentProduct?.availability || 1}`} onChange={() => {}} />
+                                   <input type="hidden" name="is_recommended" id="" value={`${currentProduct?.is_recomended || 1}`} onChange={() => {}} />
+                         <ProductCreateUpdateFooter />
+                         </div>  
+                    </form>
+               </div>
+
           </div>
 
           
