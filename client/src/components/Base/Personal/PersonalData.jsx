@@ -35,8 +35,6 @@ export default function PersonalData() {
      }
      const path = currentUser.picture.length > 0 ? `${root}/images/users/${currentUser.id}/${currentUser.picture}` 
      :`${root}/images/users/no-image.png`;
-     console.log(path);
-     console.log(currentUser.picture);
   return (
      <>
           {

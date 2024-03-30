@@ -1,6 +1,5 @@
 const fs = require('fs')
 const fsPromises = require('fs/promises');
-const path = require('path');
 const functions = require('../functions/functions');
 const fs_functions = require('../functions/fs_functions');
 const realyze = require('../config').realyze;
@@ -9,7 +8,6 @@ const getReviewsFromProducts = functions.reviewsFromProducts;
 const getReviewsByUser = functions.reviewsByUser;
 const getReviewsByProduct = functions.reviewsByProduct;
 const getRatingCounts = functions.ratingCounts;
-const getSizeOfObject = functions.sizeOfObject;
 module.exports.getReviewListByProductId = async (req, res) => {
      try {
           const productId = req.params.id;

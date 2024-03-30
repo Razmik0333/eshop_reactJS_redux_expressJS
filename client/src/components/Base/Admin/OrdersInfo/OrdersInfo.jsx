@@ -21,7 +21,6 @@ function OrdersInfo() {
 
      const ordersList = useSelector(adminOrderSelector);
      const filteredOrders = ordersList.filter(item => +item?.user_status === 0)
-     console.log("🚀 ~ OrdersInfo ~ filteredOrders:", filteredOrders)
      return (
           <div className="orders__info">
                <div className="orders__info__header">

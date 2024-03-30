@@ -4,7 +4,7 @@ const realyze = require('./config').realyze
 
 const storage = multer.diskStorage({
      destination: function (req, file, cb) {
-          cb(null, path.resolve() + '/public/images')
+          cb(null, path.resolve() + '/public/images/products')
      },
      filename: async (req, file, cb) => {
           const [id] = await realyze("SELECT MAX(id) FROM `products`")

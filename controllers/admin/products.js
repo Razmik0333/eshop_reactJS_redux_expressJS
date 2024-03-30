@@ -2,9 +2,13 @@ const fs = require('fs');
 const realyze = require('../../config').realyze;
 const fs_functions = require('../../functions/fs_functions');
 const variables = require('../../variables/variables');
+const path = require("path");
+const XLSX = require('xlsx');
 
+
+//
 module.exports.productsList = async(req, res) => {
-     //const id = req.params.id; //
+
      const cachesPathAdmin = variables.cachesAdmin.product;
      if (fs.existsSync(`${cachesPathAdmin}/caches_admin_product.json`)) {
           fs.readFile(`${cachesPathAdmin}/caches_admin_product.json`, 'utf-8',
@@ -35,6 +39,7 @@ module.exports.productsList = async(req, res) => {
           res.send(products)
 
      }
+     
 }
 module.exports.delete = async (req, res) => {
      const productId = req.body.product_id
@@ -66,7 +71,31 @@ module.exports.update = async(req, res) => {
      res.send(updatedProduct)
 }
 module.exports.addProductsWithList = async(req, res) => {
-     
-     console.log(req.body);
+
+     console.log(path.resolve() + "/data/data.xlsx")
+     if (fs.existsSync(path.resolve() + "/upload/data/data.xlsx")) {
+          
+          const workbook = XLSX.readFile(path.resolve() + "/upload/data/data.xlsx");
+          let worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      
+          for (let index = 2; index <= 7; index++) {
+               const category = worksheet[`B${index}`].v
+               const alias = worksheet[`C${index}`].v;
+               const arm_name = worksheet[`D${index}`].v;
+               const descr = worksheet[`E${index}`].v;
+               const title = worksheet[`F${index}`].v;
+               const cost = worksheet[`G${index}`].v;
+               const discount = worksheet[`H${index}`].v;
+               const is_recommended = worksheet[`J${index}`].v;
+               const availability = worksheet[`K${index}`].v;
+               const main = worksheet[`L${index}`].v;
+               const articul = worksheet[`M${index}`].v;
+               await realyze("INSERT INTO `products` (category, alias, arm_name, descr,title, cost, discount, is_recomended, availability, main, `1c_articul`, time_add) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ",
+               [category, alias,arm_name, descr,title, cost, discount, is_recommended, availability, main,articul, Date.now()]);
+          }
+          res.send(JSON.stringify(1))
+     }else{
+          res.send(JSON.stringify(0))
+     }
      
 }

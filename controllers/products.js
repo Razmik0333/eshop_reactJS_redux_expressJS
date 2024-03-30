@@ -14,7 +14,6 @@ const [
 const getMostestProductData = functions.mostestProduct;
 const getMostestMaxObject = functions.mostestMaxObject;
 const getMiddleRating = functions.middleRating;
-const getReviewsByUser = functions.reviewsByUser;
 
 module.exports.productsByCategory = async (req, res) => {
      const params = req.params.id;
@@ -30,7 +29,7 @@ module.exports.productsByCategory = async (req, res) => {
                               if (err) throw err;
                               else {                                   
                                    const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ?", [params])
-                                   if (JSON.parse(data)[0].id < lastProductId.max) {
+                                   if (JSON.parse(data)[0].id !== lastProductId.max) {
                                         const result = await realyze("SELECT * FROM `products` WHERE `category`= ?  ORDER BY id DESC LIMIT ?", [params, 12]);
                                         fs_functions.writeCacheFile(
                                              `${cachesPath}/products/${[categories[params - 1]?.alias]}.json`,
