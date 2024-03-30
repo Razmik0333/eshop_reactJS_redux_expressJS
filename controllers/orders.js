@@ -74,11 +74,11 @@ module.exports.ordersByStatus = async (req, res) => {
                async function(err, data) {
                     if (err) throw err;
                     else {   
-                         const [orderCountByStatus] = await realyze("SELECT COUNT(id) AS count FROM orders WHERE user_id = ? AND user_status = ?", [userId,status])                        
+                         const [orderCountByStatus] = await realyze("SELECT COUNT(id) AS count FROM orders WHERE user_id = ? AND user_status = ? ORDER BY id DESC", [userId,status])                        
                          if (JSON.parse(data).length === orderCountByStatus.count) {
                               res.send(data);
                          }else{
-                              const orders = await realyze("SELECT id, user_order, user_status, user_price FROM orders WHERE user_id = ? AND user_status = ?", [userId, status]);
+                              const orders = await realyze("SELECT id, user_order, user_status, user_price FROM orders WHERE user_id = ? AND user_status = ? ORDER BY id DESC", [userId, status]);
                               const resArray = await getProductsFromOrdersList(orders);
                               fs_functions.writeCacheFile(
                                    `${cachesPath}/orders/${statusTypeObj.status}.json`,
@@ -89,7 +89,7 @@ module.exports.ordersByStatus = async (req, res) => {
                     }
                })
           } else {
-               const orders = await realyze("SELECT * FROM orders WHERE user_id = ? AND user_status = ?", [userId, status]);
+               const orders = await realyze("SELECT * FROM orders WHERE user_id = ? AND user_status = ? ORDER BY id DESC", [userId, status]);
                const resArray = await getProductsFromOrdersList(orders);
                fs_functions.writeCacheFile(
                     `${cachesPath}/orders/${statusTypeObj.status}.json`,

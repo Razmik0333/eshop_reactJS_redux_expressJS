@@ -82,6 +82,7 @@ export const adminTimeObjectProductSelector = ({ AdminProductDuck }) => AdminPro
 export const adminProductsSelector = ({ AdminProductDuck }) => AdminProductDuck.productsList; //
 export const adminProductIdSelector = ({ AdminProductDuck }) => AdminProductDuck.currentProductId; //
 export const adminProductSelector = ({ AdminProductDuck }) => AdminProductDuck.currentProduct; //
+export const adminProductSavedSelector = ({ AdminProductDuck }) => AdminProductDuck.isSaved; //
 export const adminProductIsDeletedSelector = ({ AdminProductDuck }) => AdminProductDuck.isDeleted; //
 export const adminCurrentOrderSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrder; //
 export const adminCurrentOrderInfoSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrderInfo; //

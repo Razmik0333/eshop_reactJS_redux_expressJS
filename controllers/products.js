@@ -108,15 +108,16 @@ module.exports.productsByLargeDiscount = async (req, res) => {
                     fs.readFile( `${cachesPath}/large_discount/large_discount.json`,"utf-8",
                     async function(err, data) {
                          if (err) throw err;
-                         else {                                   
-                              res.send(data);
+                         else { 
+                              res.send(data);                          
                          }
                     })
                     
                }else{
-                    const result = await realyze("SELECT MAX(discount) AS max FROM `products` ");
-                    const max = result[0]?.max;
-                    const discountedProducts = await realyze("SELECT * FROM `products` WHERE discount = ? ORDER BY id DESC LIMIT ?", [max, 3])
+                    const [result] = await realyze("SELECT MAX(discount) AS max FROM `products` ");
+
+                    console.log("🚀 ~ module.exports.productsByLargeDiscount= ~ result:", result)
+                    const discountedProducts = await realyze("SELECT * FROM `products`  ORDER BY discount DESC LIMIT ?", [3])
                     fs_functions.writeCacheFile(
                          `${cachesPath}/large_discount/large_discount.json`,
                          discountedProducts

@@ -41,65 +41,74 @@ function HotDealsContent() {
      return (
           <>
                {popupIsShow ?  <ModalPopup id={arr?.id}/> : <></>}
-               <div className="hot__deals__content">
-                    <div className="hot-deals-picture-part">
-                         <div className="hot-deals-picture">
-                              <img src={`${root}/images/products/${arr?.id}.jpg`} alt="" />
-                              <button type="button" className="add-cart" data-id={arr?.id}>
-                                   
-                                   <span className="add-cart-text"
-                                        data-id={arr?.id}
-                                        onClick={addProductToCart}
-                                   ><img src={`${root}/icons/config/add-cart.png`} alt="" />
-                                   {addCart}
-                                   </span>
-                              </button>
-                              
-                         </div>
-                    </div>
-                    <div className="hot-deals-desc-part">
-                         <div className="hot-deals-desc-header">
-                              <p className="hot-deals-header">
-                                    <NavLink to={`/product/${arr?.id}`}
-                                        data-id={arr?.id}
-                                        className="product-link"  onClick={changeCurrentProduct}>
-                                   {arr?.descr}
-                                   </NavLink>
-                              </p>
-                         </div>
-                         <RatingMapping 
-                              rating={arr?.rating} 
-                         /> 
-                         <div className="hot-deals-desc-options">
-                              <div className="hot-deals-buttons">
-                                   <button 
-                                        className="hot-deals-button button-eyes"
-                                        onClick={showProductPopup}
-                                        data-id={arr?.id}
-                                   >
+               <>
+                    <div className="hot__deals__content">
+                         {
+                              arr?.discount > 0 ? <div className="sale">
+                                   sale
+                              </div>
+                              : <></>
+                         }
+                         <div className="hot-deals-picture-part">
+                              <div className="hot-deals-picture">
+                                   <img src={`${root}/images/products/${arr?.id}.jpg`} alt="" />
+                                   <button type="button" className="add-cart" data-id={arr?.id}>
+                                        
+                                        <span className="add-cart-text"
+                                             data-id={arr?.id}
+                                             onClick={addProductToCart}
+                                        ><img src={`${root}/icons/config/add-cart.png`} alt="" />
+                                        {addCart}
+                                        </span>
                                    </button>
-                                   <button className="hot-deals-button button-favorite"></button>
-                                   <button className="hot-deals-button button-compare"></button>
-                              </div>
-                              <div className="hot-deals-prices">
-                                   <span className="hot-deals-price old-price">
-                                        <del>
-                                             {`${getNewCurrency(currentCurrency, arr?.cost).value}
-                                             ${getNewCurrency(currentCurrency, arr?.cost ).char}`}
-                                        </del>
-                                   </span>
-                                   <span className="hot-deals-price new-price">
-                                        {
-                                             `${getNewCurrency(currentCurrency, discountedPrice).value}
-                                             ${getNewCurrency(currentCurrency, discountedPrice).char}`
-                                        }
-                                   </span>
+                                   
                               </div>
                          </div>
+                         <div className="hot-deals-desc-part">
+                              <div className="hot-deals-desc-header">
+                                   <p className="hot-deals-header">
+                                        <NavLink to={`/product/${arr?.id}`}
+                                             data-id={arr?.id}
+                                             className="product-link"  onClick={changeCurrentProduct}>
+                                        {arr?.descr}
+                                        </NavLink>
+                                   </p>
+                              </div>
+                              <RatingMapping 
+                                   rating={arr?.rating} 
+                              /> 
+                              <div className="hot-deals-desc-options">
+                                   <div className="hot-deals-buttons">
+                                        <button 
+                                             className="hot-deals-button button-eyes"
+                                             onClick={showProductPopup}
+                                             data-id={arr?.id}
+                                        >
+                                        </button>
+                                        <button className="hot-deals-button button-favorite"></button>
+                                        <button className="hot-deals-button button-compare"></button>
+                                   </div>
+                                   <div className="hot-deals-prices">
+                                        <span className="hot-deals-price old-price">
+                                             <del>
+                                                  {`${getNewCurrency(currentCurrency, arr?.cost).value}
+                                                  ${getNewCurrency(currentCurrency, arr?.cost ).char}`}
+                                             </del>
+                                        </span>
+                                        <span className="hot-deals-price new-price">
+                                             {
+                                                  `${getNewCurrency(currentCurrency, discountedPrice).value}
+                                                  ${getNewCurrency(currentCurrency, discountedPrice).char}`
+                                             }
+                                        </span>
+                                   </div>
+                              </div>
 
+                         </div>
+                         
                     </div>
-                    
-               </div>
+
+               </>
           </>
           
      ) 

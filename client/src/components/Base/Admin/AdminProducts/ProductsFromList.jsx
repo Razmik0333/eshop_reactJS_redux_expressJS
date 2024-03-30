@@ -5,12 +5,10 @@ import { currentLanguageDataSelector, modalCloseSelector } from '../../../../hel
 import "./styles/_admin-insert-file.scss"
 import Modal from '../../Modal/Modal';
 import { changeModal } from '../../../../redux/ducks/configsDuck';
-import { useNavigate } from 'react-router-dom';
 export default function ProductsFromList() {
      const dispatch = useDispatch();
      const [isCreated, setIsCreated] = useState(false);
      const inputFile = useRef(null);
-     const navigate = useNavigate();
      const productsUpdateLangData = useSelector(currentLanguageDataSelector)?.admin?.products?.product_from_list;
      const handleSubmit = async (e) => {
            e.preventDefault();

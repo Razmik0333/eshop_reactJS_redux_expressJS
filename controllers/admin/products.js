@@ -65,10 +65,36 @@ module.exports.create = async(req, res) => {
 
 module.exports.update = async(req, res) => {
      const body = req.body;
+     const cachesPathAdmin = variables.cachesAdmin.product;
+
      await realyze("UPDATE `products` SET category = ?, alias= ?, arm_name=?, descr= ?, cost= ?, discount= ?, is_recomended= ?, availability= ?, main= ?, `1c_articul`= ?, time_add= ? WHERE id = ?",
           [body.category, body.alias,  body.arm_name, body.descr, body.cost, body.discount, body.is_recomended, body.availability,body.main, body[`1c_articul`], Date.now(), body.id])
-     const updatedProduct = await realyze("SELECT * FROM products WHERE id = ? ", [body?.id])
-     res.send(updatedProduct)
+     const updatedProduct = await realyze("SELECT * FROM products WHERE id = ? ", [body?.id]);
+     const products = await realyze("SELECT * FROM products ");
+
+     fs_functions.writeCacheFile(
+          `${cachesPathAdmin}/caches_admin_product.json`,
+          products
+     )
+     res.send(updatedProduct);
+
+}
+module.exports.save = async(req, res) => {
+     const cachesPath = variables.caches.product;
+     const pathArray = [`products`, `filtered_products`,'large_discount'];
+     pathArray.forEach(item => {
+          fs.readdir(cachesPath + item,async (err, files) => {
+               if (err) throw err;
+               for (const file of files) {
+                    fs.unlink(path.join(cachesPath + item, file), (err) => {
+                              if (err) throw err;
+                    });
+               }
+          });
+          
+     })
+     res.send(JSON.stringify('saved'));
+
 }
 module.exports.addProductsWithList = async(req, res) => {
 

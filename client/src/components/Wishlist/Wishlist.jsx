@@ -17,7 +17,6 @@ function Wishlist() {
           !userId && navigate('/login') 
      }, []);
      useEffect(() => {
-          
           dispatch(fetchWishList(userId))     
      }, [userId]);
      const wishListData = useSelector(getWishListDataSelector)

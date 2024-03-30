@@ -7,6 +7,7 @@ const PRODUCTS_FOR_UPDATE = 'adminProductDuck/PRODUCTS_FOR_UPDATE';
 const PRODUCT_FOR_DELETE = 'adminProductDuck/PRODUCT_FOR_DELETE';
 const TIME_OBJECT = 'adminProductDuck/TIME_OBJECT';
 const CLEAR_TIME_OBJECT = 'adminProductDuck/CLEAR_TIME_OBJECT';
+const IS_SAVED = 'adminProductDuck/IS_SAVED';
 
 
 export const getProductsList = createAction(PRODUCTS_LIST);
@@ -15,6 +16,7 @@ export const getProductForUpdate = createAction(PRODUCTS_FOR_UPDATE);
 export const getProductForDelete = createAction(PRODUCT_FOR_DELETE);
 export const getTimeObject = createAction(TIME_OBJECT);
 export const clearTimeObject = createAction(CLEAR_TIME_OBJECT);
+export const saveChanges = createAction(IS_SAVED);
 
 
 
@@ -23,7 +25,8 @@ const initialStateApp = {
   currentProductId : null,
   currentProduct:null,
   isDeleted : false,
-  timeObj : {}
+  timeObj : {},
+  isSaved : ''
 
 };
 export const currentCartItem = () => (dispatch) => {
@@ -47,7 +50,7 @@ export const createYear = (obj) => (dispatch) => {
   dispatch(getTimeObject(obj))
 }
 export const createMonth = (obj) => (dispatch) => {
-dispatch(getTimeObject(obj))
+  dispatch(getTimeObject(obj))
 
 }
 export const changeCurrentProduct = (obj) => (dispatch) => {
@@ -57,11 +60,24 @@ dispatch(getProductForUpdate(obj))
 export const resetTimeObject = () => (dispatch) => {
   dispatch(clearTimeObject())
 }
+export const saveChangedProducts = (str) => (dispatch) => {
+  dispatch(saveChanges(str))
+}
 
 export const fetchProductsList = () => async (dispatch) => {
     try {
       const data = await( await fetch(`${root}/api/admin/product/list`)).json()
       dispatch(getProductsList(data));
+    } catch (e) {
+      console.log('error from AdminProductDuck', e)
+    }
+         
+};
+export const deleteCacheFiles = () => async (dispatch) => {
+    try {
+      const data = await( await fetch(`${root}/api/admin/products/save`)).json()
+      dispatch(saveChangedProducts(data));
+      console.log("🚀 ~ deleteCacheFiles ~ data:", data)
     } catch (e) {
       console.log('error from AdminProductDuck', e)
     }
@@ -150,6 +166,11 @@ const AdminProductDuck = (state = initialStateApp, action) => {
         return {
           ...state,
           timeObj: {},
+        };
+      case IS_SAVED:
+        return {
+          ...state,
+          isSaved: action.payload,
         };
     default:
       return state;
