@@ -16,39 +16,49 @@ module.exports.allOrdersByUser = async (req, res) => {
      try {
           const cachesPath = variables.caches.order;
           const userId = req.params.id;
-          const ordersByUser = await realyze("SELECT id, user_order, user_status, user_price, time_add FROM orders WHERE user_id = ? ", [userId]);
-          const resArray = await getProductsFromOrdersList(ordersByUser);
-          if (fs.existsSync(`${cachesPath}/orders/all-orders.json`)) {
-               fs.readFile(`${cachesPath}/orders/all-orders.json`,'utf8',
-               async function(err, data) {
-                    if (err) throw err;
-                    else {          
-                         const [orderCountByStatus] = await realyze("SELECT COUNT(id) AS count FROM orders WHERE user_id = ? ", [userId])
-                         
-                         
-                         if (JSON.parse(data).length < orderCountByStatus.count) {
-
-                              const orders = await realyze("SELECT id, user_order, user_status, user_price FROM orders WHERE user_id = ? ", [userId]);
-                              const resArray = await getProductsFromOrdersList(orders);
-                              fs_functions.writeCacheFile(
-                                   `${cachesPath}/orders/all-orders.json`,
-                                   resArray
-                              )
-                              res.send(resArray);
-                         }else{
-                              res.send(data);
+          console.log("🚀 ~ module.exports.allOrdersByUser= ~ userId:", `${cachesPath}/orders/${userId}`)
+          //console.log(fs.existsSync(`${cachesPath}/orders/${userId}`));
+          
+          if (!fs.existsSync(`${cachesPath}/orders/${userId}`)) {
+               fs.mkdir(`${cachesPath}/orders/${userId}`,{recursive: true}, (err) => {
+                    if (err) throw err
+               });
+          }
+               if (fs.existsSync(`${cachesPath}/orders/${userId}/all-orders.json`)) {
+                    fs.readFile(`${cachesPath}/orders/${userId}/all-orders.json`,'utf8',
+                    async function(err, data) {
+                         if (err) throw err;
+                         else {          
+                              const [orderCountByStatus] = await realyze("SELECT COUNT(id) AS count FROM orders WHERE user_id = ? ", [userId])
+                              
+                              
+                              if (JSON.parse(data).length < orderCountByStatus.count) {
+     
+                                   const orders = await realyze("SELECT id, user_order, user_status, user_price FROM orders WHERE user_id = ? ", [userId]);
+                                   const resArray = await getProductsFromOrdersList(orders);
+                                   fs_functions.writeCacheFile(
+                                        `${cachesPath}/orders/${userId}/all-orders.json`,
+                                        resArray
+                                   )
+                                   res.send(resArray);
+                              }else{
+                                   res.send(data);
+                              }
                          }
                     }
-               }
-               )
-          } else {
-               fs_functions.writeCacheFile(
-                    `${cachesPath}/orders/all-orders.json`,
-                    resArray
-               )
-               res.send(JSON.stringify(resArray, undefined, 2));
+                    )
+               } else {
+                    const ordersByUser = await realyze("SELECT id, user_order, user_status, user_price, time_add FROM orders WHERE user_id = ? ", [userId]);
+                    const resArray = await getProductsFromOrdersList(ordersByUser);
                
-          }
+                    fs_functions.writeCacheFile(
+                         `${cachesPath}/orders/${userId}/all-orders.json`,
+                         resArray
+                    )
+                    res.send(JSON.stringify(resArray, undefined, 2));
+                    
+               }
+          
           
      } catch (err) {
           throw err;
@@ -69,8 +79,13 @@ module.exports.ordersByStatus = async (req, res) => {
           const status = req.body.status;
           const statusTypeObj = functions.statusIndex(status)
           const cachesPath = variables.caches.order;
-          if (fs.existsSync(`${cachesPath}/orders/${statusTypeObj.status}.json`)) {
-               fs.readFile(`${cachesPath}/orders/${statusTypeObj.status}.json`, 'utf-8',
+          if (!fs.existsSync(`${cachesPath}/orders/${userId}`)) {
+               fs.mkdir(`${cachesPath}/orders/${userId}`,{recursive: true}, (err) => {
+                    if (err) throw err
+               });
+          }
+          if (fs.existsSync(`${cachesPath}/orders/${userId}/${statusTypeObj.status}.json`)) {
+               fs.readFile(`${cachesPath}/orders/${userId}/${statusTypeObj.status}.json`, 'utf-8',
                async function(err, data) {
                     if (err) throw err;
                     else {   
@@ -81,7 +96,7 @@ module.exports.ordersByStatus = async (req, res) => {
                               const orders = await realyze("SELECT id, user_order, user_status, user_price FROM orders WHERE user_id = ? AND user_status = ? ORDER BY id DESC", [userId, status]);
                               const resArray = await getProductsFromOrdersList(orders);
                               fs_functions.writeCacheFile(
-                                   `${cachesPath}/orders/${statusTypeObj.status}.json`,
+                                   `${cachesPath}/orders/${userId}/${statusTypeObj.status}.json`,
                                    resArray
                               )
                               res.send(resArray);
@@ -92,7 +107,7 @@ module.exports.ordersByStatus = async (req, res) => {
                const orders = await realyze("SELECT * FROM orders WHERE user_id = ? AND user_status = ? ORDER BY id DESC", [userId, status]);
                const resArray = await getProductsFromOrdersList(orders);
                fs_functions.writeCacheFile(
-                    `${cachesPath}/orders/${statusTypeObj.status}.json`,
+                    `${cachesPath}/orders/${userId}/${statusTypeObj.status}.json`,
                     resArray
                )
                res.send(JSON.stringify(resArray, undefined, 2));

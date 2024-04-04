@@ -45,7 +45,7 @@ function HotDealsContent() {
                     <div className="hot__deals__content">
                          {
                               arr?.discount > 0 ? <div className="sale">
-                                   sale
+                                   Զեղչ
                               </div>
                               : <></>
                          }

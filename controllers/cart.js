@@ -23,8 +23,13 @@ module.exports.cartById = async (req, res) => {
                const product_ids =  Object.keys(cart)
                const quantities =  Object.values(cart)
                const tokens = getTokensForQuery(product_ids);
-               if (fs.existsSync(`${cachesPath}/cart/cart.json`)) {
-                    fs.readFile(`${cachesPath}/cart/cart.json`, 'utf-8',
+               if (!fs.existsSync(`${cachesPath}/cart/${userId}`)) {
+                    fs.mkdir(`${cachesPath}/cart/${userId}`,{recursive: true}, (err) => {
+                         if (err) throw err
+                    });
+               }
+               if (fs.existsSync(`${cachesPath}/cart/${userId}/cart.json`)) {
+                    fs.readFile(`${cachesPath}/cart/${userId}/cart.json`, 'utf-8',
                          async function(err, data) {
                               if (err) throw err;
                               else { 
@@ -40,7 +45,7 @@ module.exports.cartById = async (req, res) => {
                                         const products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, product_ids);
                                         const productsWithCounts = getProductsWithCounts(products, quantities);
                                         fs_functions.writeCacheFile(
-                                             `${cachesPath}/cart/cart.json`,
+                                             `${cachesPath}/cart/${userId}/cart.json`,
                                              productsWithCounts
                                         )
                                         res.send(productsWithCounts)
@@ -52,7 +57,7 @@ module.exports.cartById = async (req, res) => {
                     const products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, product_ids);
                     const productsWithCounts = getProductsWithCounts(products, quantities);
                     fs_functions.writeCacheFile(
-                         `${cachesPath}/cart/cart.json`,
+                         `${cachesPath}/cart/${userId}/cart.json`,
                          productsWithCounts
                     )
                     res.send(productsWithCounts)
@@ -103,7 +108,7 @@ module.exports.addToCartById = async (req, res) => {
      let products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, product_ids);
      const productsWithCounts = getProductsWithCounts(products,quantities)
      fs_functions.writeCacheFile(
-          `${cachesPath}/cart/cart.json`,
+          `${cachesPath}/cart/${userId}/cart.json`,
           productsWithCounts
      )
      res.send(productsWithCounts)
@@ -129,7 +134,7 @@ module.exports.removeProductFromCart = async (req, res) => {
 
           const productsWithCounts = getProductsWithCounts(products,cartValues)
           fs_functions.writeCacheFile(
-               `${cachesPath}/cart/cart.json`,
+               `${cachesPath}/cart/${userId}/cart.json`,
                productsWithCounts
           )
           res.send(productsWithCounts);

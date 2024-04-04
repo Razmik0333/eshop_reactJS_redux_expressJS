@@ -2,7 +2,7 @@ import { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { currentLanguageDataSelector, getUserDataSelector, getUserId } from "../../../../helpers/reduxSelectors";
-import { currentUser, getUserData } from '../../../../redux/ducks/userDuck';
+import { clearCachesFiles, currentUser, getUserData } from '../../../../redux/ducks/userDuck';
 import { changeOrdersFromLogout } from '../../../../redux/ducks/orderDuck';
 
 import "./styles/_menu-burger.scss";
@@ -14,10 +14,11 @@ function MenuBurger() {
      const userData = useSelector(getUserDataSelector);
      const userId = useSelector(getUserId);
      const changeLogout = (e) => {        
-
+          dispatch(clearCachesFiles(userId))
           dispatch(currentUser(null))
           dispatch(getUserData(null))
           dispatch(changeOrdersFromLogout());
+
           navigate('/home')
     }
      const [clicked, setClicked] = useState(false);

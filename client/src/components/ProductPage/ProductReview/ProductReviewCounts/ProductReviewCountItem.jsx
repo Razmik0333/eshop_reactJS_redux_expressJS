@@ -9,7 +9,7 @@ export default function ProductReviewCountItem({ind, count}) {
      
      const ratingCounts = useSelector(getRatingListSelector)
      const summRating = getObjectSize(ratingCounts) === 0 ? 0 : Object.values(ratingCounts).reduce((acc, curr) => {      
-          acc += curr.count;
+          acc += curr?.count;
           return acc
      }, 0);
      

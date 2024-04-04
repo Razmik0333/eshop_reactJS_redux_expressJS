@@ -9,6 +9,12 @@ const cachesPaths = {
     review:`${cachesPath}/caches_review/`,
     interest:`${cachesPath}/caches_interest/`
 }
+const cachesUserPaths = [
+    `${cachesPath}/caches_orders/orders/`,
+    `${cachesPath}/caches_review/reviews/reviewsByUser/`,
+    `${cachesPath}/caches_interest/cart/`,
+    `${cachesPath}/caches_interest/wishlist/`
+]
 const cachesPathsAdmin = {
     product: `${cachesPath}/caches_admin/caches_admin_products/`,
     //category:`${cachesPath}/caches_category/`,
@@ -19,5 +25,6 @@ const cachesPathsAdmin = {
 
 module.exports = {
     caches : cachesPaths,
-    cachesAdmin: cachesPathsAdmin
+    cachesAdmin: cachesPathsAdmin,
+    cachesUser :cachesUserPaths
 }

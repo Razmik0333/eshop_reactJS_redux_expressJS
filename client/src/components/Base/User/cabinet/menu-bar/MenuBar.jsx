@@ -2,22 +2,34 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./styles/_cabinet-header.scss"
 import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { currentLanguageDataSelector } from "../../../../../helpers/reduxSelectors";
-import { currentUser, getUserData } from "../../../../../redux/ducks/userDuck";
+import { currentLanguageDataSelector, getUserCacheClearSelector, getUserId, modalCloseSelector } from "../../../../../helpers/reduxSelectors";
+import { clearCachesFiles, currentUser, getUserData } from "../../../../../redux/ducks/userDuck";
 import { changeOrdersFromLogout } from "../../../../../redux/ducks/orderDuck";
+import Modal from "../../../Modal/Modal";
 
 function MenuBar() {
      const dispatch = useDispatch();
-     const navigate = useNavigate()
+     const navigate = useNavigate();
+     const userId = useSelector(getUserId)
      const menuLangData = useSelector(currentLanguageDataSelector)?.personal?.menu_bar;
      const changeLogout = (e) => {        
-
-          dispatch(currentUser(null))
+          dispatch(clearCachesFiles(userId))
+           dispatch(currentUser(null))
           dispatch(getUserData(null))
-          dispatch(changeOrdersFromLogout());
-          navigate('/home')
+           dispatch(changeOrdersFromLogout());
+         // navigate('/home')
     }
-     return <div className="user__page__settings_list">
+    const modalIsClose = useSelector(modalCloseSelector);
+
+
+    const isCleared = useSelector(getUserCacheClearSelector);
+     return <>
+          {/* {
+               modalIsClose ?
+                    isCleared ? <Modal message={isCleared} /> 
+                    : <Modal message={'Wrong'} /> : <></>
+          } */}
+          <div className="user__page__settings_list">
                <div className="user__page__settings">
                     <div className="user_nav">
                          <ul className="user_nav_items">
@@ -33,5 +45,6 @@ function MenuBar() {
                     </div>
                </div>
           </div>
+     </>
 }
 export default memo(MenuBar);

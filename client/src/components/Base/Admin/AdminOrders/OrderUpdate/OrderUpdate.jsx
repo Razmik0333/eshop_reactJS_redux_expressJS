@@ -8,6 +8,7 @@ import ProductCreateUpdateFooter from "../../AdminProducts/ProductCreateUpdateFo
 import { getStatus, checkEmptyObject } from "../../../../../helpers/functions/functions";
 import { fetchOrderItem} from "../../../../../redux/ducks/adminOrderDuck";
 import Loader from "../../../Loader/Loader";
+import "../styles/_orders-create-update-form.scss";
 function OrderUpdate() {
      const dispatch = useDispatch();
      const currentOrderId = useSelector(adminOrderIdSelector);
@@ -145,31 +146,35 @@ function OrderUpdate() {
                               currentOrder ?
                               <div className="form__item form__item_list">
                                    <div className="form__item__header">Current Order Info</div>
-                                   {
-                                        isChanged ?
-                                        <>                           
-                                        <ul className="current__order__infos">
-                                             {
-                                                  currentOrder?.products?.map((item,ind) => {
-                                                       return <li className="current__order__info" key={`current__order__${ind}`}>
-                                                            <>
-                                                            <img src={`${root}/images/products/${item.id}.jpg`} alt="" />X 
-                                                            <span>{`${item?.quantity}հտ`}</span>
-                                                            </>
+                                   <div className="form__item__content">
+                                        {
+                                             isChanged ?
+                                             <>                           
+                                             <ul className="current__order__infos">
+                                                  {
+                                                       currentOrder?.products?.map((item,ind) => {
+                                                            return <li className="current__order__info" key={`current__order__${ind}`}>
+                                                                 <>
+                                                                 <img src={`${root}/images/products/${item.id}.jpg`} alt="" />X 
+                                                                 <span>{`${item?.quantity}հտ`}</span>
+                                                                 </>
 
-                                                       </li>
-                                                  })
-                                             }
-                                             
-                                        </ul>
-                                        </>
-                                        : <Loader />
-                                   }
-                              
+                                                            </li>
+                                                       })
+                                                  }
+                                                  
+                                             </ul>
+                                             </>
+                                             : <Loader />
+                                        }
+                                   </div>
                               </div>
                               :<></>
                          }
-                        <ProductCreateUpdateFooter />
+                         <div className="form__item form__item__save">
+
+                              <ProductCreateUpdateFooter />
+                         </div>
                     </div>  
                </form>
           </div>

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const realyze = require('../../config').realyze;
-
+const path = require("path")
 const functions = require('../../functions/functions');
 const getTokensForQuery = functions.query;
 const getAdminCurrentOrderData = functions.adminOrderCurrentData;
@@ -86,13 +86,39 @@ module.exports.adminOrderById = async(req, res) => {
 module.exports.adminStatusUpdate = async (req, res) => {
      const orderId = req.params.order_id; //
      const statusIndex = req.body.user_status;
+     const cachesPathAdmin =variables.cachesAdmin.order;
+
+     console.log("🚀 ~ module.exports.adminStatusUpdate= ~ statusIndex:", statusIndex)
      await realyze("UPDATE `orders` SET user_status = ? WHERE id = ? ", [statusIndex, orderId]);
-     const updatedOrder = await realyze("SELECT * FROM `orders` WHERE id = ?", [orderId])
-     res.send(updatedOrder)
+     const updatedOrder = await realyze("SELECT * FROM `orders` WHERE id = ?", [orderId]);
+     const allOrders = await realyze("SELECT * FROM `orders` ");
+     fs_functions.writeCacheFile(
+          `${cachesPathAdmin}/caches_admin_order.json`,
+          allOrders
+     )
+     res.send(updatedOrder);
 }
 module.exports.adminOrderDelete = async (req, res) => {
      const orderId = req.body.order_id;
      await realyze("DELETE FROM orders WHERE id = ? ", [orderId]);
      const ordersAfterDelete = await realyze("SELECT * FROM orders ");
      res.send(ordersAfterDelete);
+}
+module.exports.adminOrderSave = async (req, res) => {
+     const cachesPath = variables.caches.order;
+     //const pathArray = [`orders`, `filtered_products`,'large_discount'];
+   //  pathArray.forEach(item => {
+          fs.readdir(cachesPath + `orders`,async (err, files) => {
+               if (err) throw err;
+               console.log(files);
+               
+               for (const file of files) {
+                    fs.unlink(path.join(cachesPath + `orders`, file), (err) => {
+                              if (err) throw err;
+                    });
+               }
+          });
+          
+   //  })
+     res.send(JSON.stringify('saved'));
 }

@@ -432,7 +432,8 @@ export const getMiddleRating = (obj) => {
 }
 
 export const getDataFromInterval = (data, params) => {
+     console.log(params);
      return data.filter((item, pos) => {
-          return pos >= params.start && pos <= params.start + params.count
+          return pos >= params?.start && pos <= params?.start + params?.count
      })
 }

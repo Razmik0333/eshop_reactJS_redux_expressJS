@@ -9,6 +9,7 @@ const CURRENT_ORDER_PRODUCTS = 'adminOrderDuck/CURRENT_ORDER_PRODUCTS';
 const CURRENT_ORDER_DELETE = 'adminOrderDuck/CURRENT_ORDER_DELETE';
 const TIME_OBJECT = 'adminOrderDuck/TIME_OBJECT';
 const CLEAR_TIME_OBJECT = 'adminOrderDuck/CLEAR_TIME_OBJECT';
+const ORDER_SAVE = 'adminOrderDuck/ORDER_SAVE';
 
 
 export const getOrdersList = createAction(ORDERS_LIST);
@@ -19,6 +20,7 @@ export const getCurrentOrderInfo = createAction(CURRENT_ORDER_INFO);
 export const getCurrentOrderDelete = createAction(CURRENT_ORDER_DELETE);
 export const getTimeObject = createAction(TIME_OBJECT);
 export const clearTimeObject = createAction(CLEAR_TIME_OBJECT);
+export const orderSave = createAction(ORDER_SAVE);
 
 
 
@@ -29,6 +31,7 @@ const initialStateApp = {
   currentOrderProducts:[],
   currentOrderInfo: null,
   isDeleted: false,
+  isSaved : "",
   timeObj : {}
 };
 export const currentCartItem = () => (dispatch) => {
@@ -53,6 +56,15 @@ export const resetIsDeleted = (bool) => (dispatch) => {
 export const resetTimeObject = () => (dispatch) => {
     dispatch(clearTimeObject())
 }
+export const fetchOrdersChanges = () => async(dispatch) => { 
+    
+  try {
+    const data = await (await fetch(`${root}/api/admin/orders/save`)).json();
+    dispatch(orderSave(data));
+  } catch (e) {
+    console.log('error from AdminOrderDuck', e)
+  }
+};
 export const fetchOrdersList = () => async(dispatch) => { 
     
   try {
@@ -147,6 +159,11 @@ const AdminOrderDuck = (state = initialStateApp, action) => {
       return {
         ...state,
         currentOrderProducts: action.payload,
+      };
+    case ORDER_SAVE:
+      return {
+        ...state,
+        isSaved: action.payload,
       };
 
     default:

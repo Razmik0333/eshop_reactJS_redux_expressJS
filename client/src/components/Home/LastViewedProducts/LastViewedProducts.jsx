@@ -12,24 +12,28 @@ import { getDataFromInterval } from "../../../helpers/functions/functions";
 function LastViewedProducts() {
      const dispatch = useDispatch();
      const viewedProducts =  useSelector(getViewedProductsSelector)
+     console.log("🚀 ~ LastViewedProducts ~ viewedProducts:", viewedProducts)
      useEffect(() => {
           dispatch(fetchViewedProducts(viewedProducts))
      }, [viewedProducts]);
      const viewedProductsData =  useSelector(getViewedProductsDataSelector)
+     //console.log("🚀 ~ LastViewedProducts ~ viewedProductsData:", viewedProductsData)
      const lastViewedProductsData = viewedProductsData.filter((_, pos) => pos < 4 )
      const productItemText = useSelector(currentLanguageDataSelector)?.product_item;
      const viewedProductsText = useSelector(currentLanguageDataSelector)?.home;
-     const viewId = useSelector(getViewedProductIdSelector)
+     const viewId = useSelector(getViewedProductIdSelector)// || 1
+     console.log("🚀 ~ LastViewedProducts ~ viewId:", viewId)
 
      const start = (viewId - 1) * 4; //id 1, start 0
 
      const filtered = getDataFromInterval(
           viewedProductsData,
           {
-               start,
+               start  ,
                count : 3
           }
      )
+     
      return(
           <div className="products__list">
                <div className="container product__list__container">
@@ -39,7 +43,6 @@ function LastViewedProducts() {
                          <div className="categories">
                               <span className="viewed">{viewedProductsText?.viewed}
                                    <NavLink className="viewed-link" to={'/viewed'}>
-
                                         <img src={`${root}/icons/config/arrow_right.svg`} alt="" />
                                    </NavLink>
                               
@@ -55,7 +58,6 @@ function LastViewedProducts() {
                                         })
                                    }
                               </div>
-                         
                          </>
                     }
                </div>

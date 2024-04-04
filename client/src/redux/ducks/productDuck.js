@@ -223,7 +223,7 @@ export const fetchViewedProducts = (arr) => async(dispatch) => {
     console.log('error from productDuck', e)
   }
  }else{
-  dispatch(getCartProducts([]))
+  dispatch(changeViewedProductsData([]))
  }
 };
  

@@ -42,6 +42,7 @@ export const getCurrentLanguageSelector = ({ ConfigsDuck }) => ConfigsDuck.curre
 export const getUserId = ({ UserDuck }) => UserDuck.userId; //
 export const getAvatartUrl = ({ UserDuck }) => UserDuck.avatarURL; //
 export const getUserDataSelector = ({ UserDuck }) => UserDuck.userData; //
+export const getUserCacheClearSelector = ({ UserDuck }) => UserDuck.isCleared; //
 export const getCartSelector = ({ CartDuck }) => CartDuck.cartData; //
 export const getCartCountSelector = ({ CartDuck }) => CartDuck.countItems; //
 export const getTotalPriceSelector = ({ CartDuck }) => CartDuck.totalPrice; //
@@ -87,6 +88,7 @@ export const adminProductIsDeletedSelector = ({ AdminProductDuck }) => AdminProd
 export const adminCurrentOrderSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrder; //
 export const adminCurrentOrderInfoSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrderInfo; //
 export const adminOrderIdSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrderId; //
+export const adminOrdersSaveSelector = ({ AdminOrderDuck }) => AdminOrderDuck.isSaved; //
 export const adminOrderIsDeletedSelector = ({ AdminOrderDuck }) => AdminOrderDuck.isDeleted; //
 export const adminUserListSelector = ({ AdminUserDuck }) => AdminUserDuck.usersList; //
 export const adminReviewListSelector = ({ AdminReviewDuck }) => AdminReviewDuck.reviewList; //

@@ -22,9 +22,13 @@ module.exports.wishListByUserId = async (req, res) => {
                const productsIds = getIdsArray(wishByUser.wish);
                const tokens = getTokensForQuery(productsIds);
                //const products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, productsIds);
-
-               if (fs.existsSync(`${cachesPath}/wishlist/wishlist.json`)) {
-                    fs.readFile(`${cachesPath}/wishlist/wishlist.json`, 'utf-8',
+               if (!fs.existsSync(`${cachesPath}/wishlist/${userId}`)) {
+                    fs.mkdir(`${cachesPath}/wishlist/${userId}`,{recursive: true}, (err) => {
+                         if (err) throw err
+                    });
+               }
+               if (fs.existsSync(`${cachesPath}/wishlist/${userId}/wishlist.json`)) {
+                    fs.readFile(`${cachesPath}/wishlist/${userId}/wishlist.json`, 'utf-8',
                          async function(err, data) {
                               if (err) throw err;
                               else { 
@@ -40,7 +44,7 @@ module.exports.wishListByUserId = async (req, res) => {
                                         const products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, productsIds);
                                         //const productsWithCounts = getProductsWithCounts(products, quantities);
                                         fs_functions.writeCacheFile(
-                                             `${cachesPath}/wishlist/wishlist.json`,
+                                             `${cachesPath}/wishlist/${userId}/wishlist.json`,
                                              products
                                         )
                                         res.send(products)
@@ -51,7 +55,7 @@ module.exports.wishListByUserId = async (req, res) => {
                } else {
                     const products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, productsIds);
                     fs_functions.writeCacheFile(
-                         `${cachesPath}/wishlist/wishlist.json`,
+                         `${cachesPath}/wishlist/${userId}/wishlist.json`,
                          products
                     )
                     res.send(products)
@@ -89,7 +93,7 @@ module.exports.addToWishlist = async (req, res) => {
           tokens = getTokensForQuery(productsIds);
           products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, productsIds);
           fs_functions.writeCacheFile(
-               `${cachesPath}/wishlist/wishlist.json`,
+               `${cachesPath}/wishlist/${userId}/wishlist.json`,
                products
           )
       }     
@@ -110,7 +114,7 @@ module.exports.removeFromWishlist = async (req, res) => {
           const tokens = getTokensForQuery(idsArray);
           const products = await realyze(`SELECT * FROM products WHERE id IN (${tokens})`, idsArray);
           fs_functions.writeCacheFile(
-               `${cachesPath}/wishlist/wishlist.json`,
+               `${cachesPath}/wishlist/${userId}/wishlist.json`,
                products
           )
           res.send(products);

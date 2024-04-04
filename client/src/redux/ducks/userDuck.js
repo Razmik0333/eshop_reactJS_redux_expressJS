@@ -4,17 +4,21 @@ const USER_ID = 'user/USER_ID';
 const USER_DATA = 'user/USER_DATA';
 const USER_AVATAR = 'user/USER_AVATAR';
 const USER_NAME = 'user/USER_NAME';
+const USER_CACHES = 'user/USER_CACHES';
+
 
 export const getUserId = createAction(USER_ID);
 export const getUserDataAction = createAction(USER_DATA);
 export const getUserAvatar = createAction(USER_AVATAR);
 export const getUserName = createAction(USER_NAME);
+export const clearCaches = createAction(USER_CACHES);
 
 
 const initialState = {
   userId: null,
   avatarURL: `${root}/icons/config/user_no_have_picture.png`,
   userData:{},
+  isCleared : false
 };
 
 export const currentUser = (id) => (dispatch) => {
@@ -27,6 +31,17 @@ export const currentUser = (id) => (dispatch) => {
 export const userAvatarPicture = (url) => (dispatch) => {
     dispatch(getUserAvatar(url));
 };
+
+export const clearCachesFiles = (id) => async(dispatch) => {
+  try {
+    const isCleared = await(await fetch(`/api/user/clear/${id}`)).json();  
+    console.log("🚀 ~ clearCachesFiles ~ isCleared:", isCleared)
+    dispatch(clearCaches(isCleared))
+    
+  } catch (error) {
+    throw error
+  }
+}
 
 export const getUserData = (id) => async(dispatch) => {
     if(id){
@@ -86,6 +101,11 @@ const UserDuck = (state = initialState, action) => {
           ...state.userData,
           name: action.payload
         },
+      };
+    case USER_CACHES:
+      return {
+        ...state,
+        isCleared: action.payload
       };
     default:
       return state;

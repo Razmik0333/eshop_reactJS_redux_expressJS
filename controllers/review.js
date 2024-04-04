@@ -103,7 +103,7 @@ module.exports.updateReviewById = async (req, res) => {
           const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? ORDER BY id DESC ", [userId]);
           const modReviews = await getReviewsByUser(reviews);
           fs_functions.writeCacheFile(
-               `${cachesPath}/reviews/reviewsByUser.json`,
+               `${cachesPath}/reviews/reviewsByUser/${userId}/reviewsByUser.json`,
                modReviews
           );
           res.send(modReviews)
@@ -123,7 +123,7 @@ module.exports.deleteReviewById = async (req, res) => {
 
           const modReviews = await getReviewsByUser(reviews);
           fs_functions.writeCacheFile(
-               `${cachesPath}/reviews/reviewsByUser.json`,
+               `${cachesPath}/reviews/reviewsByUser/${userId}/reviewsByUser.json`,
                modReviews
           );
           res.send(modReviews)
@@ -137,8 +137,14 @@ module.exports.reviewByUserId = async (req, res) => {
      try {
           const cachesPath = variables.caches.review;
           const userId = req.params.user_id;
-          if (fs.existsSync(`${cachesPath}/reviews/reviewsByUser.json`)) {
-               fs.readFile(`${cachesPath}/reviews/reviewsByUser.json`, 'utf-8',
+          console.log("🚀 ~ module.exports.reviewByUserId= ~ userId:", userId);
+          if (!fs.existsSync(`${cachesPath}/reviews/reviewsByUser/${userId}`)) {
+               fs.mkdir(`${cachesPath}/reviews/reviewsByUser/${userId}`,{recursive: true}, (err) => {
+                    if (err) throw err
+               });
+          }
+          if (fs.existsSync(`${cachesPath}/reviews/reviewsByUser/${userId}/reviewsByUser.json`)) {
+               fs.readFile(`${cachesPath}/reviews/reviewsByUser/${userId}/reviewsByUser.json`, 'utf-8',
                async function(err, data) {
                     if (err) throw err;
                     else {
@@ -150,7 +156,7 @@ module.exports.reviewByUserId = async (req, res) => {
                                    const modReviews = await getReviewsByUser(reviews);
      
                                    fs_functions.writeCacheFile(
-                                        `${cachesPath}/reviews/reviewsByUser.json`,
+                                        `${cachesPath}/reviews/reviewsByUser/${userId}/reviewsByUser.json`,
                                         modReviews
                                    );
                                    res.send(modReviews)
@@ -165,7 +171,7 @@ module.exports.reviewByUserId = async (req, res) => {
                const reviews = await realyze("SELECT * FROM reviews WHERE user_id = ? ORDER BY id DESC  ", [userId]);
                const modReviews = await getReviewsByUser(reviews);
                fs_functions.writeCacheFile(
-                    `${cachesPath}/reviews/reviewsByUser.json`,
+                    `${cachesPath}/reviews/reviewsByUser/${userId}/reviewsByUser.json`,
                     modReviews
                );
                res.send(modReviews)

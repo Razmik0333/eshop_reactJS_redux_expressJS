@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const path = require('path')
 const fs = require('fs')
 const fsPromises = require('fs/promises')
+const variables = require('../variables/variables')
 const realyze = require('../config').realyze
 const getWriteUploadFile = require('../functions/functions').writeUploadFile
 
@@ -103,4 +104,24 @@ module.exports.name = async ( req, res) => {
      await realyze("UPDATE user SET name = ? WHERE id = ?", [userName, userId]);
      const [newUserName] = await realyze("SELECT * FROM user WHERE id = ?", [userId]);
      res.send(JSON.stringify(newUserName['name']));
+}
+module.exports.clearCaches = async ( req, res) => { 
+     const userId = req.params.id;   
+     const userPaths = variables.cachesUser ;
+     userPaths.forEach(item => {
+          fs.readdir(item + userId,async (err, files) => {
+               if (err) throw err;
+               console.log(files);
+               
+               for (const file of files) {
+                    fs.unlink(path.join(item + userId, file), (err) => {
+                              if (err) throw err;
+                    });
+               }
+          });
+          
+     })
+     //console.log(fs.existsSync());
+     
+     res.send(JSON.stringify('Cleared'));
 }

@@ -19,7 +19,7 @@ export default function ProductReviewCounts() {
                     <div className="review__count__block">
                     {   
                          [5, 4, 3, 2, 1].map(item => {
-                              return <ProductReviewCountItem ind={item} count={(item in ratingCounts) ? ratingCounts[item].count : 0} key={`rating_count_${item}`} />
+                              return <ProductReviewCountItem ind={item} count={(item in ratingCounts) ? ratingCounts[item]?.count : 0} key={`rating_count_${item}`} />
                          })
                     }
 

@@ -6,6 +6,7 @@ import { fetchOrdersList } from "../../../../../redux/ducks/adminOrderDuck";
 import OrdersInfoItem from "../OrdersInfoItem/OrdersInfoItem";
 import OrdersInfoHeader from "../../OrdersInfo/OrdersInfoHeader";
 import "../styles/_orders-info.scss"
+import AdminOrderFooter from "../AdminOrderFooter/AdminOrderFooter";
 
 function OrdersInfo() {
      const dispatch = useDispatch();
@@ -38,6 +39,9 @@ function OrdersInfo() {
                     </div>
                </div>
 
+               <AdminOrderFooter />
+          </div>
+          <div>
           </div>
           </>
 

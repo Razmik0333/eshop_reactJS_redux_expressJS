@@ -10,7 +10,7 @@ function ProductCreateUpdateFooter() {
           dispatch(changeModal(true));                
      }
      return (
-          <button className="product__save"  onClick={confirmCreate}>
+          <button className="order__save"  onClick={confirmCreate}>
                {productsSaveLangData?.product_create_page?.headers?.save}
           </button>
      )

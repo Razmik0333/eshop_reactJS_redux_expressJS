@@ -9,7 +9,7 @@ function ProductReviews() {
      const reviewsByProduct = useSelector(getReviewsByProductSelector);
      const sortType = useSelector(getReviewSortTypeSelector)
      const productsPageData = useSelector(currentLanguageDataSelector)?.product_page;
-     const sorted = sortingReviews(reviewsByProduct, sortType.type);
+     const sorted = sortingReviews(reviewsByProduct, sortType?.type);
      const isFilter = useSelector(getReviewFilterSelector)
      const finishData = isFilter ? getReviewsHavePicture(sorted) : sorted;
 
