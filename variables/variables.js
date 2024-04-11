@@ -13,7 +13,8 @@ const cachesUserPaths = [
     `${cachesPath}/caches_orders/orders/`,
     `${cachesPath}/caches_review/reviews/reviewsByUser/`,
     `${cachesPath}/caches_interest/cart/`,
-    `${cachesPath}/caches_interest/wishlist/`
+    `${cachesPath}/caches_interest/wishlist/`,
+    `${cachesPath}/caches_products/viewed/`
 ]
 const cachesPathsAdmin = {
     product: `${cachesPath}/caches_admin/caches_admin_products/`,

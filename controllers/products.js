@@ -245,19 +245,28 @@ module.exports.productById = async (req, res) => {
 
 module.exports.productsByIds = async (req, res) => {
      try {
-          const ids = req.params.ids;
-          const cachesPath = variables.caches.product;    
-          if (fs.existsSync(`${cachesPath}/viewed/viewed.json`)) {
-               fs.readFile( `${cachesPath}/viewed/viewed.json`,"utf-8",
+          const ids = req.body.ids;
+          const userId = req.body.userId;
+          console.log("🚀 ~ module.exports.productsByIds= ~ userId:", userId)
+          console.log("🚀 ~ module.exports.productsByIds= ~ ids:", ids)
+          const cachesPath = variables.caches.product;   
+          if (!fs.existsSync(`${cachesPath}/viewed/${userId}`)) {
+               fs.mkdir(`${cachesPath}/viewed/${userId}`,{recursive: true}, (err) => {
+                    if (err) throw err
+               });
+          } 
+          if (fs.existsSync(`${cachesPath}/viewed/${userId}/viewed.json`)) {
+               fs.readFile( `${cachesPath}/viewed/${userId}/viewed.json`,"utf-8",
                async function(err, data) {
                     if (err) throw err;
                     else {
+                         console.log(data);
+                         
                          const arrOfCacheIds = JSON.parse(data).map(item => item.id);
-                         const arrOfNewIds = ids.split(',');
-                          if (arrOfNewIds.length > arrOfCacheIds.length) {                                  
+                          if (ids.length !== arrOfCacheIds.length) {                                  
                               const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
                               fs_functions.writeCacheFile(
-                                   `${cachesPath}/viewed/viewed.json`,
+                                   `${cachesPath}/viewed/${userId}/viewed.json`,
                                    result
                               )
                               res.send(result);
@@ -269,7 +278,7 @@ module.exports.productsByIds = async (req, res) => {
           } else {
                const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
                fs_functions.writeCacheFile(
-                    `${cachesPath}/viewed/viewed.json`,
+                    `${cachesPath}/viewed/${userId}/viewed.json`,
                     result
                )
                res.send(result);
@@ -278,7 +287,29 @@ module.exports.productsByIds = async (req, res) => {
           throw err;
      }
 }
+module.exports.viewed = async (req, res) => {
+     const userId = req.body.userId;
+     const product_id = req.body.product_id;
+     const [viewedByUser] = await realyze("SELECT viewed FROM `user_interest` WHERE user_id = ? ", [userId])
+     if (viewedByUser?.viewed === '') {
+          await realyze("UPDATE `user_interest` SET viewed = ? WHERE user_id = ?", [product_id,userId]);
+          res.send(JSON.stringify(product_id))
 
+     } else {
+         const viewedIds =  viewedByUser?.viewed.split('|');
+        const filtered =  viewedIds.filter(item => item === product_id);
+        if(filtered.length === 0){
+             const newIds = `${viewedByUser?.viewed}|${product_id}`;
+
+              await realyze("UPDATE `user_interest` SET viewed = ? WHERE user_id = ?", [newIds,userId])
+              res.send(JSON.stringify(newIds.split('|')))
+          }else{
+               
+               res.send(JSON.stringify(viewedIds))
+        }
+     }
+     
+}
 module.exports.productsBetweenCosts = async (req, res) => {
      const category = req.query.category;
      const start = req.query.start;

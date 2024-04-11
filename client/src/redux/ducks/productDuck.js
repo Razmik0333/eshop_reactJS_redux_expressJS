@@ -213,10 +213,19 @@ export const fetchProductsByString = (arr) => async(dispatch) => {
     console.log('error from productDuck', e)
   }
 };
-export const fetchViewedProducts = (arr) => async(dispatch) => {
- if (arr.length > 0) {
+export const fetchViewedProducts = (userId, ids) => async(dispatch) => {
+ if (userId && ids.length > 0) {
   try {
-    const data = await (await fetch(`${root}/api/list/product/${arr}`)).json()
+    const data = await (await fetch(`${root}/api/list/product`, {
+        method: "POST",
+        headers : {
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+          userId, ids
+        })
+    })).json()
+    console.log("🚀 ~ fetchViewedProducts ~ data:", data)
     dispatch(changeViewedProductsData(data));
   
   } catch (e) {
@@ -226,16 +235,35 @@ export const fetchViewedProducts = (arr) => async(dispatch) => {
   dispatch(changeViewedProductsData([]))
  }
 };
- 
+export const fetchViewedProductIds = (userId, product_id) => async (dispatch) => {
+  try {
+    
+    const data = await (await fetch(`${root}/api/viewed`, {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body : JSON.stringify({
+        userId, product_id
+      })
+    })).json();
+    console.log(data);
+    
+    dispatch(changeViewedProducts(data));
 
-export const fetchNewestProducts = (arr) => (dispatch) => {
-  fetch(`${root}/list/product/${arr}`) 
-    .then((res) => res.json())
-    .then((res) => {
-      dispatch(getNewestProducts(res));
-    })
-    .catch((e) => console.log('error from productDuck', e));
+  } catch (e) {
+    console.log('error from productDuck', e)
+  }
 };
+
+// export const fetchNewestProducts = (arr) => (dispatch) => {
+//   fetch(`${root}/list/product/${arr}`) 
+//     .then((res) => res.json())
+//     .then((res) => {
+//       dispatch(getNewestProducts(res));
+//     })
+//     .catch((e) => console.log('error from productDuck', e));
+// };
 export const fetchVerySoldedProducts = () => async(dispatch) => {
   
   try {
@@ -278,9 +306,7 @@ export const changeStepsCounts = (num) => (dispatch) => {
 export const clearProductsByCosts = () => (dispatch) => {
   dispatch(getElementsByCosts([]));
 };
-export const getViewedProducts = (id) => (dispatch) => {
-  dispatch(changeViewedProducts(id));
-};
+
 export const initialStateApp = {
   products: [], //
   productsSimilar: [], //
@@ -386,24 +412,24 @@ function ProductDuck(state = initialStateApp, action) {
         ...state,
         maxDiscountData: action.payload,
       };
-    case VIEWED_PRODUCTS:      
-      if (state.viewedProducts.length === 0) {
-          return  {
-            ...state,
-            viewedProducts: [action.payload]
+    case VIEWED_PRODUCTS: 
+        return  {
+          ...state,
+          viewedProducts: action.payload
+        }     
+      // if (state.viewedProducts.length === 0) {
           
-          }
-        }
-      else{
-        if (numInArray(state.viewedProducts, action.payload)) {          
-          return {
-            ...state,
-            viewedProducts: [...state.viewedProducts, action.payload],
-          }
-        }else{
-          return  state
-        }
-      };
+      //   }
+      // else{
+      //   if (numInArray(state.viewedProducts, action.payload)) {          
+      //     return {
+      //       ...state,
+      //       viewedProducts: [...state.viewedProducts, action.payload],
+      //     }
+      //   }else{
+      //     return  state
+      //   }
+      // };
     case VIEWED_PRODUCTS_DATA:
       return{
         ...state,

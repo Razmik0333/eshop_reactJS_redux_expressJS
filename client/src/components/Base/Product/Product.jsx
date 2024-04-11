@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { fetchAddCart, getCartItem, getCountOfCart, getTotalPriceValue } from '../../../redux/ducks/cartDuck';
-import { currentProduct } from '../../../redux/ducks/productDuck'; 
+import { currentProduct, fetchViewedProductIds } from '../../../redux/ducks/productDuck'; 
 import ModalPopup from "../../Base/Modal/ModalPopup";
 import { root } from '../../../helpers/constants/constants';
 import { changePopup, getPopupItemId } from '../../../redux/ducks/configsDuck';
@@ -22,7 +22,10 @@ function Product({product, text}) {
      const wishListData = useSelector(getWishListDataSelector);
      const wishListIds = wishListData.map(item => item?.id);
      const changeCurrentProduct = (e) => {
+          e.stopPropagation();
+          console.log(e.target);
           dispatch(currentProduct(e.target.dataset.id));
+          dispatch (fetchViewedProductIds(userId,e.target.dataset.id))
      }
      const addProductToCart = (e) => {
           userId ? 

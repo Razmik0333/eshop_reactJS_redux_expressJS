@@ -75,11 +75,16 @@ export const fetchAddWishList = (user_id,productId) => async(dispatch) => {
 
 export const fetchWishList = (userId) => async (dispatch) => {
   console.log(userId);
-  try {
-    const data = await (await fetch(`${root}/api/wishlist/${userId}`)).json();
-    dispatch(getWishListData(data));
-  } catch (e) {
-    console.log('error from wishListDuck', e)
+  if (userId) {
+    try {
+      const data = await (await fetch(`${root}/api/wishlist/${userId}`)).json();
+      dispatch(getWishListData(data));
+    } catch (e) {
+      console.log('error from wishListDuck', e)
+    }
+    
+  }else{
+    dispatch(getWishListData([]))
   }
   //arr.length === 0 ? dispatch(getWishListData([])) :
      

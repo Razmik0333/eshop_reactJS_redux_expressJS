@@ -169,21 +169,21 @@ export const changeOrderStatus = (id, userId, status) => async(dispatch) => {
     }
 
 };
-export const fetchDeliveredOrdersByUser = (id) => (dispatch) => {
+// export const fetchDeliveredOrdersByUser = (id) => (dispatch) => {
 
-  //console.log(id, status);
-  id &&
-    fetch(`${root}/package/delivered/${id}`) 
-    .then((res) => res.json())
-    .then((res) => {
+//   //console.log(id, status);
+//   id &&
+//     fetch(`${root}/package/delivered/${id}`) 
+//     .then((res) => res.json())
+//     .then((res) => {
       
-       dispatch(getDeliveredOredersByUser(Object.values(getUserOrdersFromArray(res))));
-      // dispatch(orderConfirm(true));
+//        dispatch(getDeliveredOredersByUser(Object.values(getUserOrdersFromArray(res))));
+//       // dispatch(orderConfirm(true));
       
-    })
-    .catch((e) => console.log('error from orderDuck', e));
+//     })
+//     .catch((e) => console.log('error from orderDuck', e));
 
-};
+// };
 export const fetchDeletedOrder = (user_id,order_id) => async(dispatch) => {
   try {
     const data = await (await fetch(`${root}/api/package/delete`, {

@@ -8,6 +8,7 @@ import './styles/viewed-products.scss'
 function ViewedProducts() {
      const dispatch = useDispatch();
      const viewedProducts =  useSelector(getViewedProductsSelector)
+      console.log("🚀 ~ ViewedProducts ~ viewedProducts:", viewedProducts)
       useEffect(() => {
            dispatch(fetchViewedProducts(viewedProducts))
       }, [viewedProducts]);

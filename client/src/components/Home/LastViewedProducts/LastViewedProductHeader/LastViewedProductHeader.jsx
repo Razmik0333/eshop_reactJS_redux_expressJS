@@ -6,11 +6,13 @@ import { getViewedProductId } from '../../../../redux/ducks/configsDuck';
 export default function LastViewedProductHeader() {
      const dispatch = useDispatch();
      const viewedProducts =  useSelector(getViewedProductsSelector);
-
+     console.log("🚀 ~ LastViewedProductHeader ~ viewedProducts:", viewedProducts)
+     
      const setViewId = (e) => {
           dispatch(getViewedProductId(+e.target.dataset.id))
      }
      const viewId = useSelector(getViewedProductIdSelector)
+     console.log("🚀 ~ LastViewedProductHeader ~ viewId:", viewId)
   return (
      <div className="category-line-circle">
           <div className="category-line">
@@ -18,7 +20,7 @@ export default function LastViewedProductHeader() {
           </div>
           <div className="circles">
           {
-               viewedProducts.map((item,pos) => {
+               [viewedProducts].map((item,pos) => {
 
                     return (pos +  1 ) % 3 === 0 && 
                     

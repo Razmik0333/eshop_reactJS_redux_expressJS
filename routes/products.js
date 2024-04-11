@@ -11,6 +11,7 @@ const getProductsBetweenCosts = require('../controllers/products').productsBetwe
 const getSearchedProducts = require('../controllers/products').search;
 const getVerySoldedProducts = require('../controllers/products').sold;
 const hint = require('../controllers/products').hint;
+const viewed = require('../controllers/products').viewed;
 const hintAdd = require('../controllers/products').hintAdd;
 const getProductRatings = require('../controllers/products').productsRating;
 
@@ -29,10 +30,11 @@ router.get('/product/:id', getProductById);
 router.get('/product/rating/:id', getProductRatings);
 router.get('/product/similar/:catid/:prodid', getSimilarProducts);
 router.post('/product/evaluate', uploadForReview.any(), evaluateProducts);
-router.get('/list/product/:ids', getProductsByIds);
+router.post('/list/product', getProductsByIds);
 router.get('/cost', getProductsBetweenCosts);
 router.get('/search', getSearchedProducts);
 router.put('/hint', hint);
+router.post('/viewed', viewed);
 router.put('/hint/add/:hint', hintAdd);
 router.get('/package/sold', getVerySoldedProducts);
 router.get('/mostest/rating', getMostestRatingProducts);

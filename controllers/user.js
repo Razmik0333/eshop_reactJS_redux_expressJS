@@ -6,6 +6,7 @@ const variables = require('../variables/variables')
 const realyze = require('../config').realyze
 const getWriteUploadFile = require('../functions/functions').writeUploadFile
 
+
 module.exports.userById = async (req, res) => {
      try {
           const userId = req.params.id;

@@ -1,23 +1,23 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { currentLanguageDataSelector, getViewedProductIdSelector, getViewedProductsDataSelector, getViewedProductsSelector } from "../../../helpers/reduxSelectors";
+import { currentLanguageDataSelector, getUserId, getViewedProductIdSelector, getViewedProductsDataSelector, getViewedProductsSelector } from "../../../helpers/reduxSelectors";
 import { fetchViewedProducts } from "../../../redux/ducks/productDuck";
 import Product from "../../Base/Product/Product";
 import { root } from "../../../helpers/constants/constants";
-import CategoryLineCircle from "../ProductsList/CategoryLineCircle/CategoryLineCircle";
 import LastViewedProductHeader from "./LastViewedProductHeader/LastViewedProductHeader";
 import './LastViewedProductHeader/styles/_last-viewed-product-header.scss'
 import { getDataFromInterval } from "../../../helpers/functions/functions";
 function LastViewedProducts() {
      const dispatch = useDispatch();
+     const userId = useSelector(getUserId);
      const viewedProducts =  useSelector(getViewedProductsSelector)
      console.log("🚀 ~ LastViewedProducts ~ viewedProducts:", viewedProducts)
      useEffect(() => {
-          dispatch(fetchViewedProducts(viewedProducts))
+          dispatch(fetchViewedProducts(userId, viewedProducts))
      }, [viewedProducts]);
      const viewedProductsData =  useSelector(getViewedProductsDataSelector)
-     //console.log("🚀 ~ LastViewedProducts ~ viewedProductsData:", viewedProductsData)
+     console.log("🚀 ~ LastViewedProducts ~ viewedProductsData:", viewedProductsData)
      const lastViewedProductsData = viewedProductsData.filter((_, pos) => pos < 4 )
      const productItemText = useSelector(currentLanguageDataSelector)?.product_item;
      const viewedProductsText = useSelector(currentLanguageDataSelector)?.home;

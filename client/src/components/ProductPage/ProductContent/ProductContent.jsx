@@ -14,7 +14,7 @@ function ProductContent() {
      useEffect(() => {
           dispatch(fetchCurrentProduct(currentProductId));
           dispatch(fetchCurrentProductsReviews(currentProductId));
-          dispatch(getViewedProducts(currentProductId))
+          //dispatch(getViewedProducts(currentProductId))
           dispatch(fetchAllSoldedProducts())
      }, [currentProductId]);
      return (

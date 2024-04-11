@@ -143,6 +143,7 @@ module.exports.reviewByUserId = async (req, res) => {
                     if (err) throw err
                });
           }
+
           if (fs.existsSync(`${cachesPath}/reviews/reviewsByUser/${userId}/reviewsByUser.json`)) {
                fs.readFile(`${cachesPath}/reviews/reviewsByUser/${userId}/reviewsByUser.json`, 'utf-8',
                async function(err, data) {
@@ -192,7 +193,7 @@ module.exports.getLatestReviews = async(req, res) => {
                          if (JSON.parse(data)[0].id < lastReviewId.max) {
                               const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 9");    
                               const modReviews = await getReviewsFromProducts(reviews);
-                             
+                           
                               fs_functions.writeCacheFile(
                                    `${cachesPath}/reviews/latest.json`,
                                    modReviews);

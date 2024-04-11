@@ -7,6 +7,7 @@ import { changeCurrencies, changeCurrency, changeLanguage, changeLanguages, fetc
 import MenuBurger from './MenuBurger/MenuBurger';
 import './styles/_header.scss';
 import { fetchCurrentCart } from '../../../redux/ducks/cartDuck';
+import { fetchWishList } from '../../../redux/ducks/wishListDuck';
 
 function Header() {
      const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function Header() {
      }, []);
      useEffect(() => {
           dispatch(fetchCurrentCart(userId))
-          
+          dispatch(fetchWishList(userId))     
      }, [userId]);
 
      const changeCurrentCurrency = (e) => {

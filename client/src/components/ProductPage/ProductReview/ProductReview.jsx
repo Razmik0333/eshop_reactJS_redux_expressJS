@@ -10,9 +10,9 @@ import './styles/_product-review.scss';
 function ProductReview() {
      const dispatch = useDispatch();
      const currentUser = useSelector(getUserDataSelector);
-     useEffect(() => {
-          dispatch(fetchDeliveredOrdersByUser(currentUser?.id))
-     }, []);
+     // useEffect(() => {
+     //      dispatch(fetchDeliveredOrdersByUser(currentUser?.id))
+     // }, []);
      const tabName = useSelector(getCurrentTabNameSelector)
      
      return (
