@@ -111,9 +111,7 @@ module.exports.clearCaches = async ( req, res) => {
      const userPaths = variables.cachesUser ;
      userPaths.forEach(item => {
           fs.readdir(item + userId,async (err, files) => {
-               if (err) throw err;
-               console.log(files);
-               
+               if (err) throw err;               
                for (const file of files) {
                     fs.unlink(path.join(item + userId, file), (err) => {
                               if (err) throw err;
@@ -121,8 +119,6 @@ module.exports.clearCaches = async ( req, res) => {
                }
           });
           
-     })
-     //console.log(fs.existsSync());
-     
+     })     
      res.send(JSON.stringify('Cleared'));
 }

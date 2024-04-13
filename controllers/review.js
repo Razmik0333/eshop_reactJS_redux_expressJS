@@ -62,9 +62,7 @@ module.exports.ratingCounts = async (req, res) => {
                if (err) throw err;
                else {
                          const [lastReviewByProductId] = await realyze("SELECT MAX(id) AS max FROM reviews WHERE product_id = ?  ", [productId])
-                         if (JSON.parse(data).length === lastReviewByProductId.max) {
-                              console.log('read');
-                              
+                         if (JSON.parse(data).length === lastReviewByProductId.max) {                              
                               const ratingCounts = getRatingCounts(JSON.parse(data));
                               res.send(ratingCounts);
                          }else{
@@ -137,7 +135,6 @@ module.exports.reviewByUserId = async (req, res) => {
      try {
           const cachesPath = variables.caches.review;
           const userId = req.params.user_id;
-          console.log("🚀 ~ module.exports.reviewByUserId= ~ userId:", userId);
           if (!fs.existsSync(`${cachesPath}/reviews/reviewsByUser/${userId}`)) {
                fs.mkdir(`${cachesPath}/reviews/reviewsByUser/${userId}`,{recursive: true}, (err) => {
                     if (err) throw err

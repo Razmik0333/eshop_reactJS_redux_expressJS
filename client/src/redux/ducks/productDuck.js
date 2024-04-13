@@ -26,6 +26,7 @@ const CLEAR_PRODUCT_REVIEW = 'productDuck/CLEAR_PRODUCT_REVIEW';
 const FETCH_MOSTEST = 'productDuck/FETCH_MOSTEST';
 const FETCH_MOSTEST_SALE = 'productDuck/FETCH_MOSTEST_SALE';
 
+const RATING_UPDATE = 'productDuck/RATING_UPDATE';
 
 export const getProducts = createAction(FETCH_PRODUCTS);
 export const getProductsSimilar = createAction(FETCH_PRODUCTS_SIMILAR);
@@ -52,6 +53,11 @@ export const changeEvaluatedProductItem = createAction(EVALUATED_PRODUCT_ITEM);
 export const clearProductReviewData = createAction(CLEAR_PRODUCT_REVIEW);
 export const changeMostest = createAction(FETCH_MOSTEST);
 //export const changeMostestSale = createAction(FETCH_MOSTEST_SALE);
+
+
+export const changeRatingUpdate = createAction(RATING_UPDATE);
+
+
 
 
 export const clearSearchData = (arr) => (dispatch) => {
@@ -193,13 +199,14 @@ export const fetchRecomendedProducts = () => async(dispatch) => {
     console.log('error from productDuck', e)
   }
 };
-export const changeProductsRating = (productIds) => async(dispatch) => {
+export const changeProductsRating = (id) => async(dispatch) => {
 
   try {
-    const data = await (await fetch(`${root}/api/product/rating/${productIds}`)).json()
-
+    const data = await (await fetch(`${root}/api/product/rating/${id}`)).json()
+    dispatch(changeRatingUpdate(data))
+    console.log("🚀 ~ changeProductsRating ~ data:", data)
   } catch (error) {
-    
+    throw error;
   }
 };
 export const fetchProductsByString = (arr) => async(dispatch) => {

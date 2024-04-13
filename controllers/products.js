@@ -114,9 +114,6 @@ module.exports.productsByLargeDiscount = async (req, res) => {
                     })
                     
                }else{
-                    const [result] = await realyze("SELECT MAX(discount) AS max FROM `products` ");
-
-                    console.log("🚀 ~ module.exports.productsByLargeDiscount= ~ result:", result)
                     const discountedProducts = await realyze("SELECT * FROM `products`  ORDER BY discount DESC LIMIT ?", [3])
                     fs_functions.writeCacheFile(
                          `${cachesPath}/large_discount/large_discount.json`,
@@ -247,8 +244,6 @@ module.exports.productsByIds = async (req, res) => {
      try {
           const ids = req.body.ids;
           const userId = req.body.userId;
-          console.log("🚀 ~ module.exports.productsByIds= ~ userId:", userId)
-          console.log("🚀 ~ module.exports.productsByIds= ~ ids:", ids)
           const cachesPath = variables.caches.product;   
           if (!fs.existsSync(`${cachesPath}/viewed/${userId}`)) {
                fs.mkdir(`${cachesPath}/viewed/${userId}`,{recursive: true}, (err) => {
@@ -259,9 +254,7 @@ module.exports.productsByIds = async (req, res) => {
                fs.readFile( `${cachesPath}/viewed/${userId}/viewed.json`,"utf-8",
                async function(err, data) {
                     if (err) throw err;
-                    else {
-                         console.log(data);
-                         
+                    else {                        
                          const arrOfCacheIds = JSON.parse(data).map(item => item.id);
                           if (ids.length !== arrOfCacheIds.length) {                                  
                               const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
@@ -294,7 +287,6 @@ module.exports.viewed = async (req, res) => {
      if (viewedByUser?.viewed === '') {
           await realyze("UPDATE `user_interest` SET viewed = ? WHERE user_id = ?", [product_id,userId]);
           res.send(JSON.stringify(product_id))
-
      } else {
          const viewedIds =  viewedByUser?.viewed.split('|');
         const filtered =  viewedIds.filter(item => item === product_id);
@@ -421,8 +413,10 @@ module.exports.productsRating = async( req, res) => {
           const current = getMiddleRating(productItem)
           await realyze("UPDATE products SET rating = ?  WHERE id = ? ", [current, item] )
      })
+
      res.send(JSON.stringify('1'))
 }
+
 
 module.exports.mostestRating = async (req, res) => {
      const mostestData = await realyze("SELECT product_id, rating FROM reviews WHERE rating = 5 ", []);
@@ -440,6 +434,7 @@ module.exports.mostestRating = async (req, res) => {
           }
           return acc;
      },{});
+     
      let max = 0;
      let maxObj = {}
      for (const key in mostData) {
@@ -452,7 +447,7 @@ module.exports.mostestRating = async (req, res) => {
                } 
           }
      }
-     const [maxRated] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
+     const [maxRated] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])     
      res.send(JSON.stringify(maxRated))
 }
 
@@ -466,7 +461,9 @@ module.exports.mostestSale = async(req, res) => {
 
 module.exports.mostestRecent = async(req, res) => {
      const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products ")
-     const [recentAddedProduct] = await realyze("SELECT * FROM products WHERE id = ? ", [lastProductId.max])
+     const [recentAddedProduct] = await realyze("SELECT * FROM products WHERE id = ? ", [lastProductId.max]);
+         
+     
      res.send(JSON.stringify(recentAddedProduct))
 }
 

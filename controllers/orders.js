@@ -15,10 +15,7 @@ module.exports.ordersByUser = async (req, res) => {
 module.exports.allOrdersByUser = async (req, res) => {
      try {
           const cachesPath = variables.caches.order;
-          const userId = req.params.id;
-          console.log("🚀 ~ module.exports.allOrdersByUser= ~ userId:", `${cachesPath}/orders/${userId}`)
-          //console.log(fs.existsSync(`${cachesPath}/orders/${userId}`));
-          
+          const userId = req.params.id;          
           if (!fs.existsSync(`${cachesPath}/orders/${userId}`)) {
                fs.mkdir(`${cachesPath}/orders/${userId}`,{recursive: true}, (err) => {
                     if (err) throw err

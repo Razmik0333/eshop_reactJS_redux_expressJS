@@ -92,7 +92,6 @@ module.exports.addToCartById = async (req, res) => {
 
                
                cart = JSON.stringify(cart)
-               console.log("🚀 ~ module.exports.addToCartById= ~ cart:", cart)
                //await realyze("UPDATE `user_interest` SET cart = ? WHERE `user_id`= ? ", [cart,userId]);  
           }else{
                  cart = JSON.stringify({

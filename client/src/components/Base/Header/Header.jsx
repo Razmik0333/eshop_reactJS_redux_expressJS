@@ -24,7 +24,6 @@ function Header() {
           dispatch(changeLanguages());
           dispatch(changeCurrencies());
           dispatch(fetchLanguageData(currentLanguage));
-
      }, []);
      useEffect(() => {
           dispatch(fetchCurrentCart(userId))

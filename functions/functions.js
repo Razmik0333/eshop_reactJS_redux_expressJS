@@ -208,9 +208,7 @@ const getReviewListFromProduct = async (data) => {
      }))
 }
 
-const getRatingCounts = (data) => {
-     console.log(typeof data);
-     
+const getRatingCounts = (data) => {    
      return data.reduce((acc, curr) => {
           if (!(curr.rating in acc)) {
                acc[curr.rating] = {

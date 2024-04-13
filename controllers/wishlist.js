@@ -11,7 +11,6 @@ module.exports.wishListByUserId = async (req, res) => {
           const cachesPath = variables.caches.interest;
 
           const userId = req.params.user_id;
-          console.log("🚀 ~ module.exports.wishListByUserId= ~ userId:", userId)
           const [wishByUser] = await realyze("SELECT `wish` FROM `user_interest` WHERE `user_id`= ? ", [userId]);
           if (wishByUser === undefined) {
                await realyze("INSERT INTO `user_interest`(user_id, wish, cart) VALUES ( ?, ?, ?)  ", [userId, '', ''])

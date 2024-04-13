@@ -36,7 +36,7 @@ function HeaderDown() {
                     <span className="phone-icon">
                          <img src={`${root}/icons/config/phone.svg`} alt="" />
                     </span>
-                    <a type="phone" href="/" className="phone-number">2300 - 3560 - 222</a>
+                    <a type="phone" href="/" className="phone-number">(+374)41-016-006</a>
                </div>
                <div className="header__down__item logo__part">
                     <a href="/home">
