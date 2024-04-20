@@ -1,16 +1,15 @@
 const fs = require('fs');
 const realyze = require('../../config').realyze;
-const path = require("path")
+const path = require("path");
+const mailer = require("../../nodemailer");
 const functions = require('../../functions/functions');
 const getTokensForQuery = functions.query;
 const getAdminCurrentOrderData = functions.adminOrderCurrentData;
-
+const getMessageObjectStatusChange = functions.messageObjectStatusChange;
 const fs_functions = require('../../functions/fs_functions')
 const variables = require('../../variables/variables')
 module.exports.adminOrdersList = async(req, res) => {
-     //const id = req.params.id; //
-     console.log('jhbfm');
-     
+     //const id = req.params.id; //    
      const cachesPathAdmin = variables.cachesAdmin.order;
      if (fs.existsSync(`${cachesPathAdmin}/caches_admin_order.json`)) {
           fs.readFile(`${cachesPathAdmin}/caches_admin_order.json`, 'utf-8',
@@ -43,6 +42,7 @@ module.exports.adminOrdersList = async(req, res) => {
           res.send(orders)
      }
 }
+
 
 
 
@@ -86,10 +86,13 @@ module.exports.adminOrderById = async(req, res) => {
 module.exports.adminStatusUpdate = async (req, res) => {
      const orderId = req.params.order_id; //
      const statusIndex = req.body.user_status;
+     const userId = req.body.user_id;
      const cachesPathAdmin =variables.cachesAdmin.order;
-
-     console.log("🚀 ~ module.exports.adminStatusUpdate= ~ statusIndex:", statusIndex)
+     const [userEmail] = await realyze("SELECT `email` FROM `user` WHERE id = ?", [userId])
+     const message = getMessageObjectStatusChange(userEmail?.email, statusIndex,orderId)
+     await mailer(message);     
      await realyze("UPDATE `orders` SET user_status = ? WHERE id = ? ", [statusIndex, orderId]);
+     //const messageObject = getMessageObjectStatusChange();
      const updatedOrder = await realyze("SELECT * FROM `orders` WHERE id = ?", [orderId]);
      const allOrders = await realyze("SELECT * FROM `orders` ");
      fs_functions.writeCacheFile(

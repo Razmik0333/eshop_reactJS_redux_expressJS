@@ -102,34 +102,38 @@ const getMiddleRating = (arr) => {
               return acc += curr.rating
      }, 0)
      return parseFloat(summ/arr.length).toFixed(2);
-         
 }
 const getStatus = (num) => {
      switch (num) {
           case 0:
                return {
                     title: 'Ընդունված',
-                    status : 'accept' 
+                    status : 'accept',
+                    message: 'ընդունվել է'
                }
           case 1:
                return {
                     title: 'Ուղարկված',
-                    status : 'reached' 
+                    status : 'reached',
+                    message: 'ուղարկվել է'
                }
           case 2:
                return {
                     title: 'Հանձնված Փ/Բ',
-                    status : 'delivered_PS' 
+                    status : 'delivered_PS',
+                    message: 'հանձնվել է ՓԲ'
                }
           case 3:
                return {
                     title: 'Հանձնված',
-                    status : 'delivered' 
+                    status : 'delivered',
+                    message: 'հանձնվել է'
                }     
           case 4:
                return {
                     title: 'Ավարտված',
-                    status : 'finished' 
+                    status : 'finished',
+                    message: 'Ավարտվել է'
                }     
           default:
                break;
@@ -223,6 +227,30 @@ const getRatingCounts = (data) => {
      },{})
 }
 
+
+const getMessageObjectStatusChange = (to, statusIndex,orderId) => {
+     const subject = `Ձեր պատվերը ${getStatus(+statusIndex).message}`;
+     const text = `Շնորհավորում ենք ։ Ձեր ${orderId} պատվերը ${getStatus(+statusIndex).message}`;
+     const html = `<b>${text}</b>`
+     return {
+          to, subject, text , html
+     };
+}
+const getMessageObjectAuth = (to, type) => {
+     const subject = type === "login" ? 
+          `Դուք մուտք եք գործել համակարգ` :
+                `Դուք գրանցվել եք համակարգում`
+     const text = type === "login" ?
+           `Շնորհավորում ենք Դուք մուտք եք գործել համակարգ` :
+                `Շնորհավորում ենք Դուք գրանցվել եք համակարգում`;
+     const html = `<b>${text}</b>`
+     return {
+          to, subject, text , html
+     };
+}
+
+
+
 module.exports = {
      solded : [
           getMaxSoldedProducts,
@@ -240,6 +268,8 @@ module.exports = {
      middleRating : getMiddleRating,
      productsWithCounts:getProductsWithCounts,
      statusIndex : getStatus,
+     messageObjectStatusChange: getMessageObjectStatusChange,
+     messageObjectAuth: getMessageObjectAuth,
      reviewsFromProducts:getReviewsFromProducts,
      reviewsByUser:getReviewsByUser,
      reviewsByProduct:getReviewListFromProduct,

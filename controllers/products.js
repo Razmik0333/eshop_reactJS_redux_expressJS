@@ -264,6 +264,7 @@ module.exports.productsByIds = async (req, res) => {
                               )
                               res.send(result);
                          }else {
+                              
                               res.send(data);
                          }                                 
                     }

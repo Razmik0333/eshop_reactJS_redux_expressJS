@@ -5,6 +5,7 @@ import ProductsList from "./ProductsList/ProductsList";
 import SpecialOffers from "./Special-Offers/SpecialOffers";
 import LatestBlog from "./LatestBlog/LatestBlog";
 import LastViewedProducts from "./LastViewedProducts/LastViewedProducts";
+import NewsLetters from "../Products-details/NewsLetters/NewsLetters";
 
 function Home() {
      return(
@@ -16,6 +17,7 @@ function Home() {
                <LastViewedProducts />
                <SpecialOffers />
                <LatestBlog />
+               <NewsLetters />
                {/* <ClientFeedback /> */}
           </>
      )

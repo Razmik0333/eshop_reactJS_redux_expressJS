@@ -3,6 +3,7 @@ upload
 uploads
 public/icons
 public/images
+cards
 client/public/images
 cache_files
 */dist

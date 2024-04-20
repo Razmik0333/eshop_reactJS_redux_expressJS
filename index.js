@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 
+
 const categoryRoutes = require('./routes/category')
 const cartRoutes = require('./routes/cart')
 const productRoutes = require('./routes/products')
@@ -18,8 +19,6 @@ const adminReviews = require('./routes/admin/review')
 
 
 const app = express();
-
-
 
 
 const PORT = process.env.PORT || 3001;

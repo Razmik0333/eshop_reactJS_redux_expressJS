@@ -1,10 +1,13 @@
-const bcrypt = require('bcrypt')
-const path = require('path')
-const fs = require('fs')
-const fsPromises = require('fs/promises')
-const variables = require('../variables/variables')
-const realyze = require('../config').realyze
-const getWriteUploadFile = require('../functions/functions').writeUploadFile
+const fs = require('fs');
+const fsPromises = require('fs/promises');
+const path = require('path');
+const bcrypt = require('bcrypt');
+const mailer = require('../nodemailer');
+const functions = require('../functions/functions');
+const getMessageObjectAuth = functions.messageObjectAuth;
+const variables = require('../variables/variables');
+const realyze = require('../config').realyze;
+
 
 
 module.exports.userById = async (req, res) => {
@@ -32,14 +35,18 @@ module.exports.userById = async (req, res) => {
 module.exports.login = async (req, res) => {     
      const [email, password] = [req.body.email, req.body.password]
      const [user] = await realyze("SELECT * FROM `user` WHERE `email`= ? ", [email]);
+     console.log(user);
      
      if(user && await bcrypt.compare(password, user.password)){
           //req.session.user = user;
+          const message = getMessageObjectAuth(req.body.email, "login")
+          await mailer(message);
           res.send(`${user.id}`);
      }else{
           res.send('0');
      }
 }
+
 
 module.exports.register = async (req, res) => {
      const user = req.body;
@@ -48,6 +55,9 @@ module.exports.register = async (req, res) => {
      if(emailExist.length === 0){
           await realyze("INSERT INTO `user` (login, password, email, name, gender, role, time_add) VALUES ( ?, ?, ?, ?, ?, ?, ?) ",
           [user.login, passwordHash, user.email, user.name, user.gender,'user', Date.now()]);
+          const message = getMessageObjectAuth(user.email, "register");
+          await mailer(message);
+
           res.send('1')
      }else{
           res.send('0')
@@ -110,15 +120,16 @@ module.exports.clearCaches = async ( req, res) => {
      const userId = req.params.id;   
      const userPaths = variables.cachesUser ;
      userPaths.forEach(item => {
-          fs.readdir(item + userId,async (err, files) => {
-               if (err) throw err;               
-               for (const file of files) {
-                    fs.unlink(path.join(item + userId, file), (err) => {
-                              if (err) throw err;
-                    });
-               }
-          });
-          
+          if (fs.existsSync(item + userId)) {
+               fs.readdir(item + userId,async (err, files) => {
+                    if (err) throw err;               
+                    for (const file of files) {
+                         fs.unlink(path.join(item + userId, file), (err) => {
+                                   if (err) throw err;
+                         });
+                    }
+               });
+          }
      })     
      res.send(JSON.stringify('Cleared'));
 }

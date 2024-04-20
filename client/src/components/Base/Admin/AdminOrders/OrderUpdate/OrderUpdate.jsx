@@ -23,8 +23,10 @@ function OrderUpdate() {
      const [customerComment, setCustomerComment] = useState(``);
      const [orderPrice, setOrderPrice] = useState("");
      const [orderStatus, setOrderStatus] = useState('');
+     const [userId, setUserId] = useState('');
 
      const currentOrder = useSelector(adminCurrentOrderSelector);
+     console.log("🚀 ~ OrderUpdate ~ currentOrder:", currentOrder)
 
      useEffect(() => {
        
@@ -32,6 +34,7 @@ function OrderUpdate() {
 
                setCustomerName(currentOrder?.user_name);
                setCustomerPhone(currentOrder?.user_phone);
+               setUserId(currentOrder?.user_id);
                setCustomerComment(currentOrder?.user_comment);
                setOrderPrice( currentOrder?.user_price);
                setOrderStatus(currentOrder?.user_status);
@@ -81,6 +84,14 @@ function OrderUpdate() {
                                         setCustomerName(e.target.value)
                                    }}
                                    disabled
+                              />
+                              <input 
+                                   type="text" 
+                                   name="user_id" 
+                                   id="user_id" 
+                                   value={userId}
+                                   onChange={() => { }}
+                                   
                               />
                          </div>
                          <div className="form__item">
