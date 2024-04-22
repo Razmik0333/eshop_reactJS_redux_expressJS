@@ -5,6 +5,7 @@ const USER_DATA = 'user/USER_DATA';
 const USER_AVATAR = 'user/USER_AVATAR';
 const USER_NAME = 'user/USER_NAME';
 const USER_CACHES = 'user/USER_CACHES';
+const EMAIL_SUBSCRIBE = 'user/EMAIL_SUBSCRIBE';
 
 
 export const getUserId = createAction(USER_ID);
@@ -12,13 +13,15 @@ export const getUserDataAction = createAction(USER_DATA);
 export const getUserAvatar = createAction(USER_AVATAR);
 export const getUserName = createAction(USER_NAME);
 export const clearCaches = createAction(USER_CACHES);
+export const changeEmail = createAction(EMAIL_SUBSCRIBE);
 
 
 const initialState = {
   userId: null,
   avatarURL: `${root}/icons/config/user_no_have_picture.png`,
   userData:{},
-  isCleared : false
+  isCleared : false,
+  emailSubscribe : false,
 };
 
 export const currentUser = (id) => (dispatch) => {
@@ -42,7 +45,23 @@ export const clearCachesFiles = (id) => async(dispatch) => {
     throw error
   }
 }
-
+export const fetchEmailForNotice = (email) => async (dispatch) => {
+  try {
+    const data = await(await fetch(`api/notice/email`, {
+      headers: {
+        "Content-Type":"application/json"
+      },
+      method:"POST",
+      body:JSON.stringify({email})
+    })).json();
+    dispatch(changeEmail(data));
+    
+  } catch (error) {
+    throw error;
+  }  
+  
+ 
+}
 export const getUserData = (id) => async(dispatch) => {
     if(id){
       try {
@@ -106,6 +125,11 @@ const UserDuck = (state = initialState, action) => {
       return {
         ...state,
         isCleared: action.payload
+      };
+    case EMAIL_SUBSCRIBE:
+      return {
+        ...state,
+        emailSubscribe: action.payload
       };
     default:
       return state;

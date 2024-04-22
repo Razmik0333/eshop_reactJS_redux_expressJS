@@ -12,7 +12,7 @@
           font-weight: 700;
           margin-right: 40px;
      }
-     input{
+     .newsletter__email{
           width: 33%;
           height: 40px;
           background-image:url('/scss/img/mail_orange.png') ;
@@ -21,7 +21,12 @@
           background-position: 10px 12px;
           padding: 0 50px;
           border-radius: 10px;
-          border: 0;
+          //border: 0;
+          outline: 0;
+     }
+
+     .wrong{
+          border: 2px solid rgb(185, 73, 73);
      }
      button{
           width: 44px;height: 44px;

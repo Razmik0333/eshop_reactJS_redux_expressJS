@@ -6,6 +6,7 @@ const fs_functions = require('../functions/fs_functions');
 const getTokensForQuery = functions.query;
 const getIdsArray = functions.idsArray;
 
+
 module.exports.wishListByUserId = async (req, res) => {
      try {
           const cachesPath = variables.caches.interest;

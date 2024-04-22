@@ -103,8 +103,9 @@ module.exports.addProductsWithList = async(req, res) => {
           
           const workbook = XLSX.readFile(path.resolve() + "/upload/data/data.xlsx");
           let worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      
-          for (let index = 2; index <= 7; index++) {
+          const lastFieldIndex = worksheet['!ref'].split(":")[1];
+          const rows = lastFieldIndex.slice(1, lastFieldIndex.length)
+          for (let index = 2; index < rows; index++) {
                const category = worksheet[`B${index}`].v
                const alias = worksheet[`C${index}`].v;
                const arm_name = worksheet[`D${index}`].v;

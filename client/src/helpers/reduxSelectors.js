@@ -43,6 +43,7 @@ export const getUserId = ({ UserDuck }) => UserDuck.userId; //
 export const getAvatartUrl = ({ UserDuck }) => UserDuck.avatarURL; //
 export const getUserDataSelector = ({ UserDuck }) => UserDuck.userData; //
 export const getUserCacheClearSelector = ({ UserDuck }) => UserDuck.isCleared; //
+export const getEmailNoticeSelector = ({ UserDuck }) => UserDuck.emailSubscribe; //
 export const getCartSelector = ({ CartDuck }) => CartDuck.cartData; //
 export const getCartCountSelector = ({ CartDuck }) => CartDuck.countItems; //
 export const getTotalPriceSelector = ({ CartDuck }) => CartDuck.totalPrice; //

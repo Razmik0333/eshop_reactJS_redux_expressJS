@@ -111,6 +111,7 @@ module.exports.productsByLargeDiscount = async (req, res) => {
                          else { 
                               res.send(data);                          
                          }
+                         
                     })
                     
                }else{

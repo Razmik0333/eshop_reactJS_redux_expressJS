@@ -85,9 +85,7 @@ export const getEvaluatedProductItem = (obj) => (dispatch) => {
 }
 
 export const fetchProductsForStartingPage = (id) => async (dispatch) => {
-  try {
-    console.log(id);
-    
+  try {   
     const data = await(await fetch(`${root}/api/main/${id}`)).json()
     dispatch(getProducts(data));
   } catch (e) {
@@ -231,8 +229,7 @@ export const fetchViewedProducts = (userId, ids) => async(dispatch) => {
         body: JSON.stringify({
           userId, ids
         })
-    })).json()
-    console.log("🚀 ~ fetchViewedProducts ~ data:", data)
+    })).json();
     dispatch(changeViewedProductsData(data));
   
   } catch (e) {

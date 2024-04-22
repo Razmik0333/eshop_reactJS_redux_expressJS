@@ -12,17 +12,14 @@ function LastViewedProducts() {
      const dispatch = useDispatch();
      const userId = useSelector(getUserId);
      const viewedProducts =  useSelector(getViewedProductsSelector)
-     console.log("🚀 ~ LastViewedProducts ~ viewedProducts:", viewedProducts)
      useEffect(() => {
           dispatch(fetchViewedProducts(userId, viewedProducts))
      }, [viewedProducts]);
      const viewedProductsData =  useSelector(getViewedProductsDataSelector)
-     console.log("🚀 ~ LastViewedProducts ~ viewedProductsData:", viewedProductsData)
      const lastViewedProductsData = viewedProductsData.filter((_, pos) => pos < 4 )
      const productItemText = useSelector(currentLanguageDataSelector)?.product_item;
      const viewedProductsText = useSelector(currentLanguageDataSelector)?.home;
      const viewId = useSelector(getViewedProductIdSelector)// || 1
-     console.log("🚀 ~ LastViewedProducts ~ viewId:", viewId)
 
      const start = (viewId - 1) * 4; //id 1, start 0
 

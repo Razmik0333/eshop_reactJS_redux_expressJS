@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
                
                const [picturesMaxId] = await realyze("SELECT MAX(id) AS id FROM `products`")
                const pictId = +picturesMaxId.id +  +file.originalname.split(".")[0];
+               console.log("🚀 ~ filename: ~ pictId:", pictId)
                const uniqueSuffix = `${pictId}.jpg`//Date.now() + '-' + file.originalname;
                cb(null, uniqueSuffix)
                
