@@ -40,7 +40,7 @@ function HeaderDown() {
                </div>
                <div className="header__down__item logo__part">
                     <a href="/home">
-                         <img src={`${root}/icons/config/Layer 1.png`} alt=""  />
+                         <img src={`${root}/icons/config/logo.jpg`} alt=""  />
                     </a>
                </div>
                     <div className="header__down__item">

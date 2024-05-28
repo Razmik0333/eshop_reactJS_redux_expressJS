@@ -12,7 +12,7 @@ const REVIEW_BY_USER = 'reviewDuck/REVIEW_BY_USER';
 const REVIEW_IS_DELETED = 'reviewDuck/REVIEW_IS_DELETED';
 const REVIEW_SORT_TYPE = 'reviewDuck/REVIEW_SORT_TYPE';
 const REVIEW_FILTER_WITH_PICTURE = 'reviewDuck/REVIEW_FILTER_WITH_PICTURE';
-// const CLEAR_ORDER_FROM_STATUS = 'orderDuck/CLEAR_ORDER_FROM_STATUS';
+const REVIEW_CONTENT_MODAL = 'orderDuck/REVIEW_CONTENT_MODAL';
 
 
 export const currentTabName = createAction(CURRENT_TAB_NAME);
@@ -25,7 +25,8 @@ export const getReviewId = createAction(REVIEW_ID);
 export const getReviewIsDeleted = createAction(REVIEW_IS_DELETED);
 export const changeReviewSortType = createAction(REVIEW_SORT_TYPE);
 export const changeReviewFilterWithPicture = createAction(REVIEW_FILTER_WITH_PICTURE);
-// export const clearOrders = createAction(CLEAR_ORDER_FROM_STATUS);createAction(CHANGE_ORDER_CONFIRMED_ID);
+export const changeReviewModal = createAction(REVIEW_CONTENT_MODAL);
+//createAction(CHANGE_ORDER_CONFIRMED_ID);
 
 
 
@@ -39,7 +40,8 @@ const initialStateApp = {
   reviewId : 1,
   isDeleted : false,
   reviewSortType : "newest",
-  isFilter:false
+  isFilter:false,
+  currentReviewId: {}
 };
 
 
@@ -63,6 +65,10 @@ const initialStateApp = {
  export const getReviewFilter = (bool) => (dispatch) => {
 
    dispatch(changeReviewFilterWithPicture(bool));
+ }
+ export const getReviewModal = (id) => (dispatch) => {
+
+   dispatch(changeReviewModal(id));
  }
 
 
@@ -187,6 +193,12 @@ const ReviewDuck = (state = initialStateApp, action) => {
         return {
           ...state,
           isFilter: action.payload,
+        }      
+        
+    case REVIEW_CONTENT_MODAL:
+        return {
+          ...state,
+          currentReviewId: action.payload,
         }      
         
 

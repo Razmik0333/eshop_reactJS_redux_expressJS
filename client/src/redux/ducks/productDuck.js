@@ -24,7 +24,7 @@ const EVALUATED_PRODUCTS_DATA = 'productDuck/EVALUATED_PRODUCTS_DATA';
 const EVALUATED_PRODUCT_ITEM = 'productDuck/EVALUATED_PRODUCT_ITEM';
 const CLEAR_PRODUCT_REVIEW = 'productDuck/CLEAR_PRODUCT_REVIEW';
 const FETCH_MOSTEST = 'productDuck/FETCH_MOSTEST';
-const FETCH_MOSTEST_SALE = 'productDuck/FETCH_MOSTEST_SALE';
+const FETCH_SERVICES = 'productDuck/FETCH_SERVICES';
 
 const RATING_UPDATE = 'productDuck/RATING_UPDATE';
 
@@ -52,6 +52,7 @@ export const changeProductReviewData = createAction(EVALUATED_PRODUCTS_DATA);
 export const changeEvaluatedProductItem = createAction(EVALUATED_PRODUCT_ITEM);
 export const clearProductReviewData = createAction(CLEAR_PRODUCT_REVIEW);
 export const changeMostest = createAction(FETCH_MOSTEST);
+export const getServices = createAction(FETCH_SERVICES);
 //export const changeMostestSale = createAction(FETCH_MOSTEST_SALE);
 
 
@@ -219,6 +220,8 @@ export const fetchProductsByString = (arr) => async(dispatch) => {
   }
 };
 export const fetchViewedProducts = (userId, ids) => async(dispatch) => {
+  console.log(ids);
+  
  if (userId && ids.length > 0) {
   try {
     const data = await (await fetch(`${root}/api/list/product`, {
@@ -260,14 +263,7 @@ export const fetchViewedProductIds = (userId, product_id) => async (dispatch) =>
   }
 };
 
-// export const fetchNewestProducts = (arr) => (dispatch) => {
-//   fetch(`${root}/list/product/${arr}`) 
-//     .then((res) => res.json())
-//     .then((res) => {
-//       dispatch(getNewestProducts(res));
-//     })
-//     .catch((e) => console.log('error from productDuck', e));
-// };
+
 export const fetchVerySoldedProducts = () => async(dispatch) => {
   
   try {
@@ -288,15 +284,23 @@ export const fetchAllSoldedProducts = () => async(dispatch) => {
 };
 
 export const fetchMostestProduct = (id) => async(dispatch) => {
-  const urlPath = getMostestURL(id) 
   try {
+    const urlPath = getMostestURL(id) 
+    console.log("🚀 ~ fetchMostestProduct ~ urlPath:", urlPath)
     const data = await (await fetch(`${root}/api/mostest/${urlPath?.url}`)).json();
     dispatch(changeMostest(data));
   } catch (e) {
     console.log('error from productDuck', e)
   }
 };
-
+export const fetchServices = () => async(dispatch) => {
+  try {
+    const data = await(await fetch('/api/services')).json()
+    dispatch(getServices(data))
+  } catch (err) {
+    throw err
+  }
+} //
 
 export const currentProduct = (id) => (dispatch) => {
   dispatch(getCurrentProductId(id));
@@ -331,7 +335,8 @@ export const initialStateApp = {
   rating : null,
   hintsData:[],
   productReview: {},
-  mostestProduct:{}
+  mostestProduct:{},
+  services:[]
 };
 
 function ProductDuck(state = initialStateApp, action) {
@@ -481,6 +486,11 @@ function ProductDuck(state = initialStateApp, action) {
       return {
         ...state,
         mostestProduct:action.payload
+      }
+    case FETCH_SERVICES :
+      return {
+        ...state,
+        services:action.payload
       }
     default:
       return state;

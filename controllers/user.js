@@ -138,7 +138,9 @@ module.exports.notice = async(req, res) => {
      const email = req.body.email;
      const emailExist = await realyze("SELECT * FROM notice WHERE email = ? ", [email])
      if(email && emailExist.length === 0){
-          await realyze("INSERT INTO notice ( email, time_add) VALUES( ? ,? )", [email, Date.now()]);
+          const date = Date.now()
+          console.log("🚀 ~ module.exports.notice=async ~ date:", date)
+          await realyze("INSERT INTO `notice` (email, time_add) VALUES ( ?, ? ) ", [email, `${Date.now()}`]);
           res.send('1');
      }else{
           res.send('0')

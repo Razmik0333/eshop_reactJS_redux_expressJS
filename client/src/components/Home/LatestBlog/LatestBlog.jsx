@@ -3,16 +3,20 @@ import LatestBlogItem from "./LatestBlogItem/LatestBlogItem";
 import './styles/_latest-blog.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLatestReviews } from "../../../redux/ducks/reviewDuck";
-import { getLatestReviewsSelector, getReviewIdSelector } from "../../../helpers/reduxSelectors";
+import { getLatestReviewsSelector, getReviewIdSelector, modalReviewShowSelector } from "../../../helpers/reduxSelectors";
 import LatestBlogHeader from "./LatestBlogHeader/LatestBlogHeader";
 import { getDataFromInterval } from "../../../helpers/functions/functions";
+import ModalReviewShow from "../../Base/Modal/ModalReviewShow";
 
 function LatestBlog() {
-     const dispatch = useDispatch()
+     const dispatch = useDispatch();
+     const reviewShow = useSelector(modalReviewShowSelector)
+
      useEffect(() => {
           dispatch(fetchLatestReviews())
      }, []);
      const latestReviews = useSelector(getLatestReviewsSelector) 
+     console.log("🚀 ~ LatestBlog ~ latestReviews:", latestReviews)
      const reviewId = useSelector(getReviewIdSelector)
      const start = (reviewId - 1) * 3;
 
@@ -23,7 +27,15 @@ function LatestBlog() {
                count : 2
           }
      )
-     return(
+     return<>
+
+
+          {
+               
+                    reviewShow ? <ModalReviewShow /> :<></>
+               
+     
+          }
           <div className="latest__blog">
           <div className="container latest__blog__container">
                <LatestBlogHeader />
@@ -38,7 +50,7 @@ function LatestBlog() {
                </div>
           </div>
      </div>
-     )
+     </>
 }
 
 export default LatestBlog;

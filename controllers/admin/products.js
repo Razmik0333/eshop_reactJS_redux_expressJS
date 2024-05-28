@@ -42,10 +42,15 @@ module.exports.productsList = async(req, res) => {
      
 }
 module.exports.delete = async (req, res) => {
+     const cachesPathAdmin = variables.cachesAdmin.product;
      const productId = req.body.product_id
      console.log("🚀 ~ file: products.js:11 ~ module.exports.delete ~ productId:", productId)
      await realyze("DELETE FROM products WHERE id = ? ", [productId]);
      const productsAfterDelete = await realyze("SELECT * FROM products ");
+     fs_functions.writeCacheFile(
+          `${cachesPathAdmin}/caches_admin_product.json`,
+          productsAfterDelete
+     )
      res.send(productsAfterDelete);
 }
 module.exports.getAdminProductById = async(req, res) => {
@@ -55,10 +60,11 @@ module.exports.getAdminProductById = async(req, res) => {
 
 }
 
+
 module.exports.create = async(req, res) => {
      const body = req.body;
-     await realyze("INSERT INTO `products` (category, alias, arm_name, descr, cost, discount, is_recomended, availability, main, `1c_articul`, time_add) VALUES (?,?,?,?,?,?,?,?,?,?,?) ",
-          [body.category, body.alias,body.arm_name, body.descr, body.cost, body.discount, body.is_recommended, body.availability, body.main, body['1c_articul'], Date.now()]);
+     await realyze("INSERT INTO `products` (category, alias, arm_name, descr,descr_en,descr_ru, cost, discount, is_recomended, availability, main, `1c_articul`, time_add) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ",
+          [body.category, body.alias,body.arm_name, body.descr, body.descr_en,body.descr_ru, body.cost, body.discount, body.is_recommended, body.availability, body.main, body['1c_articul'], Date.now()]);
      res.send(JSON.stringify('ok'));
      
 }
@@ -67,8 +73,8 @@ module.exports.update = async(req, res) => {
      const body = req.body;
      const cachesPathAdmin = variables.cachesAdmin.product;
 
-     await realyze("UPDATE `products` SET category = ?, alias= ?, arm_name=?, descr= ?, cost= ?, discount= ?, is_recomended= ?, availability= ?, main= ?, `1c_articul`= ?, time_add= ? WHERE id = ?",
-          [body.category, body.alias,  body.arm_name, body.descr, body.cost, body.discount, body.is_recomended, body.availability,body.main, body[`1c_articul`], Date.now(), body.id])
+     await realyze("UPDATE `products` SET category = ?, alias= ?, arm_name=?, descr= ?,descr_en = ?,descr_ru = ?, cost= ?, discount= ?, is_recomended= ?, availability= ?, main= ?, `1c_articul`= ?, time_add= ? WHERE id = ?",
+          [body.category, body.alias,  body.arm_name, body.descr,body.descr_en,body.descr_ru, body.cost, body.discount, body.is_recomended, body.availability,body.main, body[`1c_articul`], Date.now(), body.id])
      const updatedProduct = await realyze("SELECT * FROM products WHERE id = ? ", [body?.id]);
      const products = await realyze("SELECT * FROM products ");
 
@@ -97,32 +103,37 @@ module.exports.save = async(req, res) => {
 
 }
 module.exports.addProductsWithList = async(req, res) => {
-
-     console.log(path.resolve() + "/data/data.xlsx")
      if (fs.existsSync(path.resolve() + "/upload/data/data.xlsx")) {
           
           const workbook = XLSX.readFile(path.resolve() + "/upload/data/data.xlsx");
           let worksheet = workbook.Sheets[workbook.SheetNames[0]];
+          //console.log("🚀 ~ module.exports.addProductsWithList=async ~ worksheet:", worksheet)
           const lastFieldIndex = worksheet['!ref'].split(":")[1];
-          const rows = lastFieldIndex.slice(1, lastFieldIndex.length)
+          const rows = +lastFieldIndex.slice(1, lastFieldIndex.length) +1
+          //console.log("🚀 ~ module.exports.addProductsWithList=async ~ rows:", rows)
           for (let index = 2; index < rows; index++) {
+               //console.log(index);
+               
                const category = worksheet[`B${index}`].v
                const alias = worksheet[`C${index}`].v;
                const arm_name = worksheet[`D${index}`].v;
                const descr = worksheet[`E${index}`].v;
-               const title = worksheet[`F${index}`].v;
-               const cost = worksheet[`G${index}`].v;
-               const discount = worksheet[`H${index}`].v;
-               const is_recommended = worksheet[`J${index}`].v;
-               const availability = worksheet[`K${index}`].v;
-               const main = worksheet[`L${index}`].v;
-               const articul = worksheet[`M${index}`].v;
-               await realyze("INSERT INTO `products` (category, alias, arm_name, descr,title, cost, discount, is_recomended, availability, main, `1c_articul`, time_add) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ",
-               [category, alias,arm_name, descr,title, cost, discount, is_recommended, availability, main,articul, Date.now()]);
+               const descr_eng = worksheet[`F${index}`].v;
+               const descr_rus = worksheet[`G${index}`].v;
+               const title = worksheet[`H${index}`].v;
+               const cost = worksheet[`I${index}`].v;
+               const discount = worksheet[`J${index}`].v;
+               const is_recommended = worksheet[`K${index}`].v;
+               const availability = worksheet[`L${index}`].v;
+               const main = worksheet[`M${index}`].v;
+               const articul = worksheet[`N${index}`].v;
+               await realyze("INSERT INTO `products` (category, alias, arm_name, descr, descr_en, descr_ru, title, cost, discount, is_recomended, availability, main, `1c_articul`, time_add) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ",
+               [category, alias,arm_name, descr, descr_eng, descr_rus,title, cost, discount, is_recommended, availability, main,articul, Date.now()]);
           }
+          // const [lastId] = await realyze("SELECT LAST_INSERT_ID() AS last_id FROM `products`"); 
+          // console.log("🚀 ~ filename: ~ lastId:funcInsert", lastId)
           res.send(JSON.stringify(1))
      }else{
           res.send(JSON.stringify(0))
      }
-     
 }

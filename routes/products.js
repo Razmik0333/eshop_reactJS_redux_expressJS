@@ -21,6 +21,8 @@ const getMostestSaleProducts = require('../controllers/products').mostestSale;
 const getMostestRecentAddProducts = require('../controllers/products').mostestRecent;
 const getMostestDesiredProducts = require('../controllers/products').mostestDesired;
 const getSimilarProducts = require('../controllers/products').similarProducts;
+const getServices = require('../controllers/products').services;
+
 router.get('/main/:id', getProductsByCategory);
 router.get('/discount', getProductsByLargeDiscount);
 router.get('/recommend', getRecommendedProducts);
@@ -40,6 +42,7 @@ router.get('/mostest/rating', getMostestRatingProducts);
 router.get('/mostest/sale', getMostestSaleProducts);
 router.get('/mostest/recent', getMostestRecentAddProducts);
 router.get('/mostest/desired', getMostestDesiredProducts);
+router.get('/services', getServices);
 
 
 

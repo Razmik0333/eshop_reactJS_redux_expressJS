@@ -36,6 +36,9 @@ import Error404 from './components/Base/Error404/Error404';
 import AdminReviews from './components/Base/Admin/AdminReviews/AdminReviews/AdminReviews.jsx';
 import AdminReviewForm from './components/Base/Admin/AdminReviews/AdminReviewForm/AdminReviewForm.jsx';
 import AdminAddProductsByList from './components/Base/Admin/AdminProducts/AdminAddProductsByList.jsx';
+import UserCards from './components/Base/User/cabinet/user-cards/UserCards.jsx';
+import UserCardAdd from './components/Base/User/cabinet/user-card-add/UserCardAdd.jsx';
+import AboutUs from './components/About-us/AboutUs.jsx';
 
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
@@ -54,7 +57,7 @@ function App() {
               element={<Register />} 
               />
               <Route
-              path="/page" 
+              path="/user/page" 
               element={<Page />} 
               />
               <Route
@@ -68,6 +71,14 @@ function App() {
               <Route
               path="/user/reviews" 
               element={<UserReviews />} 
+              />
+              <Route
+              path="/user/card" 
+              element={<UserCards />} 
+              />
+              <Route
+              path="/user/card/add" 
+              element={<UserCardAdd />} 
               />
               <Route
               path="/personal" 
@@ -127,6 +138,10 @@ function App() {
               <Route
               path="/login" 
               element={<Login />} 
+              />
+              <Route
+              path="/about" 
+              element={<AboutUs />} 
               />
               <Route
               path="/category/:id" 

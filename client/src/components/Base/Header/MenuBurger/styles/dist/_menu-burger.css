@@ -40,3 +40,6 @@
   text-decoration: none;
   color: var(--white);
 }
+.menu__burger .burger_list_item:hover {
+  background-color: var(--orange);
+}

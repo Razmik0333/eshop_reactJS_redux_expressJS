@@ -5,7 +5,7 @@ import { currentProduct, fetchViewedProductIds } from '../../../redux/ducks/prod
 import ModalPopup from "../../Base/Modal/ModalPopup";
 import { root } from '../../../helpers/constants/constants';
 import { changePopup, getPopupItemId } from '../../../redux/ducks/configsDuck';
-import { getCurrentCurrencySelector, getUserId, getWishListDataSelector, popupCloseSelector } from '../../../helpers/reduxSelectors';
+import { getCurrentCurrencySelector, getCurrentLanguageSelector, getUserId, getWishListDataSelector, popupCloseSelector } from '../../../helpers/reduxSelectors';
 import { getNewCurrency, numInArray } from '../../../helpers/functions/functions';
 import RatingMapping from '../RatingMapping/RatingMapping';
 import './styles/_products.scss';
@@ -18,12 +18,13 @@ function Product({product, text}) {
      const discountedPrice = product.cost *(1 - product.discount / 100);
      const popupIsShow = useSelector(popupCloseSelector);
      const currentCurrency = useSelector(getCurrentCurrencySelector);
+     const currentLanguage = useSelector(getCurrentLanguageSelector);
+
      const userId = useSelector(getUserId);
      const wishListData = useSelector(getWishListDataSelector);
      const wishListIds = wishListData.map(item => item?.id);
      const changeCurrentProduct = (e) => {
           e.stopPropagation();
-          console.log(e.target);
           dispatch(currentProduct(e.target.dataset.id));
           dispatch (fetchViewedProductIds(userId,e.target.dataset.id))
      }
@@ -71,7 +72,6 @@ function Product({product, text}) {
                          className="add-to-cart"
                          data-id={product?.id}
                          onClick={addProductToCart}>
-                              <img src={`${root}/icons/config/cart.svg`} alt="" />
                          {text?.add_to_cart}
                     </button>
                </div>
@@ -81,7 +81,14 @@ function Product({product, text}) {
                               className="product-link"
                               onClick={changeCurrentProduct}
                               >
-                              {product?.descr}
+                              
+
+                              { 
+                                   currentLanguage === 'am' ? product?.descr : 
+                                        currentLanguage === 'en' ? product?.descr_en :
+                                             product?.descr_ru
+                                   
+                              }
                          </NavLink>
                     </p>
                <RatingMapping rating={product?.rating} />

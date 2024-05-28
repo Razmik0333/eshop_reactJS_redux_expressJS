@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { currenciesSelector, currentLanguageDataSelector, getCurrentCurrencySelector, getCurrentLanguageSelector, getUserDataSelector, getUserId, languagesSelector } from '../../../helpers/reduxSelectors';
 import { changeCurrencies, changeCurrency, changeLanguage, changeLanguages, fetchLanguageData } from '../../../redux/ducks/configsDuck';
 import MenuBurger from './MenuBurger/MenuBurger';
@@ -14,9 +14,11 @@ function Header() {
      const userId = useSelector(getUserId);
      const userData = useSelector(getUserDataSelector);
      const currentCurrency = useSelector(getCurrentCurrencySelector);
+     console.log("🚀 ~ Header ~ currentCurrency:", currentCurrency)
      const currentLanguage = useSelector(getCurrentLanguageSelector);
      const languages = useSelector(languagesSelector);
      const currencies = useSelector(currenciesSelector);
+     console.log("🚀 ~ Header ~ currencies:", currencies)
      const headerLangData = useSelector(currentLanguageDataSelector)?.header;
      const [currentLanguageObj] = languages?.filter(lang => lang?.code === currentLanguage);
      
@@ -48,7 +50,9 @@ function Header() {
                               <ul className="settings__currency__item">
                                    
                                    {
-                                        currencies?.map((item,ind) => {
+                                        currencies
+                                             ?.filter((item) => item?.code !== currentCurrency)
+                                             ?.map((item,ind) => {
 
                                              return <li className="setting__currency"
                                                   data-currency={item?.code}
@@ -67,9 +71,10 @@ function Header() {
                          
                               <ul className="settings__currency__item">
                                    {
-                                        languages?.map((item,ind) => {
-
-                                            return <li className="setting__currency"
+                                        languages
+                                             ?.filter(item => item?.code !== currentLanguage)
+                                             ?.map((item,ind) => {
+                                                  return <li className="setting__currency"
                                                        data-lang={item?.code}
                                                        onClick={changeCurrentLanguage}
                                                        key={`lang_${ind}`}
@@ -118,7 +123,7 @@ function Header() {
 
                               {
                                    userId ? 
-                                   <div className="register-link">{`${headerLangData?.hello} ${userData?.name}`}</div>
+                                   <div className="register-hello">{`${headerLangData?.hello} ${userData?.name}`}</div>
                                    : <NavLink to={"/register"} className="register-link">{headerLangData?.menu_burger?.signup}</NavLink>
                               }  
                          </div>

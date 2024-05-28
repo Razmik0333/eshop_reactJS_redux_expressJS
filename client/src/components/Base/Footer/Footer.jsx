@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {root} from "../../../helpers/constants/constants";
 import { currentLanguageDataSelector, getUserId } from "../../../helpers/reduxSelectors";
-
+import { HashLink } from 'react-router-hash-link';
 import './styles/_footer.scss';
 import { NavLink, useNavigate } from "react-router-dom";
 import { currentUser, getUserData } from "../../../redux/ducks/userDuck";
@@ -42,16 +42,15 @@ function Footer() {
                                    </li>
                                    <li className="footer__row__category"><NavLink to={'/cart'}>{footerLangData?.my_account?.cart}</NavLink></li>
                                    <li className="footer__row__category"><NavLink to={'/wishlist'}>{footerLangData?.my_account?.wishlist}</NavLink></li>
-                                   <li className="footer__row__category"><NavLink to={'/checkout'}>{footerLangData?.my_account?.checkout}</NavLink></li>
+                                   <li className="footer__row__category"><NavLink to={'/viewed'}>{footerLangData?.my_account?.viewed}</NavLink></li>
                               </ul>
                          </div>
                          <div className="footer__row">
                               <ul className="footer__row__categories">
                                    <li className="footer__row__category">{footerLangData?.services?.all}</li>
-                                   <li className="footer__row__category"><NavLink to={'/laser'}>{footerLangData?.services?.laser}</NavLink></li>
-                                   <li className="footer__row__category"><NavLink to={'/plotter'}>{footerLangData?.services?.plotter}</NavLink></li>
-                                   <li className="footer__row__category"><NavLink to={'/print'}>{footerLangData?.services?.print}</NavLink></li>
-                                   <li className="footer__row__category"><NavLink to={'/brosh'}>{footerLangData?.services?.brosh}</NavLink></li>
+                                   <li className="footer__row__category"><HashLink to={'/about/#laser'}>{footerLangData?.services?.laser}</HashLink></li>
+                                   <li className="footer__row__category"><HashLink to={'/about/#plotter'}>{footerLangData?.services?.plotter}</HashLink></li>
+                                   <li className="footer__row__category"><HashLink to={'/about/#tshirt'}>{footerLangData?.services?.tshirt}</HashLink></li>
                               </ul>
                          </div>
                          <div className="footer__row">

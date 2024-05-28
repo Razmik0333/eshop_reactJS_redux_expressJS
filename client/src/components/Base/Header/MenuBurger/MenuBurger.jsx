@@ -18,7 +18,6 @@ function MenuBurger() {
           dispatch(currentUser(null))
           dispatch(getUserData(null))
           dispatch(changeOrdersFromLogout());
-
           navigate('/home')
     }
      const [clicked, setClicked] = useState(false);
@@ -27,11 +26,7 @@ function MenuBurger() {
      }
      const goCabinet = (e) => {
           e.preventDefault();
-         return userId ? navigate('/page') : navigate('/login')
-     }
-     const goOrders = (e) => {
-          e.preventDefault();
-         return userId ? navigate('/orders') : navigate('/login')
+         return userId ? navigate('/user/page') : navigate('/login')
      }
      return <div 
                className="login__register__item menu__burger" 
@@ -52,17 +47,12 @@ function MenuBurger() {
 
                                                   </li>
                                                   :
-                                                  <li className="burger_list_item">
-                                                       <NavLink to={"/page"} onClick={goCabinet} className="register-link">{headerLangData?.profile}</NavLink>
-
+                                                  <li className="burger_list_item" onClick={goCabinet}>
+                                                       {headerLangData?.profile}
                                                   </li>
 
                                         }
-                                        <li 
-                                             className="burger_list_item"  
-                                        >
-                                             <NavLink to={"/orders"} onClick={goOrders} >{headerLangData?.my_orders}</NavLink>
-                                        </li>
+                                        
                                         {
                                              userId && 
                                                   <li 

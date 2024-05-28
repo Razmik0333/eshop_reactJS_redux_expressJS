@@ -1,13 +1,15 @@
 import React from 'react'
 import RatingMapping from '../../../../Base/RatingMapping/RatingMapping'
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentCurrencySelector } from '../../../../../helpers/reduxSelectors';
+import { getCurrentCurrencySelector, getCurrentLanguageSelector } from '../../../../../helpers/reduxSelectors';
 import { getNewCurrency } from '../../../../../helpers/functions/functions';
 import { NavLink } from 'react-router-dom';
 import { currentProduct } from '../../../../../redux/ducks/productDuck';
 export default function MostestProduct({product}) {
      const dispatch =useDispatch();
      const currentCurrency = useSelector(getCurrentCurrencySelector);
+     const currentLanguage = useSelector(getCurrentLanguageSelector);
+
      const discountedPrice = product.cost *(1 - product.discount / 100);
      const changeCurrentProduct = (e) => {
           dispatch(currentProduct(e.target.dataset.id));
@@ -26,7 +28,11 @@ export default function MostestProduct({product}) {
                     <p className="offer-title"
                          data-id={product?.id}
                          onClick={changeCurrentProduct}
-                    >{product?.descr}</p>
+                    >{
+                        currentLanguage === 'am' ? product?.descr : 
+                                   currentLanguage === 'en' ? product?.descr_en :
+                                        product?.descr_ru
+                    }</p>
                </NavLink>
                {
                     <RatingMapping rating={product?.rating}/>

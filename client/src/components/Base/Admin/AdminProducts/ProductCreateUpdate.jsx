@@ -13,6 +13,8 @@ function ProductCreateUpdate() {
      const [isCreated, setIsCreated] = useState(false);
      const modalIsClose = useSelector(modalCloseSelector);
      const [productName, setProductName] = useState(``);
+     const [productNameEng, setProductNameEng] = useState(``);
+     const [productNameRus, setProductNameRus] = useState(``);
      const [productDesc, setProductDesc] = useState(``);
      const [productCost, setProductCost] = useState(``);
      const [productDiscount, setProductDiscount] = useState(``);
@@ -28,6 +30,8 @@ function ProductCreateUpdate() {
      }, []);
      useEffect(() => {
         setProductName(currentProduct?.descr);
+        setProductNameEng(currentProduct?.descr_en);
+        setProductNameRus(currentProduct?.descr_ru);
           setProductDesc(currentProduct?.main);
           setProductCost(currentProduct?.cost);
           setProductDiscount(currentProduct?.discount);
@@ -119,19 +123,45 @@ function ProductCreateUpdate() {
                                         onChange={() => {}} 
                                         />
                               }
-                         <div className="form__item">
+                              <div className="form__item">
                                    <div className="form__item__header">{productsUpdateLangData?.headers?.name}</div>
-                                   <input 
-                                        type="text" 
-                                        name="descr" 
-                                        id="" 
-                                        placeholder={productsUpdateLangData?.placeholders?.description} 
-                                        value={productName}
-                                        onChange={(e) => {
-                                             setProductName(e.target.value)
-                                        }}
-                                   />
-                              </div>
+                                        <input 
+                                             type="text" 
+                                             name="descr" 
+                                             id="" 
+                                             placeholder={productsUpdateLangData?.placeholders?.description} 
+                                             value={productName}
+                                             onChange={(e) => {
+                                                  setProductName(e.target.value)
+                                             }}
+                                        />
+                                   </div>
+                              <div className="form__item">
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.name_eng}</div>
+                                        <input 
+                                             type="text" 
+                                             name="descr_en" 
+                                             id="" 
+                                             placeholder={productsUpdateLangData?.placeholders?.description_eng} 
+                                             value={productNameEng}
+                                             onChange={(e) => {
+                                                  setProductNameEng(e.target.value)
+                                             }}
+                                        />
+                                   </div>
+                              <div className="form__item">
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.name_rus}</div>
+                                        <input 
+                                             type="text" 
+                                             name="descr_ru" 
+                                             id="" 
+                                             placeholder={productsUpdateLangData?.placeholders?.description_rus} 
+                                             value={productNameRus}
+                                             onChange={(e) => {
+                                                  setProductNameRus(e.target.value)
+                                             }}
+                                        />
+                                   </div>
                               <div className="form__item">
                                    <div className="form__item__header">{productsUpdateLangData?.headers?.description}</div>
                                    <textarea 

@@ -11,6 +11,7 @@ function SearchItems() {
      const [searchShow, setSearchShow] = useState(false);
      const [hintShow, setHintShow] = useState(false);
      const dispatch = useDispatch();
+     const isSearch = useSelector(isSearchSelector);
      const searchWord = useSelector(currentSearchSelector);
      const countsOfProducts = useSelector(countElementsSelector);
      const isFocused = useSelector(isFocusedSelector);
@@ -48,27 +49,28 @@ function SearchItems() {
       const getSearchShow = () => {
           setSearchShow(true);
       }
-      const getSearchHide = () => {
-          setSearchShow(false);
-      }
+
      const searchData = useSelector(currentSearchData);
      const hintsData = useSelector(currentHintsData);     
      return (
           <>
-          <ul 
-               className={searchShow ? "search__items" : 'hidden'}
-               style={{height: searchData?.length <= 3 ? searchData.length * 41 + 15 : (searchData?.length - 1) * 41 + 'px'}}
-               onMouseLeave={getSearchHide}
-               onMouseOver={getSearchShow}
-          >
+          {
+               !isSearch &&
+               <ul 
+                    className={searchShow ? "search__items" : 'hidden'}
+                    style={{height: searchData?.length <= 3 ? searchData.length * 41 + 15 : (searchData?.length - 1) * 41 + 'px'}}
+                    onMouseOver={getSearchShow}
+                    
+               >
 
-               { 
-                    searchShow ? searchData.map(item => {
-                         return <SearchItem  item = {item} key={item.id}
-                         />
-                    }) :<></>
-               }
-          </ul>
+                    { 
+                         searchShow ? searchData.map(item => {
+                              return <SearchItem  item = {item} key={item.id}
+                              />
+                         }) :<></>
+                    }
+               </ul>
+          }
           <ul 
                className={hintShow ? "search__items" : 'hidden'}
                style={{height: hintsData?.length <= 3 ? hintsData.length * 41 + 15 : (hintsData?.length - 2) * 41 + 'px'}}

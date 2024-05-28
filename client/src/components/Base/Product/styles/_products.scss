@@ -44,7 +44,7 @@
                     button{
                          background-color: #2a2a2a;
                          color: #fff;
-                         padding: 8px 15px;
+                         padding: 8px 15px 8px 25px;
                          position: absolute;
                          bottom: 0;
                          display: none;
@@ -59,6 +59,10 @@
                          }
                          .add-to-cart{
                               left: 50%;
+                              background-image:url(http://localhost:3001/icons/config/add-cart.svg) ;
+                              background-repeat: no-repeat;
+                              background-position: -3px;
+                              background-size: contain;
                               &:hover{
                                    background-color: var(--orange);
                               }

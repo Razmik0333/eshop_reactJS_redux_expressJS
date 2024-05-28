@@ -95,6 +95,18 @@
                          width: 100%;
 
                          cursor: pointer;
+                         .item-user-avatar{
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                              .review__user__avatar{
+                                   margin-right: 10px;
+                                   img{
+                                        width: 30px;
+                                        height: auto;
+                                   }
+                              }
+                         }
                          .item-desc-title{
                               padding: 15px 0;
                               color: #676767;
@@ -104,6 +116,7 @@
                               font-size: 14px;
                               color: #676767;
                               line-height: 1.3;
+                              height: 40px;
                          }
                          .latest-blog-footer {
                              

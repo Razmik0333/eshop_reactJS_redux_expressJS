@@ -11,12 +11,14 @@ import { getDataFromInterval } from "../../../helpers/functions/functions";
 function LastViewedProducts() {
      const dispatch = useDispatch();
      const userId = useSelector(getUserId);
+     console.log("🚀 ~ LastViewedProducts ~ userId:", userId)
      const viewedProducts =  useSelector(getViewedProductsSelector)
+     console.log("🚀 ~ LastViewedProducts ~ viewedProducts:", viewedProducts)
      useEffect(() => {
           dispatch(fetchViewedProducts(userId, viewedProducts))
      }, [viewedProducts]);
      const viewedProductsData =  useSelector(getViewedProductsDataSelector)
-     const lastViewedProductsData = viewedProductsData.filter((_, pos) => pos < 4 )
+     const lastViewedProductsData = viewedProductsData.filter((_, pos) => pos < 12 )
      const productItemText = useSelector(currentLanguageDataSelector)?.product_item;
      const viewedProductsText = useSelector(currentLanguageDataSelector)?.home;
      const viewId = useSelector(getViewedProductIdSelector)// || 1
@@ -32,33 +34,38 @@ function LastViewedProducts() {
      )
      
      return(
-          <div className="products__list">
-               <div className="container product__list__container">
-                    {
-                         lastViewedProductsData.length > 0 &&
-                         <>
-                         <div className="categories">
-                              <span className="viewed">{viewedProductsText?.viewed}
-                                   <NavLink className="viewed-link" to={'/viewed'}>
-                                        <img src={`${root}/icons/config/arrow_right.svg`} alt="" />
-                                   </NavLink>
-                              
-                              </span>
+          
+               userId &&
+               <>
+                    <div className="products__list">
+                         <div className="container product__list__container">
+                              {
+                                   lastViewedProductsData.length > 0 &&
+                                   <>
+                                   <div className="categories">
+                                        <span className="viewed">{viewedProductsText?.viewed}
+                                             <NavLink className="viewed-link" to={'/viewed'}>
+                                                  <img src={`${root}/icons/config/arrow_right.svg`} alt="" />
+                                             </NavLink>
+                                        
+                                        </span>
+                                   </div>
+                                        <LastViewedProductHeader />
+                                        
+                                        <div className="products-list">
+                                             {
+                                             
+                                                  filtered.map((product,pos) => {
+                                                       return pos <= 11 && <Product product={product} text={productItemText} key={product?.id} />
+                                                  })
+                                             }
+                                        </div>
+                                   </>
+                              }
                          </div>
-                               <LastViewedProductHeader />
-                              
-                              <div className="products-list">
-                                   {
-                                   
-                                        filtered.map((product,pos) => {
-                                             return pos <= 11 && <Product product={product} text={productItemText} key={product?.id} />
-                                        })
-                                   }
-                              </div>
-                         </>
-                    }
-               </div>
-          </div>
+                    </div>
+               </>
+          
      )
 }
 

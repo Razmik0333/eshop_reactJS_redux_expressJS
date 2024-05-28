@@ -14,7 +14,8 @@ const [
 const getMostestProductData = functions.mostestProduct;
 const getMostestMaxObject = functions.mostestMaxObject;
 const getMiddleRating = functions.middleRating;
-
+const getCountsOffHighRating = functions.countsOffHighRating;
+const getIdOffHighRatingProduct = functions.idOffHighRatingProduct;
 module.exports.productsByCategory = async (req, res) => {
      const params = req.params.id;
      const cachesPath = variables.caches.product;
@@ -64,7 +65,6 @@ module.exports.similarProducts = async (req, res) => {
           const catId = req.params.catid;
           const prodId = req.params.prodid;
           if (typeof +catId === 'number' && !isNaN(+catId)) {
-
                const cachesPath = variables.caches.product;    
                if (fs.existsSync(`${cachesPath}/similar/similar.json`)) {
                     fs.readFile(`${cachesPath}/similar/similar.json`, "utf-8",
@@ -72,7 +72,6 @@ module.exports.similarProducts = async (req, res) => {
                          if (err) throw err;
                          else { 
                               const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ?", [catId])
-
                               if (JSON.parse(data)[0].id < lastProductId.max) {
                                    const result = await realyze("SELECT * FROM `products` WHERE `category`= ? AND `id` != ? ORDER BY id DESC LIMIT ?", [catId, prodId, 8]);
                                    fs_functions.writeCacheFile(
@@ -290,9 +289,9 @@ module.exports.viewed = async (req, res) => {
           await realyze("UPDATE `user_interest` SET viewed = ? WHERE user_id = ?", [product_id,userId]);
           res.send(JSON.stringify(product_id))
      } else {
-         const viewedIds =  viewedByUser?.viewed.split('|');
-        const filtered =  viewedIds.filter(item => item === product_id);
-        if(filtered.length === 0){
+          const viewedIds =  viewedByUser?.viewed.split('|');
+          const filtered =  viewedIds.filter(item => item === product_id);
+          if(filtered.length === 0){
              const newIds = `${viewedByUser?.viewed}|${product_id}`;
 
               await realyze("UPDATE `user_interest` SET viewed = ? WHERE user_id = ?", [newIds,userId])
@@ -305,15 +304,23 @@ module.exports.viewed = async (req, res) => {
      
 }
 module.exports.productsBetweenCosts = async (req, res) => {
-     const category = req.query.category;
      const start = req.query.start;
      const final = req.query.final;
-     const result = await realyze("SELECT * FROM products WHERE category = ? AND cost >= ? AND cost < ? ", [category,start, final]);
-     res.send(result)
+     const currentQuery = req.query;
+     if ('category' in req.query) {
+          const category = currentQuery.category;
+          const result = await realyze("SELECT * FROM products WHERE category = ? AND cost >= ? AND cost <= ? ", [category,start, final]);
+          res.send(result)
+     } else {
+          const search = currentQuery.search;
+          const result = await realyze("SELECT * FROM products WHERE  descr LIKE ? AND cost >= ? AND cost <= ? ", [`%${search}%`,start, final]);
+          res.send(result)
+          
+     }
 }
 module.exports.search = async (req, res) => {
-     const search = req.query.search;
-     const searched = await realyze("SELECT * FROM products WHERE main LIKE ?", [`%${search}%`]);
+     const search = req.query.search;    
+     const searched = await realyze("SELECT * FROM products WHERE main LIKE ? OR descr LIKE ?", [`%${search}%`,`%${search}%`]);
      res.send(searched)
 }
 module.exports.hintAdd = async (req, res) => {
@@ -333,7 +340,7 @@ module.exports.hint = async (req, res) => {
      if (userId) {
           const [currentSearched] = await realyze("SELECT search_items FROM user_interest WHERE user_id = ? ", [userId])
           const search_items = currentSearched.search_items;
-         const hintArr = search_items
+          const hintArr = search_items
                               .split("|")
                               .map((item, pos) => {
                                    return {
@@ -349,7 +356,6 @@ module.exports.hint = async (req, res) => {
 module.exports.sold = async (req, res) => {
      try {
           const cachesPath = variables.caches.product;  
-
           const user_orders = await realyze(`SELECT user_order FROM orders `);
           const productObj = getMaxSoldedProducts(user_orders);
           const productIds = getMaxSoldedProductIds(productObj);
@@ -421,63 +427,155 @@ module.exports.productsRating = async( req, res) => {
 
 
 module.exports.mostestRating = async (req, res) => {
-     const mostestData = await realyze("SELECT product_id, rating FROM reviews WHERE rating = 5 ", []);
-     const mostData = mostestData.reduce((acc, curr) => {
-          if(!(curr.product_id in acc) ){
-               acc[curr.product_id] = {
-                    rating : curr.rating,
-                    count : 1
+     const cachesPath = variables.caches.product;
+     const mostestData = await realyze("SELECT product_id, rating FROM reviews WHERE rating = ? ", [5]);
+     const mostData = getCountsOffHighRating(mostestData)
+     const objOffHighRatingProduct = getIdOffHighRatingProduct(mostData)
+     if (fs.existsSync(`${cachesPath}/mosest/rating.json`)) {
+          fs.readFile(`${cachesPath}/mosest/rating.json`,"utf-8",
+          async function(err, data) {
+               if (err) throw err;
+               else {                    
+                    if (JSON.parse(data)?.id === objOffHighRatingProduct.product_id) {
+                         console.log('read');
+                         res.send(data)
+                    }
+                    else{
+                         const [maxRated] = await realyze("SELECT * FROM products WHERE id = ? ", [objOffHighRatingProduct.product_id])  
+                         fs_functions.writeCacheFile(
+                              `${cachesPath}/mosest/rating.json`,
+                              maxRated
+                         );
+                         res.send(JSON.stringify(maxRated))
+
+                    }
                }
-          }else {
-               acc[curr.product_id] = {
-                    ...acc[curr.product_id],
-                    count : ++acc[curr.product_id].count
-               }
-          }
-          return acc;
-     },{});
-     
-     let max = 0;
-     let maxObj = {}
-     for (const key in mostData) {
-          if (mostData[key].count > max) {
-               max = mostData[key].count; 
-               maxObj = {
-                    product_id : key,
-                    count: max,
-                    rating: mostData[key].rating
-               } 
-          }
+          })
+     } else {
+          
+          const [maxRated] = await realyze("SELECT * FROM products WHERE id = ? ", [objOffHighRatingProduct.product_id])  
+          fs_functions.writeCacheFile(
+               `${cachesPath}/mosest/rating.json`,
+               maxRated
+          )
+          res.send(JSON.stringify(maxRated))
      }
-     const [maxRated] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])     
-     res.send(JSON.stringify(maxRated))
+    
 }
 
 module.exports.mostestSale = async(req, res) => {
+     const cachesPath = variables.caches.product;
      const saleProducts = await realyze("SELECT user_order FROM orders WHERE user_status = 4 ", []);
      const productsCounts = getMostestProductData(saleProducts,"user_order")
      const maxObj = getMostestMaxObject(productsCounts);
-     const [maxSaled] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
-     res.send(JSON.stringify(maxSaled))
+     if (fs.existsSync(`${cachesPath}/mosest/sale.json`)) {
+          fs.readFile(`${cachesPath}/mosest/sale.json`, "utf-8",
+          async function(err, data) {
+               if (err) throw err;
+               else { 
+
+                     if (JSON.parse(data)?.id === maxObj.product_id) {
+                         console.log('read');
+                         res.send(data)
+                    }
+                    else{
+                         const [maxSaled] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
+
+                         fs_functions.writeCacheFile(
+                              `${cachesPath}/mosest/sale.json`,
+                              maxSaled
+                         )
+                         res.send(JSON.stringify(maxSaled))
+                    }
+               }
+          })
+     } else {
+          const [maxSaled] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
+
+          fs_functions.writeCacheFile(
+               `${cachesPath}/mosest/sale.json`,
+               maxSaled
+          )
+          res.send(JSON.stringify(maxSaled))
+     }
+
 }
 
 module.exports.mostestRecent = async(req, res) => {
+     const cachesPath = variables.caches.product;  
      const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products ")
-     const [recentAddedProduct] = await realyze("SELECT * FROM products WHERE id = ? ", [lastProductId.max]);
-         
-     
-     res.send(JSON.stringify(recentAddedProduct))
+
+     if (fs.existsSync(`${cachesPath}/mosest/recent.json`)) {
+
+          fs.readFile(`${cachesPath}/mosest/recent.json`, "utf8", 
+          async function(err, data) {
+               if (err) throw err;
+               else { 
+                    if (JSON.parse(data)?.id >= lastProductId.max) {
+                         console.log('read');
+                         res.send(data)
+                    }
+                    else{
+                         const [recentAddedProduct] = await realyze("SELECT * FROM products WHERE id = ? ", [lastProductId.max]);                        
+                         fs_functions.writeCacheFile(
+                              `${cachesPath}/mosest/recent.json`,
+                              recentAddedProduct
+                         )
+                         res.send(JSON.stringify(recentAddedProduct))
+                    }
+               }
+          })
+     } else {
+          const [recentAddedProduct] = await realyze("SELECT * FROM products WHERE id = ? ", [lastProductId.max]);
+          fs_functions.writeCacheFile(
+               `${cachesPath}/mosest/recent.json`,
+               recentAddedProduct
+          )
+          res.send(JSON.stringify(recentAddedProduct))
+          
+     }
 }
 
 
 module.exports.mostestDesired = async(req, res) => {
+     const cachesPath = variables.caches.product;  
      const cartsByUsers = await realyze("SELECT cart FROM user_interest");
      const filteredCart = cartsByUsers.filter(item => Boolean(item.cart) === true);
      const desiredProducts = getMostestProductData(filteredCart,"cart")
      const maxObj = getMostestMaxObject(desiredProducts);
-     const [maxDesired] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
+     if (fs.existsSync(`${cachesPath}/mosest/desired.json`)) {
+          fs.readFile(`${cachesPath}/mosest/desired.json`,"utf-8",
+          async function(err, data) {
+               if (err) throw err;
+               else { 
+                    if (JSON.parse(data)?.id === maxObj.product_id) {
+                         console.log('read');
+                         res.send(data)
+                    }
+                    else{
+                         const [maxDesired] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
+                         fs_functions.writeCacheFile(
+                              `${cachesPath}/mosest/desired.json`,
+                              maxDesired
+                         )
+                         res.send(JSON.stringify(maxDesired))
+                    }
+               }
+          })
+     } else {
+          
+          const [maxDesired] = await realyze("SELECT * FROM products WHERE id = ? ", [maxObj.product_id])
+          fs_functions.writeCacheFile(
+               `${cachesPath}/mosest/desired.json`,
+               maxDesired
+          )
+          res.send(JSON.stringify(maxDesired))
+     }
      
-     res.send(JSON.stringify(maxDesired))
 }
 
+module.exports.services = async (req, res) => {
+     const services = await realyze("SELECT * FROM services");
+     res.send(services)
 
+}

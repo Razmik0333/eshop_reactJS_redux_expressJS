@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { currentProductID, fetchProductItem } from "../../../../redux/ducks/adminProductDuck";
+import { currentProductID, fetchProductItem, fetchProductsForDelete } from "../../../../redux/ducks/adminProductDuck";
 import { changeModal } from "../../../../redux/ducks/configsDuck";
 import { currentLanguageDataSelector } from "../../../../helpers/reduxSelectors";
 
@@ -17,7 +17,7 @@ function ProductsInfoItem({product}) {
      const deleteProductItem = (e) => {
           dispatch(changeModal(true))
           dispatch(currentProductID(e.target.dataset.id))
-         
+         dispatch(fetchProductsForDelete(e.target.dataset.id))
      }
      
      return (

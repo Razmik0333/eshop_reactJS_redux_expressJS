@@ -90,7 +90,7 @@ function ProductDesc({currentProduct}) {
                     <input className="add-quantity" defaultValue="+" type="button" data-action="add" onClick={clickForChangeCountProducts}/>
                </div>
                <div className="quick__overview">
-               {product_page_content?.name}: {currentProduct.main}
+               {product_page_content?.description}: {currentProduct.main}
                </div>
                <div className="product__info">
                     <p>{product_page_content?.availability} : <span className="availability">

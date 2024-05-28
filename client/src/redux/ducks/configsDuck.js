@@ -19,6 +19,7 @@ const LANGUAGES = 'configsDuck/LANGUAGES';
 const CURRENCIES = 'configsDuck/CURRENCIES';
 const MOSTEST_OPTIONS_INDEX = 'configsDuck/MOSTEST_OPTIONS_INDEX';
 const VIEWED_PRODUCT_ID = 'configsDuck/VIEWED_PRODUCT_ID'
+const REVIEW_SHOW = 'configsDuck/REVIEW_SHOW'
 
 export const getShowType = createAction(CHANGE_SHOW_TYPE);
 export const getSortType = createAction(CHANGE_SORT_TYPE);
@@ -38,6 +39,7 @@ export const changeCurrentLanguage = createAction(CURRENT_LANGUAGE);
 export const changeCurrentLanguageData = createAction(CURRENT_LANGUAGE_DATA);
 export const changeCurrentMostestIndex = createAction(MOSTEST_OPTIONS_INDEX)
 export const changeViewedProductId = createAction(VIEWED_PRODUCT_ID)
+export const changeReviewShow = createAction(REVIEW_SHOW)
 
 
 export const changeShowType = (str) => (dispatch) => {
@@ -63,6 +65,9 @@ export const clearCostValues = () => (dispatch) => {
 };
 export const changeModal = (bool) => (dispatch) => {
   dispatch(getModalOpenClose(bool));
+};
+export const getReviewShow = (bool) => (dispatch) => {
+  dispatch(changeReviewShow(bool));
 };
 export const changePopup = (bool) => (dispatch) => {
   dispatch(getPopupOpenClose(bool));
@@ -150,7 +155,9 @@ const initialStateConfigs = {
     idProductsFromStart : 1,
     hotDealsTimerSeconds : 3 * 24 * 60 * 60,
     mostestIndex : "0",
-    viewedProductId : 1
+    viewedProductId : 1,
+    reviewShow : false,
+    
 };
 
 const ConfigsDuck = (state = initialStateConfigs, action) => {
@@ -255,6 +262,11 @@ const ConfigsDuck = (state = initialStateConfigs, action) => {
       return {
         ...state,
         viewedProductId: action.payload,
+      };
+    case REVIEW_SHOW:
+      return {
+        ...state,
+        reviewShow: action.payload,
       };
     
     default:

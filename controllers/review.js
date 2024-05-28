@@ -12,8 +12,6 @@ module.exports.getReviewListByProductId = async (req, res) => {
      try {
           const productId = req.params.id;
           const cachesPath = variables.caches.review;
-
-          
           if (fs.existsSync(`${cachesPath}/reviews/reviewsByProduct.json`)) {
                fs.readFile(`${cachesPath}/reviews/reviewsByProduct.json`, 'utf-8', 
                async function(err, data) {
@@ -22,6 +20,7 @@ module.exports.getReviewListByProductId = async (req, res) => {
                          const [lastReviewByProductId] = await realyze("SELECT COUNT(id) AS count FROM reviews WHERE product_id = ? ", [productId])
                          if (JSON.parse(data).length === lastReviewByProductId.count) {
                               res.send(data);
+
                          }else{
                               const reviews = await realyze("SELECT * FROM reviews WHERE product_id = ?  ORDER BY id DESC ", [productId]);
                               const newReviews = await getReviewsByProduct(reviews);
@@ -39,7 +38,6 @@ module.exports.getReviewListByProductId = async (req, res) => {
                     `${cachesPath}/reviews/reviewsByProduct.json`,
                     newReviews
                );
-               
                res.send(newReviews);
           }
      } catch (error) {
@@ -160,6 +158,7 @@ module.exports.reviewByUserId = async (req, res) => {
                                    res.send(modReviews)
      
                               }else{
+                                   
                                    res.send(data);
                               }
                          }                            
@@ -188,8 +187,9 @@ module.exports.getLatestReviews = async(req, res) => {
                     else {                                   
                          const [lastReviewId] = await realyze("SELECT MAX(id) AS max FROM reviews ")
                          if (JSON.parse(data)[0].id < lastReviewId.max) {
-                              const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 9");    
+                              const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT ?", [9]);    
                               const modReviews = await getReviewsFromProducts(reviews);
+                              console.log("🚀 ~ function ~ modReviews:", modReviews)
                            
                               fs_functions.writeCacheFile(
                                    `${cachesPath}/reviews/latest.json`,
@@ -201,7 +201,7 @@ module.exports.getLatestReviews = async(req, res) => {
                     }
                })
           } else {
-               const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT 9");    
+               const reviews = await realyze("SELECT * FROM reviews ORDER BY time_add DESC LIMIT ?",[9]);    
                const modReviews = await getReviewsFromProducts(reviews)
                fs_functions.writeCacheFile(
                     `${cachesPath}/reviews/latest.json`,

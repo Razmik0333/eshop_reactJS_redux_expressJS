@@ -1,0 +1,28 @@
+.login__register {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 13px;
+}
+.login__register .login__register__item {
+  padding: 10px;
+}
+.login__register .login__register__item .register-link {
+  color: var(--white);
+  text-decoration: none;
+  padding: 10px;
+}
+.login__register .login__register__item .register-link:hover {
+  cursor: pointer;
+  background-color: var(--orange);
+  padding: 10px;
+}
+.login__register .login__register__item .register-hello {
+  cursor: pointer;
+}
+.login__register .login__register__item .register__icon {
+  fill: #fff;
+}

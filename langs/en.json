@@ -84,6 +84,7 @@
             "quantity":"Quantity",
             "name":"Name",
             "availability":"Availability",
+            "description" : "Description",
             "category":"Category",
             "sold" :"Sold",
             "pcs":"pcs"
@@ -318,14 +319,13 @@
             "logout":"Logout",
             "cart":"My Cart",
             "wishlist":"Wishlist",
-            "checkout":"Checkout"
+            "viewed":"Viewed"
         },
         "services" : {
             "all":"SERVICES",
             "laser":"Laser engraving",
             "plotter":"Plotter work",
-            "print":"Printing",
-            "brosh":"Making brooches"
+            "tshirt":"Tshirt Printing"
         },
         "orders" : {
             "all":"Orders",

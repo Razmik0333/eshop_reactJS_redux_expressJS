@@ -1,0 +1,56 @@
+
+
+.card__items{
+     margin: 20px 0;
+     width: 100%;
+     display: flex;
+     gap: 10px;
+     .card__item{
+
+          width: 400px;
+          height: 200px;
+          border: 2px solid var(--orange);
+          border-radius: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          .card__item__body{
+               display: flex;
+               flex-direction: row;
+               align-items: center;
+               flex-wrap: nowrap;
+               justify-content: space-around;
+               padding: 20px 0;
+               .card__content{
+                    line-height: 2.2;
+               }
+               .payment__system__icon {
+                    svg{
+                         width: 60px;
+                         height: auto;
+
+                    }
+               }
+          }
+          .card__remove{
+               text-align: center;
+               button{
+                    width: 150px;
+                    height: 30px;
+                    background-color: var(--orange);
+                    cursor: pointer;
+
+               }
+          }
+     }
+     .add_card{
+          background-image: url('../../../../../../../public/icons/add_plus_icon.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          cursor: pointer;
+          &:hover{
+               background-color: #ece7e7;
+          }
+     }
+}
+

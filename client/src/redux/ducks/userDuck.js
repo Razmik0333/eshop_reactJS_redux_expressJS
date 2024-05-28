@@ -47,7 +47,7 @@ export const clearCachesFiles = (id) => async(dispatch) => {
 }
 export const fetchEmailForNotice = (email) => async (dispatch) => {
   try {
-    const data = await(await fetch(`api/notice/email`, {
+    const data = await(await fetch(`${root}/api/notice/email`, {
       headers: {
         "Content-Type":"application/json"
       },

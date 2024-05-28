@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { root } from '../../../../helpers/constants/constants';
-import { currentLanguageDataSelector } from '../../../../helpers/reduxSelectors';
+import { currentLanguageDataSelector, getServicesSelector } from '../../../../helpers/reduxSelectors';
 import './styles/_carousel.scss';
+import { fetchServices } from '../../../../redux/ducks/productDuck';
+import CarouselItem from './CarouselItem/CarouselItem';
 
 
 function Carousel() {
+     const dispatch = useDispatch();
      const carouselRef= useRef(null);
      const [leftVal, setLeftVal] = useState(0);
+     useEffect(() => {
+          dispatch(fetchServices());
+          
+     }, []);
+     const servicesList = useSelector(getServicesSelector)
      const shopNow = useSelector(currentLanguageDataSelector)?.home?.carousel?.shop_now;
      const arrowRight = () => {
           leftVal <  -carouselRef.current?.clientWidth ? setLeftVal(0) :
@@ -29,41 +37,11 @@ function Carousel() {
      return (
           <div className="carousel" ref={carouselRef}>
                <div className="pictures__block" style={{left:leftVal}}>
-                    <div className="carousel__body">
-                         <div className="carousel__picture">
-                              <img alt='carousel_item_1'  src={`${root}/images/services/glass.jpg`}/>
-                         </div>
-                         {/* <div className="carousel__content">
-                              <h1 className="carousel-body-header">
-                                   INDOOR <span>FURNITURE</span>
-                              </h1>
-                              <p>SAVE UP TO 50% OF ALL FURNITURE</p>
-                         </div> */}
-                    </div>
-                    <div className="carousel__body">
-                         <div className="carousel__picture">
-                              <img alt='carousel_item_1'  src={`${root}/images/services/mike.jpg`}/>
-                         </div>
-                         {/* <div className="carousel__content">
-                              <h1 className="carousel-body-header">
-                                   INDOOR <span>FURNITURE</span>
-                              </h1>
-                              <p>SAVE UP TO 50% OF ALL FURNITURE</p>
-                         </div> */}
-                    </div>
-                    <div className="carousel__body">
-                         <div className="carousel__picture">
-                              <img alt='carousel_item_1'   src={`${root}/images/services/laser.jpg`}/>
-                         </div>
-                         {/* <div className="carousel__content">
-                              <h1 className="carousel-body-header">
-                                   INDOOR <span>FURNITURE</span>
-                              </h1>
-                              <p>SAVE UP TO 50% OF ALL FURNITURE</p>
-                         </div> */}
-                    </div>
-                     
-
+                    {
+                         servicesList.map(service => {
+                              return <CarouselItem service = {service}/>
+                         })
+                    }
                </div>
                <button type="button" className="shop-now">{shopNow}</button>
                <div className="carousel__buttons">

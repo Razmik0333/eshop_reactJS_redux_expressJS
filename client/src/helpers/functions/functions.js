@@ -247,7 +247,8 @@ export const getBestSellers = (obj) => {
 }
 
 
-export const getSortedArray = (orgArr, typeObj) => {          
+export const getSortedArray = (orgArr, typeObj) => {  
+                  
           switch (typeObj.type && typeObj.time) {
                case 'price' && 'lowest':
                     return orgArr.sort((a, b) => {

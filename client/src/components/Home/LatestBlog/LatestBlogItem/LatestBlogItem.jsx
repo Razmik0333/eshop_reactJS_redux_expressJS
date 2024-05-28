@@ -3,11 +3,16 @@ import { getTime } from "../../../../helpers/functions/functions";
 import RatingMapping from "../../../Base/RatingMapping/RatingMapping";
 import { root } from "../../../../helpers/constants/constants";
 import { useRef } from "react";
-import { useSelector } from "react-redux";
-import { currentLanguageDataSelector, getReviewIdSelector } from "../../../../helpers/reduxSelectors";
+import { useDispatch, useSelector } from "react-redux";
+import { currentLanguageDataSelector, getCurrentLanguageSelector, getReviewIdSelector, modalCloseSelector, modalReviewShowSelector } from "../../../../helpers/reduxSelectors";
+import { getReviewModal } from "../../../../redux/ducks/reviewDuck";
+import { changeModal, getReviewShow } from "../../../../redux/ducks/configsDuck";
 
 function LatestBlogItem({blog}) {
-     const reviewId = useSelector(getReviewIdSelector)
+     const dispatch = useDispatch();
+     const reviewId = useSelector(getReviewIdSelector);
+     const currentLanguage = useSelector(getCurrentLanguageSelector);
+
      const latestBlogData = useSelector(currentLanguageDataSelector)?.home?.latest_blog;
      useEffect(() => {
           setLeftVal(0)
@@ -27,13 +32,19 @@ function LatestBlogItem({blog}) {
           setLeftVal(leftVal - 381)          
      }
      const picturePath = `${root}/images/reviews` // 
-
+     const avatarPath = `${root}/images/users` // 
+     const changeReviewId = (e) => {
+          dispatch(getReviewModal(e.target.dataset.id));
+          dispatch(getReviewShow(true))
+     }
      return(
+          <>
           <div className="latest__blog__item">
                <div className="latest__blog__item__pictures"
                     style={{
                          width : blog?.productPictures.length === 0 ? 381 : blog?.productPictures.length * 381,
-                         left:leftVal}}
+                         left:leftVal
+                         }}
                     ref={imgRef}
                >
                     {
@@ -50,7 +61,7 @@ function LatestBlogItem({blog}) {
                               :
                               <div className="latest__blog__item__picture" >
                                    {
-                                        <img src={`${picturePath}/no-image.png`} 
+                                        <img src={`${avatarPath}/no-image.png`} 
                                              alt=""
                                         />
                                    }
@@ -59,7 +70,7 @@ function LatestBlogItem({blog}) {
                     }
                </div>
                {
-                    blog?.productPictures.length > 0 &&
+                    blog?.productPictures.length > 1 &&
 
                     <div className="arrows">
                          <div className="arrow-left" onClick={arrowLeft}>
@@ -67,7 +78,6 @@ function LatestBlogItem({blog}) {
                          </div>
                          <div className="arrow-right" onClick={arrowRight}>
                               <img src={`${root}/icons/config/arrow_right.svg`} alt="" />
-
                          </div>
                     </div>
 
@@ -79,28 +89,41 @@ function LatestBlogItem({blog}) {
                               `${day} ${month} ${year}`
                          }
                     </span>
-                         <span className="item-title-date">
-                              {
-                                   <RatingMapping rating={blog?.rating}/>
-                              }
-                         </span>
+                    <span className="item-title-date">
+                         {
+                              <RatingMapping rating={blog?.rating}/>
+                         }
+                    </span>
                </div>
                <div className="latest_blog_content">
+                    <p className="item-user-avatar">
+                         <div className="review__user__avatar">
+                         <img src={`${avatarPath}/${blog?.user_id}/${blog?.avatarPicture}`} alt="" />
+                         </div>
+                         <div className="review__user__name">
+                              {blog?.user_name}
+                              
+                         </div>
+                         
+                    </p>
                     <p className="item-desc-title">
                          {
-                              blog?.product?.descr
+                              currentLanguage === 'am' ?  blog?.product?.descr : 
+                                   currentLanguage === 'en' ?  blog?.product?.descr_en :
+                                   blog?.product?.descr_ru
                          } 
                     </p>
                     <div className="item-desc-text">
                          {
-                              blog?.review
+                              blog?.review.split(" ").filter((item, pos) => pos < 10 ).join(" ") + "..."
                          }
                     </div>
                     <div className="latest-blog-footer">
-                         <button className="latest_blog_button">{latestBlogData?.read_more}</button>
+                         <button className="latest_blog_button" data-id={`${blog?.id}`} onClick={changeReviewId}>{latestBlogData?.read_more}</button>
                     </div>
                </div>
           </div>
+          </>
      )
 }
 

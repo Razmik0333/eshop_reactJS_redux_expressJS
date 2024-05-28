@@ -111,7 +111,7 @@ var fetchEmailForNotice = function fetchEmailForNotice(email) {
             _context2.prev = 0;
             _context2.t0 = regeneratorRuntime;
             _context2.next = 4;
-            return regeneratorRuntime.awrap(fetch("api/notice/email", {
+            return regeneratorRuntime.awrap(fetch("".concat(_constants.root, "/api/notice/email"), {
               headers: {
                 "Content-Type": "application/json"
               },

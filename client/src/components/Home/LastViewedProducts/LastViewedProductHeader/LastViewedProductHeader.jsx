@@ -6,7 +6,7 @@ import { getViewedProductId } from '../../../../redux/ducks/configsDuck';
 export default function LastViewedProductHeader() {
      const dispatch = useDispatch();
      const viewedProducts =  useSelector(getViewedProductsSelector);
-     
+     const wiewedFilteredProductsIds = viewedProducts.filter((_, pos) => pos < 12)
      const setViewId = (e) => {
           dispatch(getViewedProductId(+e.target.dataset.id))
      }
@@ -18,15 +18,15 @@ export default function LastViewedProductHeader() {
           </div>
           <div className="circles">
           {
-               [viewedProducts].map((item,pos) => {
+               wiewedFilteredProductsIds.map((_,pos) => {
 
-                    return (pos +  1 ) % 3 === 0 && 
+                    return (pos +  1 ) % 4 === 0 && 
                     
                          <div className={
-                              `circle ${(+pos + 1)/3 === viewId ? `active` : ``}`
+                              `circle ${(+pos + 1)/4 === viewId ? `active` : ``}`
                          }
                               onClick={setViewId} 
-                              data-id={`${(+pos + 1)/3}`}
+                              data-id={`${(+pos + 1)/4}`}
                               key={`viewed_product_${pos}`}
                          >
 

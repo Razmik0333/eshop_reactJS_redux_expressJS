@@ -153,9 +153,18 @@
                     }
                     .button-favorite{
                          vertical-align: middle;
+                         
                          &::before{
                               content: "\2661" ;
                          }
+                    }
+                    .button-favorite-full{
+                         &::before{
+                              content: "\2661" ;
+                              color: #fff;
+                         }
+                         border-color: #d58e32;
+                         background-color: #d58e32;
                     }
                     .button-compare{
                          &::before{

@@ -5,6 +5,7 @@ import { currentLanguageDataSelector, modalCloseSelector } from '../../../../hel
 import "./styles/_admin-insert-file.scss"
 import Modal from '../../Modal/Modal';
 import { changeModal } from '../../../../redux/ducks/configsDuck';
+import { deleteCacheFiles } from '../../../../redux/ducks/adminProductDuck';
 export default function ProductsFromList() {
      const dispatch = useDispatch();
      const [isCreated, setIsCreated] = useState(false);
@@ -24,7 +25,7 @@ export default function ProductsFromList() {
                console.log(res);
                res && setIsCreated(true)
                dispatch(changeModal(true));
-              
+               dispatch(deleteCacheFiles())
                // navigate('/admin/product');
 
            }).catch(err => {throw err})

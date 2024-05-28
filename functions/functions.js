@@ -89,9 +89,8 @@ const getMostestMaxObject = (data) => {
           if (data[key].count > max) {
                max = data[key].count; 
                maxObj = {
-                    product_id : key,
-                    count: max,
-                    rating: data[key].rating
+                    product_id : +key,
+                    count: max
                } 
           }
      }
@@ -249,6 +248,38 @@ const getMessageObjectAuth = (to, type) => {
      };
 }
 
+const getCountsOffHighRating = (mostestData) => {
+    return mostestData.reduce((acc, curr) => {
+          if(!(curr.product_id in acc) ){
+               acc[curr.product_id] = {
+                    rating : curr.rating,
+                    count : 1
+               }
+          }else {
+               acc[curr.product_id] = {
+                    ...acc[curr.product_id],
+                    count : ++acc[curr.product_id].count
+               }
+          }
+          return acc;
+     },{})
+}
+
+const getIdOffHighRatingProduct = (mostData) => {
+     let max = 0;
+     let maxObj = {}
+     for (const key in mostData) {
+          if (mostData[key].count > max) {
+               max = mostData[key].count; 
+               maxObj = {
+                    product_id : +key,
+                    count: max,
+                    rating: mostData[key].rating
+               } 
+          }
+     }
+     return maxObj;
+}
 
 
 module.exports = {
@@ -273,7 +304,9 @@ module.exports = {
      reviewsFromProducts:getReviewsFromProducts,
      reviewsByUser:getReviewsByUser,
      reviewsByProduct:getReviewListFromProduct,
-     ratingCounts : getRatingCounts
+     ratingCounts : getRatingCounts,
+     countsOffHighRating: getCountsOffHighRating,
+     idOffHighRatingProduct : getIdOffHighRatingProduct
 }
 
 
