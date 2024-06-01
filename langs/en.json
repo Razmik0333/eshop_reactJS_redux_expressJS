@@ -79,6 +79,7 @@
     },
     "product_page" : {
         "content" : {
+            "review" : "review",
             "reviews" : "reviews",
             "add_to_cart": "Add To Cart",
             "quantity":"Quantity",
@@ -87,12 +88,21 @@
             "description" : "Description",
             "category":"Category",
             "sold" :"Sold",
-            "pcs":"pcs"
+            "pcs":"pcs",
+            "available" : "Available",
+            "not_available" : "Not_available"
         },
         "review": {
             "header" : {
                 "description" : "DESCRIPTION",
                 "reviews" : "REVIEWS"
+            },
+            "filter_types" : {
+                "newest":"newest",
+                "oldest":"oldest",
+                "high_rating":"high rating",
+                "low_rating":"low rating",
+                "reviews_With_pictures":"Reviews With pictures"                
             }
         },
         "missing": "Reviews are missing",

@@ -1,10 +1,14 @@
 .modal{
-     .modal__popup{
+     .modal__popup__review{
           width: 60%;
           left: 25%;
           top: 1%;
           height:450px;
           font-size: 12px;
+          position: absolute;
+          .button-block{
+               right: 4%;
+          }
      }
      .review-main{
           
@@ -13,6 +17,7 @@
           padding: 20px;
           justify-content: center;
          align-items: flex-start;
+         background-color: var(--white);
 
           .picture-block{
                display: flex;
@@ -35,7 +40,7 @@
                          align-content: center;
                          text-align: center;
                               img{
-                                   width: 60%;
+                                   width: 100%;
                                    height: auto;
                               }
      
@@ -121,8 +126,6 @@
                }
           }
      }
-     .button-block{
-          right: 4%;
-     }
+
 
 }

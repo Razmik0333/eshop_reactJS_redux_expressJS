@@ -16,7 +16,6 @@ function Product({product, text}) {
      const dispatch = useDispatch();
      const navigate = useNavigate();
      const discountedPrice = product.cost *(1 - product.discount / 100);
-     const popupIsShow = useSelector(popupCloseSelector);
      const currentCurrency = useSelector(getCurrentCurrencySelector);
      const currentLanguage = useSelector(getCurrentLanguageSelector);
 
@@ -51,7 +50,7 @@ function Product({product, text}) {
      }
      return (
           <>
-               {popupIsShow ?  <ModalPopup id={product?.id}/> : <></>}
+              
           <div className="product">
                {
                     product?.discount > 0 ? <div className="sale">

@@ -7,6 +7,7 @@ import ProductReviewSort from "../ProductReviewSort/ProductReviewSort";
 import { getReviewsHavePicture, sortingReviews } from "../../../../helpers/functions/functions";
 function ProductReviews() {
      const reviewsByProduct = useSelector(getReviewsByProductSelector);
+     console.log("🚀 ~ ProductReviews ~ reviewsByProduct:", reviewsByProduct)
      const sortType = useSelector(getReviewSortTypeSelector)
      const productsPageData = useSelector(currentLanguageDataSelector)?.product_page;
      const sorted = sortingReviews(reviewsByProduct, sortType?.type);
@@ -20,7 +21,7 @@ function ProductReviews() {
                     <ProductReviewCounts />
                }
                {
-                    <ProductReviewSort />
+                   reviewsByProduct.length > 0 &&  <ProductReviewSort />
                }
                {
                     <div className="review-block">

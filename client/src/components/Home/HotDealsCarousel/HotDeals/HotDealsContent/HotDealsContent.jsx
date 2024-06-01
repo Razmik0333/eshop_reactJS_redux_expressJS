@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { currentLanguageDataSelector, getCurrentCurrencySelector, getCurrentLanguageSelector, getUserId, getWishListDataSelector, hotDealsSelector, maxDiscountDataSelector, popupCloseSelector } from "../../../../../helpers/reduxSelectors";
+import { currentLanguageDataSelector, getCurrentCurrencySelector, getCurrentLanguageSelector, getUserId, getWishListDataSelector, hotDealsSelector, maxDiscountDataSelector, popupCloseSelector, popupHotDealsCloseSelector } from "../../../../../helpers/reduxSelectors";
 import {root} from '../../../../../helpers/constants/constants' ;
 import ModalPopup from "../../../../Base/Modal/ModalPopup";
 import { getNewCurrency, numInArray } from "../../../../../helpers/functions/functions";
@@ -15,7 +15,7 @@ function HotDealsContent() {
      const dispatch = useDispatch();
      const navigate = useNavigate();
      const userId = useSelector(getUserId)
-     const popupIsShow = useSelector(popupCloseSelector);
+     const popupHodDealsIsShow = useSelector(popupHotDealsCloseSelector);
 
      const currentCurrency = useSelector(getCurrentCurrencySelector);
      const wishListData = useSelector(getWishListDataSelector);
@@ -55,7 +55,7 @@ function HotDealsContent() {
      const addCart = useSelector(currentLanguageDataSelector)?.home?.hot_deals?.add_to_cart;
      return (
           <>
-               {popupIsShow ?  <ModalPopup id={currentItem?.id}/> : <></>}
+               {popupHodDealsIsShow ?  <ModalPopup id={currentItem?.id}/> : <></>}
                <>
                     <div className="hot__deals__content">
                          {

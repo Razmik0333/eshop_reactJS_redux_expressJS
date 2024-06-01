@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.fetchLanguages = exports.fetchLanguageData = exports.changeCurrencies = exports.changeLanguages = exports.changeMostestIndex = exports.changeLanguage = exports.changeCurrency = exports.getIdProductsFromStartingPage = exports.getHotDealsTimerSecond = exports.getViewedProductId = exports.getPopupItemId = exports.changePopup = exports.getReviewShow = exports.changeModal = exports.clearCostValues = exports.changeCosts = exports.changeCountItemsOfPage = exports.changeCountElements = exports.changeSortType = exports.getHotDealsId = exports.changeShowType = exports.changeReviewShow = exports.changeViewedProductId = exports.changeCurrentMostestIndex = exports.changeCurrentLanguageData = exports.changeCurrentLanguage = exports.changeCurrentCurrency = exports.changeHotDealsTimerSecond = exports.changeIdProductsFromStartingPage = exports.changeHotDealsId = exports.changePopupItemId = exports.getCurrencies = exports.getLanguages = exports.getPopupOpenClose = exports.getModalOpenClose = exports.getCostsValues = exports.getCountItemsOfPage = exports.getCountElements = exports.getSortType = exports.getShowType = void 0;
+exports["default"] = exports.fetchLanguages = exports.fetchLanguageData = exports.changeCurrencies = exports.changeLanguages = exports.changeMostestIndex = exports.changeLanguage = exports.changeCurrency = exports.getIdProductsFromStartingPage = exports.getHotDealsTimerSecond = exports.getViewedProductId = exports.getPopupItemId = exports.changePopupHotDeals = exports.changePopup = exports.getReviewShow = exports.changeModal = exports.clearCostValues = exports.changeCosts = exports.changeCountItemsOfPage = exports.changeCountElements = exports.changeSortType = exports.getBestSellerProductId = exports.getSimilarProductId = exports.getHotDealsId = exports.changeShowType = exports.changeBestSellerProductId = exports.changeSimilarProductId = exports.changeReviewShow = exports.changeViewedProductId = exports.changeCurrentMostestIndex = exports.changeCurrentLanguageData = exports.changeCurrentLanguage = exports.changeCurrentCurrency = exports.changeHotDealsTimerSecond = exports.changeIdProductsFromStartingPage = exports.changeHotDealsId = exports.changePopupItemId = exports.getCurrencies = exports.getLanguages = exports.getPopupHotDealsOpenClose = exports.getPopupOpenClose = exports.getModalOpenClose = exports.getCostsValues = exports.getCountItemsOfPage = exports.getCountElements = exports.getSortType = exports.getShowType = void 0;
 
 var _redux = require("../../helpers/redux");
 
@@ -24,6 +24,7 @@ var COUNT_ELEMENTS_OF_PAGE = 'configsDuck/COUNT_ELEMENTS_OF_PAGE';
 var COST_VALUES = 'configsDuck/COST_VALUES';
 var MODAL_OPEN_CLOSE = 'configsDuck/MODAL_OPEN_CLOSE';
 var POPUP_IS_SHOW = 'configsDuck/POPUP_IS_SHOW';
+var POPUP_HOT_DEALS_IS_SHOW = 'configsDuck/POPUP_HOT_DEALS_IS_SHOW';
 var POPUP_ITEM_ID = 'configsDuck/POPUP_ITEM_ID';
 var HOT_DEALS_ID = 'configsDuck/HOT_DEALS_ID';
 var HOT_DEALS_TIMER_SECONDS = 'configsDuck/HOT_DEALS_TIMER_SECONDS';
@@ -36,6 +37,8 @@ var CURRENCIES = 'configsDuck/CURRENCIES';
 var MOSTEST_OPTIONS_INDEX = 'configsDuck/MOSTEST_OPTIONS_INDEX';
 var VIEWED_PRODUCT_ID = 'configsDuck/VIEWED_PRODUCT_ID';
 var REVIEW_SHOW = 'configsDuck/REVIEW_SHOW';
+var SIMILAR_PRODUCT_ID = 'configsDuck/SIMILAR_PRODUCT_ID';
+var BEST_SELLER_PRODUCT_ID = 'configsDuck/BEST_SELLER_PRODUCT_ID';
 var getShowType = (0, _redux.createAction)(CHANGE_SHOW_TYPE);
 exports.getShowType = getShowType;
 var getSortType = (0, _redux.createAction)(CHANGE_SORT_TYPE);
@@ -50,6 +53,8 @@ var getModalOpenClose = (0, _redux.createAction)(MODAL_OPEN_CLOSE);
 exports.getModalOpenClose = getModalOpenClose;
 var getPopupOpenClose = (0, _redux.createAction)(POPUP_IS_SHOW);
 exports.getPopupOpenClose = getPopupOpenClose;
+var getPopupHotDealsOpenClose = (0, _redux.createAction)(POPUP_HOT_DEALS_IS_SHOW);
+exports.getPopupHotDealsOpenClose = getPopupHotDealsOpenClose;
 var getLanguages = (0, _redux.createAction)(LANGUAGES);
 exports.getLanguages = getLanguages;
 var getCurrencies = (0, _redux.createAction)(CURRENCIES);
@@ -74,6 +79,10 @@ var changeViewedProductId = (0, _redux.createAction)(VIEWED_PRODUCT_ID);
 exports.changeViewedProductId = changeViewedProductId;
 var changeReviewShow = (0, _redux.createAction)(REVIEW_SHOW);
 exports.changeReviewShow = changeReviewShow;
+var changeSimilarProductId = (0, _redux.createAction)(SIMILAR_PRODUCT_ID);
+exports.changeSimilarProductId = changeSimilarProductId;
+var changeBestSellerProductId = (0, _redux.createAction)(BEST_SELLER_PRODUCT_ID);
+exports.changeBestSellerProductId = changeBestSellerProductId;
 
 var changeShowType = function changeShowType(str) {
   return function (dispatch) {
@@ -90,6 +99,22 @@ var getHotDealsId = function getHotDealsId(id) {
 };
 
 exports.getHotDealsId = getHotDealsId;
+
+var getSimilarProductId = function getSimilarProductId(id) {
+  return function (dispatch) {
+    dispatch(changeSimilarProductId(id));
+  };
+};
+
+exports.getSimilarProductId = getSimilarProductId;
+
+var getBestSellerProductId = function getBestSellerProductId(id) {
+  return function (dispatch) {
+    dispatch(changeBestSellerProductId(id));
+  };
+};
+
+exports.getBestSellerProductId = getBestSellerProductId;
 
 var changeSortType = function changeSortType(obj) {
   return function (dispatch) {
@@ -154,6 +179,14 @@ var changePopup = function changePopup(bool) {
 };
 
 exports.changePopup = changePopup;
+
+var changePopupHotDeals = function changePopupHotDeals(bool) {
+  return function (dispatch) {
+    dispatch(getPopupHotDealsOpenClose(bool));
+  };
+};
+
+exports.changePopupHotDeals = changePopupHotDeals;
 
 var getPopupItemId = function getPopupItemId(id) {
   return function (dispatch) {
@@ -351,6 +384,7 @@ var initialStateConfigs = {
   popupIsShow: false,
   popupItemId: null,
   hotDealsId: 0,
+  hotDealsPopup: 0,
   currentCurrency: 'AMD',
   currentLanguage: 'am',
   languages: [],
@@ -360,6 +394,8 @@ var initialStateConfigs = {
   hotDealsTimerSeconds: 3 * 24 * 60 * 60,
   mostestIndex: "0",
   viewedProductId: 1,
+  similarCirclId: 1,
+  bestSellerCircleId: 1,
   reviewShow: false
 };
 
@@ -412,6 +448,11 @@ var ConfigsDuck = function ConfigsDuck() {
     case POPUP_IS_SHOW:
       return _objectSpread({}, state, {
         popupIsShow: action.payload
+      });
+
+    case POPUP_HOT_DEALS_IS_SHOW:
+      return _objectSpread({}, state, {
+        hotDealsPopup: action.payload
       });
 
     case POPUP_ITEM_ID:
@@ -467,6 +508,16 @@ var ConfigsDuck = function ConfigsDuck() {
     case REVIEW_SHOW:
       return _objectSpread({}, state, {
         reviewShow: action.payload
+      });
+
+    case SIMILAR_PRODUCT_ID:
+      return _objectSpread({}, state, {
+        similarCirclId: action.payload
+      });
+
+    case BEST_SELLER_PRODUCT_ID:
+      return _objectSpread({}, state, {
+        bestSellerCircleId: action.payload
       });
 
     default:

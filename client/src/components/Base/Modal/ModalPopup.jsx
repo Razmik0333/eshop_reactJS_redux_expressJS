@@ -8,7 +8,7 @@ function ModalPopup() {
      const dispatch = useDispatch();
      const pictureId = useSelector(popupItemIdSelector)
      return <div className="modal container">
-          <div className=" modal__popup">
+          <div className="modal__popup">
               <div className="picture-block">
              
                     <img src={`${root}/images/products/${pictureId}.jpg`} alt="" />

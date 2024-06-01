@@ -28,7 +28,7 @@ const getProductsWithCounts = (data, quantities) => {
 const getMaxSoldedProductIds = (productObj) => {
      return  Object.entries(productObj).sort((a, b) => {
           return b[1] - a[1]
-     }).filter((_, pos) => pos <= 3)
+     }).filter((_, pos) => pos <= 11)
      .map(item => item[0])
 }
 const getTokensForQuery = (idArray) => {

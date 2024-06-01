@@ -8,6 +8,7 @@ const COUNT_ELEMENTS_OF_PAGE = 'configsDuck/COUNT_ELEMENTS_OF_PAGE';
 const COST_VALUES = 'configsDuck/COST_VALUES';
 const MODAL_OPEN_CLOSE = 'configsDuck/MODAL_OPEN_CLOSE';
 const POPUP_IS_SHOW = 'configsDuck/POPUP_IS_SHOW';
+const POPUP_HOT_DEALS_IS_SHOW = 'configsDuck/POPUP_HOT_DEALS_IS_SHOW';
 const POPUP_ITEM_ID = 'configsDuck/POPUP_ITEM_ID';
 const HOT_DEALS_ID = 'configsDuck/HOT_DEALS_ID';
 const HOT_DEALS_TIMER_SECONDS = 'configsDuck/HOT_DEALS_TIMER_SECONDS';
@@ -20,6 +21,8 @@ const CURRENCIES = 'configsDuck/CURRENCIES';
 const MOSTEST_OPTIONS_INDEX = 'configsDuck/MOSTEST_OPTIONS_INDEX';
 const VIEWED_PRODUCT_ID = 'configsDuck/VIEWED_PRODUCT_ID'
 const REVIEW_SHOW = 'configsDuck/REVIEW_SHOW'
+const SIMILAR_PRODUCT_ID = 'configsDuck/SIMILAR_PRODUCT_ID'
+const BEST_SELLER_PRODUCT_ID = 'configsDuck/BEST_SELLER_PRODUCT_ID'
 
 export const getShowType = createAction(CHANGE_SHOW_TYPE);
 export const getSortType = createAction(CHANGE_SORT_TYPE);
@@ -28,6 +31,7 @@ export const getCountItemsOfPage = createAction(COUNT_ELEMENTS_OF_PAGE);
 export const getCostsValues = createAction(COST_VALUES);
 export const getModalOpenClose = createAction(MODAL_OPEN_CLOSE);
 export const getPopupOpenClose = createAction(POPUP_IS_SHOW);
+export const getPopupHotDealsOpenClose = createAction(POPUP_HOT_DEALS_IS_SHOW);
 export const getLanguages = createAction(LANGUAGES);
 export const getCurrencies = createAction(CURRENCIES);
 export const changePopupItemId = createAction(POPUP_ITEM_ID);
@@ -40,6 +44,8 @@ export const changeCurrentLanguageData = createAction(CURRENT_LANGUAGE_DATA);
 export const changeCurrentMostestIndex = createAction(MOSTEST_OPTIONS_INDEX)
 export const changeViewedProductId = createAction(VIEWED_PRODUCT_ID)
 export const changeReviewShow = createAction(REVIEW_SHOW)
+export const changeSimilarProductId = createAction(SIMILAR_PRODUCT_ID)
+export const changeBestSellerProductId = createAction(BEST_SELLER_PRODUCT_ID)
 
 
 export const changeShowType = (str) => (dispatch) => {
@@ -47,6 +53,12 @@ export const changeShowType = (str) => (dispatch) => {
 };
 export const getHotDealsId = (id) => (dispatch) => {
   dispatch(changeHotDealsId(id));
+};
+export const getSimilarProductId = (id) => (dispatch) => {
+  dispatch(changeSimilarProductId(id));
+};
+export const getBestSellerProductId = (id) => (dispatch) => {
+  dispatch(changeBestSellerProductId(id));
 };
 export const changeSortType = (obj) => (dispatch) => {
   dispatch(getSortType(obj));
@@ -71,6 +83,9 @@ export const getReviewShow = (bool) => (dispatch) => {
 };
 export const changePopup = (bool) => (dispatch) => {
   dispatch(getPopupOpenClose(bool));
+};
+export const changePopupHotDeals = (bool) => (dispatch) => {
+  dispatch(getPopupHotDealsOpenClose(bool));
 };
 export const getPopupItemId = (id) => (dispatch) => {
   dispatch(changePopupItemId(id));
@@ -147,6 +162,7 @@ const initialStateConfigs = {
     popupIsShow : false,
     popupItemId :null,
     hotDealsId : 0,
+    hotDealsPopup : 0,
     currentCurrency : 'AMD',
     currentLanguage : 'am',
     languages : [],
@@ -156,6 +172,8 @@ const initialStateConfigs = {
     hotDealsTimerSeconds : 3 * 24 * 60 * 60,
     mostestIndex : "0",
     viewedProductId : 1,
+    similarCirclId : 1,
+    bestSellerCircleId : 1,
     reviewShow : false,
     
 };
@@ -213,6 +231,11 @@ const ConfigsDuck = (state = initialStateConfigs, action) => {
         ...state,
         popupIsShow: action.payload,
       };
+    case POPUP_HOT_DEALS_IS_SHOW:
+      return {
+        ...state,
+        hotDealsPopup: action.payload,
+      };
     case POPUP_ITEM_ID:
       return {
         ...state,
@@ -267,6 +290,16 @@ const ConfigsDuck = (state = initialStateConfigs, action) => {
       return {
         ...state,
         reviewShow: action.payload,
+      };
+    case SIMILAR_PRODUCT_ID:
+      return {
+        ...state,
+        similarCirclId: action.payload,
+      };
+    case BEST_SELLER_PRODUCT_ID:
+      return {
+        ...state,
+        bestSellerCircleId: action.payload,
       };
     
     default:

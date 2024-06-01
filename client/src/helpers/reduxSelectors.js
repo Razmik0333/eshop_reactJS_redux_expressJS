@@ -35,6 +35,7 @@ export const elementsCostsSelector = ({ ProductDuck }) => ProductDuck.costItems;
 export const modalCloseSelector = ({ ConfigsDuck }) => ConfigsDuck.modalIsClose; //
 export const modalReviewShowSelector = ({ ConfigsDuck }) => ConfigsDuck.reviewShow; //
 export const popupCloseSelector = ({ ConfigsDuck }) => ConfigsDuck.popupIsShow; //
+export const popupHotDealsCloseSelector = ({ ConfigsDuck }) => ConfigsDuck.hotDealsPopup; //
 export const popupItemIdSelector = ({ ConfigsDuck }) => ConfigsDuck.popupItemId; //
 export const hotDealsTimerSelector = ({ ConfigsDuck }) => ConfigsDuck.hotDealsTimerSeconds; //
 export const idProductsFromStartSelector = ({ ConfigsDuck }) => ConfigsDuck.idProductsFromStart; //
@@ -72,6 +73,8 @@ export const getWishListIdsSelector = ({ WishListDuck }) => WishListDuck.wishLis
 export const getWishListDataSelector = ({ WishListDuck }) => WishListDuck.wishListData; //
 export const getViewedProductsSelector = ({ ProductDuck }) => ProductDuck.viewedProducts; //
 export const getViewedProductIdSelector = ({ ConfigsDuck }) => ConfigsDuck.viewedProductId; //
+export const getSimilarCircleIdSelector = ({ ConfigsDuck }) => ConfigsDuck.similarCirclId; //
+export const getBestSellerCircleIdSelector = ({ ConfigsDuck }) => ConfigsDuck.bestSellerCircleId; //
 export const getViewedProductsDataSelector = ({ ProductDuck }) => ProductDuck.viewedProductsData; //
 export const getServicesSelector = ({ProductDuck}) => ProductDuck.services;
 

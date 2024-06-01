@@ -10,6 +10,7 @@ const [
      getMaxSoldedProducts,
      getMaxSoldedProductIds
 ] = functions.solded
+const getTokensForQuery = functions.query
 
 const getMostestProductData = functions.mostestProduct;
 const getMostestMaxObject = functions.mostestMaxObject;
@@ -85,7 +86,7 @@ module.exports.similarProducts = async (req, res) => {
                     })
                
                }else{
-                    const result = await realyze("SELECT * FROM `products` WHERE `category`= ? AND `id` != ? ORDER BY id DESC LIMIT ?", [catId, prodId, 8]);
+                    const result = await realyze("SELECT * FROM `products` WHERE `category`= ? AND `id` != ? ORDER BY id DESC LIMIT ?", [catId, prodId, 24]);
                     fs_functions.writeCacheFile(
                          `${cachesPath}/similar/similar.json`,
                          result
@@ -359,6 +360,8 @@ module.exports.sold = async (req, res) => {
           const user_orders = await realyze(`SELECT user_order FROM orders `);
           const productObj = getMaxSoldedProducts(user_orders);
           const productIds = getMaxSoldedProductIds(productObj);
+          console.log("🚀 ~ module.exports.sold= ~ productIds:",getTokensForQuery(productIds) );
+          
           if (fs.existsSync(`${cachesPath}/solded/solded.json`)) {
                fs.readFile(`${cachesPath}/solded/solded.json`, "utf-8",
                async function(err, data) {
@@ -368,7 +371,9 @@ module.exports.sold = async (req, res) => {
                         const newArr =  JSON.parse(data).filter((item, pos) => item['id'] === +productSortedIds[pos] );
                          if (newArr.length === 4) res.send(data)
                          else{
-                              const result = await realyze(`SELECT * FROM products WHERE id IN (? , ? , ?, ?)`, productIds);
+                              const tokens = getTokensForQuery(productIds)
+                              const result = await realyze(`SELECT * FROM products WHERE id IN (${tokens}) `, productIds)
+                              //const result = await realyze(`SELECT * FROM products WHERE id IN (? , ? , ?, ?)`, productIds);
                               fs_functions.writeCacheFile(
                                    `${cachesPath}/solded/solded.json`,
                                    result
@@ -378,7 +383,8 @@ module.exports.sold = async (req, res) => {
                     }
                })
           }else{
-               const result = await realyze(`SELECT * FROM products WHERE id IN (? , ? , ?, ?)`, productIds);
+               const tokens = getTokensForQuery(productIds)
+               const result = await realyze(`SELECT * FROM products WHERE id IN (${tokens}) `, productIds)
                fs_functions.writeCacheFile(
                     `${cachesPath}/solded/solded.json`,
                     result

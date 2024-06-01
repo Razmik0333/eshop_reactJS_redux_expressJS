@@ -41,7 +41,7 @@ function ModalReviewShow() {
      }
 
      return <div className="modal container">
-          <div className=" modal__popup" >
+          <div className=" modal__popup__review" >
                <div className="review-main">
                     <div className="picture-block">
                          <div className="picture-block-img"

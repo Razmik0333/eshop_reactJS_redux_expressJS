@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import "./styles/_product-similar.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSimilarProducts } from '../../../redux/ducks/productDuck';
-import { currentLanguageDataSelector, currentProductSelector, productsSimilarSelector } from '../../../helpers/reduxSelectors';
+import { currentLanguageDataSelector, currentProductSelector, getSimilarCircleIdSelector, productsSimilarSelector } from '../../../helpers/reduxSelectors';
 import Product from '../../Base/Product/Product';
+import ProductSimilarHeader from './ProductSimilarHeader';
 
 export default function ProductSimilar() {
      const dispatch = useDispatch();
@@ -14,31 +15,24 @@ export default function ProductSimilar() {
      }, [currentProductCategory,currentProductId]);
      const productSimilar = useSelector(productsSimilarSelector);
      const langData = useSelector(currentLanguageDataSelector);
-
-     const productSimilarLang = langData?.product_page;
+     const circleId = useSelector(getSimilarCircleIdSelector)
+     const filtered = productSimilar.filter((_, pos) => {
+          return pos >= circleId * 8 && pos < (circleId + 1) * 8
+     })
 
      const productItemText = langData?.product_item;
 
   return (
     <div className="similar__products">
           <div className="container similar__products__container">
-               <div className="categories">
-                    <span>{productSimilarLang?.similar}</span>
-               </div>
-               <div className="category-line-circle">
-                    <div className="category-line">
-
-                    </div>
-                    <div className="circles">
-                         <div className="circle active"></div>
-                         <div className="circle"></div>
-                         <div className="circle"></div>
-                    </div>
-               </div>
+               <ProductSimilarHeader />
                <div className="products-list">
-                    {productSimilar.map(item => {
-                         return <Product product={item} key={`similar_${item?.id}`} text={productItemText} />
-                    })  }
+                    {
+                         
+                         filtered.map((item) => {
+                              return <Product product={item} key={`similar_${item?.id}`} text={productItemText} />
+                         })  
+                    }
                </div>
           </div>
     </div>

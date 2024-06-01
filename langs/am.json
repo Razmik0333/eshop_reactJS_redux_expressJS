@@ -87,14 +87,23 @@
               "description" : "Նկարագրություն",
               "category" : "Կատեգորիա",
               "sold" : "Վաճառված է",
-              "pcs" : "հատ"
+              "pcs" : "հատ",
+              "available" : "Առկա է",
+              "not_available" : "Առկա չէ"
      
           },
           "review": {
                 "header" : {
                     "description" : "ԲՆՈՒԹԱԳԻՐ",
                     "reviews" : "ԿԱՐԾԻՔՆԵՐ"
-                }
+                },
+                "filter_types" : {
+                        "newest":"Նորերը",
+                        "oldest":"Հները",
+                        "high_rating":"Բարձր Գնահատականով",
+                        "low_rating":"Ցածր Գնահատականով",
+                        "reviews_With_pictures":"Ցուցադրել նկարով կարծիքները"                
+                    }
           },
           "missing": "Կարծիքները բացակայում են",
           "home" : "ԳԼԽԱՎՈՐ",

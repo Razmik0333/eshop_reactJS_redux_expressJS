@@ -59,6 +59,13 @@
                     color: var(--white);
                }
           }
+          .button-favorite-full{
+               background-color: var(--orange);
+               &::before{
+                    content: "♡";
+                    color: #fff;
+               }
+          }
           .add-to-cart{
                //left: 50%;
                height: 35px;
@@ -150,7 +157,7 @@
                          font-size: 13px;
                     }
                     svg{
-                         width: 20px;
+                         width: 17px;
                          height: 20px;
                          vertical-align: middle;
 
@@ -164,16 +171,16 @@
                     background-color: #3b5998;
                     color: var(--white);
                }
-               .google{
+               .instagram{
                     width: 90px;
                     fill: #d62d20;
                     padding: 5px;
                     background-color: var(--white);
                }
-               .twitter{
+               .whatsapp{
                     background-color: var(--white);
                     padding: 5px;
-                    fill: #4099ff;
+                    fill: #0bce73;
                }
                .pinterest{
                     width: 93px;
@@ -183,7 +190,7 @@
                }
                .linkedin{
                     width: 93px;
-                    fill: #4099ff;
+                    fill: #8810c0;
                     padding: 5px;
                     background-color: var(--white);
 
