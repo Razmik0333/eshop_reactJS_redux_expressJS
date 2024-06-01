@@ -18,11 +18,12 @@
                border: 3px solid var(--orange);
                border-radius: 50%;
                position: absolute;
+               top: 12%;
                z-index: 99998;
                background-color: var(--white);
           }
           .line{
-               height: 6px;
+               height: 12px;
                top: 5px;
                position: absolute;
           }
@@ -43,14 +44,14 @@
                border: 3px solid #ccc;
           }
           .final{
-               left: 100%;
+               left: calc(100% - 6px) ;
 
           }
      }
      .filter-price{
           margin-top: 60px;
           display: flex;
-          justify-content: space-between;
+          justify-content: flex-end;
            align-items: center;
            .filter-button{
                 width: 60px;

@@ -74,6 +74,9 @@ export const generateArrayFromMaxMin = (arr) => {
 export const getPositiveNumber = (val) => {
      return  val <= 0 ? 0 : val;
 }
+export const getRoundedValue = (num) => {
+    return num > 1 ? 1 : num
+}
 export const getHigherStrValue = (str1, str2) => {
     return parseInt(str1) >= parseInt(str2) ? parseInt(str2) - 16 : parseInt(str1);
 }
@@ -95,7 +98,7 @@ export const getNewCurrency = (val, price) => {
      switch (val) {
           case 'AMD':
                return {
-                    value : price,
+                    value : +price.toFixed(2),
                     char : '֏'
                }
           case "RUB":

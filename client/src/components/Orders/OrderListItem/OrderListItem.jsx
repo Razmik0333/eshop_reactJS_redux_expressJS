@@ -17,7 +17,7 @@ function OrderListItem({product, counts}) {
      }
      return (
           
-           <div className="product__list">
+           <div className="product__list order__product__list">
                <div className="sale">
                {orderTextItem?.sale}
                </div>

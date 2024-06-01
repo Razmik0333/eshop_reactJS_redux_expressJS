@@ -32,7 +32,6 @@ module.exports.wishListByUserId = async (req, res) => {
                          async function(err, data) {
                               if (err) throw err;
                               else { 
-                                   
                                    const productSortedIds = productsIds.sort((a, b) => a - b)                                  
                                    const newArr =  JSON.parse(data).filter((item, pos) => item['id'] === +productSortedIds[pos] );
                                    if (newArr.length === JSON.parse(data).length) 

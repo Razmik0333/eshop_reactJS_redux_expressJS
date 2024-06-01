@@ -1,19 +1,29 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { getCartSelector, getUserId } from '../../../helpers/reduxSelectors';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { getCartSelector, getCurrentCurrencySelector, getCurrentLanguageSelector, getUserId, getWishListDataSelector } from '../../../helpers/reduxSelectors';
 import { fetchAddCart, fetchRemoveOnCart } from '../../../redux/ducks/cartDuck';
 import { currentProduct } from '../../../redux/ducks/productDuck';
 import { root } from '../../../helpers/constants/constants';
 import RatingMapping from '../../Base/RatingMapping/RatingMapping';
+import { getNewCurrency, numInArray } from '../../../helpers/functions/functions';
+import { deleteWishListItem, fetchAddWishList } from '../../../redux/ducks/wishListDuck';
 
 import './_cartListItem.scss';
 
 function CartListItem({product, text}) {
+     const dispatch = useDispatch();
+     const navigate = useNavigate();
      const cart = useSelector(getCartSelector);
+     const discountedPrice = product.cost *(1 - product.discount / 100);
+     const currentCurrency = useSelector(getCurrentCurrencySelector);
+
      const [count, setCount] = useState(product?.quantity);
      const userId = useSelector(getUserId);
-     const dispatch = useDispatch();
+     const wishListData = useSelector(getWishListDataSelector);
+     const currentLanguage = useSelector(getCurrentLanguageSelector);
+
+     const wishListIds = wishListData.map(item => item?.id);
      const changeCurrentProduct = (e) => {
           dispatch(currentProduct(e.target.dataset.id))
      }
@@ -38,6 +48,17 @@ function CartListItem({product, text}) {
      const changeDeletedId = (e) => {
           dispatch(fetchRemoveOnCart(userId, e.target.dataset.product))
      }
+     const addProductToWishList = (e) => {
+          const target = e.target; 
+          userId ? 
+          (
+               numInArray(wishListIds,+target.dataset.id) ? 
+               dispatch(fetchAddWishList(userId, +target.dataset.id)):
+                    dispatch(deleteWishListItem(userId, +target.dataset.id))
+          )
+          : navigate('/login')
+
+     }
      return (
           
            <div className="product__list">
@@ -54,13 +75,21 @@ function CartListItem({product, text}) {
                          className="product-link" 
                          data-id={product.id}
                          onClick={changeCurrentProduct}>
-                              {product.descr}
+                              {
+                                    
+                                   currentLanguage === 'am' ? product?.descr : 
+                                        currentLanguage === 'en' ? product?.descr_en :
+                                        product?.descr_ru
+                                   
+                    
+                                   }
                          </NavLink>
                     </p>
                <div className="product-prices">
                     {
                          <span className="product-price new-price">
-                         {`${product.cost * (1 - product.discount / 100)}Դ X ${product?.quantity}`}
+                         {`${getNewCurrency(currentCurrency, discountedPrice).value}
+                                   ${getNewCurrency(currentCurrency, discountedPrice).char} X ${product?.quantity}`}
                          </span> 
                     }
                     
@@ -90,21 +119,23 @@ function CartListItem({product, text}) {
                               data-quantity={product?.quantity}
                               data-id={product.id}
                               onClick={addQuantity}
-
                          >+</button>
                          
                     </div>
                     <div className="product-buttons">
-                         <button className="product-button button-favorite"></button>
+                         <button className={`product-button  ${numInArray(wishListIds,product?.id) ? 'button-favorite' : 'button-favorite-full' }`}
+                              data-id={`${product?.id}`}
+                              onClick={addProductToWishList}
+                         ></button>                      
                          <button className="product-button button-compare"></button>
                          <button
-                          className="product-button button-delete"
-                           data-product={`${product['id']}`}
-                           data-price={`-${product.cost * (1 - product.discount / 100)}`}
-                           data-count={`${cart[product.id]}`}
-                           onClick={changeDeletedId}
-                           >
-                           </button>
+                              className="product-button button-delete"
+                              data-product={`${product['id']}`}
+                              data-price={`-${product.cost * (1 - product.discount / 100)}`}
+                              data-count={`${cart[product.id]}`}
+                              onClick={changeDeletedId}
+                         >
+                         </button>
                         
                     </div>
                     

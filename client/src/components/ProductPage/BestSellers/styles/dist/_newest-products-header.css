@@ -29,6 +29,9 @@
   border-radius: 50%;
   background-color: #e2e2e2;
 }
+.newest__products__header .category-line-circle .circles .circle:hover {
+  background-color: var(--orange);
+}
 .newest__products__header .category-line-circle .circles .active {
   background-color: var(--orange);
 }

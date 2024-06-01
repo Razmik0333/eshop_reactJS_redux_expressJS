@@ -20,7 +20,7 @@ function Cart() {
      return(
           
           <>
-               <div className="products__list">
+               <div className="products__list cart__products__list">
                     <div className="container product__list__container">
                          <div className="cart__header__items">
                               <div className="cart__header">

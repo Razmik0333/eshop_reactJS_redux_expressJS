@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentProduct } from '../../../../redux/ducks/productDuck';
 import RatingMapping from '../../../Base/RatingMapping/RatingMapping';
-import { currentLanguageDataSelector, getCurrentCurrencySelector, getUserId } from '../../../../helpers/reduxSelectors';
+import { currentLanguageDataSelector, getCurrentCurrencySelector, getCurrentLanguageSelector, getUserId } from '../../../../helpers/reduxSelectors';
 import { getNewCurrency } from '../../../../helpers/functions/functions';
 import { fetchAddCart } from '../../../../redux/ducks/cartDuck';
 import './styles/_featured-products.scss';
@@ -17,6 +17,7 @@ function FeaturedProduct({recommendProduct}) {
      const discountedPrice = recommendProduct.cost *(1 - recommendProduct.discount / 100);
      const currentCurrency = useSelector(getCurrentCurrencySelector);
      const featuredProducts = useSelector(currentLanguageDataSelector)?.recomend;
+     const currentLanguage = useSelector(getCurrentLanguageSelector);
 
      const changeCurrentProduct = (e) => {
           dispatch( currentProduct(e.target.dataset.id))
@@ -37,8 +38,14 @@ function FeaturedProduct({recommendProduct}) {
                     <p className="product__title">
                     <NavLink to={`/product/${recommendProduct.id}`}
                          data-id={recommendProduct.id}
-                         onClick={changeCurrentProduct}>
-                         {recommendProduct.descr}
+                         onClick={changeCurrentProduct}
+                    >
+                         { 
+                                   currentLanguage === 'am' ? recommendProduct?.descr : 
+                                        currentLanguage === 'en' ? recommendProduct?.descr_en :
+                                        recommendProduct?.descr_ru
+                                   
+                         }
                     </NavLink>
                     </p>
                     <p className="product__price">
@@ -47,8 +54,8 @@ function FeaturedProduct({recommendProduct}) {
                     </p>
                     <RatingMapping rating={recommendProduct.rating} />
                     <button className="add-cart"
-                                             data-id={recommendProduct?.id}
-                                             onClick={addProductToCart}
+                         data-id={recommendProduct?.id}
+                         onClick={addProductToCart}
 
                     >{featuredProducts?.add_to_cart}</button>
                </div>

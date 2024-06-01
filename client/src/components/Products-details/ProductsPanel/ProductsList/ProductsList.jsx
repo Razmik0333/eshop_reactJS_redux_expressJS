@@ -53,14 +53,16 @@ function ProductsList() {
      const productItemText = useSelector(currentLanguageDataSelector)?.product_item;
 
      return (
-          <div className="products-list">
-                {
-                    productsByCount.map(product => {
-                         return  showType === 'grid' || '' ? 
-                              <Product product={product} text={productItemText} key={product.id}/> : 
-                                   <ProductByList product={product} text={productItemText} key={product.id} />
-                    })
-               }
+          <div className="details-products-list">
+               <div className="products-list">
+                    {
+                         productsByCount.map(product => {
+                              return  showType === 'grid' || '' ? 
+                                   <Product product={product} text={productItemText} key={product.id}/> : 
+                                        <ProductByList product={product} text={productItemText} key={product.id} />
+                         })
+                    }
+               </div>
           </div>
      )
 }

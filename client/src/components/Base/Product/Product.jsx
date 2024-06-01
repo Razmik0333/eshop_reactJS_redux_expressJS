@@ -2,14 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { fetchAddCart, getCartItem, getCountOfCart, getTotalPriceValue } from '../../../redux/ducks/cartDuck';
 import { currentProduct, fetchViewedProductIds } from '../../../redux/ducks/productDuck'; 
-import ModalPopup from "../../Base/Modal/ModalPopup";
 import { root } from '../../../helpers/constants/constants';
 import { changePopup, getPopupItemId } from '../../../redux/ducks/configsDuck';
 import { getCurrentCurrencySelector, getCurrentLanguageSelector, getUserId, getWishListDataSelector, popupCloseSelector } from '../../../helpers/reduxSelectors';
 import { getNewCurrency, numInArray } from '../../../helpers/functions/functions';
 import RatingMapping from '../RatingMapping/RatingMapping';
-import './styles/_products.scss';
 import { deleteWishListItem, fetchAddWishList } from '../../../redux/ducks/wishListDuck';
+import './styles/_products.scss';
 
 
 function Product({product, text}) {
@@ -80,8 +79,6 @@ function Product({product, text}) {
                               className="product-link"
                               onClick={changeCurrentProduct}
                               >
-                              
-
                               { 
                                    currentLanguage === 'am' ? product?.descr : 
                                         currentLanguage === 'en' ? product?.descr_en :
@@ -94,10 +91,10 @@ function Product({product, text}) {
                <div className="product-options">
                     <div className="product-buttons">
                          <button className={
-                              `product-button  ${numInArray(wishListIds,product?.id) ? 'button-favorite' : 'button-favorite-full' }`
-                         }
-                         data-id={`${product?.id}`}
-                         onClick={addProductToWishList}
+                                   `product-button  ${numInArray(wishListIds,product?.id) ? 'button-favorite' : 'button-favorite-full' }`
+                              }
+                              data-id={`${product?.id}`}
+                              onClick={addProductToWishList}
                          >
 
                          </button>
