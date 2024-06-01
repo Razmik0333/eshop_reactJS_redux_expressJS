@@ -1,5 +1,5 @@
 export const checkEmail = (str) => {
-    return  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(str)
+    return str.length === 0 || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(str)
 
 }
 export const checkPassword = (str) => {

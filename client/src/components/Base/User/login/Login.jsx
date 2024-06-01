@@ -14,6 +14,7 @@ function Login() {
      const [emailLoginExist, setEmailLoginExist] = useState(true);
      const dispatch = useDispatch();
      const loginUser = useSelector(currentLanguageDataSelector)?.login;
+     console.log("🚀 ~ Login ~ loginUser:", loginUser)
 
      const formRef = useRef(null);
      const navigate = useNavigate();
@@ -58,7 +59,7 @@ function Login() {
                               placeholder={`${loginUser?.email}*`}
                               autoComplete="off"
                              // value={userEmail}
-                              defaultValue="razmik0333@fril.ru"
+                              //defaultValue="razmik0333@fril.ru"
                               onChange={changeUserEmail}
                          />
                          <span className="output">
@@ -79,7 +80,6 @@ function Login() {
                               placeholder={`${loginUser?.your_pass}*`}
                               autoComplete="off"
                               //value={userPassword}
-                              defaultValue="Razojan0333"
                               onChange={changeUserPassword}
                          />
                          <span className="output">

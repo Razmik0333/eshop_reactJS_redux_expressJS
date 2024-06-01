@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.checkPhoneNumber = exports.checkConfirmPassword = exports.checkStrWithNumber = exports.checkCapitalLetter = exports.checkStrLength = exports.checkPassword = exports.checkEmail = void 0;
 
 var checkEmail = function checkEmail(str) {
-  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(str);
+  return str.length === 0 || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(str);
 };
 
 exports.checkEmail = checkEmail;

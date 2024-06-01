@@ -19,6 +19,7 @@ function Register() {
      const [userGender, setUserGender] = useState('');
      const [emailLoginExist, setEmailLoginExist] = useState(true);
      const registerUser = useSelector(currentLanguageDataSelector)?.register;
+     console.log("🚀 ~ Register ~ registerUser:", registerUser)
      const navigate = useNavigate()
      
      
@@ -27,11 +28,13 @@ function Register() {
      const changeUserEmail = e => setUserEmail(e.target.value);
      const changeUserPassword = e => setUserPassword(e.target.value);
      const changeUserConfirm = e => setUserConfirm(e.target.value);
+     const passIsValid = checkConfirmPassword(userPassword, userConfirm)
+     console.log("🚀 ~ Register ~ passIsValid:", passIsValid)
      const formRef = useRef();
      const handleSubmit = async (e) => {
           e.preventDefault();
           const data = new FormData(formRef.current);
-          await fetch(`${root}/api/register`, {
+          passIsValid && await fetch(`${root}/api/register`, {
                method: 'POST',
                body: new URLSearchParams(data),    // ERROR THERE
           })
@@ -111,6 +114,7 @@ function Register() {
                          </span>
                     </div>
                     <div className="block__item password__block">
+                          <p className="name__block__header">{registerUser?.your_pass}</p>
                          <input
                               className="register__input__item"
                               type="password"
@@ -139,14 +143,16 @@ function Register() {
                               onChange={changeUserConfirm}
                          />
                          <span className="output">
-                         {
+                         <span>{
                               checkPassword(userPassword) ? '' : `${registerUser?.inc_pass}`
-                         }
-                         {
+                         }</span>
+                         <span>{
                               userConfirm.length > 0 ? 
                                    checkConfirmPassword(userPassword, userConfirm) ? 
                                         '' :  `${registerUser?.inc_match_pass}*`: ''
-                         }
+                         }</span>
+                         
+                         
 
                          </span>
                     </div>
