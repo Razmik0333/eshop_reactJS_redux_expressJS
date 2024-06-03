@@ -201,6 +201,10 @@
             "personal":"PERSONAL",
             "reviews":"REVIEWS",
             "logout":"LOGOUT"
+        },
+        "gender": {
+            "male":"Male",
+            "female":"Female"
         }
       },
     "admin" : {

@@ -5,6 +5,7 @@ import "./styles/_order-lists.scss";
 function OrderLists({ind,order}) {  
      const orderProducts = order?.user_order;
      const productQuantities = order?.quantities;
+     console.log(order);
      return <div className="orders-list">
           <OrderListHeader 
                ind = {ind} 

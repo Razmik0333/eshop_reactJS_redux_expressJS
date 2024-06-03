@@ -33,12 +33,12 @@ function MenuBar() {
                <div className="user__page__settings">
                     <div className="user_nav">
                          <ul className="user_nav_items">
-                              <li className="user_nav_item"><NavLink to={'/page'} className="user_nav_link">{menuLangData?.general}</NavLink></li>
+                              <li className="user_nav_item"><NavLink to={'/user/page'} className="user_nav_link">{menuLangData?.general}</NavLink></li>
                               <li className="user_nav_item"><NavLink to={"/user/orders"} className="user_nav_link">{menuLangData?.orders}</NavLink></li>
                               <li className="user_nav_item"><NavLink to={'/user/products'} className="user_nav_link">{menuLangData?.products}</NavLink></li>
                               <li className="user_nav_item"><NavLink to={'/personal'} className="user_nav_link">{menuLangData?.personal}</NavLink></li>
                               <li className="user_nav_item"><NavLink to={'/user/reviews'} className="user_nav_link">{menuLangData?.reviews}</NavLink></li>
-                              <li className="user_nav_item"><NavLink to={'/user/card'} className="user_nav_link">{menuLangData?.card}</NavLink></li>
+                              {/* <li className="user_nav_item"><NavLink to={'/user/card'} className="user_nav_link">{menuLangData?.card}</NavLink></li> */}
                               {/* <li className="user_nav_item"><a href='#' className="user_nav_link">Settings</a></li> */}
                               <li className="user_nav_item" ><NavLink to={"/"}  className="user_nav_link" onClick={changeLogout}>{menuLangData?.logout}</NavLink></li>
                          </ul>

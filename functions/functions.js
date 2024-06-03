@@ -53,6 +53,7 @@ const getProductsFromOrdersList = async (arr) => {
           const user_order = JSON.parse(item?.user_order);
           const productsKeys = Object.keys(user_order);
           const productsValues = Object.values(user_order);
+          console.log(item);
           
           const tokens = getTokensForQuery(productsKeys);
           let productIds = Object.keys(user_order);

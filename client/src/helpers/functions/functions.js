@@ -95,6 +95,7 @@ export const getSumCart = (cart, cartData) => {
       }, 0)
  }
 export const getNewCurrency = (val, price) => {
+     //console.log(+price.toFixed(2));
      switch (val) {
           case 'AMD':
                return {

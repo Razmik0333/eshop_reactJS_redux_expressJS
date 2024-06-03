@@ -31,7 +31,7 @@ module.exports.allOrdersByUser = async (req, res) => {
                               
                               if (JSON.parse(data).length < orderCountByStatus.count) {
      
-                                   const orders = await realyze("SELECT id, user_order, user_status, user_price FROM orders WHERE user_id = ? ", [userId]);
+                                   const orders = await realyze("SELECT id, user_order, user_status, user_price, time_add FROM orders WHERE user_id = ? ", [userId]);
                                    const resArray = await getProductsFromOrdersList(orders);
                                    fs_functions.writeCacheFile(
                                         `${cachesPath}/orders/${userId}/all-orders.json`,
@@ -90,7 +90,7 @@ module.exports.ordersByStatus = async (req, res) => {
                          if (JSON.parse(data).length === orderCountByStatus.count) {
                               res.send(data);
                          }else{
-                              const orders = await realyze("SELECT id, user_order, user_status, user_price FROM orders WHERE user_id = ? AND user_status = ? ORDER BY id DESC", [userId, status]);
+                              const orders = await realyze("SELECT id, user_order, user_status, user_price, time_add FROM orders WHERE user_id = ? AND user_status = ? ORDER BY id DESC", [userId, status]);
                               const resArray = await getProductsFromOrdersList(orders);
                               fs_functions.writeCacheFile(
                                    `${cachesPath}/orders/${userId}/${statusTypeObj.status}.json`,
@@ -101,7 +101,7 @@ module.exports.ordersByStatus = async (req, res) => {
                     }
                })
           } else {
-               const orders = await realyze("SELECT * FROM orders WHERE user_id = ? AND user_status = ? ORDER BY id DESC", [userId, status]);
+               const orders = await realyze("SELECT id, user_order, user_status, user_price, time_add FROM orders WHERE user_id = ? AND user_status = ? ORDER BY id DESC", [userId, status]);
                const resArray = await getProductsFromOrdersList(orders);
                fs_functions.writeCacheFile(
                     `${cachesPath}/orders/${userId}/${statusTypeObj.status}.json`,
@@ -146,7 +146,7 @@ module.exports.deleteOrder = async(req, res) => {
      const order_id = req.body.order_id;
      const user_id = req.body.user_id;
       await realyze("DELETE FROM  orders WHERE id = ?", [order_id]);
-      const orders = await realyze("SELECT * FROM orders WHERE user_id = ? AND user_status = ?", [user_id, 3]);
+      const orders = await realyze("SELECT * FROM orders WHERE user_id = ? AND user_status = ?", [user_id, 4]);
       const resArray = await getProductsFromOrdersList(orders)
       res.send(JSON.stringify(resArray, undefined, 2));
 }

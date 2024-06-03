@@ -1,0 +1,10 @@
+.user_list_container {
+  display: flex;
+}
+.user_list_container .ordered-products {
+  margin-left: 20px;
+}
+.user_list_container .ordered-products .ordered__products {
+  padding: 30px 0;
+  font-size: 22px;
+}

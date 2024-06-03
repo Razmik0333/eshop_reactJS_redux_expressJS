@@ -5,8 +5,10 @@ import "./styles/_order-list-header.scss";
 import { fetchDeletedOrder } from "../../../redux/ducks/orderDuck";
 import { getDateTemplate } from "../../../helpers/functions/timerFunctions";
 
-function OrderListHeader({ind, id, status, price, time}) {
-     const statusIndex = useSelector(getStatusIndex)
+function OrderListHeader({ind, id, status, price, time}) {     
+     const statusIndex = useSelector(getStatusIndex);
+     console.log(time);
+     
      const dispatch = useDispatch();
      const user_id = useSelector(getUserId)
      const orderListHeader = useSelector(currentLanguageDataSelector)?.order?.header?.order_item_header;
@@ -16,6 +18,7 @@ function OrderListHeader({ind, id, status, price, time}) {
           dispatch(fetchDeletedOrder(user_id, e.target.dataset.id));
 
      }
+     
      return (
           <div className="order__list__header" >
                <div className="order__info">
@@ -25,8 +28,8 @@ function OrderListHeader({ind, id, status, price, time}) {
                          </li>
                          <li className="order__list__header__item">
                               {orderListHeader?.price} ։ 
-                              {`${getNewCurrency(currentCurrency,price)?.value}
-                              ${getNewCurrency(currentCurrency,price)?.char}`}
+                              {`${getNewCurrency(currentCurrency,+price)?.value}
+                              ${getNewCurrency(currentCurrency,+price)?.char}`}
                          </li>
                          <li className="order__list__header__item">
                               {orderListHeader?.status} ։ {getStatus(+status)?.title} 

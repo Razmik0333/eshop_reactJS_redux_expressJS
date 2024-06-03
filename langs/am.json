@@ -146,6 +146,9 @@
                }
           }
       },
+      "product" : {
+        "ordered" : "ԳՆՎԱԾ ԱՊՐԱՆՔՆԵՐ"
+      },
       "recomend" : {
           "recomended_products": "ԱՌԱՋԱՐԿՎՈՂ ԱՊՐԱՆՔՆԵՐ",
           "add_to_cart": "ԱՎ․ ԶԱՄԲՅՈՒՂ"
@@ -206,6 +209,10 @@
             "reviews":"ԿԱՐԾԻՔՆԵՐ",
             "card":"ԿՑՎԱԾ ՔԱՐՏԵՐ",
             "logout":"ԵԼՔ"
+        },
+        "gender": {
+            "male":"Արական",
+            "female":"Իգական"
         }
       },
       "admin" : {

@@ -1,3 +1,10 @@
 .user_list_container{
      display: flex;
+     .ordered-products{
+          margin-left: 20px;
+          .ordered__products{
+               padding: 30px 0;
+               font-size:22px;
+          }
+     }
 }

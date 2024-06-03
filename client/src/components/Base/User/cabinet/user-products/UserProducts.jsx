@@ -9,6 +9,7 @@ export default function UserProducts() {
      const userId = useSelector(getUserId)
      const dispatch = useDispatch();
      const productItemText = useSelector(currentLanguageDataSelector)?.product_item;
+     const orderedProducts = useSelector(currentLanguageDataSelector)?.product?.ordered;
 
      useEffect(() => {
           dispatch(fetchUserOrdersByStatus(userId, 4))
@@ -28,12 +29,17 @@ export default function UserProducts() {
   <div className="container user_list_container">
        <MenuBar/>
        {
-          <div className="products-list">
-               {
-                    allProductsByFinishedOrders.map((item,pos) => {
-                         return <Product product={item} text={productItemText} key={`product_${pos}`}/>
-                    })
-               }
+          <div className="ordered-products">
+               <div className="ordered__products">{orderedProducts}</div>
+               <div className="products-list">
+
+                    {
+                         allProductsByFinishedOrders.map((item,pos) => {
+                              return <Product product={item} text={productItemText} key={`product_${pos}`}/>
+                         })
+                    }
+
+               </div>
 
           </div>
      }
