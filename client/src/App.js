@@ -39,6 +39,8 @@ import AdminAddProductsByList from './components/Base/Admin/AdminProducts/AdminA
 import UserCards from './components/Base/User/cabinet/user-cards/UserCards.jsx';
 import UserCardAdd from './components/Base/User/cabinet/user-card-add/UserCardAdd.jsx';
 import AboutUs from './components/About-us/AboutUs.jsx';
+import AdminGallery from './components/Base/Admin/AdminGallery/AdminGallery.jsx';
+import Gallery from './components/Home/Gallery/Gallery.jsx';
 
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
@@ -131,6 +133,10 @@ function App() {
               element={<AdminReviews />} 
               />
               <Route
+              path="/admin/gallery" 
+              element={<AdminGallery />} 
+              />
+              <Route
               path="/admin/list" 
               element={<AdminAddProductsByList />} 
               />
@@ -174,6 +180,10 @@ function App() {
               <Route 
               path="/viewed" 
               element={<ViewedProducts />} 
+              />
+              <Route 
+              path="/gallery" 
+              element={<Gallery />} 
               />
               <Route 
               path="/orders/evaluate" 

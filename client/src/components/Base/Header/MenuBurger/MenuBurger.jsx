@@ -6,6 +6,8 @@ import { clearCachesFiles, currentUser, getUserData } from '../../../../redux/du
 import { changeOrdersFromLogout } from '../../../../redux/ducks/orderDuck';
 
 import "./styles/_menu-burger.scss";
+import { clearviewedProducts } from "../../../../redux/ducks/productDuck";
+import { getViewedProductId } from "../../../../redux/ducks/configsDuck";
 
 function MenuBurger() {
      const dispatch = useDispatch();
@@ -18,6 +20,8 @@ function MenuBurger() {
           dispatch(currentUser(null))
           dispatch(getUserData(null))
           dispatch(changeOrdersFromLogout());
+          dispatch(clearviewedProducts());
+          dispatch(getViewedProductId(1))
           navigate('/home')
     }
      const [clicked, setClicked] = useState(false);
@@ -43,7 +47,7 @@ function MenuBurger() {
                                         {
                                              userData?.role === "admin" ?  
                                                   <li className="burger_list_item">
-                                                       <NavLink to={"/admin/home"} className="register-link">{headerLangData?.admin}</NavLink>
+                                                       <NavLink to={"/admin/home"} className="menu-burger-link">{headerLangData?.admin}</NavLink>
 
                                                   </li>
                                                   :

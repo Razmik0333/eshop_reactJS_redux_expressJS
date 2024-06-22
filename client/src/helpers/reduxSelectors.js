@@ -21,12 +21,15 @@ export const getEvaluateProductsSelector = ({ OrderDuck }) => OrderDuck.evaluate
 export const getMostestProductSelector = ({ProductDuck}) => ProductDuck.mostestProduct;
 export const isSearchSelector = ({ NavigationDuck }) => NavigationDuck.isSearch; //
 export const isFocusedSelector = ({ NavigationDuck }) => NavigationDuck.isFocused; //
+export const subCategoriesSelector = ({ SubCategoryDuck }) => SubCategoryDuck.subCategories; //
 export const showTypeSelector = ({ ConfigsDuck }) => ConfigsDuck.showType; //
 export const sortTypeSelector = ({ ConfigsDuck }) => ConfigsDuck.sortType; //
 export const hotDealsSelector = ({ ConfigsDuck }) => ConfigsDuck.hotDealsId; //
 export const languagesSelector = ({ ConfigsDuck }) => ConfigsDuck.languages; //
 export const mostestIndex = ({ ConfigsDuck }) => ConfigsDuck.mostestIndex; //
 export const currentLanguageDataSelector = ({ ConfigsDuck }) => ConfigsDuck.currentLanguageData; //
+export const currentSubCategoryIdSelector = ({ ConfigsDuck }) => ConfigsDuck.subCatId; //
+export const currentSubCategorySelector = ({ ConfigsDuck }) => ConfigsDuck.subCat; //
 export const currenciesSelector = ({ ConfigsDuck }) => ConfigsDuck.currencies; //
 export const countElementsSelector = ({ ConfigsDuck }) => ConfigsDuck.countItems; //
 export const countItemsOfPageSelector = ({ ConfigsDuck }) => ConfigsDuck.countItemsOfPage; //
@@ -72,11 +75,15 @@ export const getRatingListSelector = ({ ReviewDuck }) => ReviewDuck.ratingList; 
 export const getWishListIdsSelector = ({ WishListDuck }) => WishListDuck.wishList; //
 export const getWishListDataSelector = ({ WishListDuck }) => WishListDuck.wishListData; //
 export const getViewedProductsSelector = ({ ProductDuck }) => ProductDuck.viewedProducts; //
-export const getViewedProductIdSelector = ({ ConfigsDuck }) => ConfigsDuck.viewedProductId; //
+export const getGallerySelector = ({ ProductDuck }) => ProductDuck.gallery; //
+export const getSubCategoryDataSelector = ({ ProductDuck }) => ProductDuck.productsBySubCategories; //
+export const getSubCategoryParamsSelector = ({ SubCategoryDuck }) => SubCategoryDuck.subCatParams; //
+export const getViewedProductIdSelector = ({ ConfigsDuck }) => ConfigsDuck.viewedProductsBlockId; //
 export const getSimilarCircleIdSelector = ({ ConfigsDuck }) => ConfigsDuck.similarCirclId; //
 export const getBestSellerCircleIdSelector = ({ ConfigsDuck }) => ConfigsDuck.bestSellerCircleId; //
 export const getViewedProductsDataSelector = ({ ProductDuck }) => ProductDuck.viewedProductsData; //
 export const getServicesSelector = ({ProductDuck}) => ProductDuck.services;
+export const getFilteredProductsSelector = ({ProductDuck}) => ProductDuck.filteredProducts;
 
 
 //admins block//
@@ -91,6 +98,7 @@ export const adminProductIdSelector = ({ AdminProductDuck }) => AdminProductDuck
 export const adminProductSelector = ({ AdminProductDuck }) => AdminProductDuck.currentProduct; //
 export const adminProductSavedSelector = ({ AdminProductDuck }) => AdminProductDuck.isSaved; //
 export const adminProductIsDeletedSelector = ({ AdminProductDuck }) => AdminProductDuck.isDeleted; //
+export const adminGalleryIsAddSelector = ({ AdminProductDuck }) => AdminProductDuck.getGalleryAdd; //
 export const adminCurrentOrderSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrder; //
 export const adminCurrentOrderInfoSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrderInfo; //
 export const adminOrderIdSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrderId; //

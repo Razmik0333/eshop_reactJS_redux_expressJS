@@ -53,7 +53,6 @@ export const fetchAddWishList = (user_id,productId) => async(dispatch) => {
         user_id
       })
     })).json()
-    console.log("🚀 ~ file: wishListDuck.js:47 ~ fetchAddWishList ~ data:", data)
     dispatch(getWishListData(data))
   } catch (e) {
     console.log('error from wishListDuck', e)
@@ -74,7 +73,6 @@ export const fetchAddWishList = (user_id,productId) => async(dispatch) => {
 // };
 
 export const fetchWishList = (userId) => async (dispatch) => {
-  console.log(userId);
   if (userId) {
     try {
       const data = await (await fetch(`${root}/api/wishlist/${userId}`)).json();

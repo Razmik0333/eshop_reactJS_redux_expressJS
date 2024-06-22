@@ -3,19 +3,20 @@ const session = require('express-session');
 const cors = require('cors');
 
 
-const categoryRoutes = require('./routes/category')
-const cartRoutes = require('./routes/cart')
-const productRoutes = require('./routes/products')
-const ordersRoutes = require('./routes/orders')
-const reviewRoutes = require('./routes/review')
-const userRoutes = require('./routes/user')
-const wishListRoutes = require('./routes/wishlist')
-const configsRoutes = require('./routes/configs')
-const adminOrders = require('./routes/admin/orders')
-const adminProducts = require('./routes/admin/products')
-const adminCategories = require('./routes/admin/category')
-const adminUsers = require('./routes/admin/users')
-const adminReviews = require('./routes/admin/review')
+const categoryRoutes = require('./routes/category');
+const subCategoryRoutes = require('./routes/subCategory');
+const cartRoutes = require('./routes/cart');
+const productRoutes = require('./routes/products');
+const ordersRoutes = require('./routes/orders');
+const reviewRoutes = require('./routes/review');
+const userRoutes = require('./routes/user');
+const wishListRoutes = require('./routes/wishlist');
+const configsRoutes = require('./routes/configs');
+const adminOrders = require('./routes/admin/orders');
+const adminProducts = require('./routes/admin/products');
+const adminCategories = require('./routes/admin/category');
+const adminUsers = require('./routes/admin/users');
+const adminReviews = require('./routes/admin/review');
 
 
 const app = express();
@@ -34,8 +35,8 @@ app.use(cors({origin:"http://localhost:3000"}));
 //routes
 
 
-
 app.use('/api', categoryRoutes);
+app.use('/api', subCategoryRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', productRoutes);
 app.use('/api', ordersRoutes);

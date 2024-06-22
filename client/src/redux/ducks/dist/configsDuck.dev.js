@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.fetchLanguages = exports.fetchLanguageData = exports.changeCurrencies = exports.changeLanguages = exports.changeMostestIndex = exports.changeLanguage = exports.changeCurrency = exports.getIdProductsFromStartingPage = exports.getHotDealsTimerSecond = exports.getViewedProductId = exports.getPopupItemId = exports.changePopupHotDeals = exports.changePopup = exports.getReviewShow = exports.changeModal = exports.clearCostValues = exports.changeCosts = exports.changeCountItemsOfPage = exports.changeCountElements = exports.changeSortType = exports.getBestSellerProductId = exports.getSimilarProductId = exports.getHotDealsId = exports.changeShowType = exports.changeBestSellerProductId = exports.changeSimilarProductId = exports.changeReviewShow = exports.changeViewedProductId = exports.changeCurrentMostestIndex = exports.changeCurrentLanguageData = exports.changeCurrentLanguage = exports.changeCurrentCurrency = exports.changeHotDealsTimerSecond = exports.changeIdProductsFromStartingPage = exports.changeHotDealsId = exports.changePopupItemId = exports.getCurrencies = exports.getLanguages = exports.getPopupHotDealsOpenClose = exports.getPopupOpenClose = exports.getModalOpenClose = exports.getCostsValues = exports.getCountItemsOfPage = exports.getCountElements = exports.getSortType = exports.getShowType = void 0;
+exports["default"] = exports.fetchLanguages = exports.fetchLanguageData = exports.changeCurrencies = exports.changeLanguages = exports.getSubCategory = exports.getSubCategoryId = exports.changeMostestIndex = exports.changeLanguage = exports.changeCurrency = exports.getIdProductsFromStartingPage = exports.getHotDealsTimerSecond = exports.getViewedProductId = exports.getPopupItemId = exports.changePopupHotDeals = exports.changePopup = exports.getReviewShow = exports.changeModal = exports.clearCostValues = exports.changeCosts = exports.changeCountItemsOfPage = exports.changeCountElements = exports.changeSortType = exports.getBestSellerProductId = exports.getSimilarProductId = exports.getHotDealsId = exports.changeShowType = exports.changeSubCategory = exports.changeSubCategoryId = exports.changeBestSellerProductId = exports.changeSimilarProductId = exports.changeReviewShow = exports.changeViewedProductId = exports.changeCurrentMostestIndex = exports.changeCurrentLanguageData = exports.changeCurrentLanguage = exports.changeCurrentCurrency = exports.changeHotDealsTimerSecond = exports.changeIdProductsFromStartingPage = exports.changeHotDealsId = exports.changePopupItemId = exports.getCurrencies = exports.getLanguages = exports.getPopupHotDealsOpenClose = exports.getPopupOpenClose = exports.getModalOpenClose = exports.getCostsValues = exports.getCountItemsOfPage = exports.getCountElements = exports.getSortType = exports.getShowType = void 0;
 
 var _redux = require("../../helpers/redux");
 
@@ -35,10 +35,12 @@ var CURRENT_LANGUAGE_DATA = 'configsDuck/CURRENT_LANGUAGE_DATA';
 var LANGUAGES = 'configsDuck/LANGUAGES';
 var CURRENCIES = 'configsDuck/CURRENCIES';
 var MOSTEST_OPTIONS_INDEX = 'configsDuck/MOSTEST_OPTIONS_INDEX';
-var VIEWED_PRODUCT_ID = 'configsDuck/VIEWED_PRODUCT_ID';
+var VIEWED_PRODUCTS_BLOCK_ID = 'configsDuck/VIEWED_PRODUCTS_BLOCK_ID';
 var REVIEW_SHOW = 'configsDuck/REVIEW_SHOW';
 var SIMILAR_PRODUCT_ID = 'configsDuck/SIMILAR_PRODUCT_ID';
 var BEST_SELLER_PRODUCT_ID = 'configsDuck/BEST_SELLER_PRODUCT_ID';
+var SUB_CAT_ID = 'configsDuck/SUB_CAT_ID';
+var SUB_CAT = 'configsDuck/SUB_CAT';
 var getShowType = (0, _redux.createAction)(CHANGE_SHOW_TYPE);
 exports.getShowType = getShowType;
 var getSortType = (0, _redux.createAction)(CHANGE_SORT_TYPE);
@@ -75,7 +77,7 @@ var changeCurrentLanguageData = (0, _redux.createAction)(CURRENT_LANGUAGE_DATA);
 exports.changeCurrentLanguageData = changeCurrentLanguageData;
 var changeCurrentMostestIndex = (0, _redux.createAction)(MOSTEST_OPTIONS_INDEX);
 exports.changeCurrentMostestIndex = changeCurrentMostestIndex;
-var changeViewedProductId = (0, _redux.createAction)(VIEWED_PRODUCT_ID);
+var changeViewedProductId = (0, _redux.createAction)(VIEWED_PRODUCTS_BLOCK_ID);
 exports.changeViewedProductId = changeViewedProductId;
 var changeReviewShow = (0, _redux.createAction)(REVIEW_SHOW);
 exports.changeReviewShow = changeReviewShow;
@@ -83,6 +85,10 @@ var changeSimilarProductId = (0, _redux.createAction)(SIMILAR_PRODUCT_ID);
 exports.changeSimilarProductId = changeSimilarProductId;
 var changeBestSellerProductId = (0, _redux.createAction)(BEST_SELLER_PRODUCT_ID);
 exports.changeBestSellerProductId = changeBestSellerProductId;
+var changeSubCategoryId = (0, _redux.createAction)(SUB_CAT_ID);
+exports.changeSubCategoryId = changeSubCategoryId;
+var changeSubCategory = (0, _redux.createAction)(SUB_CAT);
+exports.changeSubCategory = changeSubCategory;
 
 var changeShowType = function changeShowType(str) {
   return function (dispatch) {
@@ -244,6 +250,22 @@ var changeMostestIndex = function changeMostestIndex(id) {
 
 exports.changeMostestIndex = changeMostestIndex;
 
+var getSubCategoryId = function getSubCategoryId(id) {
+  return function (dispatch) {
+    dispatch(changeSubCategoryId(id));
+  };
+};
+
+exports.getSubCategoryId = getSubCategoryId;
+
+var getSubCategory = function getSubCategory(id) {
+  return function (dispatch) {
+    dispatch(changeSubCategory(id));
+  };
+};
+
+exports.getSubCategory = getSubCategory;
+
 var changeLanguages = function changeLanguages() {
   return function _callee(dispatch) {
     var data;
@@ -393,10 +415,12 @@ var initialStateConfigs = {
   idProductsFromStart: 1,
   hotDealsTimerSeconds: 3 * 24 * 60 * 60,
   mostestIndex: "0",
-  viewedProductId: 1,
+  viewedProductsBlockId: 1,
   similarCirclId: 1,
   bestSellerCircleId: 1,
-  reviewShow: false
+  reviewShow: false,
+  subCatId: null,
+  subCat: null
 };
 
 var ConfigsDuck = function ConfigsDuck() {
@@ -500,9 +524,9 @@ var ConfigsDuck = function ConfigsDuck() {
         mostestIndex: action.payload
       });
 
-    case VIEWED_PRODUCT_ID:
+    case VIEWED_PRODUCTS_BLOCK_ID:
       return _objectSpread({}, state, {
-        viewedProductId: action.payload
+        viewedProductsBlockId: action.payload
       });
 
     case REVIEW_SHOW:
@@ -518,6 +542,16 @@ var ConfigsDuck = function ConfigsDuck() {
     case BEST_SELLER_PRODUCT_ID:
       return _objectSpread({}, state, {
         bestSellerCircleId: action.payload
+      });
+
+    case SUB_CAT_ID:
+      return _objectSpread({}, state, {
+        subCatId: action.payload
+      });
+
+    case SUB_CAT:
+      return _objectSpread({}, state, {
+        subCat: action.payload
       });
 
     default:

@@ -19,10 +19,12 @@ const CURRENT_LANGUAGE_DATA = 'configsDuck/CURRENT_LANGUAGE_DATA';
 const LANGUAGES = 'configsDuck/LANGUAGES';
 const CURRENCIES = 'configsDuck/CURRENCIES';
 const MOSTEST_OPTIONS_INDEX = 'configsDuck/MOSTEST_OPTIONS_INDEX';
-const VIEWED_PRODUCT_ID = 'configsDuck/VIEWED_PRODUCT_ID'
+const VIEWED_PRODUCTS_BLOCK_ID = 'configsDuck/VIEWED_PRODUCTS_BLOCK_ID'
 const REVIEW_SHOW = 'configsDuck/REVIEW_SHOW'
 const SIMILAR_PRODUCT_ID = 'configsDuck/SIMILAR_PRODUCT_ID'
 const BEST_SELLER_PRODUCT_ID = 'configsDuck/BEST_SELLER_PRODUCT_ID'
+const SUB_CAT_ID = 'configsDuck/SUB_CAT_ID'
+const SUB_CAT = 'configsDuck/SUB_CAT'
 
 export const getShowType = createAction(CHANGE_SHOW_TYPE);
 export const getSortType = createAction(CHANGE_SORT_TYPE);
@@ -42,10 +44,12 @@ export const changeCurrentCurrency = createAction(CURRENT_CURRENCY);
 export const changeCurrentLanguage = createAction(CURRENT_LANGUAGE);
 export const changeCurrentLanguageData = createAction(CURRENT_LANGUAGE_DATA);
 export const changeCurrentMostestIndex = createAction(MOSTEST_OPTIONS_INDEX)
-export const changeViewedProductId = createAction(VIEWED_PRODUCT_ID)
+export const changeViewedProductId = createAction(VIEWED_PRODUCTS_BLOCK_ID)
 export const changeReviewShow = createAction(REVIEW_SHOW)
 export const changeSimilarProductId = createAction(SIMILAR_PRODUCT_ID)
 export const changeBestSellerProductId = createAction(BEST_SELLER_PRODUCT_ID)
+export const changeSubCategoryId = createAction(SUB_CAT_ID)
+export const changeSubCategory = createAction(SUB_CAT)
 
 
 export const changeShowType = (str) => (dispatch) => {
@@ -111,6 +115,12 @@ export const changeLanguage = (lang) => (dispatch) => {
 export const changeMostestIndex = (id) => (dispatch) => {
   dispatch(changeCurrentMostestIndex(id));
 };
+export const getSubCategoryId = (id) => (dispatch) => {
+  dispatch(changeSubCategoryId(id));
+};
+export const getSubCategory = (id) => (dispatch) => {
+  dispatch(changeSubCategory(id));
+};
 export const changeLanguages = () => async(dispatch) => {
   try {
     const data = await (await fetch(`${root}/api/languages`)).json();
@@ -171,10 +181,12 @@ const initialStateConfigs = {
     idProductsFromStart : 1,
     hotDealsTimerSeconds : 3 * 24 * 60 * 60,
     mostestIndex : "0",
-    viewedProductId : 1,
+    viewedProductsBlockId : 1,
     similarCirclId : 1,
     bestSellerCircleId : 1,
     reviewShow : false,
+    subCatId : null,
+    subCat : null,
     
 };
 
@@ -281,10 +293,10 @@ const ConfigsDuck = (state = initialStateConfigs, action) => {
         ...state,
         mostestIndex: action.payload,
       };
-    case VIEWED_PRODUCT_ID:
+    case VIEWED_PRODUCTS_BLOCK_ID:
       return {
         ...state,
-        viewedProductId: action.payload,
+        viewedProductsBlockId: action.payload,
       };
     case REVIEW_SHOW:
       return {
@@ -300,6 +312,16 @@ const ConfigsDuck = (state = initialStateConfigs, action) => {
       return {
         ...state,
         bestSellerCircleId: action.payload,
+      };
+    case SUB_CAT_ID:
+      return {
+        ...state,
+        subCatId: action.payload,
+      };
+    case SUB_CAT:
+      return {
+        ...state,
+        subCat: action.payload,
       };
     
     default:

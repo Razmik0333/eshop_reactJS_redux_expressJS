@@ -9,7 +9,6 @@ export default function Categories() {
      const dispatch = useDispatch()
      const categories = useSelector(categoriesSelector);
      const currentLang = useSelector(getCurrentLanguageSelector)
-     console.log("🚀 ~ Categories ~ currentLang:", currentLang)
      const changeCategory = (e) => {
           dispatch(currentCategory(e.target.dataset.id));
           dispatch(fetchCurrentCatgory(e.target.dataset.id));

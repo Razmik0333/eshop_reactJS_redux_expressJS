@@ -10,7 +10,6 @@ function NewsLetters() {
      const dispatch = useDispatch();
      const [emailRecommend, setEmailRecommend] = useState('');
      const [emailCorrect, setEmailCorrect] = useState(true);
-     console.log("🚀 ~ NewsLetters ~ emailCorrect:", emailCorrect)
      const modalIsClose = useSelector(modalCloseSelector);
 
      useEffect(() => {

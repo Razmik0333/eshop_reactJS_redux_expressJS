@@ -14,11 +14,9 @@ function Header() {
      const userId = useSelector(getUserId);
      const userData = useSelector(getUserDataSelector);
      const currentCurrency = useSelector(getCurrentCurrencySelector);
-     console.log("🚀 ~ Header ~ currentCurrency:", currentCurrency)
      const currentLanguage = useSelector(getCurrentLanguageSelector);
      const languages = useSelector(languagesSelector);
      const currencies = useSelector(currenciesSelector);
-     console.log("🚀 ~ Header ~ currencies:", currencies)
      const headerLangData = useSelector(currentLanguageDataSelector)?.header;
      const [currentLanguageObj] = languages?.filter(lang => lang?.code === currentLanguage);
      

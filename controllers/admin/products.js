@@ -137,3 +137,15 @@ module.exports.addProductsWithList = async(req, res) => {
           res.send(JSON.stringify(0))
      }
 }
+
+module.exports.gallery = async (req, res) => {
+     const body = req.body;
+     //`performed_works`
+     if(body.description.length > 0){
+          await realyze("INSERT INTO `performed_works` (`description`, time_add) VALUES (?,?) ",
+               [body.description,  Date.now()]);
+          res.send(JSON.stringify('ok'));
+     } else{
+          res.send(JSON.stringify('bad'));
+     }
+}

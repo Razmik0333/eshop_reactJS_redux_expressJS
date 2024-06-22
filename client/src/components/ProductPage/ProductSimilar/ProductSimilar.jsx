@@ -28,11 +28,11 @@ export default function ProductSimilar() {
                <ProductSimilarHeader />
                <div className="products-list">
                     {
-                         
                          filtered.map((item) => {
                               return <Product product={item} key={`similar_${item?.id}`} text={productItemText} />
-                         })  
+                         }) 
                     }
+                    
                </div>
           </div>
     </div>

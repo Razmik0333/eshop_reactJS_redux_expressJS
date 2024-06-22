@@ -115,22 +115,21 @@ var fetchAddWishList = function fetchAddWishList(user_id, productId) {
 
           case 7:
             data = _context2.sent;
-            console.log("🚀 ~ file: wishListDuck.js:47 ~ fetchAddWishList ~ data:", data);
             dispatch(getWishListData(data));
-            _context2.next = 15;
+            _context2.next = 14;
             break;
 
-          case 12:
-            _context2.prev = 12;
+          case 11:
+            _context2.prev = 11;
             _context2.t2 = _context2["catch"](0);
             console.log('error from wishListDuck', _context2.t2);
 
-          case 15:
+          case 14:
           case "end":
             return _context2.stop();
         }
       }
-    }, null, null, [[0, 12]]);
+    }, null, null, [[0, 11]]);
   };
 }; // export const fetchCurrentWishList = (userId) => (dispatch) => {
 //   !userId ? dispatch(addToWishlist([])) :
@@ -153,47 +152,45 @@ var fetchWishList = function fetchWishList(userId) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            console.log(userId);
-
             if (!userId) {
-              _context3.next = 18;
+              _context3.next = 17;
               break;
             }
 
-            _context3.prev = 2;
+            _context3.prev = 1;
             _context3.t0 = regeneratorRuntime;
-            _context3.next = 6;
+            _context3.next = 5;
             return regeneratorRuntime.awrap(fetch("".concat(_constants.root, "/api/wishlist/").concat(userId)));
 
-          case 6:
+          case 5:
             _context3.t1 = _context3.sent.json();
-            _context3.next = 9;
+            _context3.next = 8;
             return _context3.t0.awrap.call(_context3.t0, _context3.t1);
 
-          case 9:
+          case 8:
             data = _context3.sent;
             dispatch(getWishListData(data));
-            _context3.next = 16;
+            _context3.next = 15;
             break;
 
-          case 13:
-            _context3.prev = 13;
-            _context3.t2 = _context3["catch"](2);
+          case 12:
+            _context3.prev = 12;
+            _context3.t2 = _context3["catch"](1);
             console.log('error from wishListDuck', _context3.t2);
 
-          case 16:
-            _context3.next = 19;
+          case 15:
+            _context3.next = 18;
             break;
 
-          case 18:
+          case 17:
             dispatch(getWishListData([]));
 
-          case 19:
+          case 18:
           case "end":
             return _context3.stop();
         }
       }
-    }, null, null, [[2, 13]]);
+    }, null, null, [[1, 12]]);
   };
 };
 

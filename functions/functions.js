@@ -281,8 +281,39 @@ const getIdOffHighRatingProduct = (mostData) => {
      }
      return maxObj;
 }
+const getSubCategoriesWithCount = async(arr, catId) => {     
+      return await Promise.all(arr.map(async(item) => {
+           const [countProducts] = await realyze("SELECT COUNT(category) AS count FROM `products` WHERE `category` = ? AND `sub_category`= ? ", [+catId,item?.sub_category]);
 
-
+           return await {
+               ...item,
+               count : countProducts?.count
+           };
+     })) 
+}
+const getSortedArray = (orgArr, typeObj) => {  
+                  
+     switch (typeObj.type && typeObj.time) {
+          case 'price' && 'lowest':
+               return orgArr.sort((a, b) => {
+                    return a.cost - b.cost
+               })
+          case 'price' && 'highest':
+               return orgArr.sort((a, b) => {
+                    return b.cost - a.cost
+               })
+          case 'date' && 'lowest':
+               return orgArr.sort((a, b) => {
+                    return a.time_add - b.time_add
+               })
+          case 'date' && 'highest':
+               return orgArr.sort((a, b) => {
+                    return b.time_add - a.time_add
+               })          
+          default:
+               break;
+     }
+}
 module.exports = {
      solded : [
           getMaxSoldedProducts,
@@ -299,6 +330,7 @@ module.exports = {
      mostestMaxObject: getMostestMaxObject,
      middleRating : getMiddleRating,
      productsWithCounts:getProductsWithCounts,
+     subCategoriesWithCount:getSubCategoriesWithCount,
      statusIndex : getStatus,
      messageObjectStatusChange: getMessageObjectStatusChange,
      messageObjectAuth: getMessageObjectAuth,
@@ -307,7 +339,8 @@ module.exports = {
      reviewsByProduct:getReviewListFromProduct,
      ratingCounts : getRatingCounts,
      countsOffHighRating: getCountsOffHighRating,
-     idOffHighRatingProduct : getIdOffHighRatingProduct
+     idOffHighRatingProduct : getIdOffHighRatingProduct,
+     sortedArray : getSortedArray
 }
 
 

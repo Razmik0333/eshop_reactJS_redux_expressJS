@@ -1,9 +1,10 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getArrFromField, getMinMax, getPositiveNumber, getHigherStrValue, checkEmptyObject, getRoundedValue  } from '../../../../helpers/functions/functions';
-import { costsValuesSelector, currentLanguageDataSelector, currentSearchData, getCurrentCurrencySelector, productsByCategorySelector } from '../../../../helpers/reduxSelectors';
+import { costsValuesSelector, currentCategoryIdSelector, currentLanguageDataSelector, currentSearchData, currentSubCategorySelector, getCurrentCurrencySelector, getFilteredProductsSelector, getSubCategoryDataSelector, productsByCategorySelector } from '../../../../helpers/reduxSelectors';
 import { changeCosts } from '../../../../redux/ducks/configsDuck';
 import { getNewCurrency } from '../../../../helpers/functions/functions';
+import { fetchBySubCategories } from '../../../../redux/ducks/productDuck';
 import './styles/_categories-filter-price.scss';
 function CategoriesFilterPrice() {
      const [value, setValue] = useState(0);
@@ -11,14 +12,22 @@ function CategoriesFilterPrice() {
      const [fIsSelected, setFIsSelected] = useState(false);
      const [sIsSelected, setSIsSelected] = useState(false);
      const costInterval= useSelector(costsValuesSelector);
+     
+     const currentCategory = useSelector(currentCategoryIdSelector);
+     const currentSubCategory = useSelector(currentSubCategorySelector)
+     
      const productPriceText = useSelector(currentLanguageDataSelector)?.details;
-
+     useEffect(() => {
+          
+          dispatch(fetchBySubCategories(currentCategory, currentSubCategory))
+     }, [currentCategory,currentSubCategory]);
      const dispatch = useDispatch();
      const currentCurrency = useSelector(getCurrentCurrencySelector);
-     const productsByCategory = useSelector(productsByCategorySelector);
+     const productsBySubCategory = useSelector(getSubCategoryDataSelector);
      const searchData = (useSelector(currentSearchData));
-     const products = searchData.length > 0  ? searchData : productsByCategory;
-     const arr = getArrFromField(products, 'cost');
+     //const products =  //searchData.length > 0  ? searchData : productsByCategory;
+     const arr = getArrFromField(productsBySubCategory, 'cost');
+     //console.log("🚀 ~ CategoriesFilterPrice ~ arr:", arr)
      const min = getMinMax(arr, 'min');
      const max = getMinMax(arr, 'max');
      const baseLineRef = useRef(null);

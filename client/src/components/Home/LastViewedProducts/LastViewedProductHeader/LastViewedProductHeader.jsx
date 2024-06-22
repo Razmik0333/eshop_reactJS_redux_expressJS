@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getViewedProductIdSelector, getViewedProductsSelector } from '../../../../helpers/reduxSelectors'
 import { getViewedProductId } from '../../../../redux/ducks/configsDuck';
 
 export default function LastViewedProductHeader() {
      const dispatch = useDispatch();
+     const numberProductsInBlock = 4;
+
      const viewedProducts =  useSelector(getViewedProductsSelector);
-     const wiewedFilteredProductsIds = viewedProducts.filter((_, pos) => pos < 12)
+     const viewedFilteredProductsIds = viewedProducts
+     .split("|")
+     .filter((_, pos) => pos < 12)
+     .filter((_, pos) => pos % numberProductsInBlock === 0)
      const setViewId = (e) => {
           dispatch(getViewedProductId(+e.target.dataset.id))
      }
@@ -18,15 +23,12 @@ export default function LastViewedProductHeader() {
           </div>
           <div className="circles">
           {
-               wiewedFilteredProductsIds.map((_,pos) => {
-
-                    return (pos +  1 ) % 4 === 0 && 
-                    
-                         <div className={
-                              `circle ${(+pos + 1)/4 === viewId ? `active` : ``}`
+                    viewedFilteredProductsIds.map((_,pos) => {
+                    return  <div className={
+                              `circle ${(pos + 1) === viewId ? `active` : ``}`
                          }
                               onClick={setViewId} 
-                              data-id={`${(+pos + 1)/4}`}
+                              data-id={`${(+pos + 1)}`}
                               key={`viewed_product_${pos}`}
                          >
 

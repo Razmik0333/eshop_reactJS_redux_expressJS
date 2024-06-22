@@ -99,17 +99,17 @@ export const getNewCurrency = (val, price) => {
      switch (val) {
           case 'AMD':
                return {
-                    value : +price.toFixed(2),
+                    value : +price?.toFixed(2),
                     char : '֏'
                }
           case "RUB":
                return {
-                    value : (+price / 6).toFixed(2),
+                    value : (+price / 6)?.toFixed(2),
                     char : '₽'
                }
           case "USD":
                return {
-                    value : (+price / 410).toFixed(2),
+                    value : (+price / 410)?.toFixed(2),
                     char : '$'
                }
           default:

@@ -25,8 +25,14 @@ const EVALUATED_PRODUCT_ITEM = 'productDuck/EVALUATED_PRODUCT_ITEM';
 const CLEAR_PRODUCT_REVIEW = 'productDuck/CLEAR_PRODUCT_REVIEW';
 const FETCH_MOSTEST = 'productDuck/FETCH_MOSTEST';
 const FETCH_SERVICES = 'productDuck/FETCH_SERVICES';
+const FETCH_GALLERY = 'productDuck/FETCH_GALLERY';
+const FETCH_DATA_SUB_CATEGORY = 'productDuck/FETCH_DATA_SUB_CATEGORY';
 
 const RATING_UPDATE = 'productDuck/RATING_UPDATE';
+
+const FETCH_FILTERS = 'productDuck/FETCH_FILTERS';
+
+
 
 export const getProducts = createAction(FETCH_PRODUCTS);
 export const getProductsSimilar = createAction(FETCH_PRODUCTS_SIMILAR);
@@ -53,10 +59,14 @@ export const changeEvaluatedProductItem = createAction(EVALUATED_PRODUCT_ITEM);
 export const clearProductReviewData = createAction(CLEAR_PRODUCT_REVIEW);
 export const changeMostest = createAction(FETCH_MOSTEST);
 export const getServices = createAction(FETCH_SERVICES);
-//export const changeMostestSale = createAction(FETCH_MOSTEST_SALE);
+export const getGallery = createAction(FETCH_GALLERY);
+export const changeProductsBySubCategories = createAction(FETCH_DATA_SUB_CATEGORY);
 
 
 export const changeRatingUpdate = createAction(RATING_UPDATE);
+
+
+export const changeFilters = createAction(FETCH_FILTERS);
 
 
 
@@ -180,6 +190,14 @@ export const fetchCurrentProduct = (id) => async(dispatch) => {
     console.log('error from productDuck', e)
   }
 };
+export const fetchGallery = () => async(dispatch) => {
+  try {
+    const data = await(await fetch(`${root}/api/performed`)).json();
+    dispatch(getGallery(data));
+  } catch (e) {
+    console.log('error from productDuck', e)
+  }
+};
 export const fetchMaxDiscountProduct = () => async (dispatch) => {
   
   try {
@@ -222,25 +240,29 @@ export const fetchProductsByString = (arr) => async(dispatch) => {
 export const fetchViewedProducts = (userId, ids) => async(dispatch) => {
   console.log(ids);
   
- if (userId && ids.length > 0) {
   try {
-    const data = await (await fetch(`${root}/api/list/product`, {
-        method: "POST",
-        headers : {
-          "Content-Type" : "application/json"
-        },
-        body: JSON.stringify({
-          userId, ids
-        })
-    })).json();
+    if (userId && ids.length > 0) {
+
+      const data = await (await fetch(`${root}/api/viewed/products`, {
+          method: "POST",
+          headers : {
+            "Content-Type" : "application/json"
+          },
+          body: JSON.stringify({
+            userId, ids
+          })
+      })).json();
+      console.log(data);
+      
     dispatch(changeViewedProductsData(data));
-  
+    
+    }
+    else{
+      dispatch(changeViewedProductsData([]))
+     }
   } catch (e) {
     console.log('error from productDuck', e)
   }
- }else{
-  dispatch(changeViewedProductsData([]))
- }
 };
 export const fetchViewedProductIds = (userId, product_id) => async (dispatch) => {
   try {
@@ -252,6 +274,28 @@ export const fetchViewedProductIds = (userId, product_id) => async (dispatch) =>
       },
       body : JSON.stringify({
         userId, product_id
+      })
+    })).json();
+    console.log(data);
+    
+    dispatch(changeViewedProducts(data));
+
+  } catch (e) {
+    console.log('error from productDuck', e)
+  }
+};
+export const fetchViewedProductIdsByUserId = (userId) => async (dispatch) => {
+  console.log(userId);
+  
+  try {
+    
+    const data = await (await fetch(`${root}/api/viewed/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body : JSON.stringify({
+        userId
       })
     })).json();
     console.log(data);
@@ -286,7 +330,6 @@ export const fetchAllSoldedProducts = () => async(dispatch) => {
 export const fetchMostestProduct = (id) => async(dispatch) => {
   try {
     const urlPath = getMostestURL(id) 
-    console.log("🚀 ~ fetchMostestProduct ~ urlPath:", urlPath)
     const data = await (await fetch(`${root}/api/mostest/${urlPath?.url}`)).json();
     dispatch(changeMostest(data));
   } catch (e) {
@@ -301,6 +344,28 @@ export const fetchServices = () => async(dispatch) => {
     throw err
   }
 } //
+export const fetchBySubCategories = (category, sub_category) => async(dispatch) => {
+  try { 
+    const data = await(await fetch(`/api/subCategories/${category}/${sub_category}`)).json()
+    dispatch(changeProductsBySubCategories(data));
+  } catch (err) {
+    throw err
+  }
+} //
+export const fetchForFilters = (str, count) => async(dispatch) => {
+  try {
+    
+    const data = await(await fetch(`/api/filters/${str}`)).json()
+    // dispatch(changeProductsBySubCategories(data));
+     dispatch(getProductsByCategoryLength(data.length));
+     dispatch(getStepsCounts(Math.ceil(data.length / count)));
+    dispatch(changeFilters(data))
+    console.log("🚀 ~ fetchBySubCategories ~ data:", data)
+  } catch (err) {
+    throw err
+  }
+} 
+
 
 export const currentProduct = (id) => (dispatch) => {
   dispatch(getCurrentProductId(id));
@@ -313,6 +378,12 @@ export const changeStepsCounts = (num) => (dispatch) => {
 };
 export const clearProductsByCosts = () => (dispatch) => {
   dispatch(getElementsByCosts([]));
+};
+export const clearviewedProducts = () => (dispatch) => {
+  
+
+  dispatch(changeViewedProducts([]));
+  dispatch(changeViewedProductsData([]));
 };
 
 export const initialStateApp = {
@@ -336,7 +407,10 @@ export const initialStateApp = {
   hintsData:[],
   productReview: {},
   mostestProduct:{},
-  services:[]
+  services:[],
+  gallery:[],
+  productsBySubCategories : [],
+  filteredProducts : []
 };
 
 function ProductDuck(state = initialStateApp, action) {
@@ -426,19 +500,7 @@ function ProductDuck(state = initialStateApp, action) {
           ...state,
           viewedProducts: action.payload
         }     
-      // if (state.viewedProducts.length === 0) {
-          
-      //   }
-      // else{
-      //   if (numInArray(state.viewedProducts, action.payload)) {          
-      //     return {
-      //       ...state,
-      //       viewedProducts: [...state.viewedProducts, action.payload],
-      //     }
-      //   }else{
-      //     return  state
-      //   }
-      // };
+
     case VIEWED_PRODUCTS_DATA:
       return{
         ...state,
@@ -491,6 +553,21 @@ function ProductDuck(state = initialStateApp, action) {
       return {
         ...state,
         services:action.payload
+      }
+    case FETCH_GALLERY :
+      return {
+        ...state,
+        gallery:action.payload
+      }
+    case FETCH_DATA_SUB_CATEGORY :
+      return {
+        ...state,
+        productsBySubCategories:action.payload
+      }
+    case FETCH_FILTERS :
+      return {
+        ...state,
+        filteredProducts:action.payload
       }
     default:
       return state;

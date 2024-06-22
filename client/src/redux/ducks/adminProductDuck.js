@@ -8,6 +8,7 @@ const PRODUCT_FOR_DELETE = 'adminProductDuck/PRODUCT_FOR_DELETE';
 const TIME_OBJECT = 'adminProductDuck/TIME_OBJECT';
 const CLEAR_TIME_OBJECT = 'adminProductDuck/CLEAR_TIME_OBJECT';
 const IS_SAVED = 'adminProductDuck/IS_SAVED';
+const GALLERY_IS_ADD = 'adminProductDuck/GALLERY_IS_ADD';
 
 
 export const getProductsList = createAction(PRODUCTS_LIST);
@@ -16,6 +17,7 @@ export const getProductForUpdate = createAction(PRODUCTS_FOR_UPDATE);
 export const getProductForDelete = createAction(PRODUCT_FOR_DELETE);
 export const getTimeObject = createAction(TIME_OBJECT);
 export const clearTimeObject = createAction(CLEAR_TIME_OBJECT);
+export const changeGallery = createAction(GALLERY_IS_ADD);
 export const saveChanges = createAction(IS_SAVED);
 
 
@@ -26,7 +28,8 @@ const initialStateApp = {
   currentProduct:null,
   isDeleted : false,
   timeObj : {},
-  isSaved : ''
+  isSaved : '',
+  galleryIsAdd : null
 
 };
 export const currentCartItem = () => (dispatch) => {
@@ -62,6 +65,9 @@ export const resetTimeObject = () => (dispatch) => {
 }
 export const saveChangedProducts = (str) => (dispatch) => {
   dispatch(saveChanges(str))
+}
+export const getGalleryAdd = (bool) => (dispatch) => {
+  dispatch(changeGallery(bool))
 }
 
 export const fetchProductsList = () => async (dispatch) => {
@@ -172,6 +178,11 @@ const AdminProductDuck = (state = initialStateApp, action) => {
           ...state,
           isSaved: action.payload,
         };
+      case GALLERY_IS_ADD:
+        return {
+          ...state,
+          galleryIsAdd: action.payload,
+        }; 
     default:
       return state;
   }

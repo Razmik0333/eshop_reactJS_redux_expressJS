@@ -5,10 +5,13 @@ import { changeReviewId } from '../../../../redux/ducks/reviewDuck'
 
 export default function LatestBlogHeader() {
      const dispatch = useDispatch();
+     const numberReviewsInBlock = 3;
+
      const latestReviews = useSelector(getLatestReviewsSelector) 
      const setReviewId = (e) => {
           dispatch(changeReviewId(+e.target.dataset.id))
      }
+     const latestReviewsIds = latestReviews.filter((_,pos) => pos % numberReviewsInBlock === 0)
      const reviewId = useSelector(getReviewIdSelector)
      const latestBlogData = useSelector(currentLanguageDataSelector)?.home?.latest_blog;
 
@@ -23,15 +26,13 @@ export default function LatestBlogHeader() {
                </div>
                <div className="circles">
                     {
-                         latestReviews.map((item,pos) => {
+                         latestReviewsIds.map((_,pos) => {
 
-                              return (pos +  1 ) % 3 === 0 && 
-                              
-                                   <div className={
-                                        `circle ${(+pos + 1)/3 === reviewId ? `active` : ``}`
+                              return <div className={
+                                        `circle ${(+pos + 1) === reviewId ? `active` : ``}`
                                    }
                                         onClick={setReviewId} 
-                                        data-id={`${(+pos + 1)/3}`}
+                                        data-id={`${(+pos + 1)}`}
                                         key={`latestBlogHeader_${pos}`}
                                    >
 

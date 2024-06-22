@@ -215,6 +215,7 @@
             "products":"PRODUCTS",
             "change":"CHANGE",
             "reviews":"REVIEWS",
+            "gallery":"GALLERY",
             "discount":"CHANGE DISCOUNT",
             "logout":"LOGOUT"
         },
@@ -317,6 +318,11 @@
                 "insert_file" : "Insert a file",
                 "save" : "Save"
             }
+        },
+        "gallery" : {
+            "name" : "Name",
+            "insert_file" :"Insert the file",
+            "save" : "Save"
         }
       },
     "footer" : {

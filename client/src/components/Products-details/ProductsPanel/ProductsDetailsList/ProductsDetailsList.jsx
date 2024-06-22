@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { currentCategorySelector,getCurrentLanguageSelector, currentLanguageDataSelector, currentSearchData, currentSearchSelector, elementsCostsSelector, productsByCategorySelector } from '../../../../helpers/reduxSelectors';
+import { currentCategorySelector,getCurrentLanguageSelector, currentLanguageDataSelector, currentSearchData, currentSearchSelector, elementsCostsSelector, productsByCategorySelector, currentSubCategorySelector, getFilteredProductsSelector } from '../../../../helpers/reduxSelectors';
 import { changeCountElements, changeCountItemsOfPage, changeSortType, changeShowType } from '../../../../redux/ducks/configsDuck';
 import { getStepsCounts } from '../../../../redux/ducks/productDuck';
 import './styles/_products-panel-show.scss';
 
 function ProductsDetailsList() {
+     const dispatch = useDispatch();
+
      const [filterShowBar, setFilterShowBar] = useState(false);
      const [countShowBar, setCountShowBar] = useState(false);
      const [countItems, setCountItems] = useState(null);
@@ -13,14 +15,21 @@ function ProductsDetailsList() {
      const searchData = useSelector(currentSearchData);
      const searchWord = useSelector(currentSearchSelector);
      const currentLang = useSelector(getCurrentLanguageSelector)
+     const currentSubCategory = useSelector(currentSubCategorySelector)
 
+     useEffect(() => {
+          dispatch(changeCountElements(6))
+          dispatch(changeCountItemsOfPage(6));
+          setCountItems(6);
+
+    }, [currentSubCategory]);
      const productsByCategory = useSelector(productsByCategorySelector);
      const productsByCosts = useSelector(elementsCostsSelector);
      const productsList = searchData.length > 0 ? searchData : productsByCategory;
+     const filteredProducts = useSelector(getFilteredProductsSelector)
 
      const products = productsByCosts?.length > 0 ? productsByCosts : productsList;
 
-     const dispatch = useDispatch();
      const category = useSelector(currentCategorySelector)
      const changeType = (e) => {
           dispatch(changeShowType(e.target.dataset.type))
@@ -29,7 +38,7 @@ function ProductsDetailsList() {
           setCountItems(e.target.dataset.count);
           dispatch(changeCountElements(e.target.dataset.count))
           dispatch(changeCountItemsOfPage(e.target.dataset.count))
-          dispatch(getStepsCounts(Math.ceil(products.length / +e.target.dataset.count)));
+          dispatch(getStepsCounts(Math.ceil(filteredProducts.length / +e.target.dataset.count)));
           setCountShowBar(false)
       }
      const changeFilterItems = (e) => {        

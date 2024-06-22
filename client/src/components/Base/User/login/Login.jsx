@@ -7,6 +7,7 @@ import {  checkEmail,
 import { currentUser, getUserData } from "../../../../redux/ducks/userDuck";
 import { root } from "../../../../helpers/constants/constants";
 import { currentLanguageDataSelector } from "../../../../helpers/reduxSelectors";
+import { fetchViewedProductIdsByUserId } from "../../../../redux/ducks/productDuck";
 
 function Login() {
      const [userEmail, setUserEmail] = useState('');
@@ -33,6 +34,7 @@ function Login() {
                     setEmailLoginExist(true);
                     dispatch(currentUser(res));
                     dispatch(getUserData(res));
+                    dispatch(fetchViewedProductIdsByUserId(res))
                     navigate('/home')
                }else{
                    

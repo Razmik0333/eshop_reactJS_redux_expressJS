@@ -9,8 +9,10 @@ export default function MostestProduct({product}) {
      const dispatch =useDispatch();
      const currentCurrency = useSelector(getCurrentCurrencySelector);
      const currentLanguage = useSelector(getCurrentLanguageSelector);
-
-     const discountedPrice = product.cost *(1 - product.discount / 100);
+     console.log(product);
+     
+     const discountedPrice = product?.cost *(1 - product?.discount / 100);
+     console.log("🚀 ~ MostestProduct ~ discountedPrice:", product?.cost, product?.discount)
      const changeCurrentProduct = (e) => {
           dispatch(currentProduct(e.target.dataset.id));
      }
@@ -18,10 +20,10 @@ export default function MostestProduct({product}) {
      <div className="offer-items">
 
           <div className="offer-prices">
-               <p className="offer-price new-offer-price"> {`${getNewCurrency(currentCurrency, discountedPrice).value}
-                              ${getNewCurrency(currentCurrency, discountedPrice).char}`}</p>
-               <p className="offer-price old-offer-price"><del>{`${getNewCurrency(currentCurrency, product?.cost).value}
-                                        ${getNewCurrency(currentCurrency, product?.cost ).char}`}</del></p>
+               <p className="offer-price new-offer-price"> {`${getNewCurrency(currentCurrency, discountedPrice)?.value}
+                              ${getNewCurrency(currentCurrency, discountedPrice)?.char}`}</p>
+               <p className="offer-price old-offer-price"><del>{`${getNewCurrency(currentCurrency, product?.cost)?.value}
+                                        ${getNewCurrency(currentCurrency, product?.cost )?.char}`}</del></p>
           </div>
           <div className="offer-content">
                <NavLink to={`/product/${product?.id}`}>

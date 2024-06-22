@@ -10,8 +10,9 @@ const [
      getMaxSoldedProducts,
      getMaxSoldedProductIds
 ] = functions.solded
-const getTokensForQuery = functions.query
-
+const getTokensForQuery = functions.query;
+const getSizeOfObject = functions.sizeOfObject;
+const getSortedArray = functions.sortedArray;
 const getMostestProductData = functions.mostestProduct;
 const getMostestMaxObject = functions.mostestMaxObject;
 const getMiddleRating = functions.middleRating;
@@ -241,11 +242,14 @@ module.exports.productById = async (req, res) => {
      }
 }
 
-module.exports.productsByIds = async (req, res) => {
+module.exports.viewedProducts = async (req, res) => {
      try {
           const ids = req.body.ids;
+          console.log("🚀 ~ module.exports.viewedProducts= ~ ids:", ids)
           const userId = req.body.userId;
+          console.log("🚀 ~ module.exports.viewedProducts= ~ userId:", userId)
           const cachesPath = variables.caches.product;   
+          console.log(!fs.existsSync(`${cachesPath}/viewed/${userId}`));
           if (!fs.existsSync(`${cachesPath}/viewed/${userId}`)) {
                fs.mkdir(`${cachesPath}/viewed/${userId}`,{recursive: true}, (err) => {
                     if (err) throw err
@@ -257,8 +261,9 @@ module.exports.productsByIds = async (req, res) => {
                     if (err) throw err;
                     else {                        
                          const arrOfCacheIds = JSON.parse(data).map(item => item.id);
-                          if (ids.length !== arrOfCacheIds.length) {                                  
-                              const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
+                         const idsArr = ids.split("|")
+                          if (idsArr.length !== arrOfCacheIds.length) {                                  
+                              const result = await realyze(`SELECT * FROM products WHERE id IN (${idsArr})`, [idsArr]);
                               fs_functions.writeCacheFile(
                                    `${cachesPath}/viewed/${userId}/viewed.json`,
                                    result
@@ -271,7 +276,9 @@ module.exports.productsByIds = async (req, res) => {
                     }
                })
           } else {
-               const result = await realyze(`SELECT * FROM products WHERE id IN (${ids})`, [ids]);
+               const idsArr = ids.split("|")
+
+               const result = await realyze(`SELECT * FROM products WHERE id IN (${idsArr})`, [idsArr]);
                fs_functions.writeCacheFile(
                     `${cachesPath}/viewed/${userId}/viewed.json`,
                     result
@@ -282,25 +289,40 @@ module.exports.productsByIds = async (req, res) => {
           throw err;
      }
 }
+
 module.exports.viewed = async (req, res) => {
      const userId = req.body.userId;
+     console.log("🚀 ~ module.exports.viewed= ~ userId:", userId)
      const product_id = req.body.product_id;
      const [viewedByUser] = await realyze("SELECT viewed FROM `user_interest` WHERE user_id = ? ", [userId])
      if (viewedByUser?.viewed === '') {
           await realyze("UPDATE `user_interest` SET viewed = ? WHERE user_id = ?", [product_id,userId]);
           res.send(JSON.stringify(product_id))
      } else {
-          const viewedIds =  viewedByUser?.viewed.split('|');
-          const filtered =  viewedIds.filter(item => item === product_id);
+          const viewedIds =  viewedByUser?.viewed;
+          console.log("🚀 ~ module.exports.viewed= ~ viewedIds:", viewedIds)
+          const filtered =  viewedIds.split("|").filter(item => item === product_id);
           if(filtered.length === 0){
              const newIds = `${viewedByUser?.viewed}|${product_id}`;
 
               await realyze("UPDATE `user_interest` SET viewed = ? WHERE user_id = ?", [newIds,userId])
-              res.send(JSON.stringify(newIds.split('|')))
+              res.send(JSON.stringify(newIds))
           }else{
-               
                res.send(JSON.stringify(viewedIds))
         }
+     }
+     
+}
+module.exports.viewedIdsByUser = async (req, res) => {
+     const userId = req.body.userId;
+     console.log("🚀 ~ module.exports.viewed= ~ userId:", userId)
+     //const product_id = req.body.product_id;
+     const [viewedByUser] = await realyze("SELECT viewed FROM `user_interest` WHERE user_id = ? ", [userId])
+     console.log("🚀 ~ module.exports.viewedIdsByUser= ~ viewedByUser:",  viewedByUser.viewed.length, viewedByUser)
+     if(viewedByUser?.viewed.length > 0){     
+          res.send(JSON.stringify(viewedByUser.viewed));
+     }else{
+          res.send([]);
      }
      
 }
@@ -422,7 +444,7 @@ module.exports.evaluateProducts = async( req, res) => {
 module.exports.productsRating = async( req, res) => {
      const productsIdsString = req.params.id;
      const productsIdsData = productsIdsString.trim("").split(',');
-     productsIdsData.forEach(async(item, pos) => {
+     productsIdsData.forEach(async(item) => {
          const productItem =  await realyze("SELECT rating FROM reviews WHERE product_id = ? ", [item]);
           const current = getMiddleRating(productItem)
           await realyze("UPDATE products SET rating = ?  WHERE id = ? ", [current, item] )
@@ -583,5 +605,41 @@ module.exports.mostestDesired = async(req, res) => {
 module.exports.services = async (req, res) => {
      const services = await realyze("SELECT * FROM services");
      res.send(services)
+
+}
+module.exports.performedProducts = async (req, res) => {
+      const performedProducts = await realyze("SELECT * FROM performed_works");
+      res.send(performedProducts)
+     console.log('ok');
+
+}
+module.exports.filterByList = async (req, res) => {
+     const filterObject = JSON.parse(req.params.str);
+     console.log("🚀 ~ module.exports.filterByList= ~ filterObject:", filterObject)
+     let baseString1 = "SELECT * FROM `products` WHERE category = ? AND sub_category = ?";
+     const haveCostObject = getSizeOfObject(filterObject?.cost);
+     const sortObject = getSizeOfObject(filterObject?.sort);
+     const baseArr = [filterObject?.category, filterObject?.subCategory];
+     if (haveCostObject) {
+          if(filterObject?.cost?.start){
+               baseArr.push(filterObject?.cost?.start)
+               baseString1 += " AND cost >= ?  ";
+          }else if(filterObject?.cost?.final){
+               baseArr.push(filterObject?.cost?.final)
+               baseString1 += " AND cost <= ?  ";
+
+          }
+         
+     }
+     const result = await realyze(baseString1, baseArr)
+     if (sortObject) {
+          
+          const sortedResult = getSortedArray(result, filterObject?.sort)
+          res.send(sortedResult);
+     }else{
+          
+          res.send(result);
+     }
+     
 
 }

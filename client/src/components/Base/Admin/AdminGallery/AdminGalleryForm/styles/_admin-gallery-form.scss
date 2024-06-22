@@ -1,0 +1,36 @@
+.admin-gallery{
+     margin-left: 20px;
+     .form__item{
+          padding: 15px 0 ;
+          height: 30px;
+          width: 100%;
+          margin: 15px 0 0 0;
+          .form__item__header{
+               margin-bottom: 5px;
+               
+          }
+          input{
+               font-size: 14px;
+
+               
+               height: 30px;
+               width: 100%;
+               border-radius: 5px;
+               color: #ccc;
+          }
+     }
+     .form__item__insert__picture{
+          margin-top: 50px;
+     }
+     .product__save{
+          width:100px;
+          height: 30px;
+          background-color: var(--orange);
+          margin: 20px 0;
+          outline: 0;
+          cursor: pointer;
+          &:hover{
+               color: var(--white);
+          }
+     }
+}

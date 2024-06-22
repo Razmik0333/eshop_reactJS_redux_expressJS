@@ -34,7 +34,9 @@
      }
      .burger_list_item{
           padding: 10px 0;
-          a{
+          .menu-burger-link{
+               width: 100%;
+               display: block;
                text-decoration: none;
                color: var(--white);
           }

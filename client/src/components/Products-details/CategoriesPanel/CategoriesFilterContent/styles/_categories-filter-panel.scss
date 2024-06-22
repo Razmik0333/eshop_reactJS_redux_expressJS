@@ -1,17 +1,25 @@
 .categories__filters__content{
      padding: 20px 0;
     .filter-item{
-         margin-bottom: 15px;
          display: flex;
          justify-content: space-between;
          align-items: center;
+         position: relative;
+         height: 20px;
+         padding: 15px 0;
+         z-index: 99999;
          .category__name{
+               position: absolute;
                font-size: 13px;
+               left: 0;
+               z-index: 0;
+               display: block;
                &::before{
                     content: '>';
                }
           }
           .product-count{
+               position: absolute;
                width: 20px;
                height: 20px;
                border-radius: 50%;
@@ -22,6 +30,7 @@
                display: flex;
                justify-content: center;
                align-items: center;
+               right: 0;
 
          }
          &:hover{

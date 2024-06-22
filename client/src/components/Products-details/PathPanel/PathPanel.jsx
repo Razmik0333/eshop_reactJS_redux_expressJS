@@ -8,7 +8,6 @@ function PathPanel() {
      const currentCategory = useSelector(currentCategorySelector);
      const langData = useSelector(currentLanguageDataSelector);
      const currentLang = useSelector(getCurrentLanguageSelector)
-     console.log("🚀 ~ file: PathPanel.jsx:11 ~ PathPanel ~ currentLang:", currentLang)
      const pathPanelHomeLang = langData?.details;
 
      return (

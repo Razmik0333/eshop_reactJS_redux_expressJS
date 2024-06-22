@@ -11,9 +11,11 @@ import AdminProductDuck from './ducks/adminProductDuck';
 import AdminUserDuck from './ducks/adminUserDuck';
 import ReviewDuck from './ducks/reviewDuck';
 import WishListDuck from './ducks/wishListDuck';
+import SubCategoryDuck from './ducks/subCategoryDuck';
 
 const rootReducer = combineReducers({
   NavigationDuck,
+  SubCategoryDuck,
   ProductDuck,
   ConfigsDuck,
   CartDuck,
