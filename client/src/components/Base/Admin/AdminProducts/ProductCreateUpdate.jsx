@@ -1,13 +1,15 @@
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminProductIdSelector, adminProductSelector, categoriesSelector, currentLanguageDataSelector, modalCloseSelector } from "../../../../helpers/reduxSelectors";
+import { adminProductIdSelector, adminProductSelector, adminSubCategoriesByCatIdSelector, categoriesSelector, currentLanguageDataSelector, modalCloseSelector, subCategoriesSelector } from "../../../../helpers/reduxSelectors";
 import { root } from '../../../../helpers/constants/constants';
 import Modal from '../../Modal/Modal';
 import { changeModal } from '../../../../redux/ducks/configsDuck';
 import ProductCreateUpdateFooter from './ProductCreateUpdateFooter';
 import { changeCurrentProduct, fetchProductItem } from '../../../../redux/ducks/adminProductDuck';
 import "./styles/_product-create-update-form.scss";
+import { currentCategoryId } from '../../../../redux/ducks/adminCategoryDuck';
+import { fetchSubCategoriesById } from '../../../../redux/ducks/adminSubCategoryDuck';
 
 function ProductCreateUpdate() {
      const [isCreated, setIsCreated] = useState(false);
@@ -20,6 +22,9 @@ function ProductCreateUpdate() {
      const [productDiscount, setProductDiscount] = useState(``);
      const [productArticul, setProductArticul] = useState("");
      const [selectedCat, setSelectedCat] = useState('');
+     console.log("🚀 ~ ProductCreateUpdate ~ selectedCat:", selectedCat)
+     const [selectedSubCat, setSelectedSubCat] = useState('');
+     
      const dispatch = useDispatch();
      const currentProduct = useSelector(adminProductSelector);
      const currentProductId = useSelector(adminProductIdSelector)
@@ -41,14 +46,20 @@ function ProductCreateUpdate() {
      
      const changeCategory = (e) => {
           setSelectedCat(+e.target.value);
+          dispatch(fetchSubCategoriesById(+e.target.value))
      }
+     const changeSubCategory = (e) => {
+          setSelectedSubCat(+e.target.value);
+     }
+     const subCategoriesList = useSelector(adminSubCategoriesByCatIdSelector)
+     console.log("🚀 ~ ProductCreateUpdate ~ subCategoriesList:", subCategoriesList)
      const formRef = useRef(null);
      const handleSubmit = async (e) => {
           e.preventDefault();
           const data = new FormData(formRef.current);
           const url = currentProduct ? 
                `${root}/api/admin/product/update`:
-                    `${root}/api/admin/product/create`
+                    `${root}/api/admin/product/create`;
 
           await fetch(url, {
                method: 'PUT',
@@ -64,6 +75,7 @@ function ProductCreateUpdate() {
 
      }
      const categories = useSelector(categoriesSelector)
+     console.log("🚀 ~ ProductCreateUpdate ~ categories:", categories)
      return <>
           {
                 modalIsClose ?
@@ -89,7 +101,7 @@ function ProductCreateUpdate() {
                                                             value={`${cat?.id}`}
                                                             key={`val__${cat?.id}`} 
                                                             
-                                                       >{cat?.id}</option>
+                                                       >{cat?.arm_name}</option>
 
                                                   })
                                              }
@@ -123,6 +135,27 @@ function ProductCreateUpdate() {
                                         onChange={() => {}} 
                                         />
                               }
+                              <div className="form__item">
+                                   <div className="form__item__header">{productsUpdateLangData?.headers?.sub_cat_index}</div>
+                                   <label htmlFor="sub_cat_index">
+                                        <select onChange={changeSubCategory} id="sub_cat_index" name="sub_category"
+                                        value={selectedSubCat}
+                                        >
+                                             <option>{productsUpdateLangData?.placeholders?.select_sub_category}</option>
+                                             {
+                                                  subCategoriesList.map(subCat => {
+                                                       
+                                                       return  <option 
+                                                            value={`${subCat?.id}`}
+                                                            key={`val__${subCat?.id}`} 
+                                                            
+                                                       >{subCat?.arm_name}</option>
+
+                                                  })
+                                             }
+                                        </select>
+                                   </label>
+                              </div>
                               <div className="form__item">
                                    <div className="form__item__header">{productsUpdateLangData?.headers?.name}</div>
                                         <input 

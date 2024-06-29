@@ -21,6 +21,10 @@ var _orderDuck = _interopRequireDefault(require("./ducks/orderDuck"));
 
 var _adminOrderDuck = _interopRequireDefault(require("./ducks/adminOrderDuck"));
 
+var _adminCategoryDuck = _interopRequireDefault(require("./ducks/adminCategoryDuck"));
+
+var _adminSubCategoryDuck = _interopRequireDefault(require("./ducks/adminSubCategoryDuck"));
+
 var _adminReviewDuck = _interopRequireDefault(require("./ducks/adminReviewDuck"));
 
 var _adminProductDuck = _interopRequireDefault(require("./ducks/adminProductDuck"));
@@ -45,6 +49,8 @@ var rootReducer = (0, _redux.combineReducers)({
   UserDuck: _userDuck["default"],
   AdminOrderDuck: _adminOrderDuck["default"],
   AdminProductDuck: _adminProductDuck["default"],
+  AdminCategoryDuck: _adminCategoryDuck["default"],
+  AdminSubCategoryDuck: _adminSubCategoryDuck["default"],
   AdminUserDuck: _adminUserDuck["default"],
   AdminReviewDuck: _adminReviewDuck["default"],
   ReviewDuck: _reviewDuck["default"],

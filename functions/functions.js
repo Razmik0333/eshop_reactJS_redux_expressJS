@@ -314,6 +314,33 @@ const getSortedArray = (orgArr, typeObj) => {
                break;
      }
 }
+
+const getQueryStringForCost = (filterObject) => {
+     let queryString = "SELECT * FROM `products` WHERE category = ? AND sub_category = ?";
+     const haveCostObject = getSizeOfObject(filterObject?.cost);
+     if (haveCostObject) {
+          if(filterObject?.cost?.start){
+               queryString += " AND cost >= ?  ";
+          }else if(filterObject?.cost?.final){
+               queryString += " AND cost <= ?  ";
+          }
+     }
+     queryString += " ORDER BY id DESC ";
+     return queryString;
+}
+const getQueryArrayForCost = (filterObject) => {
+     const haveCostObject = getSizeOfObject(filterObject?.cost);
+     const queryArr = [filterObject?.category, filterObject?.subCategory];
+     if (haveCostObject) {
+          if(filterObject?.cost?.start){
+               queryArr.push(filterObject?.cost?.start)
+          }else if(filterObject?.cost?.final){
+               queryArr.push(filterObject?.cost?.final)
+          }
+     }
+     return queryArr;
+}
+
 module.exports = {
      solded : [
           getMaxSoldedProducts,
@@ -340,7 +367,9 @@ module.exports = {
      ratingCounts : getRatingCounts,
      countsOffHighRating: getCountsOffHighRating,
      idOffHighRatingProduct : getIdOffHighRatingProduct,
-     sortedArray : getSortedArray
+     sortedArray : getSortedArray,
+     queryStringForCost : getQueryStringForCost,
+     queryArrayForCost : getQueryArrayForCost
 }
 
 

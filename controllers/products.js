@@ -18,6 +18,13 @@ const getMostestMaxObject = functions.mostestMaxObject;
 const getMiddleRating = functions.middleRating;
 const getCountsOffHighRating = functions.countsOffHighRating;
 const getIdOffHighRatingProduct = functions.idOffHighRatingProduct;
+const getQueryStringForCost = functions.queryStringForCost
+const getQueryArrayForCost = functions.queryArrayForCost
+
+
+
+
+
 module.exports.productsByCategory = async (req, res) => {
      const params = req.params.id;
      const cachesPath = variables.caches.product;
@@ -166,6 +173,7 @@ module.exports.recommendedProducts = async (req, res) => {
 module.exports.filteredProducts = async (req, res) => {
      const cachesPath = variables.caches.product;    
      const params = req.params.id;
+
      try {
           if (typeof +params === 'number' && !isNaN(+params)) {
                const categories = await realyze("SELECT * FROM `category` ");
@@ -245,11 +253,8 @@ module.exports.productById = async (req, res) => {
 module.exports.viewedProducts = async (req, res) => {
      try {
           const ids = req.body.ids;
-          console.log("🚀 ~ module.exports.viewedProducts= ~ ids:", ids)
           const userId = req.body.userId;
-          console.log("🚀 ~ module.exports.viewedProducts= ~ userId:", userId)
           const cachesPath = variables.caches.product;   
-          console.log(!fs.existsSync(`${cachesPath}/viewed/${userId}`));
           if (!fs.existsSync(`${cachesPath}/viewed/${userId}`)) {
                fs.mkdir(`${cachesPath}/viewed/${userId}`,{recursive: true}, (err) => {
                     if (err) throw err
@@ -610,36 +615,79 @@ module.exports.services = async (req, res) => {
 module.exports.performedProducts = async (req, res) => {
       const performedProducts = await realyze("SELECT * FROM performed_works");
       res.send(performedProducts)
-     console.log('ok');
 
 }
 module.exports.filterByList = async (req, res) => {
-     const filterObject = JSON.parse(req.params.str);
-     console.log("🚀 ~ module.exports.filterByList= ~ filterObject:", filterObject)
-     let baseString1 = "SELECT * FROM `products` WHERE category = ? AND sub_category = ?";
-     const haveCostObject = getSizeOfObject(filterObject?.cost);
-     const sortObject = getSizeOfObject(filterObject?.sort);
-     const baseArr = [filterObject?.category, filterObject?.subCategory];
-     if (haveCostObject) {
-          if(filterObject?.cost?.start){
-               baseArr.push(filterObject?.cost?.start)
-               baseString1 += " AND cost >= ?  ";
-          }else if(filterObject?.cost?.final){
-               baseArr.push(filterObject?.cost?.final)
-               baseString1 += " AND cost <= ?  ";
-
-          }
-         
-     }
-     const result = await realyze(baseString1, baseArr)
-     if (sortObject) {
-          
-          const sortedResult = getSortedArray(result, filterObject?.sort)
-          res.send(sortedResult);
-     }else{
-          
-          res.send(result);
-     }
      
+     try {
+          const cachesPath = variables.caches.product;  
+          const filterObject = JSON.parse(req.params.str);
+          const currentCategoryId = filterObject?.category;
+          const currentSubCategoryId = filterObject?.subCategory;
+          const queryString = getQueryStringForCost(filterObject);
+          const queryArray = getQueryArrayForCost(filterObject);
+          const sortObject = getSizeOfObject(filterObject?.sort);
+
+          if (getSizeOfObject(filterObject) && !isNaN(+currentCategoryId)) {
+               const [currentCategory] = await realyze("SELECT * FROM `category` WHERE id = ? ", [currentCategoryId]);
+               const [currentSubCategory] = await realyze("SELECT * FROM `subcategory` WHERE category = ? AND sub_category = ? ", [currentCategoryId, currentSubCategoryId]);
+               if (!fs.existsSync(`${cachesPath}/filtered_products/${currentCategory?.alias}`)) {
+                    fs.mkdir(`${cachesPath}/filtered_products/${currentCategory?.alias}`,{recursive: true}, (err) => {
+                         if (err) throw err
+                    });
+               }
+               if(fs.existsSync(cachesPath + `filtered_products/${currentCategory?.alias}`)){
+                    if (fs.existsSync(`${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`)) {
+                         fs.readFile( `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,"utf-8",
+                         async function(err, data) {
+                              if (err) throw err;
+                              else {  
+                                             
+                                   const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ? AND sub_category = ?", [+currentCategory?.id, currentSubCategory?.id])
+                                   if (JSON.parse(data)[0].id < lastProductId.max) {
+                                        const result = await realyze(queryString, queryArray);
+
+                                        if (sortObject) {
+                                             const sortedResult = getSortedArray(result, filterObject?.sort)
+                                             fs_functions.writeCacheFile(
+                                                  `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
+                                                  sortedResult);
+                                             res.send(sortedResult);
+                                        }else{
+                                             fs_functions.writeCacheFile(
+                                                  `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
+                                                  result);
+                                             res.send(result);
+                                        }
+                                   }else{
+                                        console.log('readdddd')
+                                        res.send(data);
+                                   }
+                              }
+                         })
+                    }else{
+                         const result = await realyze(queryString, queryArray)
+                         if (sortObject) {
+                              const sortedResult = getSortedArray(result, filterObject?.sort)
+                              fs_functions.writeCacheFile(
+                                   `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
+                                   sortedResult);
+                              res.send(sortedResult);
+                         }else{
+                              fs_functions.writeCacheFile(
+                                   `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
+                                   result);
+                              res.send(result);
+                         }
+                    }
+
+               }
+          }else{
+               res.send([]);
+          }
+          
+     } catch (err) {
+          throw err;
+     }
 
 }

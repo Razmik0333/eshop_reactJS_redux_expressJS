@@ -30,6 +30,8 @@ var adminProducts = require('./routes/admin/products');
 
 var adminCategories = require('./routes/admin/category');
 
+var adminSubCategories = require('./routes/admin/subcategory');
+
 var adminUsers = require('./routes/admin/users');
 
 var adminReviews = require('./routes/admin/review');
@@ -64,6 +66,7 @@ app.use('/api', configsRoutes);
 app.use('/api', adminOrders);
 app.use('/api', adminProducts);
 app.use('/api', adminCategories);
+app.use('/api', adminSubCategories);
 app.use('/api', adminUsers);
 app.use('/api', adminReviews);
 app.listen(PORT, function (err) {

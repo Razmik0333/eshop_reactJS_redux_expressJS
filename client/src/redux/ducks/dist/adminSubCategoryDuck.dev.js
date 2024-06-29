@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.initialStateApp = exports.fetchSubCatgories = exports.getSubCategories = void 0;
+exports["default"] = exports.fetchSubCategoriesById = exports.getSubCategoryListByCatId = void 0;
 
 var _redux = require("../../helpers/redux");
 
@@ -15,11 +15,16 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var FETCH_SUB_CATEGORIES = 'subCategoryDuck/FETCH_SUB_CATEGORIES';
-var getSubCategories = (0, _redux.createAction)(FETCH_SUB_CATEGORIES);
-exports.getSubCategories = getSubCategories;
+var SUB_CATEGORY_BY_CATEGORY = 'adminOrderDuck/SUB_CATEGORY_BY_CATEGORY';
+var getSubCategoryListByCatId = (0, _redux.createAction)(SUB_CATEGORY_BY_CATEGORY);
+exports.getSubCategoryListByCatId = getSubCategoryListByCatId;
+var initialStateApp = {
+  subCategoriesByCatId: []
+}; // export const currentCartItem = () => (dispatch) => {
+//      dispatch(getOrdersList());
+// };
 
-var fetchSubCatgories = function fetchSubCatgories(catId) {
+var fetchSubCategoriesById = function fetchSubCategoriesById(id) {
   return function _callee(dispatch) {
     var data;
     return regeneratorRuntime.async(function _callee$(_context) {
@@ -29,7 +34,7 @@ var fetchSubCatgories = function fetchSubCatgories(catId) {
             _context.prev = 0;
             _context.t0 = regeneratorRuntime;
             _context.next = 4;
-            return regeneratorRuntime.awrap(fetch("".concat(_constants.root, "/api/subCategories/").concat(catId)));
+            return regeneratorRuntime.awrap(fetch("".concat(_constants.root, "/api/admin/sub_cats/").concat(id)));
 
           case 4:
             _context.t1 = _context.sent.json();
@@ -38,44 +43,41 @@ var fetchSubCatgories = function fetchSubCatgories(catId) {
 
           case 7:
             data = _context.sent;
-            dispatch(getSubCategories(data));
-            _context.next = 14;
+            dispatch(getSubCategoryListByCatId(data));
+            console.log("🚀 ~ fetchSubCategoriesById ~ data:", data);
+            _context.next = 15;
             break;
 
-          case 11:
-            _context.prev = 11;
+          case 12:
+            _context.prev = 12;
             _context.t2 = _context["catch"](0);
-            console.log('error from SubCategoryDuck', _context.t2);
+            console.log('error from AdminOrderDuck', _context.t2);
 
-          case 14:
+          case 15:
           case "end":
             return _context.stop();
         }
       }
-    }, null, null, [[0, 11]]);
+    }, null, null, [[0, 12]]);
   };
 };
 
-exports.fetchSubCatgories = fetchSubCatgories;
-var initialStateApp = {
-  subCategories: []
-};
-exports.initialStateApp = initialStateApp;
+exports.fetchSubCategoriesById = fetchSubCategoriesById;
 
-function SubCategoryDuck() {
+var AdminSubCategoryDuck = function AdminSubCategoryDuck() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialStateApp;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case FETCH_SUB_CATEGORIES:
+    case SUB_CATEGORY_BY_CATEGORY:
       return _objectSpread({}, state, {
-        subCategories: action.payload
+        subCategoriesByCatId: action.payload
       });
 
     default:
       return state;
   }
-}
+};
 
-var _default = SubCategoryDuck;
+var _default = AdminSubCategoryDuck;
 exports["default"] = _default;

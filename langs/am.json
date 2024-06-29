@@ -305,6 +305,7 @@
             "product_create_page" : {
                 "placeholders" : {
                     "select_category":"Ընտրել Կատեգորիա",
+                    "select_sub_category":"Ընտրել Ենթակատեգորիա",
                     "description" : "Մուտքագրել հայերեն Անվանում",
                     "description_eng" : "Մուտքագրել Անգլերեն Անվանում",
                     "description_rus" : "Մուտքագրել Ռուսերեն Անվանում",
@@ -315,6 +316,7 @@
                 },
                 "headers" : {
                     "cat_index" : "Կատեգորիայի Ինդեքս",
+                    "sub_cat_index" : "Ենթակատեգորիայի Ինդեքս",
                     "name" : "Անվանում",
                     "name_eng" : "Անվանում Անգլերեն",
                     "name_rus" : "Անվանում Ռուսերեն",

@@ -11,7 +11,10 @@ function CategoriesFilterContent(){
      const currentSubCategory = useSelector(currentSubCategorySelector)
 
      useEffect(() => {
-          dispatch(fetchSubCatgories(currentCategory))
+          dispatch(fetchSubCatgories(currentCategory));
+          dispatch(getSubCategory(1));
+          dispatch(getSubCategoryId(1));
+
      }, [currentCategory]);
 
       useEffect(() => {

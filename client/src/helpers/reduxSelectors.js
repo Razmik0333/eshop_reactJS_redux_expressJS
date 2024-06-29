@@ -87,6 +87,7 @@ export const getFilteredProductsSelector = ({ProductDuck}) => ProductDuck.filter
 
 
 //admins block//
+export const adminSubCategoriesByCatIdSelector = ({ AdminSubCategoryDuck }) => AdminSubCategoryDuck.subCategoriesByCatId; //
 
 export const adminOrderSelector = ({ AdminOrderDuck }) => AdminOrderDuck.ordersList; //
 export const adminOrderProductsSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrderProducts; //

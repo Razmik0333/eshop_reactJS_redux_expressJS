@@ -6,6 +6,8 @@ import CartDuck from './ducks/cartDuck';
 import UserDuck from './ducks/userDuck';
 import OrderDuck from './ducks/orderDuck';
 import AdminOrderDuck from './ducks/adminOrderDuck';
+import AdminCategoryDuck from './ducks/adminCategoryDuck';
+import AdminSubCategoryDuck from './ducks/adminSubCategoryDuck';
 import AdminReviewDuck from './ducks/adminReviewDuck';
 import AdminProductDuck from './ducks/adminProductDuck';
 import AdminUserDuck from './ducks/adminUserDuck';
@@ -23,6 +25,8 @@ const rootReducer = combineReducers({
   UserDuck,
   AdminOrderDuck,
   AdminProductDuck,
+  AdminCategoryDuck,
+  AdminSubCategoryDuck,
   AdminUserDuck,
   AdminReviewDuck,
   ReviewDuck,

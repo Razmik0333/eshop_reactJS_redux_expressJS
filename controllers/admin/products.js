@@ -63,9 +63,11 @@ module.exports.getAdminProductById = async(req, res) => {
 
 module.exports.create = async(req, res) => {
      const body = req.body;
-     await realyze("INSERT INTO `products` (category, alias, arm_name, descr,descr_en,descr_ru, cost, discount, is_recomended, availability, main, `1c_articul`, time_add) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ",
-          [body.category, body.alias,body.arm_name, body.descr, body.descr_en,body.descr_ru, body.cost, body.discount, body.is_recommended, body.availability, body.main, body['1c_articul'], Date.now()]);
-     res.send(JSON.stringify('ok'));
+     console.log("🚀 ~ module.exports.create=async ~ body:", body)
+      await realyze("INSERT INTO `products` (category, alias, arm_name, sub_category, descr, descr_en,descr_ru, cost, discount, is_recomended, availability, main, `1c_articul`, time_add) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ",
+           [body.category, body.alias, body.arm_name,body.sub_category, body.descr, body.descr_en,body.descr_ru, body.cost, body.discount, body.is_recommended, body.availability, body.main, body['1c_articul'], Date.now()]);
+    
+          res.send(JSON.stringify('ok'));
      
 }
 
@@ -87,7 +89,7 @@ module.exports.update = async(req, res) => {
 }
 module.exports.save = async(req, res) => {
      const cachesPath = variables.caches.product;
-     const pathArray = [`products`, `filtered_products`,'large_discount'];
+     const pathArray = [`products`, `filtered_products`,'large_discount','similar','solded','mosest','recomended'];
      pathArray.forEach(item => {
           fs.readdir(cachesPath + item,async (err, files) => {
                if (err) throw err;
