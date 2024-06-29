@@ -164,7 +164,7 @@ export const fetchLanguages = () => (dispatch) => {
 
 const initialStateConfigs = {
     showType: 'grid',
-    sortType: {},
+    sortType: {type: 'date', time: 'highest'},
     countItems: 6,
     countItemsOfPage: 6,
     costInterval:{},

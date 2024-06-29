@@ -622,11 +622,13 @@ module.exports.filterByList = async (req, res) => {
      try {
           const cachesPath = variables.caches.product;  
           const filterObject = JSON.parse(req.params.str);
+          console.log("🚀 ~ module.exports.filterByList= ~ filterObject:", filterObject)
           const currentCategoryId = filterObject?.category;
           const currentSubCategoryId = filterObject?.subCategory;
           const queryString = getQueryStringForCost(filterObject);
           const queryArray = getQueryArrayForCost(filterObject);
-          const sortObject = getSizeOfObject(filterObject?.sort);
+          const sortObject = filterObject?.sort;
+          console.log("🚀 ~ module.exports.filterByList= ~ sortObject:", sortObject)
 
           if (getSizeOfObject(filterObject) && !isNaN(+currentCategoryId)) {
                const [currentCategory] = await realyze("SELECT * FROM `category` WHERE id = ? ", [currentCategoryId]);
@@ -643,22 +645,16 @@ module.exports.filterByList = async (req, res) => {
                               if (err) throw err;
                               else {  
                                              
-                                   const [lastProductId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ? AND sub_category = ?", [+currentCategory?.id, currentSubCategory?.id])
-                                   if (JSON.parse(data)[0].id < lastProductId.max) {
+                                   const [maxId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ? AND sub_category = ?", [+currentCategory?.id, currentSubCategory?.id])
+                                   if (JSON.parse(data)[0]?.id !== maxId.max) {
                                         const result = await realyze(queryString, queryArray);
 
-                                        if (sortObject) {
-                                             const sortedResult = getSortedArray(result, filterObject?.sort)
-                                             fs_functions.writeCacheFile(
-                                                  `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
-                                                  sortedResult);
-                                             res.send(sortedResult);
-                                        }else{
-                                             fs_functions.writeCacheFile(
-                                                  `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
-                                                  result);
-                                             res.send(result);
-                                        }
+                                        const sortedResult = getSortedArray(result, sortObject);
+                                        fs_functions.writeCacheFile(
+                                             `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
+                                             sortedResult);
+                                        res.send(sortedResult);
+                                        
                                    }else{
                                         console.log('readdddd')
                                         res.send(data);
@@ -667,18 +663,12 @@ module.exports.filterByList = async (req, res) => {
                          })
                     }else{
                          const result = await realyze(queryString, queryArray)
-                         if (sortObject) {
-                              const sortedResult = getSortedArray(result, filterObject?.sort)
-                              fs_functions.writeCacheFile(
-                                   `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
-                                   sortedResult);
-                              res.send(sortedResult);
-                         }else{
-                              fs_functions.writeCacheFile(
-                                   `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
-                                   result);
-                              res.send(result);
-                         }
+                         const sortedResult = getSortedArray(result, sortObject)
+                         fs_functions.writeCacheFile(
+                              `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
+                              sortedResult);
+                         res.send(sortedResult);
+                         
                     }
 
                }

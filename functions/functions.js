@@ -325,7 +325,7 @@ const getQueryStringForCost = (filterObject) => {
                queryString += " AND cost <= ?  ";
           }
      }
-     queryString += " ORDER BY id DESC ";
+     //queryString += " ORDER BY id DESC ";
      return queryString;
 }
 const getQueryArrayForCost = (filterObject) => {
