@@ -211,6 +211,8 @@
         "menu_bar" : {
             "dashboard":"DASHBOARD",
             "administrator":"ADMINISTRATOR",
+            "category":"CATEGORY",
+            "subCategory":"SUBCATEGORY",
             "orders":"ORDERS",
             "products":"PRODUCTS",
             "change":"CHANGE",
@@ -235,6 +237,40 @@
             "time":{
                 "year":"Year",
                 "month":"Month"
+            }
+        },
+        "category" : {
+            "all_categories" : "ALL CATEGORIES",
+            "header" : [
+                "Number",
+                "Alias",
+                "Name",
+                "Name_Rus",
+                "Name_Eng",
+                "Action",
+                "Action"
+            ],
+            "actions" : {
+                "update":"Update",
+                "delete":"Delete"
+            },
+            "create":"Create Category",
+            "category_create_page" : {
+                "placeholders" : {
+                    "select_category":"Select a Category",
+                    "select_sub_category":"Select a Subcategory",
+                    "name" : "Enter Armenian Name",
+                    "name_eng" : "Enter English Name",
+                    "name_rus" : "Enter Russian Name"
+                },
+                "headers" : {
+                    "cat_index" : "Category",
+                    "sub_cat_index" : "Subcategory",
+                    "name" : "Name",
+                    "name_eng" : "English Name",
+                    "name_rus" : "Russian Name",
+                    "save" : "Պահպանել"
+                }
             }
         },
         "orders" : {

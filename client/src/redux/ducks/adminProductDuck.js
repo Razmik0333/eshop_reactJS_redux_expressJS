@@ -83,7 +83,6 @@ export const deleteCacheFiles = () => async (dispatch) => {
     try {
       const data = await( await fetch(`${root}/api/admin/products/save`)).json()
       dispatch(saveChangedProducts(data));
-      console.log("🚀 ~ deleteCacheFiles ~ data:", data)
     } catch (e) {
       console.log('error from AdminProductDuck', e)
     }

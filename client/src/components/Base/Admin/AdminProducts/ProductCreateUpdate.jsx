@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminProductIdSelector, adminProductSelector, adminSubCategoriesByCatIdSelector, categoriesSelector, currentLanguageDataSelector, modalCloseSelector, subCategoriesSelector } from "../../../../helpers/reduxSelectors";
+import { adminCategoryIdSelector, adminProductIdSelector, adminProductSelector, adminSubCategoriesByCatIdSelector, adminSubCategoriesByCategorySelector, categoriesSelector, currentLanguageDataSelector, modalCloseSelector, subCategoriesSelector } from "../../../../helpers/reduxSelectors";
 import { root } from '../../../../helpers/constants/constants';
 import Modal from '../../Modal/Modal';
 import { changeModal } from '../../../../redux/ducks/configsDuck';
@@ -9,7 +9,7 @@ import ProductCreateUpdateFooter from './ProductCreateUpdateFooter';
 import { changeCurrentProduct, fetchProductItem } from '../../../../redux/ducks/adminProductDuck';
 import "./styles/_product-create-update-form.scss";
 import { currentCategoryId } from '../../../../redux/ducks/adminCategoryDuck';
-import { fetchSubCategoriesById } from '../../../../redux/ducks/adminSubCategoryDuck';
+import { changeSubCategoryId, fetchSubCategoriesById } from '../../../../redux/ducks/adminSubCategoryDuck';
 
 function ProductCreateUpdate() {
      const [isCreated, setIsCreated] = useState(false);
@@ -26,13 +26,16 @@ function ProductCreateUpdate() {
      const [selectedSubCat, setSelectedSubCat] = useState('');
      
      const dispatch = useDispatch();
+     const catId = useSelector(adminCategoryIdSelector)
+     console.log("🚀 ~ ProductCreateUpdate ~ catId:", catId)
      const currentProduct = useSelector(adminProductSelector);
      const currentProductId = useSelector(adminProductIdSelector)
+     console.log("🚀 ~ ProductCreateUpdate ~ currentProductId:", currentProductId)
      const productsUpdateLangData = useSelector(currentLanguageDataSelector)?.admin?.products?.product_create_page;
-
      useEffect(() => {
-          dispatch(fetchProductItem(currentProductId))
+        currentProductId &&  dispatch(fetchProductItem(currentProductId))
      }, []);
+
      useEffect(() => {
         setProductName(currentProduct?.descr);
         setProductNameEng(currentProduct?.descr_en);
@@ -46,13 +49,13 @@ function ProductCreateUpdate() {
      
      const changeCategory = (e) => {
           setSelectedCat(+e.target.value);
+          dispatch(currentCategoryId(+e.target.value));
           dispatch(fetchSubCategoriesById(+e.target.value))
      }
      const changeSubCategory = (e) => {
           setSelectedSubCat(+e.target.value);
      }
      const subCategoriesList = useSelector(adminSubCategoriesByCatIdSelector)
-     console.log("🚀 ~ ProductCreateUpdate ~ subCategoriesList:", subCategoriesList)
      const formRef = useRef(null);
      const handleSubmit = async (e) => {
           e.preventDefault();
@@ -75,7 +78,6 @@ function ProductCreateUpdate() {
 
      }
      const categories = useSelector(categoriesSelector)
-     console.log("🚀 ~ ProductCreateUpdate ~ categories:", categories)
      return <>
           {
                 modalIsClose ?

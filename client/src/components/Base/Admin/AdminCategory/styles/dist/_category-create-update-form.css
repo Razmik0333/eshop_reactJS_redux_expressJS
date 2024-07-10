@@ -1,0 +1,80 @@
+.category__create__update {
+  width: 87%;
+}
+.category__create__update .form__container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.category__create__update .form__container form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: center;
+}
+.category__create__update .form__container form .form__items {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50%;
+  margin-top: 30px;
+  border: 3px solid var(--orange);
+  border-radius: 10px;
+}
+.category__create__update .form__container form .form__items .form__item {
+  padding: 15px 0;
+  height: 30px;
+  width: 50%;
+  margin: 15px 0 0 0;
+}
+.category__create__update .form__container form .form__items .form__item .current__order__infos {
+  display: flex;
+  width: 100%;
+  height: 150px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.category__create__update .form__container form .form__items .form__item .current__order__infos .current__order__info {
+  margin-top: 5px;
+  padding: 5px;
+}
+.category__create__update .form__container form .form__items .form__item .current__order__infos .current__order__info img {
+  vertical-align: middle;
+}
+.category__create__update .form__container form .form__items .form__item .form__item__header {
+  margin-bottom: 5px;
+}
+.category__create__update .form__container form .form__items .form__item img {
+  width: 50px;
+  height: auto;
+}
+.category__create__update .form__container form .form__items .form__item select, .category__create__update .form__container form .form__items .form__item input, .category__create__update .form__container form .form__items .form__item textarea {
+  font-size: 14px;
+  height: 30px;
+  width: 100%;
+  border-radius: 5px;
+  color: #ccc;
+}
+.category__create__update .form__container form .form__items .form__item textarea {
+  height: 50px;
+}
+.category__create__update .form__container form .form__items .form__item_list {
+  height: 150px;
+  width: 60%;
+}
+.category__create__update .form__container form .form__items .form__item__insert__picture {
+  margin-top: 50px;
+}
+.category__create__update .form__container form .form__items .product__save {
+  width: 100px;
+  height: 30px;
+  background-color: var(--orange);
+  margin: 20px 0;
+  outline: 0;
+  cursor: pointer;
+}

@@ -1,0 +1,6 @@
+.create__sub__category {
+  width: 15%;
+  height: 30px;
+  background-color: var(--orange);
+  cursor: pointer;
+}

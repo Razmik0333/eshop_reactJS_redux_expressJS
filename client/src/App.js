@@ -41,6 +41,9 @@ import UserCardAdd from './components/Base/User/cabinet/user-card-add/UserCardAd
 import AboutUs from './components/About-us/AboutUs.jsx';
 import AdminGallery from './components/Base/Admin/AdminGallery/AdminGallery.jsx';
 import Gallery from './components/Home/Gallery/Gallery.jsx';
+import AdminCategory from './components/Base/Admin/AdminCategory/AdminCategory.jsx';
+import AdminSubCategory from './components/Base/Admin/AdminSubCategory/AdminSubCategory.jsx';
+import CategoryForm from './components/Base/Admin/AdminCategory/CategoryForm.jsx';
 
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
@@ -88,10 +91,21 @@ function App() {
               />
 
               <Route
+              path="/admin/category" 
+              element={<AdminCategory />} 
+              />
+              <Route
+              path="/admin/category/update/page" 
+              element={<CategoryForm />} 
+              />
+              <Route
+              path="/admin/subcategory" 
+              element={<AdminSubCategory />} 
+              />
+              <Route
               path="/admin/product" 
               element={<AdminProducts />} 
               />
-
               <Route
               path="/admin/personal" 
               element={<AdminPersonal />} 

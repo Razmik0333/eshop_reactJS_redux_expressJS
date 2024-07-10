@@ -33,6 +33,8 @@ function AdminMenu() {
                               <ul className="admin_nav_items">
                                    <li className="admin_nav_item"><NavLink to={'/admin/home'} className="admin_nav_link">{adminMenuLangData?.dashboard}</NavLink></li>
                                    <li className="admin_nav_item"><NavLink to={"/admin/page"} className="admin_nav_link">{adminMenuLangData?.administrator}</NavLink></li>
+                                   <li className="admin_nav_item"><NavLink to={"/admin/category"} className="admin_nav_link">{adminMenuLangData?.category}</NavLink></li>
+                                   <li className="admin_nav_item"><NavLink to={"/admin/subcategory"} className="admin_nav_link">{adminMenuLangData?.subCategory}</NavLink></li>
                                    <li className="admin_nav_item"><NavLink to={"/admin/orders"} className="admin_nav_link">{adminMenuLangData?.orders}</NavLink></li>
                                    <li className="admin_nav_item"><NavLink to={'/admin/product'} className="admin_nav_link">{adminMenuLangData?.products}</NavLink></li>
                                    <li className="admin_nav_item"><NavLink to={"/admin/reviews"} className="admin_nav_link">{adminMenuLangData?.reviews}</NavLink></li>

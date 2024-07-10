@@ -3,24 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { adminProductIsDeletedSelector, adminProductsSelector, currentLanguageDataSelector, getUserId, modalCloseSelector } from '../../../../helpers/reduxSelectors';
 import { fetchProductsList, resetIsDeleted } from '../../../../redux/ducks/adminProductDuck';
 
-
-import '../AdminProducts/styles/_product-info.scss';
 import ProductCreate from './ProductCreate';
 import ProductsInfoHeader from './ProductsInfoHeader';
 import ProductsInfoItem from './ProductsInfoItem';
 import ModalProductDelete from '../../Modal/ModalProductDelete';
 
+import '../AdminProducts/styles/_product-info.scss';
+
 
 function ProductsInfo() {
      const dispatch = useDispatch();
-     const userId = useSelector(getUserId);
      const isDeleted = useSelector(adminProductIsDeletedSelector);
      const productsList = useSelector(adminProductsSelector);
      const modalIsClose = useSelector(modalCloseSelector);
      const productsInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.products;
 
      useEffect(() => {
-          dispatch(fetchProductsList(userId));
+          dispatch(fetchProductsList());
           dispatch(resetIsDeleted(false)) 
      }, [isDeleted]);
 

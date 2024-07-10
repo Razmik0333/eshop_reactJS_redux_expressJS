@@ -1,0 +1,87 @@
+.sub__category__info__block{
+     .sub__categories__info__header{
+          font-size: 1.2em;
+          margin: 20px;
+          color: var(--orange);
+     }
+     .sub__categories__info{
+          padding: 25px;
+          background-color: #fff;
+          margin-left: 32px;
+          display: flex;
+          flex-direction: column;
+          margin-top: 10px;
+          width: 105%;
+          overflow-y: scroll;
+          height: 500px;
+          .sub__categories__info__titles{
+     
+               margin-top: 20px;
+               display: flex;
+               width: 100%;
+               .sub__category__title{
+                    padding: 10px;
+                    font-size: 14px;
+                    width: 15%;
+                    font-weight: 700;
+                    &:first-child{
+                         width: 5%;
+                    }
+               }
+          }
+          .sub__category__item__info{
+               display: flex;
+               align-items: center;
+               width: 100%;
+               .sub__category__item__data__info{
+                    padding: 15px;
+                    width: 15%;
+                    font-size: 12px;
+                    line-height: 1.3;
+                    flex: 0.5 0.5 auto;
+                    height: auto;
+                    a{
+                              background-color: var(--white);
+                              cursor: pointer;
+                              border: 1px solid #ccc;
+     
+     
+                              &:hover{
+                                   border: 1px solid var(--orange);
+                                   svg{
+          
+                                        fill: var(--orange);
+                                   }
+          
+                                   
+                              }
+                              svg{
+                                   width: 25px;
+                                   height: 25px;
+                                   fill: #ccc;
+                          
+                              }
+                    }
+                    .link__action{
+                         width: 50px;
+                         height: 40px;
+                         background-color: var(--white);
+                         text-decoration: none;
+                         padding: 5px;
+                         border: 2px solid var(--orange);
+                         &:hover{
+                              background-color: var(--orange);
+                              color: var(--white)
+                         }
+                    }
+                    &:first-child{
+                         width: 5%;
+                    }
+                    
+               }
+          }
+          
+     }
+
+}
+

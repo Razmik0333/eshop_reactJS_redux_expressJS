@@ -1,7 +1,7 @@
 import { createAction } from "../../helpers/redux";
 import { root } from "../../helpers/constants/constants";
 
-const USERS_LIST = 'adminProductDuck/USERS_LIST';
+const USERS_LIST = 'adminUserDuck/USERS_LIST';
 // const PRODUCTS_FOR_UPDATE_ID = 'adminProductDuck/PRODUCTS_FOR_UPDATE_ID';
 // const PRODUCTS_FOR_UPDATE = 'adminProductDuck/PRODUCTS_FOR_UPDATE';
 // const PRODUCT_FOR_DELETE = 'adminProductDuck/PRODUCT_FOR_DELETE';
