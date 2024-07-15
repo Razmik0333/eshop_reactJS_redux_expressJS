@@ -17,7 +17,8 @@ export default function CategoryCreateUpdate() {
      const [categoryNameRus, setCategoryNameRus] = useState('');
      const [categoryAlias, setCategoryAlias] = useState('');
      const [isCreated, setIsCreated] = useState('');
-     const currentCategoryId = useSelector(adminCurrentCategoryIdSelector)
+     const currentCategoryId = useSelector(adminCurrentCategoryIdSelector);
+     console.log("🚀 ~ CategoryCreateUpdate ~ currentCategoryId:", currentCategoryId)
      useEffect(() => {
           currentCategoryId && dispatch(fetchCurrentCategory(currentCategoryId))
      }, []);
@@ -29,7 +30,6 @@ export default function CategoryCreateUpdate() {
           setCategoryNameRus(currentCategory?.rus_name);
           setCategoryAlias(currentCategory?.alias);
      }, [currentCategoryId, currentCategory]);
-       
      const categoriesInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.category?.category_create_page;
      const modalIsClose = useSelector(modalCloseSelector);
      const formRef = useRef(null);
@@ -40,10 +40,8 @@ export default function CategoryCreateUpdate() {
           const url =  currentCategoryId ? 
                `${root}/api/admin/category/update`:
                     `${root}/api/admin/category/create`;
-
           await fetch(url, {
                method: 'PUT',
-
                body: new URLSearchParams(data),    
           })
           .then(res => res.json())

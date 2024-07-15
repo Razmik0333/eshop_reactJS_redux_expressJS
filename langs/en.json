@@ -273,6 +273,46 @@
                 }
             }
         },
+        "sub_category" : {
+            "all_sub_categories" : "All Subcategories",
+            "header" : [
+                "Number",
+                "Category N",
+                "Subcat N",
+                "Alias",
+                "Name",
+                "Name_Rus",
+                "Name_Eng",
+                "Action",
+                "Action"
+            ],
+            "actions" : {
+                "update":"Update",
+                "delete":"Delete"
+            },
+            "create":"Create Subcategory",
+            "sub_category_create_page" : {
+                "placeholders" : {
+                    "alias":"Select Alias",
+                    "select_sub_category":"Select Subcategory",
+                    "description" : "Enter Name",
+                    "description_eng" : "Enter English Name",
+                    "description_rus" : "Enter Russian Name"
+                },
+                "headers" : {
+                    "alias" : "Alias",
+                    "name" : "Name",
+                    "cat_index" : "Category Index",
+                    "sub_cat_index" : "Subcategory Index",
+                    "name_eng" : "English Name",
+                    "name_rus" : "Russian Name",
+                    "description" : "Enter Description",
+                    "select_category" : "Select a Category",
+                    "select_sub_category" : "Select a Subcategory",
+                    "save" : "Save"
+                }
+            }
+        },
         "orders" : {
             "newest_orders" : "NEWEST ORDERS",
             "all_orders" : "ALL ORDERS",

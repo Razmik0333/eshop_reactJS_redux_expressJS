@@ -15,7 +15,7 @@ module.exports.category = async (req, res) => {
                          else {
                               const [lastCategoryId] = await realyze("SELECT MAX(id) AS max FROM category");
                               const parsedData = JSON.parse(data);
-                              if (parsedData[parsedData.length - 1].id < lastCategoryId.max) {                                 
+                              if (parsedData[parsedData.length - 1].id !== lastCategoryId.max) {                                 
                                    const result = await realyze("SELECT * FROM `category`");
                                    fs_functions.writeCacheFile(
                                         `${cachesPath}/categories/categories.json`,

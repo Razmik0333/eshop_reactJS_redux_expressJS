@@ -1,10 +1,18 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { currentLanguageDataSelector } from '../../../../helpers/reduxSelectors';
+import { changeSubCategoryId, fetchSubCategoryForDelete } from '../../../../redux/ducks/adminSubCategoryDuck';
 
 export default function SubCategoriesInfoItem({subCategory}) {
+     const dispatch = useDispatch();
      const categoriesIsInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.sub_category;
+     const getSubCatId = (e) => {
+          dispatch(changeSubCategoryId(e.target.dataset.id))
+     }
+     const deleteSubCatItem = (e) => {
+          dispatch(fetchSubCategoryForDelete(e.target.dataset.id))
+     }
      return (
           <>
      
@@ -35,9 +43,9 @@ export default function SubCategoriesInfoItem({subCategory}) {
                </div>
                <div className="sub__category__item__data__info">
                     <NavLink 
-                         to={`/admin/product/update/page`} 
+                         to={`/admin/subcategory/update/page`} 
                          data-id={`${subCategory?.id}`} 
-                         // onClick={getProductId}
+                          onClick={getSubCatId}
                          className="link__action"
                          >
                          {categoriesIsInfoLangData?.actions?.update}
@@ -45,7 +53,7 @@ export default function SubCategoriesInfoItem({subCategory}) {
                </div>
                <div className="sub__category__item__data__info">
                    <NavLink to={`#`} data-id={`${subCategory?.id}`}
-                    // onClick={deleteProductItem}
+                    onClick={deleteSubCatItem}
                     className="link__action"
                    >
                     {categoriesIsInfoLangData?.actions?.delete}

@@ -88,7 +88,9 @@ export const getFilteredProductsSelector = ({ProductDuck}) => ProductDuck.filter
 
 //admins block//
 export const adminSubCategoriesByCatIdSelector = ({ AdminSubCategoryDuck }) => AdminSubCategoryDuck.subCategoriesByCatId; //
+export const adminSubCategoryIdSelector = ({ AdminSubCategoryDuck }) => AdminSubCategoryDuck.currentSubCategoryId; //
 export const adminAllSubCategoriesListSelector = ({ AdminSubCategoryDuck }) => AdminSubCategoryDuck.subCategoriesList; //
+export const adminCurrentSubCategorySelector = ({ AdminSubCategoryDuck }) => AdminSubCategoryDuck.currentSubCategory; //
 export const adminCategoryIdSelector = ({ AdminSubCategoryDuck }) => AdminSubCategoryDuck.categoryId; //
 export const adminCurrentCategoryIdSelector = ({ AdminCategoryDuck }) => AdminCategoryDuck.currentCategoryId; //
 export const adminCurrentCategorySelector = ({ AdminCategoryDuck }) => AdminCategoryDuck.currentCategory; //

@@ -44,6 +44,7 @@ import Gallery from './components/Home/Gallery/Gallery.jsx';
 import AdminCategory from './components/Base/Admin/AdminCategory/AdminCategory.jsx';
 import AdminSubCategory from './components/Base/Admin/AdminSubCategory/AdminSubCategory.jsx';
 import CategoryForm from './components/Base/Admin/AdminCategory/CategoryForm.jsx';
+import SubCategoryForm from './components/Base/Admin/AdminSubCategory/SubCategoryForm.jsx';
 
 
 const Orders = lazy(() => import('./components/Orders/Orders/Orders'));
@@ -101,6 +102,14 @@ function App() {
               <Route
               path="/admin/subcategory" 
               element={<AdminSubCategory />} 
+              />
+              <Route
+              path="/admin/subcategory/create/page" 
+              element={<SubCategoryForm />} 
+              />
+              <Route
+              path="/admin/subcategory/update/page" 
+              element={<SubCategoryForm />} 
               />
               <Route
               path="/admin/product" 

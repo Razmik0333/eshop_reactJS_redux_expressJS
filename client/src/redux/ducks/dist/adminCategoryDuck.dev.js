@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.fetchProductsForDelete = exports.fetchCategoriesList = exports.fetchCurrentCategory = exports.currentCategoryId = exports.currentCategoryClear = exports.getCategoriesList = exports.getCurrentCategory = exports.getCurrentCategoryId = void 0;
+exports["default"] = exports.fetchCategoryForDelete = exports.fetchCategoriesList = exports.fetchCurrentCategory = exports.currentCategoryId = exports.currentCategoryClear = exports.getCategoriesList = exports.getCurrentCategory = exports.getCurrentCategoryId = void 0;
 
 var _redux = require("../../helpers/redux");
 
@@ -127,7 +127,7 @@ var fetchCategoriesList = function fetchCategoriesList() {
 
 exports.fetchCategoriesList = fetchCategoriesList;
 
-var fetchProductsForDelete = function fetchProductsForDelete(category_id) {
+var fetchCategoryForDelete = function fetchCategoryForDelete(category_id) {
   return function _callee3(dispatch) {
     var data;
     return regeneratorRuntime.async(function _callee3$(_context3) {
@@ -172,7 +172,7 @@ var fetchProductsForDelete = function fetchProductsForDelete(category_id) {
   };
 };
 
-exports.fetchProductsForDelete = fetchProductsForDelete;
+exports.fetchCategoryForDelete = fetchCategoryForDelete;
 
 var AdminCategoryDuck = function AdminCategoryDuck() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialStateApp;

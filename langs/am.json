@@ -299,7 +299,28 @@
                 "update":"Թարմացնել",
                 "delete":"Վերացնել"
             },
-            "create":"Ստեղծել Ենթակատեգորիա"
+            "create":"Ստեղծել Ենթակատեգորիա",
+            "sub_category_create_page" : {
+                "placeholders" : {
+                    "alias":"Ընտրել Ալիաս",
+                    "select_sub_category":"Ընտրել Ենթակատեգորիա",
+                    "description" : "Մուտքագրել հայերեն Անվանում",
+                    "description_eng" : "Մուտքագրել Անգլերեն Անվանում",
+                    "description_rus" : "Մուտքագրել Ռուսերեն Անվանում"
+                },
+                "headers" : {
+                    "alias" : "Ալիաս",
+                    "name" : "Անվանում",
+                    "cat_index" : "Կատեգորիայի Համար",
+                    "sub_cat_index" : "Ենթակատեգորիայի Համար",
+                    "name_eng" : "Անվանում Անգլերեն",
+                    "name_rus" : "Անվանում Ռուսերեն",
+                    "description" : "Նկարագրություն",
+                    "select_category" : "Ընտրեք Կատեգորիա",
+                    "select_sub_category" : "Ընտրեք Ենթակատեգորիա",
+                    "save" : "Պահպանել"
+                }
+            }
         },
         "orders" : {
             "newest_orders" : "ՆՈՐ ՊԱՏՎԵՐՆԵՐ",

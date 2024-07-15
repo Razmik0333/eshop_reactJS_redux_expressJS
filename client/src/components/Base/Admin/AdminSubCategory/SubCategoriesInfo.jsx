@@ -6,11 +6,13 @@ import SubCategoryCreate from './SubCategoryCreate';
 import SubCategoriesInfoItem from './SubCategoriesInfoItem';
 import { fetchAllSubCategories } from '../../../../redux/ducks/adminSubCategoryDuck';
 import "./styles/_sub-category-info.scss";
+import { fetchCategoriesList } from '../../../../redux/ducks/adminCategoryDuck';
 export default function SubCategoriesInfo() {
     const  dispatch = useDispatch();
     useEffect(() => {
+      dispatch(fetchCategoriesList())
       dispatch(fetchAllSubCategories())
-      
+
     }, []);
     const subCategories = useSelector(adminAllSubCategoriesListSelector);
     console.log("🚀 ~ SubCategoriesInfo ~ subCategories:", subCategories)

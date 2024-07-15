@@ -51,7 +51,7 @@ export const fetchCategoriesList = () => async(dispatch) => {
     console.log('error from AdminOrderDuck', e)
   }
 };
-export const fetchProductsForDelete = (category_id) => async(dispatch) => {
+export const fetchCategoryForDelete = (category_id) => async(dispatch) => {
   
   try {
     const data = await (await fetch(`${root}/api/admin/category/delete`, {

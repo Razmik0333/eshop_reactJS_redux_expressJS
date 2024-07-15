@@ -1,8 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { adminCurrentCategoryIdSelector, adminCurrentCategorySelector, currentLanguageDataSelector } from '../../../../helpers/reduxSelectors';
+import { currentLanguageDataSelector } from '../../../../helpers/reduxSelectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { currentCategoryId, fetchProductsForDelete } from '../../../../redux/ducks/adminCategoryDuck';
+import { currentCategoryId, fetchCategoryForDelete } from '../../../../redux/ducks/adminCategoryDuck';
 
 export default function CategoriesInfoItem({category}) {
      const dispatch = useDispatch()
@@ -11,7 +11,7 @@ export default function CategoriesInfoItem({category}) {
           dispatch(currentCategoryId(e.target.dataset.id))
      }
      const deleteCategoryItem = (e) => {
-          dispatch(fetchProductsForDelete(e.target.dataset.id))
+          dispatch(fetchCategoryForDelete(e.target.dataset.id))
      }
      return (
           <>
