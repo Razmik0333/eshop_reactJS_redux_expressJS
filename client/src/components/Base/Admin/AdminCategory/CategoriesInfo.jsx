@@ -14,7 +14,6 @@ export default function CategoriesInfo() {
           dispatch(fetchCategoriesList())
      }, []);
      const categories = useSelector(adminCategoriesListSelector);
-     console.log("🚀 ~ CategoriesInfo ~ categories:", categories)
      const categoriesInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.category;
   return (
      <div className="category__info__block">

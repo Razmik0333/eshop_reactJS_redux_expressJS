@@ -4,12 +4,14 @@ import { root } from "../../helpers/constants/constants";
 const CURRENT_CATEGORY_ID = 'adminCategoryDuck/CURRENT_CATEGORY_ID';
 const CURRENT_CATEGORY = 'adminCategoryDuck/CURRENT_CATEGORY';
 const CATEGORIES_LIST = 'adminCategoryDuck/CATEGORIES_LIST';
-
+const IS_SAVED = 'adminProductDuck/IS_SAVED';
 
 
 export const getCurrentCategoryId = createAction(CURRENT_CATEGORY_ID);
 export const getCurrentCategory = createAction(CURRENT_CATEGORY);
+
 export const getCategoriesList = createAction(CATEGORIES_LIST);
+export const saveChanges = createAction(IS_SAVED);
 
 
 
@@ -17,9 +19,13 @@ export const getCategoriesList = createAction(CATEGORIES_LIST);
 const initialStateApp = {
   currentCategoryId: 1,
   currentCategory: {},
-  categoriesList : []
-};
+  categoriesList : [],
+  isSaved : '',
 
+};
+export const saveChangedCategories = (str) => (dispatch) => {
+  dispatch(saveChanges(str))
+}
 export const currentCategoryClear = () => (dispatch) => {
   
     
@@ -42,10 +48,8 @@ export const fetchCurrentCategory = (id) => async(dispatch) => {
 export const fetchCategoriesList = () => async(dispatch) => { 
     
   try {
-    console.log('hdjf');
     
     const data = await (await fetch(`${root}/api/admin/category/list`)).json();
-    console.log("🚀 ~ fetchCategoriesList ~ data:", data)
     dispatch(getCategoriesList(data));
   } catch (e) {
     console.log('error from AdminOrderDuck', e)
@@ -69,7 +73,15 @@ export const fetchCategoryForDelete = (category_id) => async(dispatch) => {
     console.log('error from AdminProductDuck', e)
   }
 };
-
+export const deleteCacheFiles = () => async (dispatch) => {
+  try {
+    const data = await( await fetch(`${root}/api/admin/categories/save`)).json()
+    dispatch(saveChangedCategories(data));
+  } catch (e) {
+    console.log('error from AdminProductDuck', e)
+  }
+       
+};
 const AdminCategoryDuck = (state = initialStateApp, action) => {
   switch (action.type) {
     case CURRENT_CATEGORY_ID:

@@ -263,7 +263,8 @@
                 "update":"Թարմացնել",
                 "delete":"Վերացնել"
             },
-            "create":"Ստեղծել Կատեգորիա",
+            "create":"Ստեղծել",
+            "save":"Պահպանել",
             "category_create_page" : {
                 "placeholders" : {
                     "alias":"Ընտրել Ալիաս",
@@ -299,7 +300,8 @@
                 "update":"Թարմացնել",
                 "delete":"Վերացնել"
             },
-            "create":"Ստեղծել Ենթակատեգորիա",
+            "create":"Ստեղծել",
+            "save":"Պահպանել",
             "sub_category_create_page" : {
                 "placeholders" : {
                     "alias":"Ընտրել Ալիաս",
@@ -377,7 +379,9 @@
                 "update":"Թարմացնել",
                 "delete":"Վերացնել"
             },
-            "create":"Ստեղծել Ապրանք",
+            "create":"Ստեղծել",
+            "save":"Պահպանել",
+
             "product_create_page" : {
                 "placeholders" : {
                     "select_category":"Ընտրել Կատեգորիա",

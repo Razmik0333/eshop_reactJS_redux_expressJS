@@ -72,21 +72,20 @@ var fetchSubCategoriesById = function fetchSubCategoriesById(id) {
           case 7:
             data = _context.sent;
             dispatch(getSubCategoryListByCatId(data));
-            console.log("🚀 ~ fetchSubCategoriesById ~ data:", data);
-            _context.next = 15;
+            _context.next = 14;
             break;
 
-          case 12:
-            _context.prev = 12;
+          case 11:
+            _context.prev = 11;
             _context.t2 = _context["catch"](0);
             console.log('error from AdminOrderDuck', _context.t2);
 
-          case 15:
+          case 14:
           case "end":
             return _context.stop();
         }
       }
-    }, null, null, [[0, 12]]);
+    }, null, null, [[0, 11]]);
   };
 };
 
@@ -112,21 +111,20 @@ var fetchAllSubCategories = function fetchAllSubCategories() {
           case 7:
             data = _context2.sent;
             dispatch(getSubCategoriesList(data));
-            console.log("🚀 ~ fetchSubCategoriesById ~ data:", data);
-            _context2.next = 15;
+            _context2.next = 14;
             break;
 
-          case 12:
-            _context2.prev = 12;
+          case 11:
+            _context2.prev = 11;
             _context2.t2 = _context2["catch"](0);
             console.log('error from AdminOrderDuck', _context2.t2);
 
-          case 15:
+          case 14:
           case "end":
             return _context2.stop();
         }
       }
-    }, null, null, [[0, 12]]);
+    }, null, null, [[0, 11]]);
   };
 };
 
@@ -198,22 +196,21 @@ var fetchSubCategoryForDelete = function fetchSubCategoryForDelete(sub_category_
 
           case 7:
             data = _context4.sent;
-            console.log(data);
             dispatch(getSubCategoriesList(data));
-            _context4.next = 15;
+            _context4.next = 14;
             break;
 
-          case 12:
-            _context4.prev = 12;
+          case 11:
+            _context4.prev = 11;
             _context4.t2 = _context4["catch"](0);
             console.log('error from AdminProductDuck', _context4.t2);
 
-          case 15:
+          case 14:
           case "end":
             return _context4.stop();
         }
       }
-    }, null, null, [[0, 12]]);
+    }, null, null, [[0, 11]]);
   };
 };
 

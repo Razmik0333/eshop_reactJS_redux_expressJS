@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.fetchCategoryForDelete = exports.fetchCategoriesList = exports.fetchCurrentCategory = exports.currentCategoryId = exports.currentCategoryClear = exports.getCategoriesList = exports.getCurrentCategory = exports.getCurrentCategoryId = void 0;
+exports["default"] = exports.deleteCacheFiles = exports.fetchCategoryForDelete = exports.fetchCategoriesList = exports.fetchCurrentCategory = exports.currentCategoryId = exports.currentCategoryClear = exports.saveChangedCategories = exports.saveChanges = exports.getCategoriesList = exports.getCurrentCategory = exports.getCurrentCategoryId = void 0;
 
 var _redux = require("../../helpers/redux");
 
@@ -18,17 +18,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var CURRENT_CATEGORY_ID = 'adminCategoryDuck/CURRENT_CATEGORY_ID';
 var CURRENT_CATEGORY = 'adminCategoryDuck/CURRENT_CATEGORY';
 var CATEGORIES_LIST = 'adminCategoryDuck/CATEGORIES_LIST';
+var IS_SAVED = 'adminProductDuck/IS_SAVED';
 var getCurrentCategoryId = (0, _redux.createAction)(CURRENT_CATEGORY_ID);
 exports.getCurrentCategoryId = getCurrentCategoryId;
 var getCurrentCategory = (0, _redux.createAction)(CURRENT_CATEGORY);
 exports.getCurrentCategory = getCurrentCategory;
 var getCategoriesList = (0, _redux.createAction)(CATEGORIES_LIST);
 exports.getCategoriesList = getCategoriesList;
+var saveChanges = (0, _redux.createAction)(IS_SAVED);
+exports.saveChanges = saveChanges;
 var initialStateApp = {
   currentCategoryId: 1,
   currentCategory: {},
-  categoriesList: []
+  categoriesList: [],
+  isSaved: ''
 };
+
+var saveChangedCategories = function saveChangedCategories(str) {
+  return function (dispatch) {
+    dispatch(saveChanges(str));
+  };
+};
+
+exports.saveChangedCategories = saveChangedCategories;
 
 var currentCategoryClear = function currentCategoryClear() {
   return function (dispatch) {
@@ -94,34 +106,32 @@ var fetchCategoriesList = function fetchCategoriesList() {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
-            console.log('hdjf');
             _context2.t0 = regeneratorRuntime;
-            _context2.next = 5;
+            _context2.next = 4;
             return regeneratorRuntime.awrap(fetch("".concat(_constants.root, "/api/admin/category/list")));
 
-          case 5:
+          case 4:
             _context2.t1 = _context2.sent.json();
-            _context2.next = 8;
+            _context2.next = 7;
             return _context2.t0.awrap.call(_context2.t0, _context2.t1);
 
-          case 8:
+          case 7:
             data = _context2.sent;
-            console.log("🚀 ~ fetchCategoriesList ~ data:", data);
             dispatch(getCategoriesList(data));
-            _context2.next = 16;
+            _context2.next = 14;
             break;
 
-          case 13:
-            _context2.prev = 13;
+          case 11:
+            _context2.prev = 11;
             _context2.t2 = _context2["catch"](0);
             console.log('error from AdminOrderDuck', _context2.t2);
 
-          case 16:
+          case 14:
           case "end":
             return _context2.stop();
         }
       }
-    }, null, null, [[0, 13]]);
+    }, null, null, [[0, 11]]);
   };
 };
 
@@ -173,6 +183,45 @@ var fetchCategoryForDelete = function fetchCategoryForDelete(category_id) {
 };
 
 exports.fetchCategoryForDelete = fetchCategoryForDelete;
+
+var deleteCacheFiles = function deleteCacheFiles() {
+  return function _callee4(dispatch) {
+    var data;
+    return regeneratorRuntime.async(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.t0 = regeneratorRuntime;
+            _context4.next = 4;
+            return regeneratorRuntime.awrap(fetch("".concat(_constants.root, "/api/admin/categories/save")));
+
+          case 4:
+            _context4.t1 = _context4.sent.json();
+            _context4.next = 7;
+            return _context4.t0.awrap.call(_context4.t0, _context4.t1);
+
+          case 7:
+            data = _context4.sent;
+            dispatch(saveChangedCategories(data));
+            _context4.next = 14;
+            break;
+
+          case 11:
+            _context4.prev = 11;
+            _context4.t2 = _context4["catch"](0);
+            console.log('error from AdminProductDuck', _context4.t2);
+
+          case 14:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, null, null, [[0, 11]]);
+  };
+};
+
+exports.deleteCacheFiles = deleteCacheFiles;
 
 var AdminCategoryDuck = function AdminCategoryDuck() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialStateApp;

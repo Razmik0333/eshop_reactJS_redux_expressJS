@@ -221,7 +221,6 @@ export const changeProductsRating = (id) => async(dispatch) => {
   try {
     const data = await (await fetch(`${root}/api/product/rating/${id}`)).json()
     dispatch(changeRatingUpdate(data))
-    console.log("🚀 ~ changeProductsRating ~ data:", data)
   } catch (error) {
     throw error;
   }
@@ -238,7 +237,6 @@ export const fetchProductsByString = (arr) => async(dispatch) => {
   }
 };
 export const fetchViewedProducts = (userId, ids) => async(dispatch) => {
-  console.log(ids);
   
   try {
     if (userId && ids.length > 0) {
@@ -252,7 +250,6 @@ export const fetchViewedProducts = (userId, ids) => async(dispatch) => {
             userId, ids
           })
       })).json();
-      console.log(data);
       
     dispatch(changeViewedProductsData(data));
     
@@ -276,7 +273,6 @@ export const fetchViewedProductIds = (userId, product_id) => async (dispatch) =>
         userId, product_id
       })
     })).json();
-    console.log(data);
     
     dispatch(changeViewedProducts(data));
 
@@ -285,7 +281,6 @@ export const fetchViewedProductIds = (userId, product_id) => async (dispatch) =>
   }
 };
 export const fetchViewedProductIdsByUserId = (userId) => async (dispatch) => {
-  console.log(userId);
   
   try {
     
@@ -298,7 +293,6 @@ export const fetchViewedProductIdsByUserId = (userId) => async (dispatch) => {
         userId
       })
     })).json();
-    console.log(data);
     
     dispatch(changeViewedProducts(data));
 
@@ -338,7 +332,7 @@ export const fetchMostestProduct = (id) => async(dispatch) => {
 };
 export const fetchServices = () => async(dispatch) => {
   try {
-    const data = await(await fetch('/api/services')).json()
+    const data = await(await fetch(`${root}/api/services`)).json()
     dispatch(getServices(data))
   } catch (err) {
     throw err
@@ -346,7 +340,7 @@ export const fetchServices = () => async(dispatch) => {
 } //
 export const fetchBySubCategories = (category, sub_category) => async(dispatch) => {
   try { 
-    const data = await(await fetch(`/api/subCategories/${category}/${sub_category}`)).json()
+    const data = await(await fetch(`${root}/api/subCategories/${category}/${sub_category}`)).json()
     dispatch(changeProductsBySubCategories(data));
   } catch (err) {
     throw err
@@ -360,7 +354,6 @@ export const fetchForFilters = (str, count) => async(dispatch) => {
      dispatch(getProductsByCategoryLength(data.length));
      dispatch(getStepsCounts(Math.ceil(data.length / count)));
     dispatch(changeFilters(data))
-    console.log("🚀 ~ fetchBySubCategories ~ data:", data)
   } catch (err) {
     throw err
   }

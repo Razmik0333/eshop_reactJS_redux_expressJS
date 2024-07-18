@@ -13,7 +13,6 @@ function Cart() {
 
      const cartObject = useSelector(currentLanguageDataSelector)?.cart;
      const userId = useSelector(getUserId);
-     console.log("🚀 ~ file: Cart.jsx:22 ~ Cart ~ userId:", userId)
      useEffect(() => {
           !userId && navigate('/login') 
      }, []);

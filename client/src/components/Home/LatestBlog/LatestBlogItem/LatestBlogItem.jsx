@@ -96,23 +96,23 @@ function LatestBlogItem({blog}) {
                     </span>
                </div>
                <div className="latest_blog_content">
-                    <p className="item-user-avatar">
+                    <div className="item-user-avatar">
                          <div className="review__user__avatar">
-                         <img src={`${avatarPath}/${blog?.user_id}/${blog?.avatarPicture}`} alt="" />
+                              <img src={`${avatarPath}/${blog?.user_id}/${blog?.avatarPicture}`} alt="" />
                          </div>
                          <div className="review__user__name">
                               {blog?.user_name}
                               
                          </div>
                          
-                    </p>
-                    <p className="item-desc-title">
+                    </div>
+                    <div className="item-desc-title">
                          {
                               currentLanguage === 'am' ?  blog?.product?.descr : 
                                    currentLanguage === 'en' ?  blog?.product?.descr_en :
                                    blog?.product?.descr_ru
                          } 
-                    </p>
+                    </div>
                     <div className="item-desc-text">
                          {
                               blog?.review.split(" ").filter((item, pos) => pos < 10 ).join(" ") + "..."

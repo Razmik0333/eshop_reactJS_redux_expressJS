@@ -1,6 +1,8 @@
-const realyze = require('../../config').realyze
+const fs = require('fs')
+const path = require('path');
+const realyze = require('../../config').realyze;
 
-
+const variables = require('../../variables/variables') 
 
 module.exports.categoryList = async(req, res) => {
      const categoryList = await realyze("SELECT * FROM category ")
@@ -37,4 +39,21 @@ module.exports.delete = async(req, res) => {
      console.log("🚀 ~ module.exports.delete ~ categoriesAfterDelete:", categoriesAfterDelete)
 
      res.send(categoriesAfterDelete);
+}
+module.exports.save = async(req, res) => {
+     const cachesPath = variables.caches.category;
+     console.log("🚀 ~ module.exports.save=async ~ cachesPath:", cachesPath)
+    console.log('efef');
+    
+          
+     fs.readdir(cachesPath + 'categories',async (err, files) => {
+          if (err) throw err;
+          for (const file of files) {
+               fs.unlink(path.join(cachesPath + 'categories', file), (err) => {
+                         if (err) throw err;
+               });
+          }
+     });
+
+     res.send(JSON.stringify('saved'));
 }

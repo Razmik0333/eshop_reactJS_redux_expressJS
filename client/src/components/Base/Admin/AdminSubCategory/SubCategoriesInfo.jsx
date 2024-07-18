@@ -15,7 +15,6 @@ export default function SubCategoriesInfo() {
 
     }, []);
     const subCategories = useSelector(adminAllSubCategoriesListSelector);
-    console.log("🚀 ~ SubCategoriesInfo ~ subCategories:", subCategories)
     const categoriesInfoLangData = useSelector(currentLanguageDataSelector)?.admin?.sub_category;
     return (
       <div className="sub__category__info__block">

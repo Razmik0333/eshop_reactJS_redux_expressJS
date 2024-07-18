@@ -36,7 +36,6 @@ export const fetchSubCategoriesById = (id) => async(dispatch) => {
   try {
     const data = await (await fetch(`${root}/api/admin/sub_cats/${id}`)).json();
     dispatch(getSubCategoryListByCatId(data));
-    console.log("🚀 ~ fetchSubCategoriesById ~ data:", data)
   } catch (e) {
     console.log('error from AdminOrderDuck', e)
   }
@@ -46,7 +45,6 @@ export const fetchAllSubCategories = () => async(dispatch) => {
   try {
     const data = await (await fetch(`${root}/api/admin/sub_cats`)).json();
     dispatch(getSubCategoriesList(data));
-    console.log("🚀 ~ fetchSubCategoriesById ~ data:", data)
   } catch (e) {
     console.log('error from AdminOrderDuck', e)
   }
@@ -72,7 +70,6 @@ export const fetchSubCategoryForDelete = (sub_category_id) => async(dispatch) =>
         sub_category_id
       })
     } )).json();
-    console.log(data);
     
     dispatch(getSubCategoriesList(data));
   } catch (e) {

@@ -13,9 +13,9 @@ export default function Gallery() {
   return (
      <div className="container gallery__container">
           {
-               galleryData.map(item => {
+               galleryData.map((item,pos) => {
 
-                    return <GalleryItem gallery={item} />
+                    return <GalleryItem gallery={item} key={`gallery_${pos}`} />
 
                })
           }

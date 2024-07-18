@@ -4,6 +4,7 @@ const getCurrentCategory = require('../../controllers/admin/category').currentCa
 const createCategory = require('../../controllers/admin/category').create
 const updateCategory = require('../../controllers/admin/category').update
 const deleteCategory = require('../../controllers/admin/category').delete
+const saveCategories = require('../../controllers/admin/category').save
 const router = express.Router();
 
 router.get('/admin/category/list', getCategoryList);
@@ -13,6 +14,7 @@ router.put('/admin/category/create', createCategory);
 router.put('/admin/category/update', updateCategory);
 
 router.delete('/admin/category/delete', deleteCategory); 
+router.get('/admin/categories/save', saveCategories); 
 
 
 

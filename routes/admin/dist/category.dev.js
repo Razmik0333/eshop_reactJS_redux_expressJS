@@ -12,10 +12,13 @@ var updateCategory = require('../../controllers/admin/category').update;
 
 var deleteCategory = require('../../controllers/admin/category')["delete"];
 
+var saveCategories = require('../../controllers/admin/category').save;
+
 var router = express.Router();
 router.get('/admin/category/list', getCategoryList);
 router.get('/admin/category/:id', getCurrentCategory);
 router.put('/admin/category/create', createCategory);
 router.put('/admin/category/update', updateCategory);
 router["delete"]('/admin/category/delete', deleteCategory);
+router.get('/admin/categories/save', saveCategories);
 module.exports = router;

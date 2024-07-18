@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import './styles/_admin-gallery-form.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminGalleryIsAddSelector, currentLanguageDataSelector, modalCloseSelector } from '../../../../../helpers/reduxSelectors';
+import { currentLanguageDataSelector, modalCloseSelector } from '../../../../../helpers/reduxSelectors';
 import { useState } from 'react';
 import { root } from '../../../../../helpers/constants/constants';
 import { getGalleryAdd } from '../../../../../redux/ducks/adminProductDuck';
@@ -14,8 +14,6 @@ export default function AdminGalleryForm() {
      const dispatch = useDispatch();
      const modalIsClose = useSelector(modalCloseSelector);
 
-     const galleryItemIsAdd = useSelector(adminGalleryIsAddSelector) 
-     console.log("🚀 ~ AdminGalleryForm ~ galleryItemIsAdd:", galleryItemIsAdd)
      const productsSaveLangData = useSelector(currentLanguageDataSelector)?.admin?.gallery;
      const handleSubmit = async(e) => {
           e.preventDefault();

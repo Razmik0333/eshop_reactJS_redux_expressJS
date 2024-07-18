@@ -12,7 +12,6 @@ function ProductsList() {
      const idProductsFromStart = useSelector(idProductsFromStartSelector);
      const popupIsShow = useSelector(popupCloseSelector);
      const popupId = useSelector(popupItemIdSelector)
-     console.log("🚀 ~ ProductsList ~ popupId:", popupId)
      useEffect(() => {
           dispatch(fetchProductsForStartingPage(idProductsFromStart));
      }, [idProductsFromStart]);

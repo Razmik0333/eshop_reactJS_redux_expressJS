@@ -3,8 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.adminProductSavedSelector = exports.adminProductSelector = exports.adminProductIdSelector = exports.adminProductsSelector = exports.adminTimeObjectProductSelector = exports.adminTimeObjectSelector = exports.adminOrderProductsSelector = exports.adminOrderSelector = exports.adminCategoriesListSelector = exports.adminCurrentCategorySelector = exports.adminCurrentCategoryIdSelector = exports.adminCategoryIdSelector = exports.adminCurrentSubCategorySelector = exports.adminAllSubCategoriesListSelector = exports.adminSubCategoryIdSelector = exports.adminSubCategoriesByCatIdSelector = exports.getFilteredProductsSelector = exports.getServicesSelector = exports.getViewedProductsDataSelector = exports.getBestSellerCircleIdSelector = exports.getSimilarCircleIdSelector = exports.getViewedProductIdSelector = exports.getSubCategoryParamsSelector = exports.getSubCategoryDataSelector = exports.getGallerySelector = exports.getViewedProductsSelector = exports.getWishListDataSelector = exports.getWishListIdsSelector = exports.getRatingListSelector = exports.getCurrentReviewIdSelector = exports.getReviewFilterSelector = exports.getReviewSortTypeSelector = exports.getReviewByUserId = exports.getReviewByProductIdAndUserId = exports.getReviewIdSelector = exports.getLatestReviewsSelector = exports.getReviewsByProductSelector = exports.getCurrentTabNameSelector = exports.isConfirmedSelector = exports.getEvaluateSelector = exports.getConfirmIdSelector = exports.getStatusIndex = exports.getProductsCounts = exports.getUserProducts = exports.getOrderIdDelete = exports.getUserOrders = exports.getProductsInCart = exports.getTotalPriceSelector = exports.getCartCountSelector = exports.getCartSelector = exports.getEmailNoticeSelector = exports.getUserCacheClearSelector = exports.getUserDataSelector = exports.getAvatartUrl = exports.getUserId = exports.getCurrentLanguageSelector = exports.getCurrentCurrencySelector = exports.idProductsFromStartSelector = exports.hotDealsTimerSelector = exports.popupItemIdSelector = exports.popupHotDealsCloseSelector = exports.popupCloseSelector = exports.modalReviewShowSelector = exports.modalCloseSelector = exports.elementsCostsSelector = exports.costsValuesSelector = exports.countItemsOfPageSelector = exports.countElementsSelector = exports.currenciesSelector = exports.currentSubCategorySelector = exports.currentSubCategoryIdSelector = exports.currentLanguageDataSelector = exports.mostestIndex = exports.languagesSelector = exports.hotDealsSelector = exports.sortTypeSelector = exports.showTypeSelector = exports.subCategoriesSelector = exports.isFocusedSelector = exports.isSearchSelector = exports.getMostestProductSelector = exports.getEvaluateProductsSelector = exports.productReviewDataSelector = exports.maxDiscountDataSelector = exports.currentHintsData = exports.currentSearchData = exports.currentSearchSelector = exports.productStepCountsSelector = exports.allSoldedProductsSelector = exports.verySoldedProductsSelector = exports.currentProductSelector = exports.currentProductIdSelector = exports.currentCategorySelector = exports.currentCategoryIdSelector = exports.productsByCategoryLengthSelector = exports.productsSimilarSelector = exports.productsByCategorySelector = exports.recommendProductsSelector = exports.productsSelector = exports.categoriesSelector = void 0;
-exports.adminCurrentReviewSelector = exports.adminReviewIdSelector = exports.adminReviewListSelector = exports.adminUserListSelector = exports.adminOrderIsDeletedSelector = exports.adminOrdersSaveSelector = exports.adminOrderIdSelector = exports.adminCurrentOrderInfoSelector = exports.adminCurrentOrderSelector = exports.adminGalleryIsAddSelector = exports.adminProductIsDeletedSelector = void 0;
+exports.adminProductSelector = exports.adminProductIdSelector = exports.adminProductsSelector = exports.adminTimeObjectProductSelector = exports.adminTimeObjectSelector = exports.adminOrderProductsSelector = exports.adminOrderSelector = exports.adminCategoriesSavedSelector = exports.adminCategoriesListSelector = exports.adminCurrentCategorySelector = exports.adminCurrentCategoryIdSelector = exports.adminCategoryIdSelector = exports.adminCurrentSubCategorySelector = exports.adminAllSubCategoriesListSelector = exports.adminSubCategoryIdSelector = exports.adminSubCategoriesByCatIdSelector = exports.getFilteredProductsSelector = exports.getServicesSelector = exports.getViewedProductsDataSelector = exports.getBestSellerCircleIdSelector = exports.getSimilarCircleIdSelector = exports.getViewedProductIdSelector = exports.getSubCategoryParamsSelector = exports.getSubCategoryDataSelector = exports.getGallerySelector = exports.getViewedProductsSelector = exports.getWishListDataSelector = exports.getWishListIdsSelector = exports.getRatingListSelector = exports.getCurrentReviewIdSelector = exports.getReviewFilterSelector = exports.getReviewSortTypeSelector = exports.getReviewByUserId = exports.getReviewByProductIdAndUserId = exports.getReviewIdSelector = exports.getLatestReviewsSelector = exports.getReviewsByProductSelector = exports.getCurrentTabNameSelector = exports.isConfirmedSelector = exports.getEvaluateSelector = exports.getConfirmIdSelector = exports.getStatusIndex = exports.getProductsCounts = exports.getUserProducts = exports.getOrderIdDelete = exports.getUserOrders = exports.getProductsInCart = exports.getTotalPriceSelector = exports.getCartCountSelector = exports.getCartSelector = exports.getEmailNoticeSelector = exports.getUserCacheClearSelector = exports.getUserDataSelector = exports.getAvatartUrl = exports.getUserId = exports.getCurrentLanguageSelector = exports.getCurrentCurrencySelector = exports.idProductsFromStartSelector = exports.hotDealsTimerSelector = exports.popupItemIdSelector = exports.popupHotDealsCloseSelector = exports.popupCloseSelector = exports.modalReviewShowSelector = exports.modalCloseSelector = exports.elementsCostsSelector = exports.costsValuesSelector = exports.countItemsOfPageSelector = exports.countElementsSelector = exports.currenciesSelector = exports.currentSubCategorySelector = exports.currentSubCategoryIdSelector = exports.currentLanguageDataSelector = exports.mostestIndex = exports.languagesSelector = exports.hotDealsSelector = exports.sortTypeSelector = exports.showTypeSelector = exports.subCategoriesSelector = exports.isFocusedSelector = exports.isSearchSelector = exports.getMostestProductSelector = exports.getEvaluateProductsSelector = exports.productReviewDataSelector = exports.maxDiscountDataSelector = exports.currentHintsData = exports.currentSearchData = exports.currentSearchSelector = exports.productStepCountsSelector = exports.allSoldedProductsSelector = exports.verySoldedProductsSelector = exports.currentProductSelector = exports.currentProductIdSelector = exports.currentCategorySelector = exports.currentCategoryIdSelector = exports.productsByCategoryLengthSelector = exports.productsSimilarSelector = exports.productsByCategorySelector = exports.recommendProductsSelector = exports.productsSelector = exports.categoriesSelector = void 0;
+exports.adminCurrentReviewSelector = exports.adminReviewIdSelector = exports.adminReviewListSelector = exports.adminUserListSelector = exports.adminOrderIsDeletedSelector = exports.adminOrdersSaveSelector = exports.adminOrderIdSelector = exports.adminCurrentOrderInfoSelector = exports.adminCurrentOrderSelector = exports.adminGalleryIsAddSelector = exports.adminProductIsDeletedSelector = exports.adminProductSavedSelector = void 0;
 
 var categoriesSelector = function categoriesSelector(_ref) {
   var NavigationDuck = _ref.NavigationDuck;
@@ -741,152 +741,160 @@ var adminCategoriesListSelector = function adminCategoriesListSelector(_ref92) {
 
 exports.adminCategoriesListSelector = adminCategoriesListSelector;
 
-var adminOrderSelector = function adminOrderSelector(_ref93) {
-  var AdminOrderDuck = _ref93.AdminOrderDuck;
+var adminCategoriesSavedSelector = function adminCategoriesSavedSelector(_ref93) {
+  var AdminCategoryDuck = _ref93.AdminCategoryDuck;
+  return AdminCategoryDuck.isSaved;
+}; //
+
+
+exports.adminCategoriesSavedSelector = adminCategoriesSavedSelector;
+
+var adminOrderSelector = function adminOrderSelector(_ref94) {
+  var AdminOrderDuck = _ref94.AdminOrderDuck;
   return AdminOrderDuck.ordersList;
 }; //
 
 
 exports.adminOrderSelector = adminOrderSelector;
 
-var adminOrderProductsSelector = function adminOrderProductsSelector(_ref94) {
-  var AdminOrderDuck = _ref94.AdminOrderDuck;
+var adminOrderProductsSelector = function adminOrderProductsSelector(_ref95) {
+  var AdminOrderDuck = _ref95.AdminOrderDuck;
   return AdminOrderDuck.currentOrderProducts;
 }; //
 
 
 exports.adminOrderProductsSelector = adminOrderProductsSelector;
 
-var adminTimeObjectSelector = function adminTimeObjectSelector(_ref95) {
-  var AdminOrderDuck = _ref95.AdminOrderDuck;
+var adminTimeObjectSelector = function adminTimeObjectSelector(_ref96) {
+  var AdminOrderDuck = _ref96.AdminOrderDuck;
   return AdminOrderDuck.timeObj;
 }; //
 
 
 exports.adminTimeObjectSelector = adminTimeObjectSelector;
 
-var adminTimeObjectProductSelector = function adminTimeObjectProductSelector(_ref96) {
-  var AdminProductDuck = _ref96.AdminProductDuck;
+var adminTimeObjectProductSelector = function adminTimeObjectProductSelector(_ref97) {
+  var AdminProductDuck = _ref97.AdminProductDuck;
   return AdminProductDuck.timeObj;
 }; //
 
 
 exports.adminTimeObjectProductSelector = adminTimeObjectProductSelector;
 
-var adminProductsSelector = function adminProductsSelector(_ref97) {
-  var AdminProductDuck = _ref97.AdminProductDuck;
+var adminProductsSelector = function adminProductsSelector(_ref98) {
+  var AdminProductDuck = _ref98.AdminProductDuck;
   return AdminProductDuck.productsList;
 }; //
 
 
 exports.adminProductsSelector = adminProductsSelector;
 
-var adminProductIdSelector = function adminProductIdSelector(_ref98) {
-  var AdminProductDuck = _ref98.AdminProductDuck;
+var adminProductIdSelector = function adminProductIdSelector(_ref99) {
+  var AdminProductDuck = _ref99.AdminProductDuck;
   return AdminProductDuck.currentProductId;
 }; //
 
 
 exports.adminProductIdSelector = adminProductIdSelector;
 
-var adminProductSelector = function adminProductSelector(_ref99) {
-  var AdminProductDuck = _ref99.AdminProductDuck;
+var adminProductSelector = function adminProductSelector(_ref100) {
+  var AdminProductDuck = _ref100.AdminProductDuck;
   return AdminProductDuck.currentProduct;
 }; //
 
 
 exports.adminProductSelector = adminProductSelector;
 
-var adminProductSavedSelector = function adminProductSavedSelector(_ref100) {
-  var AdminProductDuck = _ref100.AdminProductDuck;
+var adminProductSavedSelector = function adminProductSavedSelector(_ref101) {
+  var AdminProductDuck = _ref101.AdminProductDuck;
   return AdminProductDuck.isSaved;
 }; //
 
 
 exports.adminProductSavedSelector = adminProductSavedSelector;
 
-var adminProductIsDeletedSelector = function adminProductIsDeletedSelector(_ref101) {
-  var AdminProductDuck = _ref101.AdminProductDuck;
+var adminProductIsDeletedSelector = function adminProductIsDeletedSelector(_ref102) {
+  var AdminProductDuck = _ref102.AdminProductDuck;
   return AdminProductDuck.isDeleted;
 }; //
 
 
 exports.adminProductIsDeletedSelector = adminProductIsDeletedSelector;
 
-var adminGalleryIsAddSelector = function adminGalleryIsAddSelector(_ref102) {
-  var AdminProductDuck = _ref102.AdminProductDuck;
+var adminGalleryIsAddSelector = function adminGalleryIsAddSelector(_ref103) {
+  var AdminProductDuck = _ref103.AdminProductDuck;
   return AdminProductDuck.getGalleryAdd;
 }; //
 
 
 exports.adminGalleryIsAddSelector = adminGalleryIsAddSelector;
 
-var adminCurrentOrderSelector = function adminCurrentOrderSelector(_ref103) {
-  var AdminOrderDuck = _ref103.AdminOrderDuck;
+var adminCurrentOrderSelector = function adminCurrentOrderSelector(_ref104) {
+  var AdminOrderDuck = _ref104.AdminOrderDuck;
   return AdminOrderDuck.currentOrder;
 }; //
 
 
 exports.adminCurrentOrderSelector = adminCurrentOrderSelector;
 
-var adminCurrentOrderInfoSelector = function adminCurrentOrderInfoSelector(_ref104) {
-  var AdminOrderDuck = _ref104.AdminOrderDuck;
+var adminCurrentOrderInfoSelector = function adminCurrentOrderInfoSelector(_ref105) {
+  var AdminOrderDuck = _ref105.AdminOrderDuck;
   return AdminOrderDuck.currentOrderInfo;
 }; //
 
 
 exports.adminCurrentOrderInfoSelector = adminCurrentOrderInfoSelector;
 
-var adminOrderIdSelector = function adminOrderIdSelector(_ref105) {
-  var AdminOrderDuck = _ref105.AdminOrderDuck;
+var adminOrderIdSelector = function adminOrderIdSelector(_ref106) {
+  var AdminOrderDuck = _ref106.AdminOrderDuck;
   return AdminOrderDuck.currentOrderId;
 }; //
 
 
 exports.adminOrderIdSelector = adminOrderIdSelector;
 
-var adminOrdersSaveSelector = function adminOrdersSaveSelector(_ref106) {
-  var AdminOrderDuck = _ref106.AdminOrderDuck;
+var adminOrdersSaveSelector = function adminOrdersSaveSelector(_ref107) {
+  var AdminOrderDuck = _ref107.AdminOrderDuck;
   return AdminOrderDuck.isSaved;
 }; //
 
 
 exports.adminOrdersSaveSelector = adminOrdersSaveSelector;
 
-var adminOrderIsDeletedSelector = function adminOrderIsDeletedSelector(_ref107) {
-  var AdminOrderDuck = _ref107.AdminOrderDuck;
+var adminOrderIsDeletedSelector = function adminOrderIsDeletedSelector(_ref108) {
+  var AdminOrderDuck = _ref108.AdminOrderDuck;
   return AdminOrderDuck.isDeleted;
 }; //
 
 
 exports.adminOrderIsDeletedSelector = adminOrderIsDeletedSelector;
 
-var adminUserListSelector = function adminUserListSelector(_ref108) {
-  var AdminUserDuck = _ref108.AdminUserDuck;
+var adminUserListSelector = function adminUserListSelector(_ref109) {
+  var AdminUserDuck = _ref109.AdminUserDuck;
   return AdminUserDuck.usersList;
 }; //
 
 
 exports.adminUserListSelector = adminUserListSelector;
 
-var adminReviewListSelector = function adminReviewListSelector(_ref109) {
-  var AdminReviewDuck = _ref109.AdminReviewDuck;
+var adminReviewListSelector = function adminReviewListSelector(_ref110) {
+  var AdminReviewDuck = _ref110.AdminReviewDuck;
   return AdminReviewDuck.reviewList;
 }; //
 
 
 exports.adminReviewListSelector = adminReviewListSelector;
 
-var adminReviewIdSelector = function adminReviewIdSelector(_ref110) {
-  var AdminReviewDuck = _ref110.AdminReviewDuck;
+var adminReviewIdSelector = function adminReviewIdSelector(_ref111) {
+  var AdminReviewDuck = _ref111.AdminReviewDuck;
   return AdminReviewDuck.currentReviewId;
 }; //
 
 
 exports.adminReviewIdSelector = adminReviewIdSelector;
 
-var adminCurrentReviewSelector = function adminCurrentReviewSelector(_ref111) {
-  var AdminReviewDuck = _ref111.AdminReviewDuck;
+var adminCurrentReviewSelector = function adminCurrentReviewSelector(_ref112) {
+  var AdminReviewDuck = _ref112.AdminReviewDuck;
   return AdminReviewDuck.currentReview;
 }; //
 

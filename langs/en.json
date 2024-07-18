@@ -254,7 +254,8 @@
                 "update":"Update",
                 "delete":"Delete"
             },
-            "create":"Create Category",
+            "create":"Create",
+            "save":"Save",
             "category_create_page" : {
                 "placeholders" : {
                     "select_category":"Select a Category",
@@ -290,7 +291,8 @@
                 "update":"Update",
                 "delete":"Delete"
             },
-            "create":"Create Subcategory",
+            "create":"Create",
+            "save":"Save",
             "sub_category_create_page" : {
                 "placeholders" : {
                     "alias":"Select Alias",
@@ -367,7 +369,7 @@
                 "update":"Update",
                 "delete":"Delete"
             },
-            "create":"Create Product",
+            "create":"Create",
             "product_create_page" : {
                 "placeholders" : {
                     "select_category":"Select Category",

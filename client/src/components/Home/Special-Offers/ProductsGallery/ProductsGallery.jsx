@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { fetchGallery } from "../../../../redux/ducks/productDuck";
 import { getGallerySelector } from "../../../../helpers/reduxSelectors";
 import { root } from "../../../../helpers/constants/constants";
+import ProductsGalleryItem from "../ProductsGalleryItem/ProductsGalleryItem";
 
 function ProductsGallery() {
      const dispatch = useDispatch();
@@ -19,14 +20,8 @@ function ProductsGallery() {
                </div>
                <div className="products-gallery-blocks">
                {
-                    filtered.map((item) => {
-                         return <>
-
-                                        <div className="products-gallery-block">
-                                             <img src={`${root}/images/gallery/${item?.id}.jpg`} alt="" />
-                                        </div>
-                                        
-                              </>
+                    filtered.map((item,pos) => {
+                         return <ProductsGalleryItem gallery={item} key={`galleryItem${pos}`} />
                     })
                }
                </div>

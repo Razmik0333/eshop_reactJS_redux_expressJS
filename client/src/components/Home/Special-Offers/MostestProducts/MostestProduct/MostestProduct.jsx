@@ -9,10 +9,8 @@ export default function MostestProduct({product}) {
      const dispatch =useDispatch();
      const currentCurrency = useSelector(getCurrentCurrencySelector);
      const currentLanguage = useSelector(getCurrentLanguageSelector);
-     console.log(product);
      
      const discountedPrice = product?.cost *(1 - product?.discount / 100);
-     console.log("🚀 ~ MostestProduct ~ discountedPrice:", product?.cost, product?.discount)
      const changeCurrentProduct = (e) => {
           dispatch(currentProduct(e.target.dataset.id));
      }

@@ -38,8 +38,8 @@ function Carousel() {
           <div className="carousel" ref={carouselRef}>
                <div className="pictures__block" style={{left:leftVal}}>
                     {
-                         servicesList.map(service => {
-                              return <CarouselItem service = {service}/>
+                         servicesList.map((service, pos) => {
+                              return <CarouselItem service = {service} key={`service_${pos}`}/>
                          })
                     }
                </div>

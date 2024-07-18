@@ -95,6 +95,7 @@ export const adminCategoryIdSelector = ({ AdminSubCategoryDuck }) => AdminSubCat
 export const adminCurrentCategoryIdSelector = ({ AdminCategoryDuck }) => AdminCategoryDuck.currentCategoryId; //
 export const adminCurrentCategorySelector = ({ AdminCategoryDuck }) => AdminCategoryDuck.currentCategory; //
 export const adminCategoriesListSelector = ({ AdminCategoryDuck }) => AdminCategoryDuck.categoriesList; //
+export const adminCategoriesSavedSelector = ({ AdminCategoryDuck }) => AdminCategoryDuck.isSaved; //
 
 export const adminOrderSelector = ({ AdminOrderDuck }) => AdminOrderDuck.ordersList; //
 export const adminOrderProductsSelector = ({ AdminOrderDuck }) => AdminOrderDuck.currentOrderProducts; //

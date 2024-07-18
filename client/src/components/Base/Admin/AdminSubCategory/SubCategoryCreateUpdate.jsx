@@ -14,7 +14,6 @@ export default function SubCategoryCreateUpdate() {
 
      const dispatch = useDispatch();
      const [subCategoryNameArm, setSubCategoryNameArm] = useState('');
-     console.log("🚀 ~ SubCategoryCreateUpdate ~ subCategoryNameArm:", subCategoryNameArm)
      const [subCategoryNameEng, setSubCategoryNameEng] = useState('');
      const [subCategoryNameRus, setSubCategoryNameRus] = useState('');
      const [subCategoryAlias, setSubCategoryAlias] = useState('');
