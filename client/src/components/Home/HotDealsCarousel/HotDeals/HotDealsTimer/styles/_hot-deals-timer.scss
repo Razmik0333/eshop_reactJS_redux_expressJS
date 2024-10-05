@@ -1,18 +1,19 @@
 .hot-deals-timer{
      display: flex;
-     align-content: stretch;
      justify-content: center;
      align-items: center;
      flex-wrap: nowrap;
      position: absolute;
      bottom:35%;
      left: 10%;
+     width: 71%;
+     height: 60px;
      .timer-item{
-          width: 50px;
-          height: 50px;
+          width: 21%;
+          height: 80%;
           border-radius: 50%;
           background-color: #3e3e3e;
-          font-size: 18px;
+          font-size: 1.1vw;
           text-align: center;
           font-weight: 700;
           color: #fff;
@@ -23,4 +24,22 @@
           
      }
 
+}
+@media screen and (max-width:996px){
+     .hot-deals-timer{
+          width: 80%;
+          .timer-item{
+
+               font-size: 2vw;
+          }
+     }
+}
+@media screen and (max-width:768px){
+     .hot-deals-timer{
+          
+          .timer-item{
+
+               font-size: 3vw;
+          }
+     }
 }

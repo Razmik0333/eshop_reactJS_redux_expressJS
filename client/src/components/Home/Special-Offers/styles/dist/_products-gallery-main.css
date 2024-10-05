@@ -1,0 +1,48 @@
+.special__offers .special__offers__container {
+  display: flex;
+  align-content: space-between;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 40px;
+  transition: all ease-in 0.2s;
+}
+
+@media screen and (max-width: 1440px) {
+  .special__offers .special__offers__container {
+    width: 80vw;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .special__offers {
+    width: 140vw;
+  }
+  .special__offers .special__offers__container {
+    width: 110vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .special__offers .special__offers__container {
+    width: 120vw;
+  }
+}
+@media screen and (max-width: 648px) {
+  .special__offers .special__offers__container {
+    width: 140vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .special__offers {
+    width: 220vw;
+  }
+  .special__offers .special__offers__container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+  }
+}
+@media screen and (max-width: 320px) {
+  .special__offers {
+    width: 250vw;
+  }
+}

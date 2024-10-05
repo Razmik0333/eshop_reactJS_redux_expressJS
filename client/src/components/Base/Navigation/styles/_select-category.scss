@@ -1,5 +1,5 @@
 .select__category{
-     width: 210px;
+     width: 15vw;
      border: 1px solid #464646;
      padding: 15px;
      display: flex;
@@ -26,3 +26,33 @@
           margin-left: 10px;
      }
 }
+@media screen and (max-width: 1200px) {
+     .select__category{
+        // background-color: red;
+     }
+ }
+   
+ @media screen and (max-width: 992px) {
+     .select__category{
+     }
+ }
+   
+ @media screen and (max-width: 768px) {
+     .select__category{
+          width: 30vw;
+     }
+     
+ }
+   
+ @media screen and (max-width: 480px) {
+     .select__category{
+     }
+ }
+   
+ @media screen and (max-width: 320px) {
+     .select__category{
+         
+ 
+     }
+ }
+   

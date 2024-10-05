@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import LatestBlogItem from "./LatestBlogItem/LatestBlogItem";
-import './styles/_latest-blog.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLatestReviews } from "../../../redux/ducks/reviewDuck";
 import { getLatestReviewsSelector, getReviewIdSelector, modalReviewShowSelector } from "../../../helpers/reduxSelectors";
 import LatestBlogHeader from "./LatestBlogHeader/LatestBlogHeader";
 import { getDataFromInterval } from "../../../helpers/functions/functions";
 import ModalReviewShow from "../../Base/Modal/ModalReviewShow";
+import './styles/_latest-blog.scss';
 
 function LatestBlog() {
      const dispatch = useDispatch();
@@ -27,13 +27,8 @@ function LatestBlog() {
           }
      )
      return<>
-
-
           {
-               
-                    reviewShow ? <ModalReviewShow /> :<></>
-               
-     
+               reviewShow ? <ModalReviewShow /> :<></>
           }
           <div className="latest__blog">
           <div className="container latest__blog__container">

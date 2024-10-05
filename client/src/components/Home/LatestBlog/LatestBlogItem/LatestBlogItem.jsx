@@ -10,6 +10,7 @@ import { changeModal, getReviewShow } from "../../../../redux/ducks/configsDuck"
 
 function LatestBlogItem({blog}) {
      const dispatch = useDispatch();
+     const itemRef = useRef(null);
      const reviewId = useSelector(getReviewIdSelector);
      const currentLanguage = useSelector(getCurrentLanguageSelector);
 
@@ -24,12 +25,13 @@ function LatestBlogItem({blog}) {
      const month = getTime(new Date(+date).getMonth()+1)
      const day = getTime(new Date(+date).getDate());
      const arrowLeft = () => {
-          leftVal === 0 ?  setLeftVal(-(blog?.productPictures.length - 1) * 381) : 
-          setLeftVal(leftVal + 381)          
+          leftVal === 0 ?  setLeftVal(-(blog?.productPictures.length - 1) * itemRef.current?.clientWidth) : 
+          setLeftVal(leftVal + itemRef.current?.clientWidth)          
      }
      const arrowRight = () => {
-          leftVal <= -(blog?.productPictures.length - 1) * 381  ?  setLeftVal(0) : 
-          setLeftVal(leftVal - 381)          
+          leftVal <= -(blog?.productPictures.length - 1) * itemRef.current?.clientWidth  ?  setLeftVal(0) : 
+          setLeftVal(leftVal - itemRef.current?.clientWidth);
+          console.log();          
      }
      const picturePath = `${root}/images/reviews` // 
      const avatarPath = `${root}/images/users` // 
@@ -39,10 +41,10 @@ function LatestBlogItem({blog}) {
      }
      return(
           <>
-          <div className="latest__blog__item">
+          <div className="latest__blog__item" ref={itemRef}>
                <div className="latest__blog__item__pictures"
                     style={{
-                         width : blog?.productPictures.length === 0 ? 381 : blog?.productPictures.length * 381,
+                         width : blog?.productPictures.length === 0 ? itemRef.current?.clientWidth : blog?.productPictures.length * itemRef.current?.clientWidth,
                          left:leftVal
                          }}
                     ref={imgRef}
@@ -50,7 +52,11 @@ function LatestBlogItem({blog}) {
                     {
                          blog?.productPictures.length > 0 ?  
                               blog?.productPictures.map((item,pos) => {
-                                   return <div className="latest__blog__item__picture" key={`productPictures_${pos}`}>
+                                   return <div
+                                             className="latest__blog__item__picture"
+                                             style={{width: itemRef.current?.clientWidth}}
+                                             key={`productPictures_${pos}`}
+                                             >
                                         {
                                              <img src={`${picturePath}/${blog?.user_id}/${blog?.order_id}/${blog?.product_id}/${item}`} 
                                                   alt=""
@@ -83,13 +89,13 @@ function LatestBlogItem({blog}) {
 
                }
                <div className="latest__blog__item__title">
-                    <span className="comments-count">
+                    <span className="comments-date">
                          <img src="../icons/surprise.svg" alt="" />
                               {
                               `${day} ${month} ${year}`
                          }
                     </span>
-                    <span className="item-title-date">
+                    <span className="item-rating">
                          {
                               <RatingMapping rating={blog?.rating}/>
                          }

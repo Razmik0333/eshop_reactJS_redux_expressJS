@@ -19,8 +19,9 @@ function Carousel() {
      const servicesList = useSelector(getServicesSelector)
      const shopNow = useSelector(currentLanguageDataSelector)?.home?.carousel?.shop_now;
      const arrowRight = () => {
-          leftVal <  -carouselRef.current?.clientWidth ? setLeftVal(0) :
-          setLeftVal(leftVal - carouselRef.current?.clientWidth);
+          console.log(carouselRef.current?.clientWidth);
+          leftVal <  -carouselRef.current?.clientWidth ? 
+               setLeftVal(0) : setLeftVal(leftVal - carouselRef.current?.clientWidth);
           
      }
      const arrowLeft = () => {
@@ -39,7 +40,7 @@ function Carousel() {
                <div className="pictures__block" style={{left:leftVal}}>
                     {
                          servicesList.map((service, pos) => {
-                              return <CarouselItem service = {service} key={`service_${pos}`}/>
+                              return <CarouselItem service = {service} width={carouselRef.current?.clientWidth} key={`service_${pos}`}/>
                          })
                     }
                </div>

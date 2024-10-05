@@ -11,6 +11,40 @@
      justify-content: space-between;
      align-items: center;
      margin-top: 82px;
-
 }
 
+@media screen and (max-width:1200px) {
+     .services__part{
+          width: 120vw;
+     }
+}
+@media screen and (max-width:1024px) {
+     .services__part{
+          width: 150vw;
+     }
+}
+@media screen and (max-width:840px) {
+     .services__part{
+          width: 170vw;
+     }
+}
+@media screen and (max-width:648px) {
+     .services__part{
+          width: 200vw;
+     }
+}
+@media screen and (max-width:480px) {
+     .services__part{
+          width: 220vw;
+     }
+}
+@media screen and (max-width:360px) {
+     .services__part{
+          width: 250vw;
+     }
+}
+@media screen and (max-width:320px) {
+     .services__part{
+          width: 280vw;
+     }
+}

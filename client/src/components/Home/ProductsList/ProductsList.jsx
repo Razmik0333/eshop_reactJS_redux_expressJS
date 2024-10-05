@@ -6,7 +6,7 @@ import Product from "../../Base/Product/Product";
 import Categories from "./Categories/Categories";
 import CategoryLineCircle from "./CategoryLineCircle/CategoryLineCircle";
 import ModalPopup from '../../Base/Modal/ModalPopup';
-
+import "./styles/_products__list.scss";
 function ProductsList() {
      const dispatch = useDispatch();
      const idProductsFromStart = useSelector(idProductsFromStartSelector);

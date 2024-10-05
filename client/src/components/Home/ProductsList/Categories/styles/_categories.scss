@@ -49,3 +49,14 @@
 
      
 }
+@media screen and (max-width:840px){
+     
+     .product__list__container{
+          .categories{
+               flex-direction: column;
+               .category-list{
+                    margin-top: 10px;
+               }
+          }
+     }
+}

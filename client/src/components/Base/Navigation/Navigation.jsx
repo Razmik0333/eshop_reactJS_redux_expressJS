@@ -23,43 +23,32 @@ function Navigation() {
      const changeMouseOut = () => {
           dispatch(getIsFocused(false))
      }
-     // useEffect(() => {
-     //      dispatch(fetchSearchedData(searchString));
-     //      setSearchItems(searchData)
-     //      setSearchShow(true);                      
-     //      //setTimeout(() => {
-     //           // if (searchString.length === 0) {
-     //           //      setSearchString('');
-     //           //      setSearchItems([])
-     //           // }else{
-     //           //      dispatch(fetchSearchedData(searchString));
-     //           //      setSearchItems(searchData)
-     //           //      setSearchShow(true);                    
-     //           // }
-     //     // }, 1000);
-     // }, [searchWord]);
+
      return (
           <nav>
                <div className="container navigation__container">
-                    <div className="nav__item">
-                         <div className="search__part">
-                              <div className="select__category">
-                                   <span className="select-icon">
-                                        <img src={`${root}/icons/config/menu.svg`} alt="" />
-                                   </span>
-                                   <span className="select-text">{headerLangData?.select}</span>
-                                   <span className="select-dropdown">
-                                        <img src={`${root}/icons/config/triangle.svg`} alt="" />
-                                   </span>
-                              </div>
-                              <div className="search__products" onMouseLeave={changeMouseOut}/*onMouseOut={false}*/>
-                                   <SearchInput />
-                                   <SearchItems />
+                    <div className="navigation__container__items">
+                         <div className="nav__item search__area">
+                              <div className="search__part">
+                                   <div className="select__category">
+                                        <span className="select-icon">
+                                             <img src={`${root}/icons/config/menu.svg`} alt="" />
+                                        </span>
+                                        <span className="select-text">{headerLangData?.select}</span>
+                                        <span className="select-dropdown">
+                                             <img src={`${root}/icons/config/triangle.svg`} alt="" />
+                                        </span>
+                                   </div>
+                                   <div className="search__products" onMouseLeave={changeMouseOut}/*onMouseOut={false}*/>
+                                        <SearchInput />
+                                        <SearchItems />
+                                   </div>
                               </div>
                          </div>
-                    </div>
-                    <div className="nav__item">
-                         <Categories />
+                         <div className="nav__item">
+                              <Categories />
+                         </div>
+
                     </div>
                </div>
           </nav>

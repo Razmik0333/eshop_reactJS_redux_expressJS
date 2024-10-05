@@ -1,0 +1,37 @@
+.hot__deals__carousel{
+}
+@media screen and (max-width:1200px) {
+     .hot__deals__carousel{
+          width: 120vw;
+     }
+}
+@media screen and (max-width:1024px) {
+     .hot__deals__carousel{
+          width: 150vw;
+     }
+}
+@media screen and (max-width:840px) {
+     .hot__deals__carousel{
+          width: 170vw;
+     }
+}
+@media screen and (max-width:648px) {
+     .hot__deals__carousel{
+          width: 200vw;
+     }
+}
+@media screen and (max-width:480px) {
+     .hot__deals__carousel{
+          width: 220vw;
+     }
+}
+@media screen and (max-width:360px) {
+     .hot__deals__carousel{
+          width: 250vw;
+     }
+}
+@media screen and (max-width:320px) {
+     .hot__deals__carousel{
+          width: 280vw;
+     }
+}

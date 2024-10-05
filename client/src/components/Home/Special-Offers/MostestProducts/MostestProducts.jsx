@@ -24,7 +24,7 @@ function MostestProducts() {
                <MostestProductsHeader />
                <div className="offers-informations">
                     <div className="current-offer">
-                    <img src={`${root}/images/products/${mostestRatingData?.id}.jpg`} alt="" className="current-offer" />
+                    <img src={`${root}/images/products/${mostestRatingData?.id}.jpg`} alt="" className="current-offer-picture" />
 
                     </div>
                     <div className="offers-panels">

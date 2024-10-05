@@ -50,3 +50,15 @@
           }      
      }
 }
+
+@media screen and (max-width:480px) {
+     .service__part{
+          width: 25%;
+          height: 120px;
+          padding: 1%;
+          .service-name{
+               padding-left: 1%;
+               padding-right: 1%;
+          }
+     }
+}

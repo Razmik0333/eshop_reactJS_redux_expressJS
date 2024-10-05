@@ -1,11 +1,11 @@
-.carousel {
+.hot__deals__container .carousel {
   width: 73.3%;
   height: 440px;
   margin-left: 20px;
   position: relative;
   overflow: hidden;
 }
-.carousel:hover .shop-now {
+.hot__deals__container .carousel:hover .shop-now {
   width: 110px;
   height: 40px;
   background-color: #fff;
@@ -18,39 +18,39 @@
   top: 70%;
   font-family: "Poppins", Arial, Sans-Serif;
 }
-.carousel:hover .shop-now:hover {
+.hot__deals__container .carousel:hover .shop-now:hover {
   background-color: #d58e32;
   color: var(--white);
 }
-.carousel .current__picture {
+.hot__deals__container .carousel .current__picture {
   width: 100%;
   height: 450px;
   position: absolute;
   left: 0;
   top: 0;
 }
-.carousel .pictures__block {
+.hot__deals__container .carousel .pictures__block {
   transition: position 0.7s, left 0.7s ease;
   position: absolute;
   left: 0;
   top: 0;
-  width: 2671.65px;
+  width: 2971.65px;
 }
-.carousel .pictures__block .carousel__body {
-  width: 890px;
+.hot__deals__container .carousel .pictures__block .carousel__body {
+  width: 990px;
   height: 450px;
   display: inline-block;
   position: relative;
   top: 32%;
 }
-.carousel .pictures__block .carousel__body .carousel__picture img {
+.hot__deals__container .carousel .pictures__block .carousel__body .carousel__picture img {
   width: 100%;
   height: auto;
   position: absolute;
   display: inline-block;
   z-index: 0;
 }
-.carousel .pictures__block .carousel__body .carousel__content {
+.hot__deals__container .carousel .pictures__block .carousel__body .carousel__content {
   position: absolute;
   font-size: 54px;
   color: #fff;
@@ -64,13 +64,13 @@
   justify-content: flex-start;
   align-items: center;
 }
-.carousel .pictures__block .carousel__body .carousel__content p {
+.hot__deals__container .carousel .pictures__block .carousel__body .carousel__content p {
   font-size: 24px;
 }
-.carousel .pictures__block .carousel__body .carousel__content span {
+.hot__deals__container .carousel .pictures__block .carousel__body .carousel__content span {
   font-weight: 700;
 }
-.carousel .carousel__buttons {
+.hot__deals__container .carousel .carousel__buttons {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -80,22 +80,39 @@
   text-align: center;
   vertical-align: middle;
 }
-.carousel .carousel__buttons img {
+.hot__deals__container .carousel .carousel__buttons img {
   width: 20px;
   height: auto;
 }
-.carousel .carousel__buttons .carousel-button {
+.hot__deals__container .carousel .carousel__buttons .carousel-button {
   width: 50%;
   padding: 10px;
   border-width: 0;
   cursor: pointer;
 }
-.carousel .carousel__buttons .carousel-button:hover {
+.hot__deals__container .carousel .carousel__buttons .carousel-button:hover {
   background-color: #d58e32;
 }
-.carousel .carousel__buttons .arrow-left {
+.hot__deals__container .carousel .carousel__buttons .arrow-left {
   background-color: #2a2a2a;
 }
-.carousel .carousel__buttons .arrow-right {
+.hot__deals__container .carousel .carousel__buttons .arrow-right {
   background-color: #2a2a2a;
+}
+
+@media screen and (max-width: 996px) {
+  .hot__deals__container .carousel {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .hot__deals__container .carousel {
+    width: 100vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .hot__deals__container .carousel {
+    width: 176vw;
+    margin-top: 170px;
+  }
 }

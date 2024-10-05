@@ -81,6 +81,7 @@ export const getSubCategoryParamsSelector = ({ SubCategoryDuck }) => SubCategory
 export const getViewedProductIdSelector = ({ ConfigsDuck }) => ConfigsDuck.viewedProductsBlockId; //
 export const getSimilarCircleIdSelector = ({ ConfigsDuck }) => ConfigsDuck.similarCirclId; //
 export const getBestSellerCircleIdSelector = ({ ConfigsDuck }) => ConfigsDuck.bestSellerCircleId; //
+export const navigationBurgerMenuStateSelector = ({ ConfigsDuck }) => ConfigsDuck.navigetionBurgerIsActive; //
 export const getViewedProductsDataSelector = ({ ProductDuck }) => ProductDuck.viewedProductsData; //
 export const getServicesSelector = ({ProductDuck}) => ProductDuck.services;
 export const getFilteredProductsSelector = ({ProductDuck}) => ProductDuck.filteredProducts;

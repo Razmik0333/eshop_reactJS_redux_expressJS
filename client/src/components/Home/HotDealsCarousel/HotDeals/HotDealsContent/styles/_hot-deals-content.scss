@@ -20,8 +20,12 @@
           position: relative;
           text-align: center;
           img{
-               width: 165px;
-               height: auto;
+               width: 80%;
+               height: 80%;
+               object-fit: cover;
+               &:hover{
+                    object-fit: contain;
+               }
           }
      }
      .add-cart{
@@ -36,7 +40,7 @@
           border-radius: 5px;
           z-index: 99999;
           img{
-               vertical-align: sub;
+               vertical-align: bottom;
                width: 20px;
                height: auto;
                //margin-right: 5px;
@@ -127,11 +131,10 @@
                display: flex;
                flex-wrap: nowrap;
                flex-direction: row;
-               align-content: flex-end;
                justify-content: space-between;
                align-items: center;
                width: 100%;
-               margin-top: 40px;
+               margin-top: 20px;
                .hot-deals-buttons{
                     .hot-deals-button{
                          width: 35px;
@@ -172,6 +175,7 @@
                          }
                     }
                }
+
                .hot-deals-prices{
                     display: flex;
                     .hot-deals-price{
@@ -186,6 +190,38 @@
                     }
                }
           }
-          
+     }
+}
+
+@media screen and (max-width:1300px){
+     .hot__deals__content{
+          .hot-deals-desc-part{
+               .hot-deals-desc-options{
+                    flex-direction: column-reverse;
+                    margin-top: 20px;
+                    
+                    .hot-deals-buttons{
+                         margin-top: 10px;
+                    }
+               }
+
+          }
+     }
+}
+@media screen and (max-width:480px){
+     .hot__deals__content{
+          .hot-deals-picture{
+               height: 300px;
+               
+               img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    &:hover{
+                         object-fit: contain;
+                    }
+               }
+          }
+
      }
 }

@@ -7,6 +7,7 @@ const COUNT_ELEMENTS = 'configsDuck/COUNT_ELEMENTS';
 const COUNT_ELEMENTS_OF_PAGE = 'configsDuck/COUNT_ELEMENTS_OF_PAGE';
 const COST_VALUES = 'configsDuck/COST_VALUES';
 const MODAL_OPEN_CLOSE = 'configsDuck/MODAL_OPEN_CLOSE';
+const NAVIGATION_BURGER_IS_ACTIVE = 'configsDuck/NAVIGATION_BURGER_IS_ACTIVE';
 const POPUP_IS_SHOW = 'configsDuck/POPUP_IS_SHOW';
 const POPUP_HOT_DEALS_IS_SHOW = 'configsDuck/POPUP_HOT_DEALS_IS_SHOW';
 const POPUP_ITEM_ID = 'configsDuck/POPUP_ITEM_ID';
@@ -50,6 +51,7 @@ export const changeSimilarProductId = createAction(SIMILAR_PRODUCT_ID)
 export const changeBestSellerProductId = createAction(BEST_SELLER_PRODUCT_ID)
 export const changeSubCategoryId = createAction(SUB_CAT_ID)
 export const changeSubCategory = createAction(SUB_CAT)
+export const changeNavigetionBurgerIsActive = createAction(NAVIGATION_BURGER_IS_ACTIVE)
 
 
 export const changeShowType = (str) => (dispatch) => {
@@ -96,6 +98,9 @@ export const getPopupItemId = (id) => (dispatch) => {
 };
 export const getViewedProductId = (id) => (dispatch) => {
   dispatch(changeViewedProductId(id));
+};
+export const getNavigationBurgerState = (bool) => (dispatch) => {
+  dispatch(changeNavigetionBurgerIsActive(bool));
 };
 
 
@@ -187,6 +192,7 @@ const initialStateConfigs = {
     reviewShow : false,
     subCatId : null,
     subCat : null,
+    navigetionBurgerIsActive:false
     
 };
 

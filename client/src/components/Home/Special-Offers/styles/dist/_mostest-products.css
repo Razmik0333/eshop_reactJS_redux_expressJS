@@ -9,23 +9,25 @@
   font-weight: 900;
   padding: 10px 0;
 }
-.furniture__gallery .offers-items {
+.furniture__gallery .offers-categories {
+  width: 100%;
+}
+.furniture__gallery .offers-categories .offers-items {
   display: flex;
   flex-direction: row;
-  align-content: stretch;
   justify-content: space-evenly;
   align-items: flex-end;
 }
-.furniture__gallery .offers-items .offers-item {
-  padding: 10px 32px;
+.furniture__gallery .offers-categories .offers-items .offers-item {
+  padding: 2% 4%;
   background-color: #fff;
   cursor: pointer;
 }
-.furniture__gallery .offers-items .offers-item:hover {
+.furniture__gallery .offers-categories .offers-items .offers-item:hover {
   color: #fff;
   background-color: #d58e32;
 }
-.furniture__gallery .offers-items .active {
+.furniture__gallery .offers-categories .offers-items .active {
   color: #d58e32;
   border-top: 2px solid #d58e32;
   background-color: #f4f5f7;
@@ -35,10 +37,15 @@
   height: 440px;
   position: relative;
 }
-.furniture__gallery .offers-informations .current-offer {
-  width: 80%;
-  height: 440px;
+.furniture__gallery .offers-informations .current-offer-picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   position: absolute;
+  cursor: pointer;
+}
+.furniture__gallery .offers-informations .current-offer-picture:hover {
+  object-fit: contain;
 }
 .furniture__gallery .offers-informations .offers-panels {
   display: flex;
@@ -220,4 +227,31 @@
 }
 .furniture__gallery .offers-informations .offers-panels .right-panel .offer-items .offer-content .offer-rating .empty::before {
   content: "☆";
+}
+
+@media screen and (max-width: 648px) {
+  .furniture__gallery {
+    margin-left: 50px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .furniture__gallery {
+    width: 100%;
+    height: 600px;
+    padding: 20px;
+  }
+  .furniture__gallery .furniture__gallery__content {
+    height: 100%;
+  }
+  .furniture__gallery .furniture__gallery__content .offers-informations {
+    height: 100%;
+  }
+  .furniture__gallery .furniture__gallery__content .offers-informations .current-offer {
+    height: 100%;
+  }
+  .furniture__gallery .furniture__gallery__content .offers-informations .current-offer .current-offer-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }

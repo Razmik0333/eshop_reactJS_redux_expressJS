@@ -12,7 +12,6 @@
 .latest__blog__content .latest__blog__items .latest__blog__item {
   width: 31.4%;
   height: 480px;
-  background-color: #fff;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -26,9 +25,17 @@
   position: relative;
   transition: left 0.75s ease-in-out;
 }
-.latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__pictures .latest__blog__item__picture img {
+.latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__pictures .latest__blog__item__picture {
   width: 381px;
   height: 230px;
+}
+.latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__pictures .latest__blog__item__picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__pictures .latest__blog__item__picture img:hover {
+  object-fit: contain;
 }
 .latest__blog__content .latest__blog__items .latest__blog__item .arrows {
   position: relative;
@@ -126,4 +133,14 @@
 }
 .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content:hover .item-desc-title {
   color: #d58e32;
+}
+
+@media screen and (max-width: 480px) {
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__title {
+    flex-direction: column-reverse;
+    padding: 5px;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__title .comments-date {
+    margin-top: 5px;
+  }
 }

@@ -8,36 +8,45 @@
           font-weight: 900;
           padding: 10px 0;
      }
-     .offers-items{
-          display: flex;
-          flex-direction: row;
-          align-content: stretch;
-          justify-content: space-evenly;
-          align-items: flex-end;
-          .offers-item{
-               padding: 10px 32px;
-               background-color: #fff;
-               cursor: pointer;
-               &:hover{
-                    color: #fff;
-                    background-color: #d58e32;
-
+     .offers-categories{
+          width: 100%;
+          .offers-items{
+               display: flex;
+               flex-direction: row;
+               justify-content: space-evenly;
+               align-items: flex-end;
+               .offers-item{
+                    padding: 2% 4%;
+                    background-color: #fff;
+                    cursor: pointer;
+                    &:hover{
+                         color: #fff;
+                         background-color: #d58e32;
+     
+                    }
+               }
+               .active{
+                    color: #d58e32;
+                    border-top: 2px solid #d58e32 ;
+                    background-color: #f4f5f7;
                }
           }
-          .active{
-               color: #d58e32;
-               border-top: 2px solid #d58e32 ;
-               background-color: #f4f5f7;
-          }
+
      }
      .offers-informations{
           width: 100%;
           height: 440px;
           position: relative;
-          .current-offer{
-               width: 80%;
-               height: 440px;
+          .current-offer-picture{
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
                position: absolute;
+               cursor: pointer;
+               &:hover{
+                    object-fit: contain;
+
+               }
           }
           .offers-panels{
                display: flex;
@@ -231,5 +240,37 @@
                     }
                }
           }
+     }
+}
+@media screen and (max-width:648px){
+     .furniture__gallery{
+          margin-left: 50px;
+     }
+}
+@media screen and (max-width:480px){
+     .furniture__gallery{
+          
+          width: 100%;
+          height: 600px;
+          padding: 20px;
+          .furniture__gallery__content{
+               height: 100%;
+               .offers-informations{
+                    height: 100%;
+                    .current-offer{
+                         height: 100%;
+
+                         .current-offer-picture{
+                              width: 100%;
+                              height: 100%;
+                              object-fit: cover;
+
+                         }
+
+                    }
+               }
+
+          }
+
      }
 }

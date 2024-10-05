@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.fetchLanguages = exports.fetchLanguageData = exports.changeCurrencies = exports.changeLanguages = exports.getSubCategory = exports.getSubCategoryId = exports.changeMostestIndex = exports.changeLanguage = exports.changeCurrency = exports.getIdProductsFromStartingPage = exports.getHotDealsTimerSecond = exports.getViewedProductId = exports.getPopupItemId = exports.changePopupHotDeals = exports.changePopup = exports.getReviewShow = exports.changeModal = exports.clearCostValues = exports.changeCosts = exports.changeCountItemsOfPage = exports.changeCountElements = exports.changeSortType = exports.getBestSellerProductId = exports.getSimilarProductId = exports.getHotDealsId = exports.changeShowType = exports.changeSubCategory = exports.changeSubCategoryId = exports.changeBestSellerProductId = exports.changeSimilarProductId = exports.changeReviewShow = exports.changeViewedProductId = exports.changeCurrentMostestIndex = exports.changeCurrentLanguageData = exports.changeCurrentLanguage = exports.changeCurrentCurrency = exports.changeHotDealsTimerSecond = exports.changeIdProductsFromStartingPage = exports.changeHotDealsId = exports.changePopupItemId = exports.getCurrencies = exports.getLanguages = exports.getPopupHotDealsOpenClose = exports.getPopupOpenClose = exports.getModalOpenClose = exports.getCostsValues = exports.getCountItemsOfPage = exports.getCountElements = exports.getSortType = exports.getShowType = void 0;
+exports["default"] = exports.fetchLanguages = exports.fetchLanguageData = exports.changeCurrencies = exports.changeLanguages = exports.getSubCategory = exports.getSubCategoryId = exports.changeMostestIndex = exports.changeLanguage = exports.changeCurrency = exports.getIdProductsFromStartingPage = exports.getHotDealsTimerSecond = exports.getNavigationBurgerState = exports.getViewedProductId = exports.getPopupItemId = exports.changePopupHotDeals = exports.changePopup = exports.getReviewShow = exports.changeModal = exports.clearCostValues = exports.changeCosts = exports.changeCountItemsOfPage = exports.changeCountElements = exports.changeSortType = exports.getBestSellerProductId = exports.getSimilarProductId = exports.getHotDealsId = exports.changeShowType = exports.changeNavigetionBurgerIsActive = exports.changeSubCategory = exports.changeSubCategoryId = exports.changeBestSellerProductId = exports.changeSimilarProductId = exports.changeReviewShow = exports.changeViewedProductId = exports.changeCurrentMostestIndex = exports.changeCurrentLanguageData = exports.changeCurrentLanguage = exports.changeCurrentCurrency = exports.changeHotDealsTimerSecond = exports.changeIdProductsFromStartingPage = exports.changeHotDealsId = exports.changePopupItemId = exports.getCurrencies = exports.getLanguages = exports.getPopupHotDealsOpenClose = exports.getPopupOpenClose = exports.getModalOpenClose = exports.getCostsValues = exports.getCountItemsOfPage = exports.getCountElements = exports.getSortType = exports.getShowType = void 0;
 
 var _redux = require("../../helpers/redux");
 
@@ -23,6 +23,7 @@ var COUNT_ELEMENTS = 'configsDuck/COUNT_ELEMENTS';
 var COUNT_ELEMENTS_OF_PAGE = 'configsDuck/COUNT_ELEMENTS_OF_PAGE';
 var COST_VALUES = 'configsDuck/COST_VALUES';
 var MODAL_OPEN_CLOSE = 'configsDuck/MODAL_OPEN_CLOSE';
+var NAVIGATION_BURGER_IS_ACTIVE = 'configsDuck/NAVIGATION_BURGER_IS_ACTIVE';
 var POPUP_IS_SHOW = 'configsDuck/POPUP_IS_SHOW';
 var POPUP_HOT_DEALS_IS_SHOW = 'configsDuck/POPUP_HOT_DEALS_IS_SHOW';
 var POPUP_ITEM_ID = 'configsDuck/POPUP_ITEM_ID';
@@ -89,6 +90,8 @@ var changeSubCategoryId = (0, _redux.createAction)(SUB_CAT_ID);
 exports.changeSubCategoryId = changeSubCategoryId;
 var changeSubCategory = (0, _redux.createAction)(SUB_CAT);
 exports.changeSubCategory = changeSubCategory;
+var changeNavigetionBurgerIsActive = (0, _redux.createAction)(NAVIGATION_BURGER_IS_ACTIVE);
+exports.changeNavigetionBurgerIsActive = changeNavigetionBurgerIsActive;
 
 var changeShowType = function changeShowType(str) {
   return function (dispatch) {
@@ -209,6 +212,14 @@ var getViewedProductId = function getViewedProductId(id) {
 };
 
 exports.getViewedProductId = getViewedProductId;
+
+var getNavigationBurgerState = function getNavigationBurgerState(bool) {
+  return function (dispatch) {
+    dispatch(changeNavigetionBurgerIsActive(bool));
+  };
+};
+
+exports.getNavigationBurgerState = getNavigationBurgerState;
 
 var getHotDealsTimerSecond = function getHotDealsTimerSecond(second) {
   return function (dispatch) {
@@ -423,7 +434,8 @@ var initialStateConfigs = {
   bestSellerCircleId: 1,
   reviewShow: false,
   subCatId: null,
-  subCat: null
+  subCat: null,
+  navigetionBurgerIsActive: false
 };
 
 var ConfigsDuck = function ConfigsDuck() {

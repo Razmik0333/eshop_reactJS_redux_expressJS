@@ -3,5 +3,47 @@
      .latest__blog__container{
           margin-top: 20px;
           height: auto;
+          padding: 20px;
+     }
+}
+
+@media screen and (max-width:1200px) {
+     .latest__blog{
+         width: 120vw;
+          .latest__blog__container{
+               width:80%;
+          }
+     }
+}
+@media screen and (max-width:1024px) {
+     .latest__blog{
+         width: 150vw;
+          .latest__blog__container{
+               width:80%;
+          }
+     }
+}
+@media screen and (max-width:648px) {
+     .latest__blog{
+         width: 180vw;
+          .latest__blog__container{
+               width:80%;
+          }
+     }
+}
+@media screen and (max-width:480px) {
+     .latest__blog{
+         width: 220vw;
+          .latest__blog__container{
+               width:80%;
+          }
+     }
+}
+@media screen and (max-width:360px) {
+     .latest__blog{
+         width: 250vw;
+          .latest__blog__container{
+               width:80%;
+          }
      }
 }

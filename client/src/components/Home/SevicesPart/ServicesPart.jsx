@@ -66,7 +66,6 @@ function ServicesPart() {
                     </div>
                     <div className="service-name">
                          <h3>{servicesPart?.discount}</h3>
-                         
                     </div>
                </div>
           </div>
@@ -74,3 +73,4 @@ function ServicesPart() {
      )
 }
 export default ServicesPart;
+

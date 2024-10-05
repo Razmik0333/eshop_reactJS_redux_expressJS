@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {root} from "../../../helpers/constants/constants";
 import { currentLanguageDataSelector, getUserId } from "../../../helpers/reduxSelectors";
 import { HashLink } from 'react-router-hash-link';
-import './styles/_footer.scss';
 import { NavLink, useNavigate } from "react-router-dom";
 import { currentUser, getUserData } from "../../../redux/ducks/userDuck";
 import { changeOrdersFromLogout } from "../../../redux/ducks/orderDuck";
+import './styles/_footer.scss';
 function Footer() {
      const dispatch = useDispatch();
      const navigate = useNavigate();
@@ -22,53 +22,58 @@ function Footer() {
           <footer>
                <div className="container footer__container">
                     <div className="footer__top">
-                         <div className="footer__row">
-                              <ul className="footer__row__categories">
-                                   <li className="footer__row__category"> {footerLangData?.information?.info}</li>
-                                   <li className="footer__row__category"><NavLink to={'/about'}>{footerLangData?.information?.about}</NavLink></li>
-                                   <li className="footer__row__category"><NavLink to={'/privacy'}>{footerLangData?.information?.privacy}</NavLink></li>
-                                   <li className="footer__row__category"><NavLink to={'/payment'}>{footerLangData?.information?.payment}</NavLink></li>
-                                   <li className="footer__row__category"><NavLink to={'/online'}>{footerLangData?.information?.online}</NavLink></li>
-                              </ul>
+                         <div className="footer__first">
+                              <div className="footer__row">
+                                   <ul className="footer__row__categories">
+                                        <li className="footer__row__category"> {footerLangData?.information?.info}</li>
+                                        <li className="footer__row__category"><NavLink to={'/about'}>{footerLangData?.information?.about}</NavLink></li>
+                                        <li className="footer__row__category"><NavLink to={'/privacy'}>{footerLangData?.information?.privacy}</NavLink></li>
+                                        <li className="footer__row__category"><NavLink to={'/payment'}>{footerLangData?.information?.payment}</NavLink></li>
+                                        <li className="footer__row__category"><NavLink to={'/online'}>{footerLangData?.information?.online}</NavLink></li>
+                                   </ul>
+                              </div>
+                              <div className="footer__row">
+                                   <ul className="footer__row__categories">
+                                        <li className="footer__row__category">{footerLangData?.my_account?.site}</li>
+                                        <li className="footer__row__category">
+                                             {
+                                                  userId ? <NavLink to={'/'} onClick={changeLogout}>{footerLangData?.my_account?.logout}</NavLink> 
+                                                  : <NavLink to={'/login'}>{footerLangData?.my_account?.login}</NavLink>
+                                             }
+                                        </li>
+                                        <li className="footer__row__category"><NavLink to={'/cart'}>{footerLangData?.my_account?.cart}</NavLink></li>
+                                        <li className="footer__row__category"><NavLink to={'/wishlist'}>{footerLangData?.my_account?.wishlist}</NavLink></li>
+                                        <li className="footer__row__category"><NavLink to={'/viewed'}>{footerLangData?.my_account?.viewed}</NavLink></li>
+                                   </ul>
+                              </div>
                          </div>
-                         <div className="footer__row">
-                              <ul className="footer__row__categories">
-                                   <li className="footer__row__category">{footerLangData?.my_account?.site}</li>
-                                   <li className="footer__row__category">
-                                        {
-                                             userId ? <NavLink to={'/'} onClick={changeLogout}>{footerLangData?.my_account?.logout}</NavLink> 
-                                             : <NavLink to={'/login'}>{footerLangData?.my_account?.login}</NavLink>
-                                        }
-                                   </li>
-                                   <li className="footer__row__category"><NavLink to={'/cart'}>{footerLangData?.my_account?.cart}</NavLink></li>
-                                   <li className="footer__row__category"><NavLink to={'/wishlist'}>{footerLangData?.my_account?.wishlist}</NavLink></li>
-                                   <li className="footer__row__category"><NavLink to={'/viewed'}>{footerLangData?.my_account?.viewed}</NavLink></li>
-                              </ul>
-                         </div>
-                         <div className="footer__row">
-                              <ul className="footer__row__categories">
-                                   <li className="footer__row__category">{footerLangData?.services?.all}</li>
-                                   <li className="footer__row__category"><HashLink to={'/about/#laser'}>{footerLangData?.services?.laser}</HashLink></li>
-                                   <li className="footer__row__category"><HashLink to={'/about/#plotter'}>{footerLangData?.services?.plotter}</HashLink></li>
-                                   <li className="footer__row__category"><HashLink to={'/about/#tshirt'}>{footerLangData?.services?.tshirt}</HashLink></li>
-                              </ul>
-                         </div>
-                         <div className="footer__row">
-                              <ul className="footer__row__categories">
-                                   <li className="footer__row__category">{footerLangData?.orders?.all}</li>
-                                   <li className="footer__row__category">{footerLangData?.orders?.payment_methods}</li>
-                                   <li className="footer__row__category">{footerLangData?.orders?.shipping}</li>
-                                   <li className="footer__row__category">{footerLangData?.orders?.product_return}</li>
-                                   <li className="footer__row__category">{footerLangData?.orders?.money_return}</li>
-                                   <li className="footer__row__credit__cards">
-                                        <img src={`${root}/icons/other/visa.png`} alt="" />
-                                        <img src={`${root}/icons/other/master_card.png`} alt="" />
-                                        <img src={`${root}/icons/other/Discover_Network.png`} alt="" />
-                                        <img src={`${root}/icons/other/american_express.png`} alt="" />
-                                        <img src={`${root}/icons/other//paypal.png`} alt="" />
-                                        
-                                   </li>
-                              </ul>
+                         <div className="footer__second">
+                              <div className="footer__row">
+                                   <ul className="footer__row__categories">
+                                        <li className="footer__row__category">{footerLangData?.services?.all}</li>
+                                        <li className="footer__row__category"><HashLink to={'/about/#laser'}>{footerLangData?.services?.laser}</HashLink></li>
+                                        <li className="footer__row__category"><HashLink to={'/about/#plotter'}>{footerLangData?.services?.plotter}</HashLink></li>
+                                        <li className="footer__row__category"><HashLink to={'/about/#tshirt'}>{footerLangData?.services?.tshirt}</HashLink></li>
+                                   </ul>
+                              </div>
+                              <div className="footer__row">
+                                   <ul className="footer__row__categories">
+                                        <li className="footer__row__category">{footerLangData?.orders?.all}</li>
+                                        <li className="footer__row__category">{footerLangData?.orders?.payment_methods}</li>
+                                        <li className="footer__row__category">{footerLangData?.orders?.shipping}</li>
+                                        <li className="footer__row__category">{footerLangData?.orders?.product_return}</li>
+                                        <li className="footer__row__category">{footerLangData?.orders?.money_return}</li>
+                                        <li className="footer__row__credit__cards">
+                                             <img src={`${root}/icons/other/visa.png`} alt="" />
+                                             <img src={`${root}/icons/other/master_card.png`} alt="" />
+                                             <img src={`${root}/icons/other/Discover_Network.png`} alt="" />
+                                             <img src={`${root}/icons/other/american_express.png`} alt="" />
+                                             <img src={`${root}/icons/other//paypal.png`} alt="" />
+                                             
+                                        </li>
+                                   </ul>
+                              </div>
+
                          </div>
                     </div>
                     <div className="footer__bottom">

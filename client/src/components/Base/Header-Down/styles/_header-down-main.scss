@@ -1,5 +1,4 @@
 .header__down{
-     
     background-color: #363636;
     color: #d8d8d8;
     height: 110px;
@@ -19,3 +18,48 @@
      flex-direction: row;
     }
 }
+@media screen and (max-width: 1200px) {
+    .header__down{
+        width: 120vw;
+    }
+}
+  
+@media screen and (max-width: 1024px) {
+    .header__down{
+        width: 150vw;
+    }
+}
+  
+@media screen and (max-width: 840px) {
+    .header__down{
+        width: 170vw;
+    }
+    
+}
+@media screen and (max-width: 648px) {
+    .header__down{
+        width: 200vw;
+    }
+    
+}
+  
+@media screen and (max-width: 480px) {
+    .header__down{
+        width: 220vw;
+    }
+}
+  
+@media screen and (max-width: 360px) {
+    .header__down{
+        width: 250vw;
+    }
+}
+  
+@media screen and (max-width: 320px) {
+    .header__down{
+        width: 280vw;
+        min-width: 777px;
+
+    }
+}
+  
