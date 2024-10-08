@@ -1,4 +1,34 @@
 .similar__products{
      margin-top: 20px;
-
+     background-color: aqua;
 }
+@media screen and (max-width:1280px){
+     .similar__products{
+          width: 100vw;
+     }
+ }
+@media screen and (max-width:1024px){
+     .similar__products{
+          width: 140vw;
+     }
+ }
+ @media screen and (max-width:996px){
+      .similar__products{
+           width: 150vw;
+      }
+  }
+ @media screen and (max-width:648px){
+      .similar__products{
+           width: 200vw;
+      }
+  }
+ @media screen and (max-width:480px){
+      .similar__products{
+           width: 220vw;
+      }
+  }
+ @media screen and (max-width:320px){
+      .similar__products{
+           width: 270vw;
+      }
+  }

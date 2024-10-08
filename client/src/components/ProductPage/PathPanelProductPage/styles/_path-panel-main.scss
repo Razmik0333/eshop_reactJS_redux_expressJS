@@ -9,3 +9,48 @@
           }
      }
 }
+@media screen and (max-width:1200px){
+     .product-part{
+          .path__panel__shope{
+               width: 120vw;
+     
+          }
+
+     }
+}
+@media screen and (max-width: 1024px) {
+     .product-part{
+          .path__panel__shope{
+               width: 150vw;
+          }
+     }
+ }
+@media screen and (max-width: 840px) {
+     .product-part{
+          .path__panel__shope{
+               width: 170vw;
+          }
+     }
+ }
+
+@media screen and (max-width: 648px) {
+     .product-part{
+          .path__panel__shope{
+               width: 200vw;
+          }
+     }
+ }
+@media screen and (max-width: 360px) {
+     .product-part{
+          .path__panel__shope{
+               width: 250vw;
+          }
+     }
+ }
+@media screen and (max-width: 320px) {
+     .product-part{
+          .path__panel__shope{
+               width: 280vw;
+          }
+     }
+ }

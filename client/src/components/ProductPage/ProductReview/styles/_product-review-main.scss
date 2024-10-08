@@ -1,6 +1,54 @@
-.product__review__container{
-     height: 410px;
-     border: 1px solid #c2c2c2;
-    overflow: auto;
-    // background-color: aqua;
+.product__review{
+        .product__review__container{
+            height: 410px;
+            border: 1px solid #c2c2c2;
+            overflow: auto;
+            // background-color: aqua;
+        }
+}
+
+@media screen and (max-width:1200px){
+    .product__review{
+         
+              width: 120vw;
+    
+         
+
+    }
+}
+@media screen and (max-width: 1024px) {
+    .product__review{
+         
+              width: 150vw;
+         
+    }
+}
+@media screen and (max-width: 996px) {
+    .product__review{
+         
+              width: 170vw;
+         
+    }
+}
+@media screen and (max-width: 648px) {
+    .product__review{
+         
+              width: 200vw;
+         
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .product__review{
+         
+              width: 250vw;
+         
+    }
+}
+@media screen and (max-width: 320px) {
+    .product__review{
+         
+              width: 280vw;
+         
+    }
 }

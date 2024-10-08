@@ -1,6 +1,8 @@
 .product__desc{
      width: 60%;
      padding: 20px;
+     display: flex;
+     flex-direction: column;
      .product__title{
           font-size: 22px;
      }
@@ -198,4 +200,10 @@
           }
      }
 
+}
+@media screen and (max-width:768px){
+     .product__desc{
+          width: 100%;
+          padding: 20px 0;
+     }
 }
