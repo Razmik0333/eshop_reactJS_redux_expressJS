@@ -79,6 +79,7 @@
   font-weight: 500;
   margin-top: 10px;
   padding: 5px 0;
+  height: 50px;
 }
 .products-list .product .product-name .product-link {
   text-decoration: none;
@@ -122,8 +123,6 @@
   content: "⇄";
 }
 .products-list .product .product-options .product-prices .product-price {
-  width: 60px;
-  height: 35px;
   padding: 5px;
 }
 .products-list .product .product-options .product-prices .new-price {
@@ -134,55 +133,116 @@
 @media screen and (max-width: 1280px) {
   .products-list {
     gap: 50px;
-    width: 85vw;
     justify-content: center;
+  }
+  .products-list .product .sale {
+    font-size: 1.2vw;
   }
 }
 @media screen and (max-width: 1140px) {
   .products-list {
     gap: 15px;
-    width: 100vw;
   }
 }
 @media screen and (max-width: 1085px) {
   .products-list {
     gap: 15px;
-    width: 100vw;
+  }
+  .products-list .product .sale {
+    font-size: 1.5vw;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .products-list .product .product-name {
+    font-size: 2.3vw;
+  }
+  .products-list .product .product-options .product-prices {
+    font-size: 2.3vw;
   }
 }
 @media screen and (max-width: 996px) {
   .products-list {
     gap: 30px;
-    width: 110vw;
   }
 }
 @media screen and (max-width: 840px) {
   .products-list {
     gap: 25px;
-    width: 115vw;
+  }
+  .products-list .product .sale {
+    font-size: 1.8vw;
+  }
+  .products-list .product .product-name {
+    font-size: 2.7vw;
+  }
+  .products-list .product .product-options .product-prices {
+    font-size: 3.3vw;
   }
 }
 @media screen and (max-width: 768px) {
   .products-list {
     gap: 25px;
-    width: 150vw;
+  }
+  .products-list .product .sale {
+    font-size: 2vw;
+  }
+  .products-list .product .product-name {
+    font-size: 3.4vw;
+  }
+  .products-list .product .product-options .product-prices {
+    font-size: 3.5vw;
   }
 }
 @media screen and (max-width: 648px) {
   .products-list {
     gap: 50px;
-    width: 150vw;
+  }
+  .products-list .product .sale {
+    font-size: 2.2vw;
+  }
+  .products-list .product .product-name {
+    font-size: 4vw;
+  }
+  .products-list .product .product-options .product-prices {
+    font-size: 4.5vw;
   }
 }
 @media screen and (max-width: 480px) {
   .products-list {
-    gap: 30px;
-    width: 150vw;
+    gap: 25px;
+  }
+  .products-list .product .sale {
+    font-size: 3vw;
+  }
+  .products-list .product .product-name {
+    font-size: 5vw;
+  }
+  .products-list .product .product-options .product-prices {
+    font-size: 5.6vw;
+  }
+}
+@media screen and (max-width: 360px) {
+  .products-list .product .sale {
+    font-size: 4vw;
+  }
+  .products-list .product .product-name {
+    font-size: 6.3vw;
+  }
+  .products-list .product .product-options .product-prices {
+    font-size: 7.3vw;
   }
 }
 @media screen and (max-width: 320px) {
   .products-list {
     gap: 30px;
-    width: 210vw;
+  }
+  .products-list .product .sale {
+    font-size: 4.5vw;
+  }
+  .products-list .product .product-name {
+    font-size: 7.4vw;
+  }
+  .products-list .product .product-options .product-prices {
+    font-size: 8.3vw;
   }
 }

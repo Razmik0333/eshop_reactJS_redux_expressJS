@@ -33,6 +33,7 @@ app.use(express.static('public'));
 app.use(session({secret:'niufewfukewkfgekfgekfgkefgewf', cookie: { maxAge:60000 }}))
 app.use(cors({origin:"http://localhost:3000"}));
 
+
 //routes
 
 

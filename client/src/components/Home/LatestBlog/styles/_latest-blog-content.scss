@@ -95,57 +95,127 @@
                     }
                }
 
-                    .latest_blog_content {
-                         background-color: #fff;
-                        
-                         width: 100%;
+               .latest_blog_content {
+                    background-color: #fff;
+                    
+                    width: 100%;
 
-                         cursor: pointer;
-                         .item-user-avatar{
-                              display: flex;
-                              align-items: center;
-                              justify-content: center;
-                              .review__user__avatar{
-                                   margin-right: 10px;
-                                   img{
-                                        width: 30px;
-                                        height: auto;
-                                   }
+                    cursor: pointer;
+                    .item-user-avatar{
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         .review__user__avatar{
+                              margin-right: 10px;
+                              img{
+                                   width: 30px;
+                                   height: auto;
                               }
-                         }
-                         .item-desc-title{
-                              padding: 15px 0;
-                              color: #676767;
-                              font-weight: 500;
-                         }
-                         .item-desc-text{
-                              font-size: 14px;
-                              color: #676767;
-                              line-height: 1.3;
-                              height: 40px;
-                         }
-                         .latest-blog-footer {
-                             
-                              .latest_blog_button{
-                                   width: 130px;
-                                   height: 30px;
-                                   background-color: #2a2a2a;
-                                   margin-top: 30px;
-                                   left: 10px;
-                                   color: #fff;
-                                   cursor: pointer;
-                              }
-                         }
-                         &:hover .latest_blog_button{
-                              background-color: #d58e32;
-                         }
-                         &:hover .item-desc-title{
-                              color: #d58e32;
                          }
                     }
+                    .item-desc-title{
+                         padding: 15px 0;
+                         color: #676767;
+                         font-weight: 500;
+                    }
+                    .item-desc-text{
+                         font-size: 14px;
+                         color: #676767;
+                         line-height: 1.3;
+                         height: 40px;
+                    }
+                    .latest-blog-footer {
+                         
+                         .latest_blog_button{
+                              width: 130px;
+                              height: 30px;
+                              background-color: #2a2a2a;
+                              margin-top: 30px;
+                              left: 10px;
+                              color: #fff;
+                              cursor: pointer;
+                         }
+                    }
+                    &:hover .latest_blog_button{
+                         background-color: #d58e32;
+                    }
+                    &:hover .item-desc-title{
+                         color: #d58e32;
+                    }
+               }
           }
      }
      
+}
+@media screen and (max-width:840px) {
+     .latest__blog__content{
+          .latest__blog__items{
+               .latest__blog__item{
+                    .latest__blog__item__title{
+                         .comments-date{
+                              font-size: 2vw;
+                         }
+                    }
+                    .latest_blog_content {
+                         .item-user-avatar{
+                              .review__user__name{
+                                   font-size: 3vw;
+                              }
+                         }
+                         .item-desc-title{
+                              font-size: 2vw;
+                         }
+
+                         .item-desc-text{
+                              font-size: 2.2vw;
+                         }
+                         .latest-blog-footer {
+                         
+                              .latest_blog_button{
+                                  font-size: 1.8vw;
+                              }
+                         }
+          
+                    }
+
+               }
+          }
+     }
+}
+@media screen and (max-width:768px) {
+     .latest__blog__content{
+          .latest__blog__items{
+               .latest__blog__item{
+                    .latest__blog__item__title{
+                         .comments-date{
+                              font-size: 3vw;
+                         }
+                    }
+                    .latest_blog_content {
+                         .item-user-avatar{
+                              .review__user__name{
+                                   font-size: 3.5vw;
+                              }
+                         }
+                         .item-desc-title{
+                              font-size: 3vw;
+                         }
+
+                         .item-desc-text{
+                              font-size: 2.8vw;
+                         }
+                         .latest-blog-footer {
+                         
+                              .latest_blog_button{
+                                  font-size: 2.5vw;
+                              }
+                         }
+          
+                    }
+
+               }
+          }
+     }
 }
 @media screen and (max-width:480px) {
      .latest__blog__content{
@@ -158,8 +228,93 @@
                          padding: 5px;
                          .comments-date{
                               margin-top: 5px;
+                              font-size: 3.5vw;
                          }
                     }
+                    .latest_blog_content {
+                         .item-user-avatar{
+                              .review__user__name{
+                                   font-size: 4.5vw;
+                              }
+                         }
+                         .item-desc-title{
+                              font-size: 4vw;
+                         }
+
+                         .item-desc-text{
+                              font-size: 3.5vw;
+                         }
+                         .latest-blog-footer {
+                         
+                              .latest_blog_button{
+                                  font-size: 3.8vw;
+                                  height: 50px;
+                              }
+                         }
+                    }
+               }
+          }
+     }
+}
+@media screen and (max-width:360px) {
+     .latest__blog__content{
+          .latest__blog__items{
+               .latest__blog__item{
+                    .latest__blog__item__title{
+                         .comments-date{
+                              font-size: 4.5vw;
+                         }
+                    }
+                    .latest_blog_content {
+                         .item-user-avatar{
+                              .review__user__name{
+                                   font-size: 5.5vw;
+                              }
+                         }
+                         .item-desc-title{
+                              font-size: 5vw;
+                         }
+
+                         .item-desc-text{
+                              font-size: 4.5vw;
+                         }
+                         .latest-blog-footer {
+                              .latest_blog_button{
+                                  font-size: 5.5vw;
+                                  margin-top: 20px;
+                              }
+                         }
+                    }
+
+               }
+          }
+     }
+}
+@media screen and (max-width:320px) {
+     .latest__blog__content{
+          .latest__blog__items{
+               .latest__blog__item{
+                    .latest__blog__item__title{
+                         .comments-date{
+                              font-size: 5.5vw;
+                         }
+                    }
+                    .latest_blog_content {
+                         .item-user-avatar{
+                              .review__user__name{
+                                   font-size: 6.5vw;
+                              }
+                         }
+                         .item-desc-title{
+                              font-size: 6vw;
+                         }
+
+                         .item-desc-text{
+                              font-size: 5.5vw;
+                         }
+          
+                    }
+
                }
           }
      }

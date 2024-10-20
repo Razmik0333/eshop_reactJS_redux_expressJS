@@ -121,7 +121,7 @@ function LatestBlogItem({blog}) {
                     </div>
                     <div className="item-desc-text">
                          {
-                              blog?.review.split(" ").filter((item, pos) => pos < 10 ).join(" ") + "..."
+                              blog?.review.split(" ").filter((item, pos) => pos < 5 ).join(" ") + "..."
                          }
                     </div>
                     <div className="latest-blog-footer">

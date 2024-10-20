@@ -40,7 +40,6 @@
                    background-color: var(--orange);
                    color: var(--white);
                }
-               
           }
           .empty{
                width: 100px;
@@ -49,14 +48,110 @@
 
      
 }
+@media screen and (max-width:1024px){
+     .product__list__container{
+          .categories{
+               .newest, .viewed{
+                    font-size: 2.5vw;
+              }
+              .category-list{
+                    .category{
+                         font-size: 2.0vw;
+                    }
+              }
+          }
+     }
+}
 @media screen and (max-width:840px){
      
      .product__list__container{
           .categories{
                flex-direction: column;
+               .newest, .viewed{
+                    font-size: 4vw;
+
+               }
                .category-list{
                     margin-top: 10px;
+                    .category{
+                         font-size: 3.0vw;
+                    }
                }
+          }
+     }
+}
+@media screen and (max-width:768px){
+     
+     .product__list__container{
+          .categories{
+               .newest, .viewed{
+                    font-size: 4.5vw;
+               }
+               .category-list{
+                    .category{
+                         font-size: 4.0vw;
+                    }
+              }
+          }
+     }
+}
+@media screen and (max-width:648px){
+     
+     .product__list__container{
+          .categories{
+               .newest, .viewed{
+                    font-size: 5vw;
+               }
+               .category-list{
+                    .category{
+                         font-size: 4.5vw;
+                    }
+              }
+          }
+     }
+}
+@media screen and (max-width:480px){
+     
+     .product__list__container{
+          .categories{
+               .newest, .viewed{
+                    font-size: 6vw;
+               }
+               .category-list{
+                    .category{
+                         font-size: 5vw;
+                    }
+              }
+          }
+     }
+}
+@media screen and (max-width:360px){
+     
+     .product__list__container{
+          .categories{
+               .newest, .viewed{
+                    font-size: 8vw;
+               }
+               .category-list{
+                    .category{
+                         font-size: 7vw;
+                    }
+              }
+          }
+     }
+}
+@media screen and (max-width:320px){
+     
+     .product__list__container{
+          .categories{
+               .newest, .viewed{
+                    font-size: 10vw;
+               }
+               .category-list{
+                    .category{
+                         font-size: 9vw;
+                    }
+              }
           }
      }
 }

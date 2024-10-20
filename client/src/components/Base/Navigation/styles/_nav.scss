@@ -29,7 +29,7 @@ nav{
      }
 }
 
-@media screen and (max-width:1200px){
+@media screen and (max-width:1280px){
     nav{
         width: 120vw;
     }
@@ -44,7 +44,7 @@ nav{
 
 @media screen and (max-width: 840px) {
     nav{
-        width: 170vw;
+        width: 190vw;
         .navigation__part{
             position: relative;
             .category__list{

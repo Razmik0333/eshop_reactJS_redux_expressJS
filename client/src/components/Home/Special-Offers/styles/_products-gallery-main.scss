@@ -18,6 +18,14 @@
 
      }
 }
+@media screen and (max-width:1280px){
+     .special__offers{
+          width: 120vw;
+          .special__offers__container{
+          }
+
+     }
+}
 
 @media screen and (max-width:1024px){
      .special__offers{
@@ -28,11 +36,21 @@
 
      }
 }
+@media screen and (max-width:840px){
+     .special__offers{
+          width: 190vw;
+          
+          .special__offers__container{
+               width: 80%;
+          }
+
+     }
+}
 @media screen and (max-width:768px){
      .special__offers{
           
           .special__offers__container{
-               width: 120vw;
+              // width: 120vw;
           }
 
      }
@@ -41,7 +59,7 @@
      .special__offers{
           
           .special__offers__container{
-               width: 140vw;
+              // width: 140vw;
           }
 
      }
@@ -56,6 +74,14 @@
                align-items: center;
                align-content: center;
           }
+
+     }
+}
+@media screen and (max-width:360px){
+     .special__offers{
+          
+          width: 240vw;
+          
 
      }
 }

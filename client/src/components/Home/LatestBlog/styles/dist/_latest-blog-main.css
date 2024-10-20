@@ -4,7 +4,7 @@
   padding: 20px;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
   .latest__blog {
     width: 120vw;
   }
@@ -20,9 +20,17 @@
     width: 80%;
   }
 }
+@media screen and (max-width: 840px) {
+  .latest__blog {
+    width: 190vw;
+  }
+  .latest__blog .latest__blog__container {
+    width: 80%;
+  }
+}
 @media screen and (max-width: 648px) {
   .latest__blog {
-    width: 180vw;
+    width: 200vw;
   }
   .latest__blog .latest__blog__container {
     width: 80%;
@@ -42,5 +50,10 @@
   }
   .latest__blog .latest__blog__container {
     width: 80%;
+  }
+}
+@media screen and (max-width: 320px) {
+  .latest__blog {
+    width: 270vw;
   }
 }

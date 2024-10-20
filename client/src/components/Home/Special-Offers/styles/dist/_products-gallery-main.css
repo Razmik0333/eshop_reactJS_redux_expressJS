@@ -12,6 +12,11 @@
     width: 80vw;
   }
 }
+@media screen and (max-width: 1280px) {
+  .special__offers {
+    width: 120vw;
+  }
+}
 @media screen and (max-width: 1024px) {
   .special__offers {
     width: 140vw;
@@ -20,14 +25,12 @@
     width: 110vw;
   }
 }
-@media screen and (max-width: 768px) {
-  .special__offers .special__offers__container {
-    width: 120vw;
+@media screen and (max-width: 840px) {
+  .special__offers {
+    width: 190vw;
   }
-}
-@media screen and (max-width: 648px) {
   .special__offers .special__offers__container {
-    width: 140vw;
+    width: 80%;
   }
 }
 @media screen and (max-width: 480px) {
@@ -39,6 +42,11 @@
     flex-wrap: wrap;
     align-items: center;
     align-content: center;
+  }
+}
+@media screen and (max-width: 360px) {
+  .special__offers {
+    width: 240vw;
   }
 }
 @media screen and (max-width: 320px) {

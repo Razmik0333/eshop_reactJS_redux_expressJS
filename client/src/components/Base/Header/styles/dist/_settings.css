@@ -1,0 +1,67 @@
+.settings {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+}
+.settings .setting__item {
+  position: relative;
+  height: 35px;
+  display: flex;
+  padding: 5px;
+}
+.settings .setting__item:hover .settings__currency__item {
+  display: inline-block;
+  background-color: #434343;
+  position: absolute;
+  top: 40px;
+}
+.settings .setting__item .setting__currency {
+  padding: 8px 10px;
+  background-color: #434343;
+}
+.settings .setting__item .setting__currency:hover {
+  cursor: pointer;
+  background-color: #d58e32;
+}
+.settings .setting__item .settings__currency__item {
+  display: none;
+}
+.settings .settings__currency__lang {
+  width: 100px;
+}
+.settings .settings__about {
+  padding: 5px;
+}
+.settings .settings__about a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+@media screen and (max-width: 840px) {
+  .settings .setting__item {
+    font-size: 2.2vw;
+  }
+}
+@media screen and (max-width: 648px) {
+  .settings .setting__item {
+    font-size: 3vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .settings .setting__item {
+    font-size: 4vw;
+  }
+}
+@media screen and (max-width: 360px) {
+  .settings .setting__item {
+    font-size: 5vw;
+  }
+}
+@media screen and (max-width: 320px) {
+  .settings .setting__item {
+    font-size: 6vw;
+  }
+}

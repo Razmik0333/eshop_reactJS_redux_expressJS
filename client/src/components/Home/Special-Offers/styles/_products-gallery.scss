@@ -6,7 +6,7 @@
      position: relative;
      .products-gallery-header{
           .products-gallery-title{
-               font-size: 2.7vw;
+               font-size: 1.7vw;
                color: #d58e32;
                font-weight: 500;
                padding: 25px;
@@ -90,13 +90,26 @@
 }
 @media screen and (max-width:1024px){
      .products-gallery {
-          
+          .products-gallery-header{
+               .products-gallery-title{
+                    font-size: 3vw;
+               }
+          }
           .products-gallery-blocks{
                width: 64vw;
           }
           
      }
      
+}
+@media screen and (max-width:840px){
+     .products-gallery {
+          .products-gallery-header{
+               .products-gallery-title{
+                    font-size: 4vw;
+               }
+          }
+     }
 }
 @media screen and (max-width:768px){
      .products-gallery {
@@ -105,6 +118,8 @@
                     
                     padding: 15px;
                     margin-left: 15px;
+                    font-size: 4.5vw;
+
                }
           }
           .products-gallery-blocks{
@@ -117,40 +132,39 @@
      }
      
 }
-@media screen and (max-width:540px){
+@media screen and (max-width:648px){
      .products-gallery {
-          left: 80px;
           .products-gallery-header{
                .products-gallery-title{
-                    
-                  
+                    font-size: 5vw;
                }
           }
      }
 }
+@media screen and (max-width:540px){
+     .products-gallery {
+          left: 80px;
+     }
+}
+
 @media screen and (max-width:480px){
      .products-gallery {
-          top: 50px;
+          top: 100px;
           width: 100%;
           left: 0;
           .products-gallery-header{
                .products-gallery-title{
                     
-                    font-size: 7vw;
+                    font-size: 6vw;
                }
           }
           .products-gallery-blocks{
-               width: 140vw;
+               width: 180vw;
                row-gap: 20px;
                column-gap: 15px;
-          }
-     }
-}
-@media screen and (max-width:480px){
-     .products-gallery {
-
-          .products-gallery-blocks{
-               width: 140vw;
+               .products-gallery-block{
+                    width: 210px;
+               }
           }
           .products-gallery-footer{
                bottom: 50%;
@@ -158,10 +172,30 @@
           }
      }
 }
-@media screen and (max-width:460px){
+
+@media screen and (max-width:360px){
      .products-gallery {
           .products-gallery-blocks{
-               width: 160vw;
+               width: 190vw;
+          }
+          .products-gallery-header{
+               .products-gallery-title{
+                    
+                    font-size: 8vw;
+               }
+          }
+     }
+}
+@media screen and (max-width:320px){
+     .products-gallery {
+          .products-gallery-blocks{
+               width:210vw;
+          }
+          .products-gallery-header{
+               .products-gallery-title{
+                    
+                    font-size: 10vw;
+               }
           }
      }
 }

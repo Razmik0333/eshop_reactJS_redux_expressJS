@@ -45,6 +45,27 @@
   fill: whitesmoke;
 }
 
+@media screen and (max-width: 1024px) {
+  .service__part .service-name {
+    font-size: 2vw;
+    padding: 20px;
+  }
+}
+@media screen and (max-width: 840px) {
+  .service__part .service-name {
+    font-size: 2.5vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .service__part .service-name {
+    font-size: 3vw;
+  }
+}
+@media screen and (max-width: 648px) {
+  .service__part .service-name {
+    font-size: 3.2vw;
+  }
+}
 @media screen and (max-width: 480px) {
   .service__part {
     width: 25%;
@@ -54,5 +75,16 @@
   .service__part .service-name {
     padding-left: 1%;
     padding-right: 1%;
+    font-size: 5vw;
+  }
+}
+@media screen and (max-width: 360px) {
+  .service__part .service-name {
+    font-size: 6vw;
+  }
+}
+@media screen and (max-width: 320px) {
+  .service__part .service-name {
+    font-size: 6.5vw;
   }
 }

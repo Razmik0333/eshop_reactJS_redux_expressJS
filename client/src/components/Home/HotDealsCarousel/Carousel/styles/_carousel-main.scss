@@ -6,7 +6,6 @@
           position: relative;
            overflow: hidden;
            &:hover{
-               
                .shop-now{
                     width: 110px;
                     height: 40px;
@@ -118,8 +117,11 @@
 @media screen and (max-width:996px){
      .hot__deals__container{
           .carousel{
-               width: 100%;
-     
+               &:hover{
+                    .shop-now{
+                         font-size: 2vw;
+                    }
+               }
           }
 
      }
@@ -128,8 +130,25 @@
      .hot__deals__container{
           .carousel{
                width: 100vw;
-             //  margin-top: 80px;
-              // left: 38%;
+               &:hover{
+                    .shop-now{
+                         font-size: 2.8vw;
+                    }
+               }
+          }
+
+     }
+}
+@media screen and (max-width:648px){
+     .hot__deals__container{
+          .carousel{
+               &:hover{
+                    .shop-now{
+                         width: 150px;
+                         height: 60px;
+                         font-size: 4vw;
+                    }
+               }
           }
 
      }
@@ -139,8 +158,35 @@
           .carousel{
                width: 176vw;
                margin-top: 170px;
+               &:hover{
+                    .shop-now{
+                         font-size: 5.5vw;
+                    }
+               }
+          }
 
-               //left: 85%;
+     }
+}
+@media screen and (max-width:360px){
+     .hot__deals__container{
+          .carousel{
+               &:hover{
+                    .shop-now{
+                         font-size:7vw;
+                    }
+               }
+          }
+
+     }
+}
+@media screen and (max-width:320px){
+     .hot__deals__container{
+          .carousel{
+               &:hover{
+                    .shop-now{
+                         font-size:8vw;
+                    }
+               }
           }
 
      }

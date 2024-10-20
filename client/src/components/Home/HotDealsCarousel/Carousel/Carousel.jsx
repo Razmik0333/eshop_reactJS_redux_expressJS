@@ -19,7 +19,6 @@ function Carousel() {
      const servicesList = useSelector(getServicesSelector)
      const shopNow = useSelector(currentLanguageDataSelector)?.home?.carousel?.shop_now;
      const arrowRight = () => {
-          console.log(carouselRef.current?.clientWidth);
           leftVal <  -carouselRef.current?.clientWidth ? 
                setLeftVal(0) : setLeftVal(leftVal - carouselRef.current?.clientWidth);
           

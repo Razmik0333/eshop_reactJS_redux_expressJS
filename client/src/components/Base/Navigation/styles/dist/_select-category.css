@@ -1,7 +1,7 @@
 .select__category {
-  width: 15vw;
   border: 1px solid #464646;
   padding: 15px;
+  height: 34px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -13,6 +13,7 @@
 }
 .select__category .select-text {
   font-size: 14px;
+  padding: 10px;
 }
 .select__category .select-icon img {
   width: 24px;
@@ -27,8 +28,50 @@
   margin-left: 10px;
 }
 
+@media screen and (max-width: 1440px) {
+  .select__category .select-text {
+    font-size: 11px;
+    padding: 6px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .select__category .select-text {
+    font-size: 1.1vw;
+    padding: 0;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .select__category .select-text {
+    font-size: 1.5vw;
+  }
+}
+@media screen and (max-width: 840px) {
+  .select__category .select-text {
+    font-size: 1.7vw;
+  }
+}
 @media screen and (max-width: 768px) {
-  .select__category {
-    width: 30vw;
+  .select__category .select-text {
+    font-size: 2.2vw;
+  }
+}
+@media screen and (max-width: 648px) {
+  .select__category .select-text {
+    font-size: 3vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .select__category .select-text {
+    font-size: 3.3vw;
+  }
+}
+@media screen and (max-width: 360px) {
+  .select__category .select-text {
+    font-size: 4vw;
+  }
+}
+@media screen and (max-width: 320px) {
+  .select__category .select-text {
+    font-size: 4.6vw;
   }
 }

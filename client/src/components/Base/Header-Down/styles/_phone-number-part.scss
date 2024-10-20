@@ -8,3 +8,44 @@
      }
 
 }
+@media screen and (max-width: 840px) {
+     .phone__number{
+          .phone-number{
+               font-size: 2.2vw;
+          }
+         
+     }
+ }
+@media screen and (max-width: 648px) {
+     .phone__number{
+          .phone-number{
+               font-size: 3vw;
+          }
+         
+     }
+ }
+@media screen and (max-width: 480px) {
+     .phone__number{
+          .phone-number{
+               font-size: 4vw;
+          }
+         
+     }
+ }
+@media screen and (max-width: 360px) {
+     .phone__number{
+          .phone-number{
+               font-size: 5vw;
+          }
+         
+     }
+ }
+@media screen and (max-width: 320px) {
+     .phone__number{
+          .phone-number{
+               font-size: 6vw;
+          }
+         
+     }
+ }
+

@@ -42,11 +42,9 @@ function Header() {
           <header>
                <div className="container header__container">
                     <ul className="settings">
-                        <li className="settings__currency">
+                        <li className="setting__item settings__currency">
                               <span className="setting__currency">{currentCurrency}</span>
-                         
                               <ul className="settings__currency__item">
-                                   
                                    {
                                         currencies
                                              ?.filter((item) => item?.code !== currentCurrency)
@@ -61,12 +59,10 @@ function Header() {
                                              </li>
                                         })
                                    }
-                                   
                               </ul>
                         </li>
-                        <li className="settings__currency settings__currency__lang">
+                        <li className="setting__item settings__currency settings__currency__lang">
                                <span className="setting__currency">{currentLanguageObj?.title}</span> 
-                         
                               <ul className="settings__currency__item">
                                    {
                                         languages
@@ -84,12 +80,12 @@ function Header() {
                               </ul>
                         </li>
 
-                        <li className="settings__about">
-                              <span>
+                        <li className="setting__item settings__about">
+                              
 
                               <NavLink to={"/about"} className="setting__currency">
                               {headerLangData?.menu_burger?.about}</NavLink>
-                              </span>
+                              
 
                          </li>
                           {/* <li>
@@ -104,19 +100,25 @@ function Header() {
                          </li>  */}
                     </ul>
                     <div className="login__register">
-                         <div className="login__register__item login">
-                              <div className="register__icon"></div>
-                                   {
-                                        !userId &&
-                                        <>
-                                             <NavLink to={"/login"} className="register-link">{headerLangData?.menu_burger?.login}</NavLink>
-                                        </>
-                                   
-                                   }
-                                   
-
-                              
-                         </div>
+                              {
+                                   !userId &&
+                                   <>
+                                        <div className="login__register__item login">
+                                             {
+                                                  <>
+                                                       <div className="register__icon"></div>
+                                                       {
+                                                            
+                                                            <>
+                                                                 <NavLink to={"/login"} className="register-link">{headerLangData?.menu_burger?.login}</NavLink>
+                                                            </>
+                                                       
+                                                       }
+                                                  </>
+                                             }
+                                        </div>
+                                   </>
+                              }
                          <div className="login__register__item register">
 
                               {

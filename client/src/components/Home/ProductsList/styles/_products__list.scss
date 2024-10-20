@@ -4,7 +4,7 @@
 
 @media screen and (max-width:1280px){
      .products__list{
-          width: 100vw;
+          width: 120vw;
      }
  }
 @media screen and (max-width:1024px){
@@ -12,9 +12,9 @@
           width: 140vw;
      }
  }
- @media screen and (max-width:996px){
+ @media screen and (max-width:840px){
       .products__list{
-           width: 150vw;
+           width: 190vw;
       }
   }
  @media screen and (max-width:648px){
@@ -27,8 +27,13 @@
            width: 220vw;
       }
   }
+ @media screen and (max-width:360px){
+      .products__list{
+           width: 250vw;
+      }
+  }
  @media screen and (max-width:320px){
       .products__list{
-           width: 270vw;
+           width: 280vw;
       }
   }

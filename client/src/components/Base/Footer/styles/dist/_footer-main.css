@@ -17,7 +17,7 @@ footer .footer__top .footer__second {
   column-gap: 100px;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
   footer {
     width: 120vw;
   }
@@ -29,7 +29,7 @@ footer .footer__top .footer__second {
 }
 @media screen and (max-width: 840px) {
   footer {
-    width: 170vw;
+    width: 190vw;
   }
 }
 @media screen and (max-width: 648px) {

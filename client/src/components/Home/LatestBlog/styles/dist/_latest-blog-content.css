@@ -135,6 +135,40 @@
   color: #d58e32;
 }
 
+@media screen and (max-width: 840px) {
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__title .comments-date {
+    font-size: 2vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-user-avatar .review__user__name {
+    font-size: 3vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-desc-title {
+    font-size: 2vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-desc-text {
+    font-size: 2.2vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .latest-blog-footer .latest_blog_button {
+    font-size: 1.8vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__title .comments-date {
+    font-size: 3vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-user-avatar .review__user__name {
+    font-size: 3.5vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-desc-title {
+    font-size: 3vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-desc-text {
+    font-size: 2.8vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .latest-blog-footer .latest_blog_button {
+    font-size: 2.5vw;
+  }
+}
 @media screen and (max-width: 480px) {
   .latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__title {
     flex-direction: column-reverse;
@@ -142,5 +176,51 @@
   }
   .latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__title .comments-date {
     margin-top: 5px;
+    font-size: 3.5vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-user-avatar .review__user__name {
+    font-size: 4.5vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-desc-title {
+    font-size: 4vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-desc-text {
+    font-size: 3.5vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .latest-blog-footer .latest_blog_button {
+    font-size: 3.8vw;
+    height: 50px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__title .comments-date {
+    font-size: 4.5vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-user-avatar .review__user__name {
+    font-size: 5.5vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-desc-title {
+    font-size: 5vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-desc-text {
+    font-size: 4.5vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .latest-blog-footer .latest_blog_button {
+    font-size: 5.5vw;
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest__blog__item__title .comments-date {
+    font-size: 5.5vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-user-avatar .review__user__name {
+    font-size: 6.5vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-desc-title {
+    font-size: 6vw;
+  }
+  .latest__blog__content .latest__blog__items .latest__blog__item .latest_blog_content .item-desc-text {
+    font-size: 5.5vw;
   }
 }

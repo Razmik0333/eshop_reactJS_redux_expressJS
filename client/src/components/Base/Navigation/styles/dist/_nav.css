@@ -21,7 +21,7 @@ nav .navigation__part .category__list li .active {
   color: #fff;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
   nav {
     width: 120vw;
   }
@@ -33,7 +33,7 @@ nav .navigation__part .category__list li .active {
 }
 @media screen and (max-width: 840px) {
   nav {
-    width: 170vw;
+    width: 190vw;
   }
   nav .navigation__part {
     position: relative;

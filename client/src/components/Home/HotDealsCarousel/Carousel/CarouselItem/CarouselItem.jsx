@@ -5,7 +5,6 @@ import { getCurrentLanguageSelector } from '../../../../../helpers/reduxSelector
 
 export default function CarouselItem({service,width}) {
      const currentLanguage = useSelector(getCurrentLanguageSelector);
-     console.log(width);
   return (
      <div className="carousel__body" style={{width}}>
           <div className="carousel__picture" >

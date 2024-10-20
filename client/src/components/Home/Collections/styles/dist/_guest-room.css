@@ -78,7 +78,7 @@
   padding: 10px;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
   .collections {
     width: 120vw;
   }
@@ -86,6 +86,9 @@
 @media screen and (max-width: 1024px) {
   .collections {
     width: 140vw;
+  }
+  .collections .collections__container .collections-header {
+    font-size: 3vw;
   }
   .collections .collections__container .collections__content .guest__room .guest__room__sofa .guest-room {
     font-size: 5vw;
@@ -97,12 +100,23 @@
     font-size: 8vw;
   }
 }
+@media screen and (max-width: 996px) {
+  .collections {
+    width: 150vw;
+  }
+}
 @media screen and (max-width: 840px) {
   .collections {
-    width: 170vw;
+    width: 190vw;
+  }
+  .collections .collections-header {
+    font-size: 4vw;
   }
 }
 @media screen and (max-width: 768px) {
+  .collections .collections__container .collections-header {
+    font-size: 4.5vw;
+  }
   .collections .collections__container .collections__content .guest__room .guest__room__sofa {
     height: 200px;
   }
@@ -120,6 +134,9 @@
   .collections {
     width: 200vw;
   }
+  .collections .collections__container .collections-header {
+    font-size: 5vw;
+  }
   .collections .collections__container .collections__content .guest__room .guest__room__sofa {
     top: 0;
   }
@@ -127,6 +144,9 @@
 @media screen and (max-width: 480px) {
   .collections {
     width: 220vw;
+  }
+  .collections .collections__container .collections-header {
+    font-size: 6vw;
   }
   .collections .collections__container .collections__content .guest__room .guest__room__sofa {
     height: 200px;
@@ -146,10 +166,16 @@
   .collections {
     width: 250vw;
   }
+  .collections .collections__container .collections-header {
+    font-size: 8vw;
+  }
 }
 @media screen and (max-width: 320px) {
   .collections {
     width: 280vw;
+  }
+  .collections .collections__container .collections-header {
+    font-size: 10vw;
   }
   .collections .collections__container .collections__content {
     min-width: 320px;

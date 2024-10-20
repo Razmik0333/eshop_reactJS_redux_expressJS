@@ -43,14 +43,12 @@
                vertical-align: bottom;
                width: 20px;
                height: auto;
-               //margin-right: 5px;
           }
           .add-cart-text{
                margin-left: 0px;
                color: #fff;
                font-size: 11px;
                vertical-align: text-top;
-               /* width: 100%; */
                padding: 5px;
           }
      }
@@ -179,7 +177,7 @@
                .hot-deals-prices{
                     display: flex;
                     .hot-deals-price{
-                         width: 56px;
+                         width: 60px;
                          height:18px;
                          padding: 10px;
                          text-align: center;
@@ -195,21 +193,138 @@
 
 @media screen and (max-width:1300px){
      .hot__deals__content{
+          .sale{
+               font-size: 1.2vw;
+          }
           .hot-deals-desc-part{
                .hot-deals-desc-options{
                     flex-direction: column-reverse;
                     margin-top: 20px;
-                    
+                    .hot-deals-prices{
+                         font-size: 1.5vw;
+                         .hot-deals-price{
+                              width: 70px;
+                         }
+                    }
                     .hot-deals-buttons{
                          margin-top: 10px;
+                    }
+               }
+               .hot-deals-desc-header{
+                    .hot-deals-header{
+                         font-size: 1.5vw;
                     }
                }
 
           }
      }
 }
+@media screen and (max-width:1024px){
+     .hot__deals__content{
+          .hot-deals-desc-part{
+               .hot-deals-desc-options{
+                    .hot-deals-prices{
+                         font-size: 2vw;
+
+                    }
+               }
+     
+               .hot-deals-desc-header{
+
+                    .hot-deals-header{
+                         font-size: 2vw;
+                    }
+               }
+          }
+          .sale{
+               font-size: 1.5vw;
+          }
+     }
+}
+@media screen and (max-width:840px){
+     .hot__deals__content{
+          .hot-deals-desc-part{
+               .hot-deals-desc-options{
+                    .hot-deals-prices{
+                         font-size: 2.4vw;
+
+                    }
+               }
+               .hot-deals-desc-header{
+                    .hot-deals-header{
+                         font-size: 2.5vw;
+                    }
+               }
+          }
+          .sale{
+               font-size: 1.8vw;
+          }
+     }
+}
+@media screen and (max-width:768px){
+     .hot__deals__content{
+          .hot-deals-desc-part{
+               .hot-deals-desc-options{
+                    .hot-deals-prices{
+                         font-size: 2.6vw;
+
+                    }
+               }
+               .hot-deals-desc-header{
+                    .hot-deals-header{
+                         font-size: 3vw;
+                    }
+               }
+          }
+          .sale{
+               font-size: 2vw;
+          }
+     }
+}
+@media screen and (max-width:648px){
+     .hot__deals__content{
+          .hot-deals-desc-part{
+               .hot-deals-desc-options{
+                    .hot-deals-prices{
+                         font-size: 3vw;
+
+                    }
+               }
+               .hot-deals-desc-header{
+                    .hot-deals-header{
+                         font-size: 3.5vw;
+                    }
+               }
+          }
+          .sale{
+               font-size: 2.2vw;
+          }
+     }
+}
 @media screen and (max-width:480px){
      .hot__deals__content{
+          .hot-deals-desc-part{
+               .hot-deals-desc-options{
+                    flex-direction: row;
+
+                    .hot-deals-prices{
+                         font-size: 5.5vw;
+                         .hot-deals-price{
+                              width: 90px;
+                              height: 25px;
+                         }
+
+                    }
+               }
+               .hot-deals-desc-header{
+                    .hot-deals-header{
+                         font-size: 6vw;
+                    }
+               }
+          }
+          .sale{
+               font-size: 3vw;
+          }
           .hot-deals-picture{
                height: 300px;
                
@@ -223,5 +338,43 @@
                }
           }
 
+     }
+}
+@media screen and (max-width:360px){
+     .hot__deals__content{
+          .hot-deals-desc-part{
+               .hot-deals-desc-options{
+                    .hot-deals-prices{
+                         font-size: 6.5vw;
+                    }
+               }
+               .hot-deals-desc-header{
+                    .hot-deals-header{
+                         font-size: 8vw;
+                    }
+               }
+          }
+          .sale{
+               font-size: 4vw;
+          }
+     }
+}
+@media screen and (max-width:320px){
+     .hot__deals__content{
+          .hot-deals-desc-part{
+               .hot-deals-desc-options{
+                    .hot-deals-prices{
+                         font-size: 7.5vw;
+                    }
+               }
+               .hot-deals-desc-header{
+                    .hot-deals-header{
+                         font-size: 10vw;
+                    }
+               }
+          }
+          .sale{
+               font-size: 4.5vw;
+          }
      }
 }

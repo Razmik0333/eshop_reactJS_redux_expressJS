@@ -21,11 +21,10 @@ export default function Categories() {
           }else{
                dispatch(getNavigationBurgerState(true));
                setBurgerState(true);
-
           }
-          
      }, [window.innerWidth]);
      const changeCategory = (e) => {
+          dispatch(currentCategory(e.target.dataset.id))
           dispatch(fetchCurrentCatgory(e.target.dataset.id));
           dispatch(clearSearchData([]));
           dispatch(currentSearch(''));

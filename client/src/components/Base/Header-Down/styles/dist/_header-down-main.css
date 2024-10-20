@@ -18,7 +18,7 @@
   flex-direction: row;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
   .header__down {
     width: 120vw;
   }
@@ -30,7 +30,7 @@
 }
 @media screen and (max-width: 840px) {
   .header__down {
-    width: 170vw;
+    width: 190vw;
   }
 }
 @media screen and (max-width: 648px) {

@@ -615,13 +615,12 @@ module.exports.services = async (req, res) => {
 module.exports.performedProducts = async (req, res) => {
       const performedProducts = await realyze("SELECT * FROM performed_works");
       res.send(performedProducts)
-
 }
 module.exports.filterByList = async (req, res) => {
-     
      try {
           const cachesPath = variables.caches.product;  
           const filterObject = JSON.parse(req.params.str);
+          console.log("🚀 ~ module.exports.filterByList= ~ req.params.str:", req.params.str)
           console.log("🚀 ~ module.exports.filterByList= ~ filterObject:", filterObject)
           const currentCategoryId = filterObject?.category;
           const currentSubCategoryId = filterObject?.subCategory;

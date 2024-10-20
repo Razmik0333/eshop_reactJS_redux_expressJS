@@ -6,7 +6,7 @@
      position: absolute;
      bottom:35%;
      left: 10%;
-     width: 71%;
+     width: 80%;
      height: 60px;
      .timer-item{
           width: 21%;
@@ -25,9 +25,24 @@
      }
 
 }
+@media screen and (max-width:1200px){
+     .hot-deals-timer{
+          .timer-item{
+
+               font-size: 1.5vw;
+          }
+     }
+}
+@media screen and (max-width:1024px){
+     .hot-deals-timer{
+          .timer-item{
+
+               font-size: 1.8vw;
+          }
+     }
+}
 @media screen and (max-width:996px){
      .hot-deals-timer{
-          width: 80%;
           .timer-item{
 
                font-size: 2vw;
@@ -39,7 +54,41 @@
           
           .timer-item{
 
-               font-size: 3vw;
+               font-size: 2.3vw;
+          }
+     }
+}
+@media screen and (max-width:648px){
+     .hot-deals-timer{
+          
+          .timer-item{
+
+               font-size: 2.8vw;
+          }
+     }
+}
+@media screen and (max-width:480px){
+     .hot-deals-timer{
+          left: 10%;
+          width: 80%;
+          bottom: 12%;
+          height: 100px;
+          .timer-item{
+               font-size: 4.8vw;
+          }
+     }
+}
+@media screen and (max-width:360px){
+     .hot-deals-timer{
+          .timer-item{
+               font-size: 6.8vw;
+          }
+     }
+}
+@media screen and (max-width:320px){
+     .hot-deals-timer{
+          .timer-item{
+               font-size: 7.8vw;
           }
      }
 }

@@ -34,3 +34,39 @@
 .latest__blog__header .latest__blog_line__circles .circles .active {
   background-color: #d58e32;
 }
+
+@media screen and (max-width: 1024px) {
+  .latest__blog__header .latest-blog-header {
+    font-size: 3vw;
+  }
+}
+@media screen and (max-width: 840px) {
+  .latest__blog__header .latest-blog-header {
+    font-size: 4vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .latest__blog__header .latest-blog-header {
+    font-size: 4.5vw;
+  }
+}
+@media screen and (max-width: 648px) {
+  .latest__blog__header .latest-blog-header {
+    font-size: 5vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .latest__blog__header .latest-blog-header {
+    font-size: 6vw;
+  }
+}
+@media screen and (max-width: 360px) {
+  .latest__blog__header .latest-blog-header {
+    font-size: 8vw;
+  }
+}
+@media screen and (max-width: 320px) {
+  .latest__blog__header .latest-blog-header {
+    font-size: 10vw;
+  }
+}

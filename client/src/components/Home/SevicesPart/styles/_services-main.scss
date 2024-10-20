@@ -13,6 +13,11 @@
      margin-top: 82px;
 }
 
+@media screen and (max-width:1300px) {
+     .services__part{
+          margin-top:100px;
+     }
+}
 @media screen and (max-width:1200px) {
      .services__part{
           width: 120vw;
@@ -25,7 +30,7 @@
 }
 @media screen and (max-width:840px) {
      .services__part{
-          width: 170vw;
+          width: 190vw;
      }
 }
 @media screen and (max-width:648px) {
