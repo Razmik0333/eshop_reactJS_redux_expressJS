@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.fetchLanguages = exports.fetchLanguageData = exports.changeCurrencies = exports.changeLanguages = exports.getSubCategory = exports.getSubCategoryId = exports.changeMostestIndex = exports.changeLanguage = exports.changeCurrency = exports.getIdProductsFromStartingPage = exports.getHotDealsTimerSecond = exports.getNavigationBurgerState = exports.getViewedProductId = exports.getPopupItemId = exports.changePopupHotDeals = exports.changePopup = exports.getReviewShow = exports.changeModal = exports.clearCostValues = exports.changeCosts = exports.changeCountItemsOfPage = exports.changeCountElements = exports.changeSortType = exports.getBestSellerProductId = exports.getSimilarProductId = exports.getHotDealsId = exports.changeShowType = exports.changeNavigetionBurgerIsActive = exports.changeSubCategory = exports.changeSubCategoryId = exports.changeBestSellerProductId = exports.changeSimilarProductId = exports.changeReviewShow = exports.changeViewedProductId = exports.changeCurrentMostestIndex = exports.changeCurrentLanguageData = exports.changeCurrentLanguage = exports.changeCurrentCurrency = exports.changeHotDealsTimerSecond = exports.changeIdProductsFromStartingPage = exports.changeHotDealsId = exports.changePopupItemId = exports.getCurrencies = exports.getLanguages = exports.getPopupHotDealsOpenClose = exports.getPopupOpenClose = exports.getModalOpenClose = exports.getCostsValues = exports.getCountItemsOfPage = exports.getCountElements = exports.getSortType = exports.getShowType = void 0;
+exports["default"] = exports.fetchLanguages = exports.fetchLanguageData = exports.changeCurrencies = exports.changeLanguages = exports.changeIsSmallSize = exports.showSubCategoriesSmallSize = exports.getSubCategory = exports.getSubCategoryId = exports.changeMostestIndex = exports.changeLanguage = exports.changeCurrency = exports.getIdProductsFromStartingPage = exports.getHotDealsTimerSecond = exports.getNavigationBurgerState = exports.getViewedProductId = exports.getPopupItemId = exports.changePopupHotDeals = exports.changePopup = exports.getReviewShow = exports.changeModal = exports.clearCostValues = exports.changeCosts = exports.changeCountItemsOfPage = exports.changeCountElements = exports.changeSortType = exports.getBestSellerProductId = exports.getSimilarProductId = exports.getHotDealsId = exports.changeShowType = exports.isSmallSize = exports.showSubCategoriesForSmallSize = exports.changeNavigetionBurgerIsActive = exports.changeSubCategory = exports.changeSubCategoryId = exports.changeBestSellerProductId = exports.changeSimilarProductId = exports.changeReviewShow = exports.changeViewedProductId = exports.changeCurrentMostestIndex = exports.changeCurrentLanguageData = exports.changeCurrentLanguage = exports.changeCurrentCurrency = exports.changeHotDealsTimerSecond = exports.changeIdProductsFromStartingPage = exports.changeHotDealsId = exports.changePopupItemId = exports.getCurrencies = exports.getLanguages = exports.getPopupHotDealsOpenClose = exports.getPopupOpenClose = exports.getModalOpenClose = exports.getCostsValues = exports.getCountItemsOfPage = exports.getCountElements = exports.getSortType = exports.getShowType = void 0;
 
 var _redux = require("../../helpers/redux");
 
@@ -42,6 +42,8 @@ var SIMILAR_PRODUCT_ID = 'configsDuck/SIMILAR_PRODUCT_ID';
 var BEST_SELLER_PRODUCT_ID = 'configsDuck/BEST_SELLER_PRODUCT_ID';
 var SUB_CAT_ID = 'configsDuck/SUB_CAT_ID';
 var SUB_CAT = 'configsDuck/SUB_CAT';
+var IS_SMALL_SIZE = 'configsDuck/IS_SMALL_SIZE';
+var SUB_CAT_SMALL_SIZE = 'configsDuck/SUB_CAT_SMALL_SIZE';
 var getShowType = (0, _redux.createAction)(CHANGE_SHOW_TYPE);
 exports.getShowType = getShowType;
 var getSortType = (0, _redux.createAction)(CHANGE_SORT_TYPE);
@@ -92,6 +94,10 @@ var changeSubCategory = (0, _redux.createAction)(SUB_CAT);
 exports.changeSubCategory = changeSubCategory;
 var changeNavigetionBurgerIsActive = (0, _redux.createAction)(NAVIGATION_BURGER_IS_ACTIVE);
 exports.changeNavigetionBurgerIsActive = changeNavigetionBurgerIsActive;
+var showSubCategoriesForSmallSize = (0, _redux.createAction)(SUB_CAT_SMALL_SIZE);
+exports.showSubCategoriesForSmallSize = showSubCategoriesForSmallSize;
+var isSmallSize = (0, _redux.createAction)(IS_SMALL_SIZE);
+exports.isSmallSize = isSmallSize;
 
 var changeShowType = function changeShowType(str) {
   return function (dispatch) {
@@ -277,6 +283,22 @@ var getSubCategory = function getSubCategory(id) {
 
 exports.getSubCategory = getSubCategory;
 
+var showSubCategoriesSmallSize = function showSubCategoriesSmallSize(bool) {
+  return function (dispatch) {
+    dispatch(showSubCategoriesForSmallSize(bool));
+  };
+};
+
+exports.showSubCategoriesSmallSize = showSubCategoriesSmallSize;
+
+var changeIsSmallSize = function changeIsSmallSize(bool) {
+  return function (dispatch) {
+    dispatch(isSmallSize(bool));
+  };
+};
+
+exports.changeIsSmallSize = changeIsSmallSize;
+
 var changeLanguages = function changeLanguages() {
   return function _callee(dispatch) {
     var data;
@@ -433,9 +455,11 @@ var initialStateConfigs = {
   similarCirclId: 1,
   bestSellerCircleId: 1,
   reviewShow: false,
-  subCatId: null,
-  subCat: null,
-  navigetionBurgerIsActive: false
+  subCatId: "1",
+  subCat: "1",
+  navigetionBurgerIsActive: false,
+  subCategoriesForSmallSize: false,
+  isSmallSize: false
 };
 
 var ConfigsDuck = function ConfigsDuck() {
@@ -567,6 +591,16 @@ var ConfigsDuck = function ConfigsDuck() {
     case SUB_CAT:
       return _objectSpread({}, state, {
         subCat: action.payload
+      });
+
+    case IS_SMALL_SIZE:
+      return _objectSpread({}, state, {
+        isSmallSize: action.payload
+      });
+
+    case SUB_CAT_SMALL_SIZE:
+      return _objectSpread({}, state, {
+        subCategoriesForSmallSize: action.payload
       });
 
     default:

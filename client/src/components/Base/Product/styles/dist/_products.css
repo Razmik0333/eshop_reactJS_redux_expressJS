@@ -1,14 +1,4 @@
 @charset "UTF-8";
-.products-list {
-  margin-top: 50px;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  align-items: center;
-  height: auto;
-  gap: 70px;
-}
 .products-list .product {
   width: 280px;
   height: 500px;
@@ -131,24 +121,12 @@
 }
 
 @media screen and (max-width: 1280px) {
-  .products-list {
-    gap: 50px;
-    justify-content: center;
-  }
   .products-list .product .sale {
     font-size: 1.2vw;
   }
 }
-@media screen and (max-width: 1140px) {
-  .products-list {
-    gap: 15px;
-  }
-}
 @media screen and (max-width: 1085px) {
-  .products-list {
-    gap: 15px;
-  }
-  .products-list .product .sale {
+  .product .sale {
     font-size: 1.5vw;
   }
 }
@@ -160,29 +138,18 @@
     font-size: 2.3vw;
   }
 }
-@media screen and (max-width: 996px) {
-  .products-list {
-    gap: 30px;
-  }
-}
 @media screen and (max-width: 840px) {
-  .products-list {
-    gap: 25px;
-  }
-  .products-list .product .sale {
+  .product .sale {
     font-size: 1.8vw;
   }
-  .products-list .product .product-name {
+  .product .product-name {
     font-size: 2.7vw;
   }
-  .products-list .product .product-options .product-prices {
+  .product .product-options .product-prices {
     font-size: 3.3vw;
   }
 }
 @media screen and (max-width: 768px) {
-  .products-list {
-    gap: 25px;
-  }
   .products-list .product .sale {
     font-size: 2vw;
   }
@@ -194,9 +161,6 @@
   }
 }
 @media screen and (max-width: 648px) {
-  .products-list {
-    gap: 50px;
-  }
   .products-list .product .sale {
     font-size: 2.2vw;
   }
@@ -208,9 +172,6 @@
   }
 }
 @media screen and (max-width: 480px) {
-  .products-list {
-    gap: 25px;
-  }
   .products-list .product .sale {
     font-size: 3vw;
   }
@@ -233,9 +194,6 @@
   }
 }
 @media screen and (max-width: 320px) {
-  .products-list {
-    gap: 30px;
-  }
   .products-list .product .sale {
     font-size: 4.5vw;
   }

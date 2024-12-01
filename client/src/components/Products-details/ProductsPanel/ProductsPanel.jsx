@@ -9,7 +9,7 @@ const ProductsList = lazy(() => import('./ProductsList/ProductsList'));
 function ProductsPanel(){
      return (
           
-          <div className="products__panel">
+          <div className="products__panel" >
                <ProductsDetailsList />
                <ProductsList /> 
                <RefreshButton /> 

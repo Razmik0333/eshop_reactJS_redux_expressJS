@@ -11,7 +11,7 @@
 }
 .search__area .search__part .search__products {
   position: relative;
-  width: 50%;
+  width: 43%;
   padding: 17px;
 }
 .search__area .search__part .search__products .search-input {
@@ -20,7 +20,6 @@
   position: absolute;
   top: -16px;
   left: 0;
-  width: 50%;
 }
 .search__area .search__part .search__products .search-button {
   height: 50px;
@@ -43,9 +42,9 @@
   position: absolute;
   top: 42px;
   text-align: center;
-  width: 100%;
+  width: 67%;
   border-radius: 5px;
-  height: 100px;
+  height: 60px;
   overflow-y: auto;
   left: 0;
   z-index: 99999;
@@ -70,9 +69,20 @@
   display: none;
 }
 
+@media screen and (max-width: 1440px) {
+  .search__area .search__part .search__products .search__items {
+    width: 89%;
+  }
+}
 @media screen and (max-width: 1024px) {
+  .search__area .search__part .search__products {
+    width: 47%;
+  }
   .search__area .search__part .search__products .search-input {
     font-size: 1.8vw;
+  }
+  .search__area .search__part .search__products .search__items {
+    width: 100%;
   }
 }
 @media screen and (max-width: 840px) {
@@ -82,6 +92,9 @@
   .search__area .search__part .search__products .search-input {
     font-size: 1.8vw;
   }
+  .search__area .search__part .search__products .search__items {
+    width: 72%;
+  }
 }
 @media screen and (max-width: 768px) {
   .search__area {
@@ -90,6 +103,9 @@
   .search__area .search__part .search__products .search-input {
     font-size: 2.2vw;
   }
+  .search__area .search__part .search__products .search__items {
+    width: 87%;
+  }
 }
 @media screen and (max-width: 648px) {
   .search__area {
@@ -97,6 +113,9 @@
   }
   .search__area .search__part .search__products .search-input {
     font-size: 3vw;
+  }
+  .search__area .search__part .search__products .search__items {
+    width: 92%;
   }
 }
 @media screen and (max-width: 480px) {
@@ -110,6 +129,9 @@
 @media screen and (max-width: 360px) {
   .search__area .search__part .search__products .search-input {
     font-size: 5vw;
+  }
+  .search__area .search__part .search__products .search__items {
+    width: 115%;
   }
 }
 @media screen and (max-width: 320px) {

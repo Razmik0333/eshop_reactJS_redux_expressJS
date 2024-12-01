@@ -2,18 +2,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import './styles/_categories-filter-panel.scss';
 import { fetchSubCatgories } from '../../../../redux/ducks/subCategoryDuck';
 import { useEffect } from 'react';
-import { currentCategoryIdSelector, currentSubCategorySelector, subCategoriesSelector } from '../../../../helpers/reduxSelectors';
+import { currentCategoryIdSelector, currentLanguageDataSelector, currentSubCategorySelector, subCategoriesSelector } from '../../../../helpers/reduxSelectors';
 import { clearCostValues, getSubCategory, getSubCategoryId } from '../../../../redux/ducks/configsDuck';
 function CategoriesFilterContent(){
      const dispatch = useDispatch();
 
      const currentCategory = useSelector(currentCategoryIdSelector);
      const currentSubCategory = useSelector(currentSubCategorySelector)
+     const productPriceText = useSelector(currentLanguageDataSelector)?.details;
 
      useEffect(() => {
           dispatch(fetchSubCatgories(currentCategory));
-          dispatch(getSubCategory(1));
-          dispatch(getSubCategoryId(1));
+          dispatch(getSubCategory('1'));
+          dispatch(getSubCategoryId('1'));
 
      }, [currentCategory]);
 
@@ -25,6 +26,7 @@ function CategoriesFilterContent(){
 
      const subCategories = useSelector(subCategoriesSelector)
      const changeSubCategoryId = (e) => {
+          
           console.log(e.target.dataset);
           dispatch(getSubCategoryId(e.target.dataset.id));
           dispatch(getSubCategory(e.target.dataset.sub_category));
@@ -32,7 +34,8 @@ function CategoriesFilterContent(){
      return (
           <>
                <p className="categories__filters__header">
-                     FILTER BY CATEGORIES
+                    {productPriceText?.filter_by_categories}
+
                </p>
                <div className="categories__filters__content">
                     <ul className="filters-items">

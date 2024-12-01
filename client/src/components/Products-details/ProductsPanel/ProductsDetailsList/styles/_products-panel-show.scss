@@ -161,6 +161,11 @@
      }
 }
 
-
-
-
+@media screen and (max-width:840px){
+     .details__products__container{
+          .products__panel{
+               width: 100%;
+          }
+          
+     }
+ }

@@ -34,9 +34,7 @@ module.exports.userById = async (req, res) => {
 
 module.exports.login = async (req, res) => {     
      const [email, password] = [req.body.email, req.body.password]
-     const [user] = await realyze("SELECT * FROM `user` WHERE `email`= ? ", [email]);
-     console.log(user);
-     
+     const [user] = await realyze("SELECT * FROM `user` WHERE `email`= ? ", [email]);     
      if(user && await bcrypt.compare(password, user.password)){
           //req.session.user = user;
           const message = getMessageObjectAuth(req.body.email, "login")

@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.details-products-list .filters-show {
+  display: none;
+}
 .details-products-list .products-list .product__list {
   width: 100%;
   height: auto;
@@ -146,4 +149,15 @@
 }
 .details-products-list .products-list .product__list .product-details .product-options .product-buttons .button-compare::before {
   content: "⇄";
+}
+
+@media screen and (max-width: 840px) {
+  .details-products-list .filters-show {
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+  }
+  .details-products-list .filters-show svg:hover {
+    stroke: var(--orange);
+  }
 }

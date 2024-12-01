@@ -10,7 +10,7 @@ nav .navigation__container .navigation__container__items {
   align-content: stretch;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 90%;
 }
 
 @media screen and (max-width: 768px) {

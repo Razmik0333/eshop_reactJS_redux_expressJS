@@ -11,18 +11,26 @@ export default function Categories() {
      const categories = useSelector(categoriesSelector);
      const currentLang = useSelector(getCurrentLanguageSelector);
      const burgerState = useSelector(navigationBurgerMenuStateSelector);
-     const [stateBurger, setBurgerState] = useState(burgerState)
-     console.log("window.innerWidth > 768", window.innerWidth > 768)
-     console.log("window.innerWidth", window.innerWidth)
+     const [stateBurger, setBurgerState] = useState(burgerState);
+     const [screenWidth, setInnerWidth] = useState(window.screen.width);
+
      useEffect(() => {
-          if(window.innerWidth < 740) {
+          function handleResize(){
+               setInnerWidth(window.screen.width)
+          }
+          window.addEventListener('resize', handleResize);
+          if(screenWidth < 840) {
                dispatch(getNavigationBurgerState(false));
                setBurgerState(false);
           }else{
                dispatch(getNavigationBurgerState(true));
                setBurgerState(true);
           }
-     }, [window.innerWidth]);
+          return () => {
+               window.removeEventListener('resize',handleResize)
+          };
+     }, [window.screen.width]);
+     
      const changeCategory = (e) => {
           dispatch(currentCategory(e.target.dataset.id))
           dispatch(fetchCurrentCatgory(e.target.dataset.id));
@@ -45,7 +53,9 @@ export default function Categories() {
                          categories.map(item => {
                               return  <li className="category__item"
                                         key={item.id} 
-                                        onClick = {changeCategory} >
+                                        onClick = {changeCategory} 
+                                        data-id={item.id}
+                                        >
                                         <NavLink to={`/category/${item.id}`} data-id={item.id}>
                                              {
                                                   currentLang === 'am' ? item?.arm_name : 
@@ -60,7 +70,9 @@ export default function Categories() {
                }
                <div className={`${stateBurger ? "nav__menu__burger__active": "nav__menu__burger"}`}
                     onClick={navBurgerStateChange} >
-                    <span></span>
+                    <span>
+
+                    </span>
                </div>
           </div>
     </>

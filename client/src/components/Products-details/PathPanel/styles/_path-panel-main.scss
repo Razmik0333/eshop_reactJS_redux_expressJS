@@ -1,7 +1,52 @@
 .path__panel{
+    background-color: var(--pathPanelColor);
      .path__panel__container{
           height: 35px;
-          background-color: var(--pathPanelColor);
      }
 
 }
+@media screen and (max-width: 1280px) {
+     .path__panel{
+         width: 120vw;
+ 
+     }
+ }
+ @media screen and (max-width:1024px) {
+     .path__panel{
+          width: 150vw;
+     }
+ }
+ @media screen and (max-width: 992px) {
+     .path__panel{
+     }
+ }
+   
+ @media screen and (max-width: 840px) {
+      .path__panel{
+          width: 190vw;
+          //font-size: 20px;
+      }
+  }
+ @media screen and (max-width: 648px) {
+     .path__panel{
+         width: 200vw;
+     }
+ }
+   
+ @media screen and (max-width: 480px) {
+     .path__panel{
+         width: 220vw;
+     }
+ }
+ @media screen and (max-width: 360px) {
+     .path__panel{
+         width: 250vw;
+     }
+ }
+   
+ @media screen and (max-width: 320px) {
+     .path__panel{
+         width: 280vw;
+     }
+ }
+ 

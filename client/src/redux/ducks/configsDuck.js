@@ -26,6 +26,8 @@ const SIMILAR_PRODUCT_ID = 'configsDuck/SIMILAR_PRODUCT_ID'
 const BEST_SELLER_PRODUCT_ID = 'configsDuck/BEST_SELLER_PRODUCT_ID'
 const SUB_CAT_ID = 'configsDuck/SUB_CAT_ID'
 const SUB_CAT = 'configsDuck/SUB_CAT'
+const IS_SMALL_SIZE = 'configsDuck/IS_SMALL_SIZE';
+const SUB_CAT_SMALL_SIZE = 'configsDuck/SUB_CAT_SMALL_SIZE'
 
 export const getShowType = createAction(CHANGE_SHOW_TYPE);
 export const getSortType = createAction(CHANGE_SORT_TYPE);
@@ -52,6 +54,8 @@ export const changeBestSellerProductId = createAction(BEST_SELLER_PRODUCT_ID)
 export const changeSubCategoryId = createAction(SUB_CAT_ID)
 export const changeSubCategory = createAction(SUB_CAT)
 export const changeNavigetionBurgerIsActive = createAction(NAVIGATION_BURGER_IS_ACTIVE)
+export const showSubCategoriesForSmallSize = createAction(SUB_CAT_SMALL_SIZE)
+export const isSmallSize = createAction(IS_SMALL_SIZE)
 
 
 export const changeShowType = (str) => (dispatch) => {
@@ -103,8 +107,6 @@ export const getNavigationBurgerState = (bool) => (dispatch) => {
   dispatch(changeNavigetionBurgerIsActive(bool));
 };
 
-
-
 export const getHotDealsTimerSecond = (second) => (dispatch) => {
   dispatch(changeHotDealsTimerSecond(second));
 };
@@ -125,6 +127,12 @@ export const getSubCategoryId = (id) => (dispatch) => {
 };
 export const getSubCategory = (id) => (dispatch) => {
   dispatch(changeSubCategory(id));
+};
+export const showSubCategoriesSmallSize = (bool) => (dispatch) => {
+  dispatch(showSubCategoriesForSmallSize(bool));
+};
+export const changeIsSmallSize = (bool) => (dispatch) => {
+  dispatch(isSmallSize(bool));
 };
 export const changeLanguages = () => async(dispatch) => {
   try {
@@ -190,9 +198,11 @@ const initialStateConfigs = {
     similarCirclId : 1,
     bestSellerCircleId : 1,
     reviewShow : false,
-    subCatId : null,
-    subCat : null,
-    navigetionBurgerIsActive:false
+    subCatId : "1",
+    subCat : "1",
+    navigetionBurgerIsActive:false,
+    subCategoriesForSmallSize:false,
+    isSmallSize:false
     
 };
 
@@ -328,6 +338,16 @@ const ConfigsDuck = (state = initialStateConfigs, action) => {
       return {
         ...state,
         subCat: action.payload,
+      };
+    case IS_SMALL_SIZE:
+      return {
+        ...state,
+        isSmallSize: action.payload,
+      };
+    case SUB_CAT_SMALL_SIZE:
+      return {
+        ...state,
+        subCategoriesForSmallSize: action.payload,
       };
     
     default:

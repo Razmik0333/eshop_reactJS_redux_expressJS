@@ -11,7 +11,7 @@ module.exports.subCategories = async (req, res) => {
      const catId = req.params.catId;
      const result = await realyze("SELECT * FROM `subcategory` WHERE `category`= ? ", [catId]);
      const subCategoryWithCounts = await getSubCategoriesWithCount(result, catId)
-     console.log("🚀 ~ module.exports.subCategories= ~ result:", result)
+     //console.log("🚀 ~ module.exports.subCategories= ~ result:", result)
      
      res.send(subCategoryWithCounts);
 }

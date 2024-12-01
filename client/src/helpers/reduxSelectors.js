@@ -85,6 +85,8 @@ export const navigationBurgerMenuStateSelector = ({ ConfigsDuck }) => ConfigsDuc
 export const getViewedProductsDataSelector = ({ ProductDuck }) => ProductDuck.viewedProductsData; //
 export const getServicesSelector = ({ProductDuck}) => ProductDuck.services;
 export const getFilteredProductsSelector = ({ProductDuck}) => ProductDuck.filteredProducts;
+export const getSubCatForSmallSizeSelector = ({ConfigsDuck}) => ConfigsDuck.subCategoriesForSmallSize;
+export const getIsSmallSizeSelector = ({ConfigsDuck}) => ConfigsDuck.isSmallSize;
 
 
 //admins block//

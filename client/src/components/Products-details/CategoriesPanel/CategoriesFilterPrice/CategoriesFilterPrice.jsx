@@ -1,12 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArrFromField, getMinMax, getPositiveNumber, getHigherStrValue, checkEmptyObject, getRoundedValue  } from '../../../../helpers/functions/functions';
-import { costsValuesSelector, currentCategoryIdSelector, currentLanguageDataSelector, currentSearchData, currentSubCategorySelector, getCurrentCurrencySelector, getFilteredProductsSelector, getSubCategoryDataSelector, productsByCategorySelector } from '../../../../helpers/reduxSelectors';
+import {  
+          getArrFromField,
+          getMinMax,
+          getPositiveNumber,
+          getHigherStrValue,
+          checkEmptyObject,
+          getRoundedValue  
+     } from '../../../../helpers/functions/functions';
+import { costsValuesSelector, 
+     currentCategoryIdSelector, 
+     currentLanguageDataSelector, 
+     currentSubCategorySelector, 
+     getCurrentCurrencySelector , 
+     getSubCategoryDataSelector } from '../../../../helpers/reduxSelectors';
 import { changeCosts } from '../../../../redux/ducks/configsDuck';
 import { getNewCurrency } from '../../../../helpers/functions/functions';
 import { fetchBySubCategories } from '../../../../redux/ducks/productDuck';
 import './styles/_categories-filter-price.scss';
 function CategoriesFilterPrice() {
+     // 283 -> 400
      const [value, setValue] = useState(0);
      const [isUp, setIsUp] = useState(false);
      const [fIsSelected, setFIsSelected] = useState(false);
@@ -24,22 +37,19 @@ function CategoriesFilterPrice() {
      const dispatch = useDispatch();
      const currentCurrency = useSelector(getCurrentCurrencySelector);
      const productsBySubCategory = useSelector(getSubCategoryDataSelector);
-     const searchData = (useSelector(currentSearchData));
-     //const products =  //searchData.length > 0  ? searchData : productsByCategory;
      const arr = getArrFromField(productsBySubCategory, 'cost');
-     //console.log("🚀 ~ CategoriesFilterPrice ~ arr:", arr)
      const min = getMinMax(arr, 'min');
      const max = getMinMax(arr, 'max');
      const baseLineRef = useRef(null);
      const currentLineRef = useRef(null);
-
+     const rangeContentRef = useRef(null);
      let leftVal = getPositiveNumber(value);
      const startRef = useRef(null);
 
      const finalRef = useRef(null);
 
-     const roundedStartValue = getRoundedValue(parseInt(startRef.current?.style.left)/283);
-     const roundedFinalValue = getRoundedValue(parseInt(finalRef.current?.style.left)/283);
+     const roundedStartValue = getRoundedValue(parseInt(startRef.current?.style.left)/rangeContentRef.current?.clientWidth);
+     const roundedFinalValue = getRoundedValue(parseInt(finalRef.current?.style.left)/rangeContentRef.current?.clientWidth);
      const minPrice = Math.floor((min + (max - min) * roundedStartValue));
      const maxPrice = Math.floor((min + (max - min) * roundedFinalValue));
      return ( 
@@ -48,15 +58,18 @@ function CategoriesFilterPrice() {
                     {productPriceText?.filter_price}
                </p>
                
-               <div className="range__content"
-                    
+               <div className="range__content" 
+                    ref={rangeContentRef}
                     onMouseMove={(e)=> {
-                              const zeroRange = e.pageX - 1084;                              
+                              
+                              const zeroRange = e.pageX - rangeContentRef.current?.offsetLeft;   
+
+                              //console.log( e.target)
                               if(isUp){
                                    setValue(zeroRange);
-                                   
-                                   fIsSelected ? startRef.current.style.left = leftVal + 'px' :
-                                   finalRef.current.style.left = leftVal + 'px';
+                                   fIsSelected ?
+                                         startRef.current.style.left = leftVal  + 'px' :
+                                             finalRef.current.style.left = leftVal + 'px';
                               }
                          }
                     }
@@ -73,13 +86,13 @@ function CategoriesFilterPrice() {
                               setIsUp(true);
                               startRef.current.style.left = leftVal + 'px';  //ok
                               finalRef.current.style.left =
-                                   finalRef.current.style.left === '' ? `283px` : finalRef.current.style.left;
+                                   finalRef.current.style.left === '' ? `${rangeContentRef.current?.clientWidth}px` : finalRef.current.style.left;
                               }
                          }
                          onMouseUp = {() =>{
                               setFIsSelected(false);
                               finalRef.current.style.left =
-                                   finalRef.current.style.left === '' ? `283px` : finalRef.current.style.left;
+                                   finalRef.current.style.left === '' ? `${rangeContentRef.current?.clientWidth}px` : finalRef.current.style.left;
                               startRef.current.style.left = 
                                    currentLineRef.current.style.left = 
                                         getHigherStrValue(startRef.current.style.left, finalRef.current.style.left) + 'px'
@@ -97,7 +110,7 @@ function CategoriesFilterPrice() {
                          className={
                               fIsSelected ? "ranges start selected" : "ranges start"
                          }
-                         style={checkEmptyObject(costInterval) ? {left:0} : {left:startRef.current?.style.left}}
+                         style={checkEmptyObject(costInterval) ? {left : 0} : {left:startRef.current?.style.left}}
                          ></div>
                     <div
                          ref={finalRef}  className={
@@ -111,7 +124,7 @@ function CategoriesFilterPrice() {
                                              '0px':`${startRef.current.style.left}px`;
                                    finalRef.current.style.left = 
                                         finalRef.current.style.left.length === 0 ? 
-                                             `283px`:`${finalRef.current.style.left }px`;
+                                             `${rangeContentRef.current?.clientWidth}px`:`${finalRef.current.style.left}px`;
                                    //finalRef.current.style.left = leftVal + 'px';
                               }
                          }
@@ -125,9 +138,9 @@ function CategoriesFilterPrice() {
                               currentLineRef.current.style.width = 
                                     parseInt(finalRef.current.style.left ) - 
                                         parseInt(startRef.current.style.left) +'px';
-                              dispatch(changeCosts({final : Math.floor((min + (max - min) * ((parseInt(finalRef.current.style.left))/283 )))}))
+                              dispatch(changeCosts({final : Math.floor((min + (max - min) * ((parseInt(finalRef.current.style.left))/rangeContentRef.current?.clientWidth )))}))
                          }}
-                         style={checkEmptyObject(costInterval) ? {left:283} : {left:finalRef.current?.style.left}}
+                         style={checkEmptyObject(costInterval) ? {left:rangeContentRef.current?.clientWidth} : {left:finalRef.current?.style.left}}
 
                          ></div>
                          <div 

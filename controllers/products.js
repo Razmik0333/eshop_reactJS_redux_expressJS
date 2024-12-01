@@ -616,19 +616,16 @@ module.exports.performedProducts = async (req, res) => {
       const performedProducts = await realyze("SELECT * FROM performed_works");
       res.send(performedProducts)
 }
+
 module.exports.filterByList = async (req, res) => {
      try {
           const cachesPath = variables.caches.product;  
           const filterObject = JSON.parse(req.params.str);
-          console.log("🚀 ~ module.exports.filterByList= ~ req.params.str:", req.params.str)
-          console.log("🚀 ~ module.exports.filterByList= ~ filterObject:", filterObject)
           const currentCategoryId = filterObject?.category;
           const currentSubCategoryId = filterObject?.subCategory;
           const queryString = getQueryStringForCost(filterObject);
           const queryArray = getQueryArrayForCost(filterObject);
           const sortObject = filterObject?.sort;
-          console.log("🚀 ~ module.exports.filterByList= ~ sortObject:", sortObject)
-
           if (getSizeOfObject(filterObject) && !isNaN(+currentCategoryId)) {
                const [currentCategory] = await realyze("SELECT * FROM `category` WHERE id = ? ", [currentCategoryId]);
                const [currentSubCategory] = await realyze("SELECT * FROM `subcategory` WHERE category = ? AND sub_category = ? ", [currentCategoryId, currentSubCategoryId]);
@@ -642,18 +639,16 @@ module.exports.filterByList = async (req, res) => {
                          fs.readFile( `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,"utf-8",
                          async function(err, data) {
                               if (err) throw err;
-                              else {  
-                                             
-                                   const [maxId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ? AND sub_category = ?", [+currentCategory?.id, currentSubCategory?.id])
+                              else {      
+                                   const [maxId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ? AND sub_category = ?", [`${+currentCategory?.id}`, `${currentSubCategory?.id}`])
                                    if (JSON.parse(data)[0]?.id !== maxId.max) {
                                         const result = await realyze(queryString, queryArray);
-
+                                        console.log("🚀 ~ function ~ result:", result)
                                         const sortedResult = getSortedArray(result, sortObject);
                                         fs_functions.writeCacheFile(
                                              `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
                                              sortedResult);
                                         res.send(sortedResult);
-                                        
                                    }else{
                                         console.log('readdddd')
                                         res.send(data);

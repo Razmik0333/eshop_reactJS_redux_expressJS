@@ -1,12 +1,5 @@
 .products-list{
-     margin-top: 50px;
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      align-content: center;
-      align-items: center;
-      height: auto;
-      gap: 70px;
+
      .product{
           width: 280px;
           height: 500px;
@@ -146,8 +139,8 @@
 }
 @media screen and (max-width:1280px){
      .products-list{
-         gap:50px;
-         justify-content: center;
+     //     gap:50px;
+     //     justify-content: center;
          .product{
                .sale{
                     font-size: 1.2vw;
@@ -158,20 +151,19 @@
      }
 }
 @media screen and (max-width:1140px){
-     .products-list{
-         gap:15px;
+     // .products-list{
+     //     gap:15px;
          
-     }
+     // }
 }
 @media screen and (max-width:1085px){
-     .products-list{
-          gap: 15px;
+     //.products-list{
           .product{
                .sale{
                     font-size: 1.5vw;
                }
           }
-     }
+    // }
 }
 
 
@@ -190,14 +182,14 @@
      }
 }
 @media screen and (max-width:996px){
-     .products-list{
-         gap:30px;
+     // .products-list{
+     //     gap:30px;
      
-     }
+     // }
 }
 @media screen and (max-width:840px){
-     .products-list{
-         gap:25px;
+     // .products-list{
+     //     gap:25px;
          .product{
                .sale{
                     font-size: 1.8vw;
@@ -211,11 +203,11 @@
                     }
                }
           }
-     }
+    // }
 }
 @media screen and (max-width:768px){
      .products-list{
-         gap:25px;
+         //gap:25px;
          .product{
                .sale{
                     font-size: 2vw;
@@ -233,7 +225,7 @@
 }
 @media screen and (max-width:648px){
      .products-list{
-         gap:50px;
+         //gap:50px;
          .product{
                .sale{
                     font-size: 2.2vw;
@@ -251,7 +243,7 @@
 }
 @media screen and (max-width:480px){
      .products-list{
-         gap:25px;
+       //  gap:25px;
          .product{
                .sale{
                     font-size: 3vw;
@@ -287,7 +279,7 @@
 }
 @media screen and (max-width:320px){
      .products-list{
-         gap:30px;
+       //  gap:30px;
          .product{
                .sale{
                     font-size: 4.5vw;

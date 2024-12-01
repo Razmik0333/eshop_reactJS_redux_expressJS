@@ -13,6 +13,7 @@ function Login() {
      const [userEmail, setUserEmail] = useState('');
      const [userPassword, setUserPassword] = useState('');
      const [emailLoginExist, setEmailLoginExist] = useState(true);
+     console.log("🚀 ~ Login ~ emailLoginExist:", emailLoginExist)
      const dispatch = useDispatch();
      const loginUser = useSelector(currentLanguageDataSelector)?.login;
      console.log("🚀 ~ Login ~ loginUser:", loginUser)

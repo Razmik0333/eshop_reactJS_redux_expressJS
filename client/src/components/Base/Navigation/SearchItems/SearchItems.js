@@ -58,9 +58,10 @@ function SearchItems() {
                !isSearch &&
                <ul 
                     className={searchShow ? "search__items" : 'hidden'}
-                    style={{height: searchData?.length <= 3 ? searchData.length * 41 + 15 : (searchData?.length - 1) * 41 + 'px'}}
+                    style={{height: searchData?.length <= 3 ? searchData.length * 41 + 15 : (searchData?.length - 1) * 41 + 'px',
+                    }}
                     onMouseOver={getSearchShow}
-                    
+
                >
 
                     { 

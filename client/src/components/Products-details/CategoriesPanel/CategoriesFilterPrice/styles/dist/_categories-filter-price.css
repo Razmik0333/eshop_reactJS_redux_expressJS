@@ -14,12 +14,11 @@
   height: 30px;
 }
 .categories__filter__price .range__content .ranges {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   border: 3px solid var(--orange);
   border-radius: 50%;
   position: absolute;
-  top: 12%;
   z-index: 99998;
   background-color: var(--white);
 }

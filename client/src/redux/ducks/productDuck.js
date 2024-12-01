@@ -349,8 +349,11 @@ export const fetchBySubCategories = (category, sub_category) => async(dispatch) 
 export const fetchForFilters = (str, count) => async(dispatch) => {
   try {
     
-    const data = await(await fetch(`/api/filters/${str}`)).json()
+    const data = await(await fetch(`${root}/api/filters/${str}`)).json()
     // dispatch(changeProductsBySubCategories(data));
+    console.log(str);
+    
+     console.log("🚀 ~ fetchForFilters ~ data:", data)
      dispatch(getProductsByCategoryLength(data.length));
      dispatch(getStepsCounts(Math.ceil(data.length / count)));
     dispatch(changeFilters(data))
@@ -360,6 +363,9 @@ export const fetchForFilters = (str, count) => async(dispatch) => {
 } 
 
 
+export const clearFilteredProductsList = () => (dispatch) => {
+  dispatch(changeFilters([]));
+};
 export const currentProduct = (id) => (dispatch) => {
   dispatch(getCurrentProductId(id));
 };

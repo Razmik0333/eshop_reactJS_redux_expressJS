@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { currentLanguageDataSelector, getBestSellerCircleIdSelector, verySoldedProductsSelector } from "../../../helpers/reduxSelectors";
 import { fetchVerySoldedProducts } from "../../../redux/ducks/productDuck";
 import Product from "../../Base/Product/Product";
-import './styles/_newest-products-header.scss';
+import './styles/_best-sellers.scss';
 import BestSellersHeader from "./BestSellersHeader";
 function BestSellers() {
      const dispatch = useDispatch();

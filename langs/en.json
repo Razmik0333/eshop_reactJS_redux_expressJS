@@ -74,6 +74,7 @@
         ],
         "filter" : "FILTER",
         "filter_price" : "FILTER BY PRICE",
+        "filter_by_categories" : "FILTER BY CATEGORIES",
         "home" : "HOME"
 
     },

@@ -1,4 +1,7 @@
 .details-products-list{
+     .filters-show{
+          display: none;
+     }
      .products-list{
           .product__list{
                width: 100%;
@@ -165,3 +168,20 @@
      }
 
 }
+
+@media screen and (max-width: 840px) {
+     .details-products-list{
+          .filters-show{
+               display: flex;
+               justify-content: end;
+               cursor: pointer;
+               svg{
+                    &:hover{
+                         stroke: var(--orange);
+                    }
+
+               }
+          }
+     }
+ }
+  
