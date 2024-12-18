@@ -20,7 +20,6 @@ function ProductDesc({currentProduct}) {
      const discountedPrice = currentProduct.cost *(1 - currentProduct.discount / 100);
      const wishListData = useSelector(getWishListDataSelector);
      const wishListIds = wishListData.map(item => item?.id);
-     console.log(product_page_content?.reviews);
      const rating = Math.floor(summRating(reviewsByProduct)/ reviewsByProduct.length)
      
      const dispatch = useDispatch();

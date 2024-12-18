@@ -15,7 +15,7 @@ function SearchItem({item}) {
                     to={`/product/${item.id}`} 
                     key={item.id}
                     data-id={item.id}
-               >  {item.descr}</NavLink></li>
+               > {item.descr}</NavLink></li>
 
 }
 

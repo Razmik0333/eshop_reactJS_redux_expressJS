@@ -348,8 +348,15 @@ module.exports.productsBetweenCosts = async (req, res) => {
 }
 module.exports.search = async (req, res) => {
      const search = req.query.search;    
-     const searched = await realyze("SELECT * FROM products WHERE main LIKE ? OR descr LIKE ?", [`%${search}%`,`%${search}%`]);
-     res.send(searched)
+     const category = req.query.category;  
+     const reqStr = +category === 0 ? "" : `AND category= ? `;
+     const sqlReq = +category === 0 ? 
+     `SELECT * FROM products WHERE (main LIKE ? OR descr LIKE ? ) `
+     :
+     `SELECT * FROM products WHERE (main LIKE ? OR descr LIKE ? ) ${reqStr} `;
+     const reqArray = +category === 0 ? [`%${search}%`,`%${search}%`] : [`%${search}%`,`%${search}%`, +category]     
+     const searched = await realyze(sqlReq, reqArray);
+     res.send(searched);
 }
 module.exports.hintAdd = async (req, res) => {
      const userId = req.body.user_id;
@@ -643,7 +650,6 @@ module.exports.filterByList = async (req, res) => {
                                    const [maxId] = await realyze("SELECT MAX(id) AS max FROM products WHERE category = ? AND sub_category = ?", [`${+currentCategory?.id}`, `${currentSubCategory?.id}`])
                                    if (JSON.parse(data)[0]?.id !== maxId.max) {
                                         const result = await realyze(queryString, queryArray);
-                                        console.log("🚀 ~ function ~ result:", result)
                                         const sortedResult = getSortedArray(result, sortObject);
                                         fs_functions.writeCacheFile(
                                              `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
@@ -662,14 +668,12 @@ module.exports.filterByList = async (req, res) => {
                               `${cachesPath}/filtered_products/${currentCategory?.alias}/${currentSubCategory?.alias}.json`,
                               sortedResult);
                          res.send(sortedResult);
-                         
                     }
 
                }
           }else{
                res.send([]);
           }
-          
      } catch (err) {
           throw err;
      }

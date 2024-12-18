@@ -7,6 +7,7 @@ export const productsSimilarSelector = ({ ProductDuck }) => ProductDuck.products
 export const productsByCategoryLengthSelector = ({ ProductDuck }) => ProductDuck.productsByCategoryLength; //
 export const currentCategoryIdSelector = ({ NavigationDuck }) => NavigationDuck.categoryID; //
 export const currentCategorySelector = ({ NavigationDuck }) => NavigationDuck.currentCategory; //
+export const currentCategoryForSearchSelector = ({ NavigationDuck }) => NavigationDuck.currentCategoryForSearch; //
 export const currentProductIdSelector = ({ ProductDuck }) => ProductDuck.currentProductId; //
 export const currentProductSelector = ({ ProductDuck }) => ProductDuck.currentProduct; //
 export const verySoldedProductsSelector = ({ ProductDuck }) => ProductDuck.verySolded; //

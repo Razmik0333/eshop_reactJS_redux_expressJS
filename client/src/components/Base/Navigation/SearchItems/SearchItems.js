@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { countElementsSelector, currentHintsData, currentSearchData, currentSearchSelector, isFocusedSelector, isSearchSelector } from "../../../../helpers/reduxSelectors";
+import { countElementsSelector, currentCategoryForSearchSelector, currentHintsData, currentSearchData, currentSearchSelector, isFocusedSelector, isSearchSelector } from "../../../../helpers/reduxSelectors";
 import { changeCountElements } from "../../../../redux/ducks/configsDuck";
 import { currentCategory, getIsFocused } from "../../../../redux/ducks/navigationDuck";
 import { clearHintsData, clearProductsByCosts, fetchSearchedData } from "../../../../redux/ducks/productDuck";
@@ -15,6 +15,7 @@ function SearchItems() {
      const searchWord = useSelector(currentSearchSelector);
      const countsOfProducts = useSelector(countElementsSelector);
      const isFocused = useSelector(isFocusedSelector);
+     const currentCategoryForSearch = useSelector(currentCategoryForSearchSelector)
      useEffect(() => {
           setHintShow(false)
      }, []);
@@ -26,18 +27,18 @@ function SearchItems() {
                
                if (searchWord.length > 2) {
                     dispatch(clearHintsData([]))
-                    dispatch(fetchSearchedData(searchWord,countsOfProducts));
+                    dispatch(fetchSearchedData(searchWord,currentCategoryForSearch,countsOfProducts));//
                     dispatch(changeCountElements(6));
                     dispatch(clearProductsByCosts());
                     setHintShow(false)          
                     setSearchShow(searchWord.length > 0);                    
                     dispatch(currentCategory(null))
                }
-          }, 200);
+          }, 500);
           return () => {
                clearTimeout(id)
           }
-      }, [searchWord]);
+      }, [searchWord, currentCategoryForSearch]);
       const getHintsShow = () => {
           dispatch(getIsFocused(true))
           setHintShow(true);
@@ -51,6 +52,7 @@ function SearchItems() {
       }
 
      const searchData = useSelector(currentSearchData);
+     console.log("🚀 ~ SearchItems ~ searchData:", searchData)
      const hintsData = useSelector(currentHintsData);     
      return (
           <>

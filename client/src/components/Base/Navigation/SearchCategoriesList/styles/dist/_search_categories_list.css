@@ -1,0 +1,110 @@
+.select__category {
+  border: 1px solid #464646;
+  padding: 15px;
+  height: 34px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border-right-color: #fff;
+  border-radius: 2px;
+  margin-right: -2px;
+  position: relative;
+  width: 220px;
+}
+.select__category .select__category__main {
+  width: 100%;
+}
+.select__category .select__category__main .select__category__header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+.select__category .category__search__items {
+  position: absolute;
+  background-color: var(--white);
+  height: auto;
+  width: 250px;
+  z-index: 99999;
+  top: 100%;
+  left: -2px;
+}
+.select__category .category__search__items .category__search__item {
+  padding: 15px 5px 0 5px;
+  height: 30px;
+  text-align: center;
+  border-bottom: 2px solid var(--black);
+  cursor: pointer;
+}
+.select__category .category__search__items .category__search__item:last-child {
+  border-bottom: 0;
+}
+.select__category .category__search__items .category__search__item:hover {
+  background-color: var(--orange);
+}
+.select__category .select-text {
+  font-size: 14px;
+  padding: 10px;
+}
+.select__category .select-icon img {
+  width: 24px;
+  height: auto;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.select__category .select-dropdown img {
+  width: 10px;
+  height: auto;
+  vertical-align: text-bottom;
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 1440px) {
+  .select__category .select-text {
+    font-size: 11px;
+    padding: 6px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .select__category .select-text {
+    font-size: 1.1vw;
+    padding: 0;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .select__category .select-text {
+    font-size: 1.5vw;
+  }
+}
+@media screen and (max-width: 840px) {
+  .select__category .select-text {
+    font-size: 1.7vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .select__category .select-text {
+    font-size: 2.2vw;
+  }
+}
+@media screen and (max-width: 648px) {
+  .select__category .select-text {
+    font-size: 3vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .select__category .select-text {
+    font-size: 3.3vw;
+  }
+}
+@media screen and (max-width: 360px) {
+  .select__category .select-text {
+    font-size: 4vw;
+  }
+}
+@media screen and (max-width: 320px) {
+  .select__category .select-text {
+    font-size: 4.6vw;
+  }
+}

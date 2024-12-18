@@ -171,11 +171,12 @@ export const changeHints = (user_id, hint) => async(dispatch) =>  {
     console.log('error from productDuck', e)
   }  
 };
-export const fetchSearchedData = (str,count) => async(dispatch) => {
+export const fetchSearchedData = (str,category,count) => async(dispatch) => {
  
   try {
-    const data = await (await fetch(`${root}/api/search/?search=${str}`) ).json();
+    const data = await (await fetch(`${root}/api/search/?search=${str}&category=${category}`) ).json();
     dispatch(getSearchData(data));
+    console.log("🚀 ~ fetchSearchedData ~ data:", data)
     dispatch(getStepsCounts(Math.ceil(data.length / count)));
   } catch (e) {
     console.log('error from productDuck', e)
